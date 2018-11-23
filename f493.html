@@ -1,0 +1,595 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Visalud</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Color de la aplicación -->
+		<meta name="theme-color" content="#65c0ba" />
+
+		<!-- Optomización para móvil -->
+		<meta name="MobileOptimized" content="width" />
+		<meta name="HandleFriendly" content="true" />
+
+		<!-- Configuración General PWA -->
+		<link rel="manifest" href="manifest.json" />
+
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+
+		<script src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script src="./js/bootstrap.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/pouchdb.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="./js/sw-db.js"></script>
+		
+	</head>
+	<body>
+		<header>
+			<a href="index.html">
+				<img src="./img/escudo.jpg" />
+			</a>
+			<div class="titulos">
+				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
+				<h2>Vigilancia en Salud Pública</h2>
+				<h2>Formato FT493</h2>
+			</div>
+		</header>
+
+		<br><br>
+
+		<div class="container">
+			<div class="row">
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Inscripción de establecimientos Formato FT493
+					</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">Departamento:</label>
+								<input type="text" class="form-control" name="depto" value="VALLE DEL CAUCA">
+							</div>
+							<div class="col-md-8">
+								<div class="col-md-4">
+									<label class="col-md-12 control-label">Mpio:</label>
+									<input type="text" class="form-control" name="mpio" value="CANDELARIA">
+								</div>
+								<div class="col-md-4">
+									<label class="col-md-12 control-label">Fecha:</label>
+									<input type="date" class="form-control" name="fechaInsc">
+								</div>
+								<div class="col-md-4">
+									<label class="col-md-12 control-label">Insc. No:</label>
+									<input type="number" class="form-control" name="inscripcion">
+								</div>
+							</div>						
+																						
+						</div>
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<label class="control-label col-md-12" style="text-decoration:underline">PERSONERÍA JURÍDICA</label>
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Razón social:</label>
+								<input type="text" class="form-control" name="razonSocial">
+							</div>
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Nombre Comercial:</label>
+								<input type="text" class="form-control" name="nombreComercial">
+							</div>
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Nit:</label>
+								<input type="text" class="form-control" name="nit">
+							</div>
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br><br>
+
+						<div class="form-group">
+							<label class="control-label col-md-12" style="text-decoration:underline">PERSONA NATURAL</label>
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">N. Establ.:</label>
+								<input type="text" class="form-control" name="nEstablecimiento">
+							</div>
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">Propietario:</label>
+								<input type="text" class="form-control" name="propietario">
+							</div>
+							<div class="col-md-3">
+								<label class="col-md-12 control-label">Identificación:</label>
+								<div class="col-md-5">
+									<select class="form-control" name="tipoId">
+										<option value="cc">CC</option>
+										<option value="ce">CE</option>
+										<option value="nit">NIT</option>
+									</select>
+								</div>
+								<div class="col-md-7">
+									<input type="text" class="form-control" name="identificacion">
+								</div>							
+							</div>
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br><br>
+
+						<div class="form-group">
+							<label class="col-md-1 col-md-offset-1 control-label">Dirección:</label>			
+							<div class="col-md-6">
+								<input type="text" class="form-control" name="direccion">
+							</div>
+							<label class="col-md-1 control-label">Zona:</label>				
+							<div class="col-md-2">
+								<select class="form-control" name="zona">
+									<option value="U">URBANA</option>
+									<option value="R">RURAL</option>
+								</select>														
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-2" style="margin-left:50px">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="radio" name="territorioInscripcion" value="comuna">
+								    </span>
+								    <input type="text" class="form-control" name="comuna" value="Comuna">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="radio" name="territorioInscripcion" value="barrio">
+								    </span>
+								    <input type="text" class="form-control" name="barrio" value="Barrio">
+								</div>
+							</div>									
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="radio" name="territorioInscripcion" value="localidad">
+								    </span>
+								    <input type="text" class="form-control" name="localidad" value="Localidad">
+								</div>
+							</div>								
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="radio" name="territorioInscripcion" value="sector">
+								    </span>
+								    <input type="text" class="form-control" name="sector" value="Sector">
+								</div>
+							</div>								
+							<div class="col-md-3">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="radio" name="territorioInscripcion" value="corregimiento">
+								    </span>
+								    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
+								</div>
+							</div>
+							<br><br><br>
+							<div class="col-md-2" style="margin-left:50px">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="radio" name="territorioInscripcion" value="upz">
+								    </span>
+								    <input type="text" class="form-control" name="upz" value="Upz">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="radio" name="territorioInscripcion" value="caserio">
+								    </span>
+								    <input type="text" class="form-control" name="caserio" value="Caserío">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="input-group">
+									<span class="input-group-addon">
+								    	<input type="radio" name="territorioInscripcion" value="otro">
+								    </span>
+								    <input type="text" class="form-control" name="otro" value="Otro">
+								</div>
+							</div>					
+						</div>
+
+	                    <br><br>
+
+	                    <div class="form-group">
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Cual:</label>
+								<input type="text" class="form-control" name="nomTerrInscrito">
+							</div>													
+							<div class="col-md-3">
+								<label class="col-md-12 control-label">Celular:</label>
+								<input type="text" class="form-control" name="celInscrito">	
+							</div>
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Fax:</label>
+								<input type="text" class="form-control" name="faxInscrito">		
+							</div>
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Teléfono:</label>
+								<input type="text" class="form-control" name="telInscrito">		
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-7">
+								<label class="col-md-12 control-label">Correo:</label>
+								<input type="text" class="form-control" name="correoPropInscrito">
+							</div>
+
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Autoriza envío de correos electrónicos:</label>
+								<div class="col-md-3">
+									<select class="form-control" name="autorizaPropInscrito">
+										<option value="s">S</option>
+										<option value="n">N</option>
+									</select>
+								</div>								
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Dir Notif:</label>
+								<input type="text" class="form-control" name="dirNotifInsc">
+							</div>							
+							<div class="col-md-5">
+								<div class="col-md-5">
+									<label class="control-label">Depto Notif:</label>
+									<input type="text" class="form-control" value="Valle del Cauca" name="deptoNotifInsc">
+								</div>
+								<div class="col-md-4">
+									<label class="control-label">Mpio Notif:</label>
+									<input type="text" class="form-control" value="Candelaria" name="mpioNotifInsc">
+								</div>
+								<div class="col-md-3">
+									<label class="col-md-12 control-label">Visitado:</label>
+									<select class="form-control" name="visitadoInsc">
+										<option value="s">Si</option>
+										<option value="n">No</option>
+									</select>											
+								</div>													
+							</div>
+							<div class="col-md-2">
+								<label class="col-md-12 control-label">Fecha:</label>
+								<input type="date" class="form-control" name="fechaNotifInsc">
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br>
+
+						<div class="form-group">
+							<label class="col-md-1 control-label">Visitó:</label>		
+							<div class="col-md-5">
+								<input type="text" class="form-control" name="funcionarioUltVisita" placeholder="Nombre del funcionario que visitó por última vez">
+							</div>
+
+							<label class="col-md-1 control-label">Concepto:</label>
+							<div class="col-md-5">								
+								<input type="text" class="form-control" name="conceptoUltVisita" placeholder="Concepto de la última visita">
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br>
+
+
+						<div class="form-group">
+
+							<div class="col-md-1">
+								<br>
+								<label class="control-label">Actividad:</label>			
+							</div>
+
+							<div class="col-md-11">
+								<div class="col-md-4">
+									<div class="row" style="border-style:solid; border-width:1px">
+										<div class="col-md-4">
+											<br><br>
+											<label class="control-label">Prep. de Alimentos</label>
+										</div>
+										<div class="col-md-8" style="padding:0">
+											<div class="input-group">
+											    <input type="text" class="form-control" name="restaurante" value="Restaurante">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="alimentos" value="restaurante">
+											    </span>
+											</div>
+											<div class="input-group">
+											    <input type="text" class="form-control" name="cafeteria" value="Cafetería">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="alimentos" value="cafeteria">
+											    </span>
+											</div>
+											<div class="input-group">
+											    <input type="text" class="form-control" name="panaderia" value="Panadería-pastelería">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="alimentos" value="panaderia">
+											    </span>
+											</div>
+											<div class="input-group">
+											    <input type="text" class="form-control" name="fruteria" value="Jugos-heladería">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="alimentos" value="fruteria">
+											    </span>
+											</div>
+										</div>
+									</div>
+
+									<div class="row" style="border-style:solid; border-width:1px">
+										<div class="col-md-4">
+											<br>
+											<label class="control-label">Comedores</label>
+										</div>
+										<div class="col-md-8" style="padding:0">
+											<div class="input-group">
+											    <input type="text" class="form-control" name="sociales" value="Programas sociales">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="comedores" value="sociales">
+											    </span>
+											</div>
+											<div class="input-group">
+											    <input type="text" class="form-control" name="carcelarios" value="Carcelarios-Penit.">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="comedores" value="carcelarios">
+											    </span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row" style="border-style:solid; border-width:1px">
+										<div class="col-md-4">
+											<label class="control-label">Expendio de alimentos</label>
+										</div>
+										<div class="col-md-8" style="padding:0">
+											<div class="input-group">
+											    <input type="text" class="form-control" name="expendio" value="Expendio">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="expendioAli" value="X">
+											    </span>
+											</div>
+											<div class="input-group">
+											    <input type="text" class="form-control" name="pesca" value="Productos de Pesca">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="expendioAli" value="X">
+											    </span>
+											</div>
+										</div>
+									</div>
+									<div class="row" style="border-style:solid; border-width:1px">
+										<div class="col-md-4">
+											<label class="control-label">Gr. Sfies.</label>
+										</div>
+										<div class="col-md-8" style="padding:0">
+											<div class="input-group">
+											    <input type="text" class="form-control" name="superMercados" value="Hiper(sup.) Mercados">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="grandesSuperficies" value="X">
+											    </span>
+											</div>		
+										</div>
+									</div>
+									<div class="row" style="border-style:solid; border-width:1px">
+										<div class="col-md-4">
+											<label class="control-label">Ensamble de alimentos</label>
+										</div>
+										<div class="col-md-8" style="padding:0">
+											<div class="input-group">
+											    <input type="text" class="form-control" name="menu" value="Ensamble menú">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="ensamble" value="X">
+											    </span>
+											</div>
+											<div class="input-group">
+											    <input type="text" class="form-control" name="refrigerios" value="Ensamble refrigerios">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="ensamble" value="X">
+											    </span>
+											</div>
+										</div>
+									</div>
+									<div class="row" style="border-style:solid; border-width:1px">
+										<div class="col-md-4">
+											<br>
+											<label class="control-label">Almacena.</label>
+										</div>
+										<div class="col-md-8" style="padding:0">
+											<div class="input-group">
+											    <input type="text" class="form-control" name="tempAmbiente" value="A temp. Ambiente">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="almacenamiento" value="X">
+											    </span>
+											</div>
+											<div class="input-group">
+											    <input type="text" class="form-control" name="dadorFrio" value="Dador de frío">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="almacenamiento" value="X">
+											    </span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="row"style="border-style:solid; border-width:1px">
+										<div class="col-md-4">
+											<br><br>
+											<label class="control-label">Venta en vía pública</label>
+										</div>
+										<div class="col-md-8" style="padding:0">
+											<div class="input-group">
+											    <input type="text" class="form-control" name="fijo" value="Puesto fijo">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="ventaViaPublica" value="X">
+											    </span>
+											</div>
+											<div class="input-group">
+											    <input type="text" class="form-control" name="movil" value="Puesto móvil">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="ventaViaPublica" value="X">
+											    </span>
+											</div>
+											<div class="input-group">
+											    <input type="text" class="form-control" name="fijoAlim" value="Fijo con prep. alim.">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="ventaViaPublica" value="X">
+											    </span>
+											</div>
+											<div class="input-group">
+												<input type="text" class="form-control" name="movilAlim" value="Móvil con prep. alim.">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="ventaViaPublica" value="X">
+											    </span>									    
+											</div>
+										</div>
+									</div>
+									<div class="row"style="border-style:solid; border-width:1px">
+										<div class="col-md-12" style="padding:0">
+											<div class="input-group">
+												<input type="text" class="form-control" name="alcoholicas" value="Expendio de bebidas alcohólicas" style="font-weight:bold">
+												<span class="input-group-addon">
+												    <input type="checkbox" name="bebidasAlco" value="X">
+												</span>
+												
+											</div>											
+										</div>
+									</div>
+									<div class="row"style="border-style:solid; border-width:1px">
+										<div class="col-md-4">
+											<br>
+											<label class="control-label">Plaza de mercado</label>
+										</div>
+										<div class="col-md-8" style="padding:0">
+											<div class="input-group">
+												<input type="text" class="form-control" name="plaza" value="Plaza de mercado">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="plazasMercado" value="X">
+											    </span>									    
+											</div>
+											<div class="input-group">
+												<input type="text" class="form-control" name="abasto" value="Central de abasto">
+												<span class="input-group-addon">
+											    	<input type="checkbox" name="plazasMercado" value="X">
+											    </span>								    
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>														
+						</div>
+
+							<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+						<div class="form-group">
+							<label class="col-md-3 control-label">Observaciones por autoridad sanitaria:</label>		
+							<div class="col-md-9">
+								<textarea class="form-control" name="obAutoridad"></textarea>
+							</div>
+							<br><br><br>
+							<label class="col-md-3 control-label">Observaciones por persona que se inscribe:</label>
+							<div class="col-md-9">
+								<textarea class="form-control" name="obPersona"></textarea>
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br>
+
+						<div class="form-group">									
+							<div class="col-md-3">
+								<label class="col-md-12 control-label">__</label>
+								<label class="col-md-12 control-label">Persona que inscribe:</label>
+							</div>
+							<div class="col-md-4">
+								<label class="col-md-12 control-label">___</label>
+								<input type="text" class="form-control" name="inscribe">
+							</div>
+							<div class="col-md-2">								
+								<label class="col-md-12 control-label">Identicación:</label>
+								<input type="text" class="form-control" name="idInscribe">
+							</div>
+							<div class="col-md-3">								
+								<label class="col-md-12 control-label">Cargo:</label>
+								<input type="text" class="form-control" name="cargoInscribe">
+							</div>
+							<div class="col-md-3">
+								<label class="col-md-12 control-label">Persona que recibe:</label>
+							</div>
+							<div class="col-md-4">
+								<input type="text" class="form-control" name="recibe">
+							</div>
+							<div class="col-md-2">								
+								<input type="text" class="form-control" name="idRecibe">
+							</div>
+							<div class="col-md-3">								
+								<input type="text" class="form-control" name="cargoRecibe">
+							</div>							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br><br><br>
+
+						<div class="form-group">
+	                        <div class="col-md-3 col-md-offset-2">
+	                            <a href="./f493.html" type="submit" onClick="guardarInscrito()" class="btn btn-primary">
+	                                Guardar
+	                            </a>
+	                        </div>
+
+	                        <div class="col-md-3 col-md-offset-2">
+	                            <a id="todosInscritos" class="btn btn-primary">
+	                                Guardar todos inscritos
+	                            </a>
+	                        </div>
+	                    </div><!-- Fin del form-group -->
+
+	                    <br><br><br><br><br><br>
+
+	                    <div class="form-group">
+	                    	<div class="panel panel-default">
+	                    		<div class="panel-heading">INSCRITOS EN BD</div>
+	                    		<div class="panel-body">
+	                    			<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th>Establecimiento</th>
+												<th>NIT Establec.</th>
+												<th>Inscripción No.</th>
+												<th>Fecha Inscrip.</th>
+												<th>Nom. Propietario</th>
+											</tr>									
+										</thead>
+										<tbody id="inscritos"></tbody>
+									</table>
+	                    		</div>
+	                    	</div>
+							
+						</div><!-- Fin del form-group -->
+
+						<br><br><br><br><br><br>
+
+
+					</div><!-- Fin del Panel-body -->
+				</div><!-- Fin del Panel-default -->
+
+			</div><!-- Fin del Row -->
+		</div><!-- Fin del Container -->
+	</body>
+</html>
