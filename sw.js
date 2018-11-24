@@ -8,6 +8,9 @@ const CACHE_NAME = 'v2_cache_visalud_pwa';
 // ficheros a cachear en la aplicación
 var urlsToCache = [
 	'./',
+	'./index.html',
+	'./f440.html',
+	'./f493.html'
 	'./css/styles.css',
 	'./css/bootstrap.css',
 	'./css/bootstrap.min.css',
