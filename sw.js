@@ -10,7 +10,7 @@ var urlsToCache = [
 	'./',
 	'./index.html',
 	'./f440.html',
-	'./f493.html'
+	'./f493.html',
 	'./css/styles.css',
 	'./css/bootstrap.css',
 	'./css/bootstrap.min.css',
