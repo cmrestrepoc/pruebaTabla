@@ -22,8 +22,10 @@
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="./css/styles.css">
-		
+		<link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+
 		<script src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
 		<script src="./js/bootstrap.js"></script>
 		<script src="./js/bootstrap.min.js"></script>
 		<script src="./js/pouchdb.min.js"></script>
@@ -59,36 +61,67 @@
 
 						<!-- Nav tabs -->
 						<ul id="misTabs" class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab">Datos del Establecimiento</a></li>
+							<li role="presentation" class="active"><a href="#inscritos493" aria-controls="inscritos493" role="tab" data-toggle="tab">Inscritos</a></li>
+							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab">Datos del Establecimiento</a></li>
 							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab">Evaluación</a></li>
-							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab">Observaciones - Notificaciones</a></li>
+							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados()">Observaciones - Notificaciones</a></li>
 						</ul>
 
 						<!-- Tab panes -->
 						<div class="tab-content" id="miTabContent">
-							<div role="tabpanel" class="tab-pane fade active in" id="datos" aria-labelledby="datos-tab">
+							<div role="tabpanel" class="tab-pane fade active in" id="inscritos493" aria-labelledby="inscritos493-tab">
+								<br>
+								<div class="form-group">                      
+			                        <div class="col-md-3 col-md-offset-2">
+			                            <a id="todosInscritos" onclick="cargarInscritos()" class="btn btn-primary">
+			                                Cargar inscritos desde servidor
+			                            </a>
+			                        </div>
+			                    </div><!-- Fin del form-group -->
+
+			                    <br><br> 
+
+								<div class="form-group">
+									<div class="panel panel-default">
+			                    		<div class="panel-heading">INSCRITOS EN BD</div>
+			                    		<div class="panel-body">
+			                    			<table class="table table-bordered" id="tablaInscritos">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Establecimiento</th>
+														<th>Inscripción No.</th>
+														<th>Fecha Inscrip.</th>
+														<th>Nom. Propietario</th>
+														<th></th>
+													</tr>	
+												</thead>
+												<tbody id="inscritos"></tbody>
+											</table>
+										</div>
+	                    			</div>
+								</div><!-- Fin del form-group -->
+							</div><!-- Fin del tab-pane -->
+
+							<div role="tabpanel" class="tab-pane fade" id="datos" aria-labelledby="datos-tab">								
 								<div class="form-group">
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Ciudad:</label>
-										<input type="text" class="form-control" name="ciudadVisita" value="CANDELARIA">
+										<input type="text" class="form-control" name="ciudad440" value="CANDELARIA">
 									</div>
-									<div class="col-md-1">
-										<label class="col-md-12 control-label">Código:</label>
-										<input type="number" class="form-control" name="codigoCiudadVisita" value="76">
-									</div>
-									<div class="col-md-9">
+									<div class="col-md-10">
 										<div class="col-md-3">
 											<label class="col-md-12 control-label">Fecha:</label>
-											<input type="date" class="form-control" name="fechaVisita">
+											<input type="date" class="form-control" name="fecha440">
 										</div>
 										<div class="col-md-3">
 											<label class="col-md-12 control-label">Acta No:</label>
-											<input type="number" class="form-control" name="actaVisita">
+											<input type="number" class="form-control" name="acta440">
 										</div>
 
 										<div class="col-md-6" style="padding:0">
 											<label class="col-md-12 control-label">Entidad:</label>
-											<input type="text" class="form-control" name="entidadQueVisita" value="SECRETARÍA DE SALUD MUNICIPAL - CANDELARIA">
+											<input type="text" class="form-control" name="entidad440" value="SECRETARÍA DE SALUD MUNICIPAL - CANDELARIA">
 										</div>
 									</div>
 															
@@ -99,19 +132,19 @@
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="col-md-6 control-label">Razón Social:</label>
-										<input type="text" class="form-control" name="razonSocialVisitada">
+										<input type="text" class="form-control" name="razonSocial440">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-6 control-label">Nit/CC:</label>
-										<input type="text" class="form-control" name="nitVisitada">
+										<input type="text" class="form-control" name="nit440">
 									</div>
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">Nombre Comercial:</label>
-										<input type="text" class="form-control" name="nombreComercialVisitada">
+										<input type="text" class="form-control" name="nombreComercial440">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Inscripción No:</label>
-										<input type="number" class="form-control" name="inscripcionVisitada">
+										<input type="text" class="form-control" name="inscripcion440">
 									</div>
 								</div><!-- Fin del form-group -->
 								<br><br><br><hr>
@@ -119,19 +152,19 @@
 								<div class="form-group">
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">Dirección:</label>
-										<input type="text" class="form-control" name="direccionVisita">
+										<input type="text" class="form-control" name="direccion440">
 									</div>
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Matrícula Mercantil:</label>
-										<input type="text" class="form-control" name="matriculaMercantilVisitada">
+										<input type="text" class="form-control" name="matriculaMercantil440">
 									</div>
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Departamento:</label>
-										<input type="text" class="form-control" name="dpptoVisita" value="VALLE DEL CAUCA">
+										<input type="text" class="form-control" name="dpto440" value="VALLE DEL CAUCA">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Municipio:</label>
-										<input type="text" class="form-control" name="mpioVisita" value="CANDELARIA">
+										<input type="text" class="form-control" name="mpio440" value="CANDELARIA">
 									</div>
 								</div><!-- Fin del form-group -->
 								<br><br><br><hr>
@@ -140,39 +173,39 @@
 									<div class="col-md-2" style="margin-left:50px">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorioVisita" value="barrio">
+										    	<input type="radio" name="territorio440" value="barrio">
 										    </span>
-										    <input type="text" class="form-control" value="Barrio">
+										    <input type="text" class="form-control" name="barrio" value="Barrio">
 										</div>
 									</div>
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorioVisita" value="comuna">
+										    	<input type="radio" name="territorio440" value="vereda">
 										    </span>
-										    <input type="text" class="form-control" value="Comuna">
+										    <input type="text" class="form-control" name="vereda" value="Vereda">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+										    	<input type="radio" name="territorio440" value="comuna">
+										    </span>
+										    <input type="text" class="form-control" name="comuna" value="Comuna">
 										</div>
 									</div>									
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorioVisita" value="localidad">
+										    	<input type="radio" name="territorio440" value="localidad">
 										    </span>
 										    <input type="text" class="form-control" name="localidad" value="Localidad">
 										</div>
-									</div>								
-									<div class="col-md-2">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorioVisita" value="sector">
-										    </span>
-										    <input type="text" class="form-control" name="sector" value="Sector">
-										</div>
-									</div>								
+									</div>																	
 									<div class="col-md-3">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorioVisita" value="corregimiento">
+										    	<input type="radio" name="territorio440" value="corregimiento">
 										    </span>
 										    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
 										</div>
@@ -181,7 +214,7 @@
 									<div class="col-md-2" style="margin-left:50px">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorioVisita" value="caserio">
+										    	<input type="radio" name="territorio440" value="caserio">
 										    </span>
 										    <input type="text" class="form-control" name="caserio" value="Caserío">
 										</div>
@@ -189,7 +222,15 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorioVisita" value="upz">
+										    	<input type="radio" name="territorio440" value="sector">
+										    </span>
+										    <input type="text" class="form-control" name="sector" value="Sector">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+										    	<input type="radio" name="territorio440" value="upz">
 										    </span>
 										    <input type="text" class="form-control" name="upz" value="Upz">
 										</div>
@@ -197,7 +238,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorioVisita" value="otro">
+										    	<input type="radio" name="territorio440" value="otro">
 										    </span>
 										    <input type="text" class="form-control" name="otro" value="Otro">
 										</div>
@@ -209,19 +250,19 @@
 			                    <div class="form-group">
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">Cual:</label>
-										<input type="text" class="form-control" name="nomTerrVisitado">
+										<input type="text" class="form-control" name="nomTerr440">
 									</div>													
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Celular:</label>
-										<input type="text" class="form-control" name="celVisitado">	
+										<input type="text" class="form-control" name="cel440">	
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Fax:</label>
-										<input type="text" class="form-control" name="faxVisitado">		
+										<input type="text" class="form-control" name="fax440">		
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Teléfono:</label>
-										<input type="text" class="form-control" name="telVisitado">		
+										<input type="text" class="form-control" name="tel440">		
 									</div>							
 								</div><!-- Fin del form-group -->
 
@@ -230,23 +271,23 @@
 			                    <div class="form-group">
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">Correo</label>
-										<input type="text" class="form-control" name="correo">
+										<input type="text" class="form-control" name="correo440">
 									</div>
 									<div class="col-md-4" style="padding:0">
 										<label class="col-md-12 control-label">Propietario:</label>
-										<input type="text" class="form-control" name="propietario">
+										<input type="text" class="form-control" name="propietario440">
 									</div>
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Identificación:</label>
 										<div class="col-md-5">
-											<select class="form-control" name="tipoId">
+											<select class="form-control" name="tipoIdProp440">
 												<option value="cc">CC</option>
 												<option value="ce">CE</option>
 												<option value="nit">NIT</option>
 											</select>
 										</div>
 										<div class="col-md-7" style="padding:0">
-											<input type="text" class="form-control" name="idPropietario" placeholder="# identificación">
+											<input type="text" class="form-control" name="idPropietario440" placeholder="# identificación">
 										</div>							
 									</div>
 								</div><!-- Fin del form-group -->
@@ -256,33 +297,34 @@
 									<div class="col-md-6">
 										<div class="col-md-6" style="padding:0">
 											<label class="col-md-12 control-label">Rep. Legal:</label>
-											<input type="text" class="form-control" name="repLegal">
+											<input type="text" class="form-control" name="repLegal440">
 										</div>										
-										<div class="col-md-6" style="padding:0">					<label class="col-md-12 control-label">Identificación:</label>
+										<div class="col-md-6" style="padding:0">					
+											<label class="col-md-12 control-label">Identificación:</label>
 											<div class="col-md-5">
-												<select class="form-control" name="tipoId">
+												<select class="form-control" name="tipoIdRl440">
 													<option value="cc">CC</option>
 													<option value="ce">CE</option>
 													<option value="nit">NIT</option>
 												</select>
 											</div>
 											<div class="col-md-7" style="padding:0">
-												<input type="text" class="form-control" name="idRepLegal" placeholder="# identificación">
+												<input type="text" class="form-control" name="idRepLegal440" placeholder="# identificación">
 											</div>											
 										</div>										
 									</div>
 									<div class="col-md-6" style="padding:0">
 										<div class="col-md-5" style="padding:0">
 											<label class="col-md-12 control-label">Dir Notif:</label>
-										<input type="text" class="form-control" name="dirNotif">
+										<input type="text" class="form-control" name="dirNotif440">
 										</div>										
 										<div class="col-md-4">
 											<label class="control-label col-md-12">Depto N.:</label>
-											<input type="text" class="form-control" value="Valle del Cauca" name="deptoNotif">
+											<input type="text" class="form-control" value="Valle del Cauca" name="deptoNotif440">
 										</div>
 										<div class="col-md-3" style="padding:0">
 											<label class="control-label col-md-12">Mpio N.:</label>
-											<input type="text" class="form-control" value="Candelaria" name="mpioNotif">
+											<input type="text" class="form-control" value="Candelaria" name="mpioNotif440">
 										</div>
 									</div>									
 								</div><!-- Fin del form-group -->
@@ -291,13 +333,13 @@
 								<div class="form-group">
 									<div class="col-md-7 col-md-offset-1">
 										<label class="col-md-12 control-label">Horarios:</label>
-										<input type="text" class="form-control" name="horarios">
+										<input type="text" class="form-control" name="horarios440">
 									</div>
 
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">No. Trabajadores:</label>
 										<div class="col-md-5">
-											<input type="number" class="form-control" name="noTrabajadores">
+											<input type="number" class="form-control" name="noTrabajadores440">
 										</div>								
 									</div>							
 								</div><!-- Fin del form-group -->
@@ -342,7 +384,7 @@
 									<div class="col-md-2" style="padding:0">
 										<label class="col-md-12 control-label">Otros Productos:</label>
 										<div class="col-md-6">
-											<select class="form-control" name="autoriza">
+											<select class="form-control" name="otrosProductos">
 												<option value="s">S</option>
 												<option value="n">N</option>
 											</select>
@@ -356,12 +398,12 @@
 									<div class="col-md-7">
 										<div class="col-md-4" style="padding:0">
 											<label class="col-md-12 control-label">Fecha:</label>
-											<input type="date" class="form-control" name="fechaUltimaInspeccion">
+											<input type="date" class="form-control" name="fechaUltVisita440">
 										</div>
 										<div class="col-md-7 col-md-offset-1" style="padding:0">
 											<label class="col-md-12 control-label">Concepto última inspección:</label>
 											<div class="col-md-3">
-												<select class="form-control" name="concepto" onchange="setConcepto()">
+												<select class="form-control" name="concepto440" onchange="setConcepto()">
 													<option></option>				
 													<option value="1">1</option>
 													<option value="2">2</option>
@@ -369,14 +411,14 @@
 												</select>
 											</div>
 											<div class="col-md-9" style="padding:0">
-												<input type="text" class="form-control" name="textoConcepto">
+												<input type="text" class="form-control" name="textoConcepto440">
 											</div>
 										</div>												
 									</div>
 									<div class="col-md-3">
 										<label class="control-label col-md-12">Porcentaje Cumplimiento</label>
 										<div class="col-md-6">
-											<input type="number" class="form-control" name="Porcentaje">
+											<input type="number" class="form-control" name="porcentaje440">
 										</div>%									
 									</div>
 								</div><!-- Fin del form-group -->
@@ -386,7 +428,7 @@
 								<div class="form-group">
 									<label class="control-lable col-md-3" style="text-align:right">Motivo de la visita:</label>
 									<div class="col-md-2">
-										<select class="form-control" name="motivo" onchange="setMotivo()">
+										<select class="form-control" name="motivo440" onchange="setMotivo()">
 											<option></option>				
 											<option value="01">01</option>
 											<option value="02">02</option>
@@ -398,7 +440,7 @@
 										</select>
 									</div>
 									<div class="col-md-6">
-										<input type="text" class="form-control" name="textoMotivo">
+										<input type="text" class="form-control" name="textoMotivo440">
 									</div>									
 								</div><!-- Fin del form-group -->
 								<br><br><hr>
@@ -755,14 +797,14 @@
 													<button class="btn btn-primary" style="font-size:13px" onClick="consolidarPuntaje()">Cumplimiento</button>
 												</div>
 												<div class="col-md-3">
-													<input class="form-control" type="number" name="cumplimiento"></input>
+													<input class="form-control" type="number" name="cumplimiento440"></input>
 												</div>
 
-												<div class="col-md-3">
-													<button class="btn btn-primary">Concepto</button>
+												<div class="col-md-3" style="text-align:right">
+													<label class="control-label">Concepto:</label>
 												</div>
 												<div class="col-md-3" style="padding-left:0">
-													<input class="form-control" type="number" name="conceptoEval"></input>
+													<input class="form-control" type="number" name="conceptoEval440"></input>
 												</div>										
 											</div>
 										</div>
@@ -841,27 +883,27 @@
 									</div>
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">___</label>
-										<input type="text" class="form-control" name="funcionario1">
+										<input type="text" class="form-control" name="funcionario440-1">
 									</div>
 									<div class="col-md-2">								
 										<label class="col-md-12 control-label">Identicación:</label>
-										<input type="text" class="form-control" name="idFuncionario1">
+										<input type="text" class="form-control" name="idFuncionario440-1">
 									</div>
 									<div class="col-md-3">								
 										<label class="col-md-12 control-label">Cargo:</label>
-										<input type="text" class="form-control" name="cargoFuncionario1">
+										<input type="text" class="form-control" name="cargoFuncionario440-1">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Funcionario 2:</label>
 									</div>
 									<div class="col-md-5">
-										<input type="text" class="form-control" name="funcionario2">
+										<input type="text" class="form-control" name="funcionario440-2">
 									</div>
 									<div class="col-md-2">								
-										<input type="text" class="form-control" name="idFuncionario2">
+										<input type="text" class="form-control" name="idFuncionario440-2">
 									</div>
 									<div class="col-md-3">								
-										<input type="text" class="form-control" name="cargoFuncionario2">
+										<input type="text" class="form-control" name="cargoFuncionario440-2">
 									</div>							
 								</div><!-- Fin del form-group -->
 
@@ -875,61 +917,71 @@
 									</div>
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">___</label>
-										<input type="text" class="form-control" name="persona1">
+										<input type="text" class="form-control" name="persona440-1">
 									</div>
 									<div class="col-md-2">								
 										<label class="col-md-12 control-label">Identicación:</label>
-										<input type="text" class="form-control" name="idPersona1">
+										<input type="text" class="form-control" name="idPersona440-1">
 									</div>
 									<div class="col-md-3">								
 										<label class="col-md-12 control-label">Cargo:</label>
-										<input type="text" class="form-control" name="cargoPersona1">
+										<input type="text" class="form-control" name="cargoPersona440-1">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Persona 2:</label>
 									</div>
 									<div class="col-md-5">
-										<input type="text" class="form-control" name="persona2">
+										<input type="text" class="form-control" name="persona440-2">
 									</div>
 									<div class="col-md-2">								
-										<input type="text" class="form-control" name="idPersona2">
+										<input type="text" class="form-control" name="idPersona440-2">
 									</div>
 									<div class="col-md-3">								
-										<input type="text" class="form-control" name="cargoPersona2">
+										<input type="text" class="form-control" name="cargoPersona440-2">
 									</div>							
 								</div><!-- Fin del form-group -->
 
 								<br><br><br><br><br><br><hr>
 
+								<input type="hidden" name="id440" value="0">
+								
 								<div class="form-group">
-									<div class="panel panel-default">
-			                    		<div class="panel-heading">INSCRITOS EN BD</div>
-			                    		<div class="panel-body">
-			                    			<table class="table table-bordered">
-												<thead>
-													<tr>
-														<th>Establecimiento</th>
-														<th>NIT Establec.</th>
-														<th>Inscripción No.</th>
-														<th>Fecha Inscrip.</th>
-														<th>Nom. Propietario</th>
-													</tr>									
-												</thead>
-												<tbody id="inscritos"></tbody>
-											</table>
-										</div>
-	                    			</div>
-								</div><!-- Fin del form-group -->
-
-								<br><br><br><br><br><hr>
-
-								<div class="form-group">
-			                        <div class="col-md-10 col-md-offset-2">
-			                            <button type="submit" class="btn btn-primary">
+			                        <div class="col-md-4 col-md-offset-2">
+			                            <button type="submit" onclick="guardarEvaluacion440()" class="btn btn-primary">
 			                                Guardar
+			                            </button>			                            
+			                        </div>
+			                        <div class="col-md-4">
+			                        	<button type="submit" onclick="cargarServidor()" class="btn btn-primary">
+			                                Subir información a servidor
 			                            </button>
 			                        </div>
 			                    </div>
+
+			                    <br><br><br><br><br><br><hr>
+
+			                    <div class="form-group">
+			                    	<div class="panel panel-default">
+			                    		<div class="panel-heading">EVALUADOS EN BD</div>
+			                    		<div class="panel-body">	                    			
+			                    			<table class="table table-bordered" id="tablaEvaluados">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Establecimiento</th>
+														<th>Acta Número</th>
+														<th>Fecha Evaluación</th>
+														<th>P. Cumplimiento</th>
+														<th>Concepto</th>
+														<th></th>
+													</tr>									
+												</thead>
+												<tbody id="evaluados"></tbody>
+											</table>													
+			                    		</div>
+			                    	</div>
+									
+								</div><!-- Fin del form-group -->
 
 							</div><!-- Fin del tab-pane -->
 

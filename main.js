@@ -12,50 +12,50 @@ if('serviceWorker' in navigator){
 }
 
 function setConcepto() {
-	var concepto = document.getElementsByName('concepto')[0].value;
+	var concepto = document.getElementsByName('concepto440')[0].value;
 
 	switch(concepto){
 		case '1':
-			document.getElementsByName('textoConcepto')[0].value = 'Aceptable';
+			document.getElementsByName('textoConcepto440')[0].value = 'Aceptable';
 			break;
 		case '2':
-			document.getElementsByName('textoConcepto')[0].value = 'Aceptable con requerimientos';
+			document.getElementsByName('textoConcepto440')[0].value = 'Aceptable con requerimientos';
 			break;
 		case '3':
-			document.getElementsByName('textoConcepto')[0].value = 'Desfavorable';
+			document.getElementsByName('textoConcepto440')[0].value = 'Desfavorable';
 			break;
 		default:
-			document.getElementsByName('textoConcepto')[0].value = '';
+			document.getElementsByName('textoConcepto440')[0].value = '';
 	}
 }
 
 function setMotivo() {
-	var motivo = document.getElementsByName('motivo')[0].value;
+	var motivo = document.getElementsByName('motivo440')[0].value;
 
 	switch(motivo){
 		case '01':
-			document.getElementsByName('textoMotivo')[0].value = 'PROGRAMACIÓN';
+			document.getElementsByName('textoMotivo440')[0].value = 'PROGRAMACIÓN';
 			break;
 		case '02':
-			document.getElementsByName('textoMotivo')[0].value = 'SOLICITUD DEL INTERESADO';
+			document.getElementsByName('textoMotivo440')[0].value = 'SOLICITUD DEL INTERESADO';
 			break;
 		case '03':
-			document.getElementsByName('textoMotivo')[0].value = 'ASOCIADA A PQRS';
+			document.getElementsByName('textoMotivo440')[0].value = 'ASOCIADA A PQRS';
 			break;
 		case '04':
-			document.getElementsByName('textoMotivo')[0].value = 'SOLICITUD OFICIAL';
+			document.getElementsByName('textoMotivo440')[0].value = 'SOLICITUD OFICIAL';
 			break;
 		case '05':
-			document.getElementsByName('textoMotivo')[0].value = 'SEGUIMIENTO A VISITA ANTERIOR';
+			document.getElementsByName('textoMotivo440')[0].value = 'SEGUIMIENTO A VISITA ANTERIOR';
 			break;
 		case '06':
-			document.getElementsByName('textoMotivo')[0].value = 'SOLICITUD DE PRÁCTICA DE PRUEBAS/PR';
+			document.getElementsByName('textoMotivo440')[0].value = 'SOLICITUD DE PRÁCTICA DE PRUEBAS/PR';
 			break;
 		case '09':
-			document.getElementsByName('textoMotivo')[0].value = 'OTRO';
+			document.getElementsByName('textoMotivo440')[0].value = 'OTRO';
 			break;
 		default:
-			document.getElementsByName('textoMotivo')[0].value = '';
+			document.getElementsByName('textoMotivo440')[0].value = '';
 	}
 }
 
@@ -124,6 +124,6 @@ function consolidarPuntaje(){
 		concepto = 3;
 	}
 	
-	document.getElementsByName('conceptoEval')[0].value = concepto;
-	document.getElementsByName('cumplimiento')[0].value = puntajeTotal;
+	document.getElementsByName('conceptoEval440')[0].value = concepto;
+	document.getElementsByName('cumplimiento440')[0].value = puntajeTotal;
 }
