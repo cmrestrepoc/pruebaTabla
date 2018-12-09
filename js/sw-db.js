@@ -116,19 +116,23 @@ function cargarInscritos(){
 }
 
 function cargarServidor(){
-	db.allDocs({include_docs: true, descending: true}).then ( doc => {
+	db2.allDocs({include_docs: true, descending: true}).then ( doc => {
+		var data;
 		doc.rows.forEach( registro => {
-			//var formData = new FormData();
-			//formData.append('noco', registro.doc.NOCO);
+			data = 'noco='+registro.doc.NOCO+'&&'+
+						'acta='+registro.doc.ACTA+'&&'+
+						'fecha='+registro.doc.FECHA+'&&'+
+						'p_cumpl='+registro.doc.P_CUMPL+'&&'+
+						'concepto='+registro.doc.CONCEPTO;
 			fetch('https://sisbenpro.com/public/evaluacionesTabla', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
 				},
 				mode: 'no-cors',
-				body: JSON.stringify({noco: registro.doc.NOCO})
+				body: data
 			})
-			.then( res => console.log('respuesta POST', res.status) )
+			.then( res => console.log('respuesta POST', res.body) )
 			.catch( err => console.log('error POST', err) );
 		});	
 	});	
@@ -484,7 +488,7 @@ function guardarEvaluacion440(){
 	var evaluado = {
 		CIUDAD: mpio,
 		FECHA: fecha,
-		ACTA: inscripcion,
+		ACTA: acta,
 		ENTIDAD: entidad,	 //Debe copiarse en T493
 		RSO: razonSocial,
 		NIT: nitEsta,
@@ -710,8 +714,8 @@ function mostrarEvaluados(){
 			tr.appendChild(createColumns(registro.doc.NOCO));
 			tr.appendChild(createColumns(registro.doc.ACTA));
 			tr.appendChild(createColumns(registro.doc.FECHA));
-			tr.appendChild(createColumns(registro.doc.CONCEPTO));
 			tr.appendChild(createColumns(registro.doc.P_CUMPL));
+			tr.appendChild(createColumns(registro.doc.CONCEPTO));
 			tr.appendChild(createRadioEvaluados(registro.doc));
 			tbody.appendChild(tr);
 		});
