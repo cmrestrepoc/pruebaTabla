@@ -55,6 +55,13 @@ function escogerInscrito(registro){
 		document.getElementsByName('nombreComercial474')[0].value = registro.NOCO;
 		document.getElementsByName('inscripcion474')[0].value = registro.N_INSCRIP;
 		document.getElementsByName('propietario474')[0].value = registro.NOMBRE_P;
+	}else if(document.getElementsByName('razonSocial440')[0] !== undefined){
+		console.log('Debería estar en 440');
+		document.getElementsByName('razonSocial440')[0].value = registro.RSO;
+		document.getElementsByName('nit440')[0].value = registro.NIT;
+		document.getElementsByName('nombreComercial440')[0].value = registro.NOCO;
+		document.getElementsByName('inscripcion440')[0].value = registro.N_INSCRIP;
+		document.getElementsByName('propietario440')[0].value = registro.NOMBRE_P;
 	}else{
 		console.log('Deberíamos estar en el 493');
 		//console.log(document.getElementsByName('razonSocial479')[0]);
