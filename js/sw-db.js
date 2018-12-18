@@ -118,7 +118,7 @@ function cargarInscritos493(){
 		.then( respObj => {
 			db493.destroy().then( response => {
 				console.log('Base de datos anterior eliminada');
-				db = new PouchDB('inscritosCargados493');
+				db493 = new PouchDB('inscritosCargados493');
 				console.log('Nueva base de datos creada');
 				respObj.forEach(function(registro){
 					var id = { _id: registro.id.toString() };
