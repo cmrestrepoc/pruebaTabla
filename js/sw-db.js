@@ -158,7 +158,8 @@ function cargarServidor(){
 			})
 			.then( res => console.log('respuesta POST', res.body) )
 			.catch( err => console.log('error POST', err) );
-		});	
+		});
+		alert('Archivos en proceso de envío');	
 	});	
 }
 
@@ -695,9 +696,10 @@ function guardarEvaluacion474(){
 	}
 }
 
-function escogerEvaluado(registro){
+function escogerEvaluado(registro, formulario){
 	//alert(registro._id);
 	//console.log('No debería ejecutarse esto en el F493');
+	console.log(formulario);
 	document.getElementsByName('id474')[0].value = registro._id;
 	document.getElementsByName('razonSocial474')[0].value = registro.RSO;
 	document.getElementsByName('nit474')[0].value = registro.NIT;
@@ -708,12 +710,12 @@ function escogerEvaluado(registro){
 	document.getElementsByName('fecha474')[0].value = registro.fecha;
 } 
 
-function createRadioEvaluados(registro){
+function createRadioEvaluados(registro, formulario){
 	var radio = document.createElement('input');
 	radio.type = 'radio';
 	radio.setAttribute('name',"seleEvaluado");
 	radio.value = registro._id;
-	radio.addEventListener('click', escogerEvaluado.bind(this, registro));
+	radio.addEventListener('click', escogerEvaluado.bind(this, registro, formulario));
 
 	var span = document.createElement('span');
 	span.className = 'input-group-addon';
@@ -725,7 +727,7 @@ function createRadioEvaluados(registro){
 	return td;
 }
 
-function mostrarEvaluados(){
+function mostrarEvaluados474(){
 	db474.allDocs({include_docs: true, descending: true}).then ( doc => {
 		var tbody = document.getElementById('evaluados');
 		tbody.innerHTML = '';
@@ -740,7 +742,29 @@ function mostrarEvaluados(){
 			tr.appendChild(createColumns(registro.doc.FECHA));
 			tr.appendChild(createColumns(registro.doc.P_CUMPL));
 			tr.appendChild(createColumns(registro.doc.CONCEPTO));
-			tr.appendChild(createRadioEvaluados(registro.doc));
+			tr.appendChild(createRadioEvaluados(registro.doc, 474));
+			tbody.appendChild(tr);
+		});
+		$('#tablaEvaluados').DataTable();
+	});
+}
+
+function mostrarEvaluados440(){
+	db440.allDocs({include_docs: true, descending: true}).then ( doc => {
+		var tbody = document.getElementById('evaluados');
+		tbody.innerHTML = '';
+		var contador = 0;
+		doc.rows.forEach( registro => {
+			//console.log(registro.doc._id);
+			contador++;
+			var tr = document.createElement('tr');
+			tr.appendChild(createColumns(contador));
+			tr.appendChild(createColumns(registro.doc.NOCO));
+			tr.appendChild(createColumns(registro.doc.ACTA));
+			tr.appendChild(createColumns(registro.doc.FECHA));
+			tr.appendChild(createColumns(registro.doc.P_CUMPL));
+			tr.appendChild(createColumns(registro.doc.CONCEPTO));
+			tr.appendChild(createRadioEvaluados(registro.doc), 440);
 			tbody.appendChild(tr);
 		});
 		$('#tablaEvaluados').DataTable();
