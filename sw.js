@@ -25,6 +25,11 @@ var urlsToCache = [
 	'./index.html',
 	'./f440.html',
 	'./f493.html',
+	'./f479.html',
+	'./f444.html',
+	'./f495.html',
+	'./f474.html',
+	'./f480.html',
 	'./css/styles.css',
 	'./css/bootstrap.css',
 	'./css/bootstrap.min.css',
@@ -98,8 +103,8 @@ self.addEventListener('fetch', e => {
 
 	const respuesta = caches.open(CACHE_NAME).then( cache => {
 
-		fetch( e.request ).then( newResp => 
-			cache.put( e.request, newResp ));
+		fetch( e.request )
+			.then( newResp => cache.put( e.request, newResp ));
 		
 		return cache.match( e.request );
 

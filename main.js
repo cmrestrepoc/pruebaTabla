@@ -11,110 +11,89 @@ if('serviceWorker' in navigator){
 	console.log('NO PUEDES usar los serviceWorker en tu navegador');
 }
 
-function setConcepto() {
-	var concepto = document.getElementsByName('concepto440')[0].value;
+function setConcepto(objeto, destino) {
+	var concepto = objeto.value;
 
 	switch(concepto){
 		case '1':
-			document.getElementsByName('textoConcepto440')[0].value = 'Aceptable';
+			document.getElementsByName(destino)[0].value = 'Aceptable';
 			break;
 		case '2':
-			document.getElementsByName('textoConcepto440')[0].value = 'Aceptable con requerimientos';
+			document.getElementsByName(destino)[0].value = 'Aceptable con requerimientos';
 			break;
 		case '3':
-			document.getElementsByName('textoConcepto440')[0].value = 'Desfavorable';
+			document.getElementsByName(destino)[0].value = 'Desfavorable';
 			break;
 		default:
-			document.getElementsByName('textoConcepto440')[0].value = '';
+			document.getElementsByName(destino)[0].value = '';
 	}
 }
 
-function setMotivo() {
-	var motivo = document.getElementsByName('motivo440')[0].value;
+function setMotivo(objeto, destino) {
+	var motivo = objeto.value;
 
 	switch(motivo){
 		case '01':
-			document.getElementsByName('textoMotivo440')[0].value = 'PROGRAMACIÓN';
+			document.getElementsByName(destino)[0].value = 'PROGRAMACIÓN';
 			break;
 		case '02':
-			document.getElementsByName('textoMotivo440')[0].value = 'SOLICITUD DEL INTERESADO';
+			document.getElementsByName(destino)[0].value = 'SOLICITUD DEL INTERESADO';
 			break;
 		case '03':
-			document.getElementsByName('textoMotivo440')[0].value = 'ASOCIADA A PQRS';
+			document.getElementsByName(destino)[0].value = 'ASOCIADA A PQRS';
 			break;
 		case '04':
-			document.getElementsByName('textoMotivo440')[0].value = 'SOLICITUD OFICIAL';
+			document.getElementsByName(destino)[0].value = 'SOLICITUD OFICIAL';
 			break;
 		case '05':
-			document.getElementsByName('textoMotivo440')[0].value = 'SEGUIMIENTO A VISITA ANTERIOR';
+			if(destino == 'textoMotivo440'){
+				document.getElementsByName(destino)[0].value = 'SEGUIMIENTO A VISITA ANTERIOR';
+			}else{
+				document.getElementsByName(destino)[0].value = 'EVENTO DE INTERÉS EN SALUD PÚBLICA';
+			};
 			break;
 		case '06':
-			document.getElementsByName('textoMotivo440')[0].value = 'SOLICITUD DE PRÁCTICA DE PRUEBAS/PR';
+			document.getElementsByName(destino)[0].value = 'SOLICITUD DE PRÁCTICA DE PRUEBAS/PR';
 			break;
 		case '09':
-			document.getElementsByName('textoMotivo440')[0].value = 'OTRO';
+			document.getElementsByName(destino)[0].value = 'OTRO';
 			break;
 		default:
-			document.getElementsByName('textoMotivo440')[0].value = '';
+			document.getElementsByName(destino)[0].value = '';
 	}
 }
 
-var puntajeBloque1 = 0;
-var puntajeBloque2 = 0;
-var puntajeBloque3 = 0;
-var puntajeBloque4 = 0;
-var puntajeBloque5 = 0;
+var puntajeBloques = [];
 
-function evaluarBloque1(){
-	var puntaje1 = document.getElementsByName('evaluacion_1_1')[0].value;
-	var puntaje2 = document.getElementsByName('evaluacion_1_2')[0].value;
-	var puntaje3 = document.getElementsByName('evaluacion_1_3')[0].value;
-	var puntaje4 = document.getElementsByName('evaluacion_1_4')[0].value;
-
-	puntajeBloque1 = (puntaje1*4 + puntaje2*4 + puntaje3*4 + puntaje4*5);
-	document.getElementsByName('evalBloque1')[0].value = puntajeBloque1;
-
-}
-
-function evaluarBloque2(){
-	var puntaje1 = document.getElementsByName('evaluacion_2_1')[0].value;
-	var puntaje2 = document.getElementsByName('evaluacion_2_2')[0].value;
+function evaluarBloque(evaluacion, puntaje, resultado, indice){
+	var evaluaciones = document.getElementsByName(evaluacion);
+	var puntos = document.getElementsByName(puntaje);	
+	var i = 0;
+	var suma = 0;
 	
-	puntajeBloque2 = (puntaje1*6 + puntaje2*7);
-	document.getElementsByName('evalBloque2')[0].value = puntajeBloque2;
-}
-
-function evaluarBloque3(){
-	var puntaje1 = document.getElementsByName('evaluacion_3_1')[0].value;
-	var puntaje2 = document.getElementsByName('evaluacion_3_2')[0].value;
+	evaluaciones.forEach( eva => {
+		//console.log ((evaluaciones[i].value*puntos[i].innerHTML));
+		suma = suma + (evaluaciones[i].value*puntos[i].innerHTML);
+		i++;
+	})
 	
-	puntajeBloque3 = (puntaje1*8 + puntaje2*8);
-	document.getElementsByName('evalBloque3')[0].value = puntajeBloque3;
+	document.getElementsByName(resultado)[0].value = suma;
+	puntajeBloques[indice] = suma;
+	//console.log(puntajeBloques);
 }
 
-function evaluarBloque4(){
-	var puntaje1 = document.getElementsByName('evaluacion_4_1')[0].value;
-	var puntaje2 = document.getElementsByName('evaluacion_4_2')[0].value;
-	var puntaje3 = document.getElementsByName('evaluacion_4_3')[0].value;
 
-	puntajeBloque4 = (puntaje1*7 + puntaje2*9 + puntaje3*5);
-	document.getElementsByName('evalBloque4')[0].value = puntajeBloque4;
-}
-
-function evaluarBloque5(){
-	var puntaje1 = document.getElementsByName('evaluacion_5_1')[0].value;
-	var puntaje2 = document.getElementsByName('evaluacion_5_2')[0].value;
-	var puntaje3 = document.getElementsByName('evaluacion_5_3')[0].value;
-	var puntaje4 = document.getElementsByName('evaluacion_5_4')[0].value;
-	var puntaje5 = document.getElementsByName('evaluacion_5_5')[0].value;
-	
-	puntajeBloque5 = (puntaje1*7 + puntaje2*5 + puntaje3*5 + puntaje4*9 + puntaje5*7);
-	document.getElementsByName('evalBloque5')[0].value = puntajeBloque5;
-}
-
-function consolidarPuntaje(){
-	var puntajeTotal = puntajeBloque1 + puntajeBloque2 + puntajeBloque3 + puntajeBloque4 + puntajeBloque5;
+function consolidarPuntaje(con, puntaje){
+	var puntajeTotal = 0;
 	var concepto = 0;
+
+	for (var i = 0; i < puntajeBloques.length; i++) {
+		if(puntajeBloques[i] != null){
+			puntajeTotal += puntajeBloques[i];
+		}else{
+			puntajeTotal += 0;
+		}
+	};
 
 	if (puntajeTotal >= 90) {
 		concepto = 1;
@@ -124,6 +103,7 @@ function consolidarPuntaje(){
 		concepto = 3;
 	}
 	
-	document.getElementsByName('conceptoEval440')[0].value = concepto;
-	document.getElementsByName('cumplimiento440')[0].value = puntajeTotal;
+	//console.log(puntajeTotal);
+	document.getElementsByName(con)[0].value = concepto;
+	document.getElementsByName(puntaje)[0].value = puntajeTotal;
 }

@@ -2,7 +2,7 @@
 <html lang="es">
 	<head>
 		<meta charset="utf-8"/>
-		<title>F440</title>
+		<title>F480</title>
 
 		<!-- favicon -->
 		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
@@ -42,7 +42,7 @@
 			<div class="titulos">
 				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
 				<h2>Vigilancia en Salud Pública</h2>
-				<h2>Acta FT440</h2>
+				<h2>Acta FT480</h2>
 			</div>
 
 		</header>
@@ -54,7 +54,7 @@
 				
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						FT440: Acta de Inspección Sanitaria con Enfoque de Riesgo para Expendios de Carne
+						FT480: Acta de Inspección Sanitaria con Enfoque de Riesgo para Ventas de Alimentos y Bebidas en Vía Pública
 					</div>
 						
 					<div class="panel-body">
@@ -73,7 +73,7 @@
 								<br>
 								<div class="form-group">                    
 			                        <div class="col-md-3 col-md-offset-2">
-			                            <a id="todosInscritos" onclick="cargarInscritos()" class="btn btn-primary">
+			                            <a id="todosInscritos" onclick="cargarInscritos493()" class="btn btn-primary">
 			                                Cargar inscritos desde servidor
 			                            </a>
 			                        </div>
@@ -90,7 +90,7 @@
 									<div class="panel panel-default">
 			                    		<div class="panel-heading">INSCRITOS EN BD</div>
 			                    		<div class="panel-body">
-			                    			<table class="table table-bordered" id="tablaInscritos569">
+			                    			<table class="table table-bordered" id="tablaInscritos">
 												<thead>
 													<tr>
 														<th></th>
@@ -101,7 +101,7 @@
 														<th></th>
 													</tr>	
 												</thead>
-												<tbody id="inscritos569"></tbody>
+												<tbody id="inscritos"></tbody>
 											</table>
 										</div>
 	                    			</div>
@@ -112,21 +112,21 @@
 								<div class="form-group">
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Ciudad:</label>
-										<input type="text" class="form-control" name="ciudad440" value="CANDELARIA">
+										<input type="text" class="form-control" name="ciudad480" value="CANDELARIA">
 									</div>
 									<div class="col-md-10">
 										<div class="col-md-3">
 											<label class="col-md-12 control-label">Fecha:</label>
-											<input type="date" class="form-control" name="fecha440">
+											<input type="date" class="form-control" name="fecha480">
 										</div>
 										<div class="col-md-3">
 											<label class="col-md-12 control-label">Acta No:</label>
-											<input type="number" class="form-control" name="acta440">
+											<input type="number" class="form-control" name="acta480">
 										</div>
 
 										<div class="col-md-6" style="padding:0">
 											<label class="col-md-12 control-label">Entidad:</label>
-											<input type="text" class="form-control" name="entidad440" value="SECRETARÍA DE SALUD MUNICIPAL - CANDELARIA">
+											<input type="text" class="form-control" name="entidad480" value="SECRETARÍA DE SALUD MUNICIPAL - CANDELARIA">
 										</div>
 									</div>
 															
@@ -135,50 +135,115 @@
 								<br><br><br><hr>
 
 								<div class="form-group">
-									<div class="col-md-4">
-										<label class="col-md-6 control-label">Razón Social:</label>
-										<input type="text" class="form-control" name="razonSocial440">
-									</div>
-									<div class="col-md-2">
-										<label class="col-md-6 control-label">Nit/CC:</label>
-										<input type="text" class="form-control" name="nit440">
-									</div>
-									<div class="col-md-4">
+									<label class="col-md-2 control-label" style="text-align:right">TIPO DE ESTABLECIMIENTO:</label>
+									<div class="col-md-10" style="padding:0">
+										<div class="col-md-2" style="padding-left:0">
+											<div class="input-group">
+												<span class="input-group-addon">
+												    <input type="checkbox" name="tipoEstablecimiento" value="fijo480">
+												   </span>
+												   <input type="text" class="form-control" name="fijo480" value="Puesto fijo">
+											</div>
+										</div>									
+										<div class="col-md-3" style="padding-left:0">
+											<div class="input-group">
+												<span class="input-group-addon">
+												    <input type="checkbox" name="tipoEstablecimiento" value="fijoPA">
+												   </span>
+												   <input type="text" class="form-control" name="fijoPA" value="P. Fijo con Prep. Alim.">
+											</div>
+										</div>								
+										<div class="col-md-3" style="padding-left:0">
+											<div class="input-group">
+												<span class="input-group-addon">
+												    <input type="checkbox" name="tipoEstablecimiento" value="movil">
+												   </span>
+												   <input type="text" class="form-control" name="movil" value="Móvil o Ambulante">
+											</div>
+										</div>									
+										<div class="col-md-4" style="padding-left:0">
+											<div class="input-group">
+												<span class="input-group-addon">
+												    <input type="checkbox" name="tipoEstablecimiento" value="movilPA">
+												   </span>
+												   <input type="text" class="form-control" name="movilPA" value="Ambulante con Prep. Alimentos">
+											</div>
+										</div>
+									</div>															
+								</div><!-- Fin del form-group -->
+								<br><br><br><hr>
+
+								<div class="form-group">
+									<div class="col-md-6 col-md-offset-1">
 										<label class="col-md-12 control-label">Nombre Comercial:</label>
-										<input type="text" class="form-control" name="nombreComercial440">
+										<input type="text" class="form-control" name="nombreComercial480">
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-3">
 										<label class="col-md-12 control-label">Inscripción No:</label>
-										<input type="text" class="form-control" name="inscripcion440">
+										<input type="text" class="form-control" name="inscripcion480">
 									</div>
 								</div><!-- Fin del form-group -->
 								<br><br><br><hr>
 
 								<div class="form-group">
+									<div class="col-md-5">
+										<label class="col-md-12 control-label">Dirección (Para puestos fijos):</label>
+										<input type="text" class="form-control" onchange="uncampo(this,'ubicacion480')" name="direccion480">
+									</div>									
 									<div class="col-md-4">
-										<label class="col-md-12 control-label">Dirección:</label>
-										<input type="text" class="form-control" name="direccion440">
-									</div>
-									<div class="col-md-3">
-										<label class="col-md-12 control-label">Matrícula Mercantil:</label>
-										<input type="text" class="form-control" name="matriculaMercantil440">
-									</div>
-									<div class="col-md-3">
 										<label class="col-md-12 control-label">Departamento:</label>
-										<input type="text" class="form-control" name="dpto440" value="VALLE DEL CAUCA">
+										<input type="text" class="form-control" name="dpto480" value="VALLE DEL CAUCA">
 									</div>
-									<div class="col-md-2">
+									<div class="col-md-3">
 										<label class="col-md-12 control-label">Municipio:</label>
-										<input type="text" class="form-control" name="mpio440" value="CANDELARIA">
+										<input type="text" class="form-control" name="mpio480" value="CANDELARIA">
 									</div>
+									<br><br><br><br>
+									<div class="col-md-5">
+										<label class="col-md-12 control-label">Ubicación (para puestos móviles):</label>
+										<input type="text" class="form-control" onchange="uncampo(this,'direccion480')" id="ubicacion" name="ubicacion480">
+									</div>									
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Departamento:</label>
+										<input type="text" class="form-control" name="dpto480" value="VALLE DEL CAUCA">
+									</div>
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Municipio:</label>
+										<input type="text" class="form-control" name="mpio480" value="CANDELARIA">
+									</div>
+									<!--br><br><br><br>
+									<div class="col-md-5">
+										<label class="col-md-12 control-label">Dir Notificaciones:</label>
+										<input type="text" class="form-control" name="dirNotif480">
+									</div>										
+									<div class="col-md-4">
+										<label class="control-label col-md-12">Depto N.:</label>
+										<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif480">
+									</div>
+									<div class="col-md-3">
+										<label class="control-label col-md-12">Mpio N.:</label>
+										<input type="text" class="form-control" value="CANDELARIA" name="mpioNotif480">
+									</div-->									
 								</div><!-- Fin del form-group -->
 								<br><br><br><hr>
+
+								<script type="text/javascript">
+									function uncampo(este, otro){
+										if (este.value != '' && document.getElementsByName(otro)[0].value != ''){
+											alert('Solo debe llenar uno de estos dos campos: o el puesto es fijo o el puesto es móvil');
+											document.getElementsByName(otro)[0].value = '';
+											este.value = '';
+										}else{
+											console.log('Al parecer el otro campo está vacío');
+										}
+									}
+								</script>
 
 								<div class="form-group">
 									<div class="col-md-2" style="margin-left:50px">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="barrio">
+										    	<input type="radio" name="territorio480" value="barrio">
 										    </span>
 										    <input type="text" class="form-control" name="barrio" value="Barrio">
 										</div>
@@ -186,7 +251,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="vereda">
+										    	<input type="radio" name="territorio480" value="vereda">
 										    </span>
 										    <input type="text" class="form-control" name="vereda" value="Vereda">
 										</div>
@@ -194,7 +259,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="comuna">
+										    	<input type="radio" name="territorio480" value="comuna">
 										    </span>
 										    <input type="text" class="form-control" name="comuna" value="Comuna">
 										</div>
@@ -202,7 +267,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="localidad">
+										    	<input type="radio" name="territorio480" value="localidad">
 										    </span>
 										    <input type="text" class="form-control" name="localidad" value="Localidad">
 										</div>
@@ -210,7 +275,7 @@
 									<div class="col-md-3">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="corregimiento">
+										    	<input type="radio" name="territorio480" value="corregimiento">
 										    </span>
 										    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
 										</div>
@@ -219,7 +284,7 @@
 									<div class="col-md-2" style="margin-left:50px">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="caserio">
+										    	<input type="radio" name="territorio480" value="caserio">
 										    </span>
 										    <input type="text" class="form-control" name="caserio" value="Caserío">
 										</div>
@@ -227,7 +292,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="sector">
+										    	<input type="radio" name="territorio480" value="sector">
 										    </span>
 										    <input type="text" class="form-control" name="sector" value="Sector">
 										</div>
@@ -235,7 +300,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="upz">
+										    	<input type="radio" name="territorio480" value="upz">
 										    </span>
 										    <input type="text" class="form-control" name="upz" value="Upz">
 										</div>
@@ -243,7 +308,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="otro">
+										    	<input type="radio" name="territorio480" value="otro">
 										    </span>
 										    <input type="text" class="form-control" name="otro" value="Otro">
 										</div>
@@ -255,19 +320,19 @@
 			                    <div class="form-group">
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">Cual:</label>
-										<input type="text" class="form-control" name="nomTerr440">
+										<input type="text" class="form-control" name="nomTerr480">
 									</div>													
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Celular:</label>
-										<input type="text" class="form-control" name="cel440">	
+										<input type="text" class="form-control" name="cel480">	
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Fax:</label>
-										<input type="text" class="form-control" name="fax440">		
+										<input type="text" class="form-control" name="fax480">		
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Teléfono:</label>
-										<input type="text" class="form-control" name="tel440">		
+										<input type="text" class="form-control" name="tel480">		
 									</div>							
 								</div><!-- Fin del form-group -->
 
@@ -276,23 +341,23 @@
 			                    <div class="form-group">
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">Correo</label>
-										<input type="text" class="form-control" name="correo440">
+										<input type="text" class="form-control" name="correo480">
 									</div>
 									<div class="col-md-4" style="padding:0">
 										<label class="col-md-12 control-label">Propietario:</label>
-										<input type="text" class="form-control" name="propietario440">
+										<input type="text" class="form-control" name="propietario480">
 									</div>
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Identificación:</label>
 										<div class="col-md-5">
-											<select class="form-control" name="tipoIdProp440">
+											<select class="form-control" name="tipoIdProp480">
 												<option value="cc">CC</option>
 												<option value="ce">CE</option>
 												<option value="nit">NIT</option>
 											</select>
 										</div>
 										<div class="col-md-7" style="padding:0">
-											<input type="text" class="form-control" name="idPropietario440" placeholder="# identificación">
+											<input type="text" class="form-control" name="idPropietario480" placeholder="# identificación">
 										</div>							
 									</div>
 								</div><!-- Fin del form-group -->
@@ -302,34 +367,34 @@
 									<div class="col-md-6">
 										<div class="col-md-6" style="padding:0">
 											<label class="col-md-12 control-label">Rep. Legal:</label>
-											<input type="text" class="form-control" name="repLegal440">
+											<input type="text" class="form-control" name="repLegal480">
 										</div>										
 										<div class="col-md-6" style="padding:0">					
 											<label class="col-md-12 control-label">Identificación:</label>
 											<div class="col-md-5">
-												<select class="form-control" name="tipoIdRl440">
+												<select class="form-control" name="tipoIdRl480">
 													<option value="cc">CC</option>
 													<option value="ce">CE</option>
 													<option value="nit">NIT</option>
 												</select>
 											</div>
 											<div class="col-md-7" style="padding:0">
-												<input type="text" class="form-control" name="idRepLegal440" placeholder="# identificación">
+												<input type="text" class="form-control" name="idRepLegal480" placeholder="# identificación">
 											</div>											
 										</div>										
 									</div>
 									<div class="col-md-6" style="padding:0">
-										<div class="col-md-5" style="padding:0">
+										<div class="col-md-5">
 											<label class="col-md-12 control-label">Dir Notif:</label>
-										<input type="text" class="form-control" name="dirNotif440">
+											<input type="text" class="form-control" name="dirNotif480">
 										</div>										
 										<div class="col-md-4">
 											<label class="control-label col-md-12">Depto N.:</label>
-											<input type="text" class="form-control" value="Valle del Cauca" name="deptoNotif440">
+											<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif480">
 										</div>
-										<div class="col-md-3" style="padding:0">
+										<div class="col-md-3">
 											<label class="control-label col-md-12">Mpio N.:</label>
-											<input type="text" class="form-control" value="Candelaria" name="mpioNotif440">
+											<input type="text" class="form-control" value="CANDELARIA" name="mpioNotif480">
 										</div>
 									</div>									
 								</div><!-- Fin del form-group -->
@@ -338,77 +403,29 @@
 								<div class="form-group">
 									<div class="col-md-7 col-md-offset-1">
 										<label class="col-md-12 control-label">Horarios:</label>
-										<input type="text" class="form-control" name="horarios440">
+										<input type="text" class="form-control" name="horarios480">
 									</div>
 
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">No. Trabajadores:</label>
 										<div class="col-md-5">
-											<input type="number" class="form-control" name="noTrabajadores440">
+											<input type="number" class="form-control" name="noTrabajadores480">
 										</div>								
 									</div>							
 								</div><!-- Fin del form-group -->
-								<br><br><br><hr>
-
-								<div class="form-group">
-									<div class="col-md-6">
-										<label class="col-md-12 control-label">EXPENDE CARNE:</label>
-										<div class="col-md-4" style="padding:0">
-											<div class="input-group">
-												<span class="input-group-addon">
-											    	<input type="checkbox" name="tipoCarneExpende" value="bovina">
-											    </span>
-											    <input type="text" class="form-control" name="bovina" value="Bovina">
-											</div>
-										</div>									
-										<div class="col-md-4">
-											<div class="input-group">
-												<span class="input-group-addon">
-											    	<input type="checkbox" name="tipoCarneExpende" value="porcina">
-											    </span>
-											    <input type="text" class="form-control" name="porcina" value="Porcina">
-											</div>
-										</div>								
-										<div class="col-md-4">
-											<div class="input-group">
-												<span class="input-group-addon">
-											    	<input type="checkbox" name="tipoCarneExpende" value="aves">
-											    </span>
-											    <input type="text" class="form-control" name="aves" value="Aves">
-											</div>
-										</div>
-									</div>
-									
-									<div class="col-md-4" style="padding:0">
-										<label class="col-md-12 control-label">Otras Especies:</label>
-										<div class="col-md-12">
-											<input type="text" class="form-control" name="otrasEspecies">
-										</div>								
-									</div>
-
-									<div class="col-md-2" style="padding:0">
-										<label class="col-md-12 control-label">Otros Productos:</label>
-										<div class="col-md-6">
-											<select class="form-control" name="otrosProductos">
-												<option value="s">S</option>
-												<option value="n">N</option>
-											</select>
-										</div>								
-									</div>													
-								</div><!-- Fin del form-group -->
-								<br><br><br><hr>
+								<br><br><br><hr>								
 
 								<div class="form-group">
 									<label class="control-label col-md-2" style="text-align:right">ÚLTIMA INSPECCIÓN:</label>
 									<div class="col-md-7">
 										<div class="col-md-4" style="padding:0">
 											<label class="col-md-12 control-label">Fecha:</label>
-											<input type="date" class="form-control" name="fechaUltVisita440">
+											<input type="date" class="form-control" name="fechaUltVisita480">
 										</div>
 										<div class="col-md-7 col-md-offset-1" style="padding:0">
 											<label class="col-md-12 control-label">Concepto última inspección:</label>
 											<div class="col-md-3">
-												<select class="form-control" name="concepto440" onchange="setConcepto(this,'textoConcepto440')">
+												<select class="form-control" name="concepto480" onchange="setConcepto(this, 'textoConcepto480')">
 													<option></option>				
 													<option value="1">1</option>
 													<option value="2">2</option>
@@ -416,14 +433,14 @@
 												</select>
 											</div>
 											<div class="col-md-9" style="padding:0">
-												<input type="text" class="form-control" name="textoConcepto440">
+												<input type="text" class="form-control" name="textoConcepto480">
 											</div>
 										</div>												
 									</div>
 									<div class="col-md-3">
 										<label class="control-label col-md-12">Porcentaje Cumplimiento</label>
 										<div class="col-md-6">
-											<input type="number" class="form-control" name="porcentaje440">
+											<input type="number" class="form-control" name="porcentaje480">
 										</div>%									
 									</div>
 								</div><!-- Fin del form-group -->
@@ -433,7 +450,7 @@
 								<div class="form-group">
 									<label class="control-lable col-md-3" style="text-align:right">Motivo de la visita:</label>
 									<div class="col-md-2">
-										<select class="form-control" name="motivo440" onchange="setMotivo(this,'textoMotivo440')">
+										<select class="form-control" name="motivo480" onchange="setMotivo(this,'textoMotivo480')">
 											<option></option>				
 											<option value="01">01</option>
 											<option value="02">02</option>
@@ -445,7 +462,7 @@
 										</select>
 									</div>
 									<div class="col-md-6">
-										<input type="text" class="form-control" name="textoMotivo440">
+										<input type="text" class="form-control" name="textoMotivo480">
 									</div>									
 								</div><!-- Fin del form-group -->
 								<br><br><hr>
@@ -475,8 +492,8 @@
 														</thead>
 														<tbody>	
 															<tr>
-																<th scope="row">1.1 Localización y diseño</th>
-																<td name="puntaje_1">4</td>
+																<th scope="row">1.1 Localización y alrededores</th>
+																<td name="puntaje_1">7</td>
 																<td>
 																	<select class="form-control" name="evaluacion_1">
 																		<option value="1">1</option>
@@ -487,8 +504,8 @@
 																<td><textarea class="form-control" name="hallazgos_1_1"></textarea></td>
 															</tr>
 															<tr>
-																<th scope="row">1.2 Condiciones en pisos y paredes</th>
-																<td name="puntaje_1">4</td>
+																<th scope="row">1.2 Estructura física y condiciones de mantenimiento</th>
+																<td name="puntaje_1">6</td>
 																<td>
 																	<select class="form-control" name="evaluacion_1">
 																		<option value="1">1</option>
@@ -499,19 +516,7 @@
 																<td><textarea class="form-control" name="hallazgos_1_2"></textarea></td>
 															</tr>
 															<tr>
-																<th scope="row">1.3 Techos, iluminación y ventilación</th>
-																<td name="puntaje_1">4</td>
-																<td>
-																	<select class="form-control" name="evaluacion_1">
-																		<option value="1">1</option>
-																		<option value="0.5">2</option>
-																		<option value="0">3</option>
-																	</select>
-																</td>
-																<td><textarea class="form-control" name="hallazgos_1_3"></textarea></td>
-															</tr>
-															<tr>
-																<th scope="row">1.4 Instalaciones Sanitarias</th>
+																<th scope="row">1.3 Acceso a servicio sanitario</th>
 																<td name="puntaje_1">5</td>
 																<td>
 																	<select class="form-control" name="evaluacion_1">
@@ -520,7 +525,7 @@
 																		<option value="0">3</option>
 																	</select>
 																</td>
-																<td><textarea class="form-control" name="hallazgos_1_4"></textarea></td>
+																<td><textarea class="form-control" name="hallazgos_1_3"></textarea></td>
 															</tr>
 														</tbody>
 													</table>
@@ -532,7 +537,7 @@
 														<input type="text" class="form-control" name="evalBloque1">
 													</div>
 													<div class="col-md-3">
-														<label>17%</label>
+														<label>18%</label>
 													</div>
 												<br><br>
 												</div>
@@ -541,7 +546,7 @@
 													<table class="table" style="font-size:12px">
 														<thead>
 															<tr>
-																<th scope="col">2. EQUIPOS Y UTENSILIOS</th>
+																<th scope="col">2. SUPERFICIES, EQUIPOS Y UTENSILIOS</th>
 																<th scope="col">P</th>
 																<th scope="col">EVALUAC.</th>
 																<th scope="col">HALLAZGOS</th>
@@ -549,8 +554,8 @@
 														</thead>
 														<tbody>	
 															<tr>
-																<th scope="row">2.1 Condiciones de equipos y utensilios</th>
-																<td name="puntaje_2">6</td>
+																<th scope="row">2.1 Equipos y utensilios</th>
+																<td name="puntaje_2">7</td>
 																<td>
 																	<select class="form-control" name="evaluacion_2">
 																		<option value="1">1</option>
@@ -561,8 +566,8 @@
 																<td><textarea class="form-control" name="hallazgos_2_1"></textarea></td>
 															</tr>
 															<tr>
-																<th scope="row">2.2 Condiciones de equipos de conservación</th>
-																<td name="puntaje_2">7</td>
+																<th scope="row">2.2 Superficies de contacto con el alimento</th>
+																<td name="puntaje_2">8</td>
 																<td>
 																	<select class="form-control" name="evaluacion_2">
 																		<option value="1">1</option>
@@ -582,7 +587,7 @@
 														<input type="text" class="form-control" name="evalBloque2">
 													</div>
 													<div class="col-md-3">
-														<label>13%</label>
+														<label>15%</label>
 													</div>
 												<br><br>			
 												</div>
@@ -599,8 +604,8 @@
 														</thead>
 														<tbody>	
 															<tr>
-																<th scope="row">3.1 Estado de salud (signos y lesiones)</th>
-																<td name="puntaje_3">8</td>
+																<th scope="row">3.1 Estado de salud y reconocimiento médico</th>
+																<td name="puntaje_3">5</td>
 																<td>
 																	<select class="form-control" name="evaluacion_3">
 																		<option value="1">1</option>
@@ -611,8 +616,8 @@
 																<td><textarea class="form-control" name="hallazgos_3_1"></textarea></td>
 															</tr>
 															<tr>
-																<th scope="row">3.2 Prácticas higiénicas</th>
-																<td name="puntaje_3">8</td>
+																<th scope="row">3.2 Presentación personal y Prácticas Higiénicas</th>
+																<td name="puntaje_3">5</td>
 																<td>
 																	<select class="form-control" name="evaluacion_3">
 																		<option value="1">1</option>
@@ -621,6 +626,18 @@
 																	</select>
 																</td>
 																<td><textarea class="form-control" name="hallazgos_3_2"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">3.3 Capacitación en manipulación de alimentos</th>
+																<td name="puntaje_3">5</td>
+																<td>
+																	<select class="form-control" name="evaluacion_3">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_3_3"></textarea></td>
 															</tr>						
 														</tbody>
 													</table>
@@ -632,7 +649,7 @@
 														<input type="text" class="form-control" name="evalBloque3">
 														</div>
 													<div class="col-md-3">
-														<label>16%</label>
+														<label>15%</label>
 													</div>
 												<br><br>		
 												</div>
@@ -642,7 +659,7 @@
 												<table class="table" style="font-size:12px">
 													<thead>
 														<tr>
-															<th scope="col">4. REQUISITOS HIGIÉNICOS</th>
+															<th scope="col">4. REQUISITOS DE PREPARACIÓN, SERVIDO Y OTROS</th>
 															<th scope="col">P</th>
 															<th scope="col">EVALUAC.</th>
 															<th scope="col">HALLAZGOS</th>
@@ -650,8 +667,8 @@
 													</thead>
 													<tbody>	
 														<tr>
-															<th scope="row">4.1 Requisitos legales</th>
-															<td name="puntaje_4">7</td>
+															<th scope="row">4.1 Manejo, conservación y otros</th>
+															<td name="puntaje_4">9</td>
 															<td>
 																<select class="form-control" name="evaluacion_4">
 																	<option value="1">1</option>
@@ -662,7 +679,7 @@
 															<td><textarea class="form-control" name="hallazgos_4_1"></textarea></td>
 														</tr>
 														<tr>
-															<th scope="row">4.2 Manejo de temperatura</th>
+															<th scope="row">4.2 Operaciones de preparación y servido</th>
 															<td name="puntaje_4">9</td>
 															<td>
 																<select class="form-control" name="evaluacion_4">
@@ -672,18 +689,6 @@
 																</select>
 															</td>
 															<td><textarea class="form-control" name="hallazgos_4_2"></textarea></td>
-														</tr>
-														<tr>
-															<th scope="row">4.3 Condiciones de almacenamiento</th>
-															<td name="puntaje_4">5</td>
-															<td>
-																<select class="form-control" name="evaluacion_4">
-																	<option value="1">1</option>
-																	<option value="0.5">2</option>
-																	<option value="0">3</option>
-																</select>
-															</td>
-															<td><textarea class="form-control" name="hallazgos_4_3"></textarea></td>
 														</tr>						
 													</tbody>
 												</table>
@@ -695,7 +700,7 @@
 													<input type="text" class="form-control" name="evalBloque4">
 												</div>
 												<div class="col-md-3">
-													<label>21%</label>
+													<label>18%</label>
 												</div>
 													
 											</div>
@@ -704,7 +709,7 @@
 												<table class="table" style="font-size:12px">
 													<thead>
 														<tr>
-															<th scope="col">5. SANEAMIENTO</th>
+															<th scope="col">5. HIGIENE AMBIENTAL Y SANITARIA</th>
 															<th scope="col">P</th>
 															<th scope="col">EVALUAC.</th>
 															<th scope="col">HALLAZGOS</th>
@@ -712,8 +717,8 @@
 													</thead>
 													<tbody>	
 														<tr>
-															<th scope="row">5.1 Suministro y calidad de agua potable</th>
-															<td name="puntaje_5">7</td>
+															<th scope="row">5.1 Suministro, utilización y manejo del agua potable</th>
+															<td name="puntaje_5">9</td>
 															<td>
 																<select class="form-control" name="evaluacion_5">
 																	<option value="1">1</option>
@@ -725,7 +730,7 @@
 														</tr>
 														<tr>
 															<th scope="row">5.2 Residuos líquidos</th>
-															<td name="puntaje_5">5</td>
+															<td name="puntaje_5">6</td>
 															<td>
 																<select class="form-control" name="evaluacion_5">
 																	<option value="1">1</option>
@@ -748,8 +753,8 @@
 															<td><textarea class="form-control" name="hallazgos_5_3"></textarea></td>
 														</tr>
 														<tr>
-															<th scope="row">5.4 Control integral de plagas</th>
-															<td name="puntaje_5">9</td>
+															<th scope="row">5.4 Control de plagas</th>
+															<td name="puntaje_5">7</td>
 															<td>
 																<select class="form-control" name="evaluacion_5">
 																	<option value="1">1</option>
@@ -760,7 +765,7 @@
 															<td><textarea class="form-control" name="hallazgos_5_4"></textarea></td>
 														</tr>
 														<tr>
-															<th scope="row">5.5 Limpieza y desinfección de áreas, equipos y utensilios</th>
+															<th scope="row">5.5 Limpieza y desinfección</th>
 															<td name="puntaje_5">7</td>
 															<td>
 																<select class="form-control" name="evaluacion_5">
@@ -781,7 +786,7 @@
 													<input type="text" class="form-control" name="evalBloque5">
 												</div>
 												<div class="col-md-3">
-													<label>33%</label>
+													<label>34%</label>
 												</div>
 												<br><br>		
 											</div>
@@ -799,17 +804,17 @@
 										<div class="panel-body">
 											<div class="form-group">
 												<div class="col-md-3">
-													<button class="btn btn-primary" style="font-size:13px" onClick="consolidarPuntaje('conceptoEval440','cumplimiento440')">Cumplimiento</button>
+													<button class="btn btn-primary" style="font-size:13px" onClick="consolidarPuntaje('conceptoEval480','cumplimiento480')">Cumplimiento</button>
 												</div>
 												<div class="col-md-3">
-													<input class="form-control" type="number" name="cumplimiento440"></input>
+													<input class="form-control" type="number" name="cumplimiento480"></input>
 												</div>
 
 												<div class="col-md-3" style="text-align:right">
 													<label class="control-label">Concepto:</label>
 												</div>
 												<div class="col-md-3" style="padding-left:0">
-													<input class="form-control" type="number" name="conceptoEval440"></input>
+													<input class="form-control" type="number" name="conceptoEval480"></input>
 												</div>										
 											</div>
 										</div>
@@ -823,13 +828,13 @@
 											<div class="form-group">
 												<label class="control-label col-md-12">¿Aplica alguna medida?</label>
 												<div class="col-md-3">
-													<select class="form-control" name="medidaSeguridad440">
+													<select class="form-control" name="medidaSeguridad480">
 														<option value="s">SI</option>
 														<option value="n">NO</option>
 													</select>
 												</div><br><br><br><br>
 												<label class="control-label col-md-12">Detalle, en caso afirmativo</label>
-												<textarea class="form-control" name="medida440"></textarea>
+												<textarea class="form-control" name="medida480"></textarea>
 											</div>
 										</div>
 									</div>
@@ -848,14 +853,14 @@
 														<label class="control-label" style="text-align:right">Número de Muestras</label>
 													</div>
 													<div class="col-md-3">
-														<input class="form-control" type="number" name="numeroMuestras440440"></input>
+														<input class="form-control" type="number" name="numeroMuestras480"></input>
 													</div>
 
 													<div class="col-md-3">
 														<label class="control-label" style="text-align:right">Número de Acta</label>
 													</div>
 													<div class="col-md-3" style="padding-left:0">
-														<input class="form-control" type="number" name="numeroActa440440"></input>
+														<input class="form-control" type="number" name="numeroActa480"></input>
 													</div>										
 												</div>
 											</div>
@@ -870,12 +875,12 @@
 
 									<label class="col-md-3 control-label" style="text-align:right">Por parte de la autoridad sanitaria:</label>		
 									<div class="col-md-9">
-										<textarea class="form-control" name="obAutoridad440"></textarea>
+										<textarea class="form-control" name="obAutoridad480"></textarea>
 									</div>
 									<br><br><br>
 									<label class="col-md-3 control-label" style="text-align:right">Por parte del establecimiento:</label>
 									<div class="col-md-9">
-										<textarea class="form-control" name="obPersona440"></textarea>
+										<textarea class="form-control" name="obPersona480"></textarea>
 									</div>
 								</div><!-- Fin del form-group -->
 								<br><br><hr>
@@ -888,27 +893,27 @@
 									</div>
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">___</label>
-										<input type="text" class="form-control" name="funcionario440-1">
+										<input type="text" class="form-control" name="funcionario480-1">
 									</div>
 									<div class="col-md-2">								
 										<label class="col-md-12 control-label">Identicación:</label>
-										<input type="text" class="form-control" name="idFuncionario440-1">
+										<input type="text" class="form-control" name="idFuncionario480-1">
 									</div>
 									<div class="col-md-3">								
 										<label class="col-md-12 control-label">Cargo:</label>
-										<input type="text" class="form-control" name="cargoFuncionario440-1">
+										<input type="text" class="form-control" name="cargoFuncionario480-1">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Funcionario 2:</label>
 									</div>
 									<div class="col-md-5">
-										<input type="text" class="form-control" name="funcionario440-2">
+										<input type="text" class="form-control" name="funcionario480-2">
 									</div>
 									<div class="col-md-2">								
-										<input type="text" class="form-control" name="idFuncionario440-2">
+										<input type="text" class="form-control" name="idFuncionario480-2">
 									</div>
 									<div class="col-md-3">								
-										<input type="text" class="form-control" name="cargoFuncionario440-2">
+										<input type="text" class="form-control" name="cargoFuncionario480-2">
 									</div>							
 								</div><!-- Fin del form-group -->
 
@@ -922,43 +927,43 @@
 									</div>
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">___</label>
-										<input type="text" class="form-control" name="persona440-1">
+										<input type="text" class="form-control" name="persona480-1">
 									</div>
 									<div class="col-md-2">								
 										<label class="col-md-12 control-label">Identicación:</label>
-										<input type="text" class="form-control" name="idPersona440-1">
+										<input type="text" class="form-control" name="idPersona480-1">
 									</div>
 									<div class="col-md-3">								
 										<label class="col-md-12 control-label">Cargo:</label>
-										<input type="text" class="form-control" name="cargoPersona440-1">
+										<input type="text" class="form-control" name="cargoPersona480-1">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Persona 2:</label>
 									</div>
 									<div class="col-md-5">
-										<input type="text" class="form-control" name="persona440-2">
+										<input type="text" class="form-control" name="persona480-2">
 									</div>
 									<div class="col-md-2">								
-										<input type="text" class="form-control" name="idPersona440-2">
+										<input type="text" class="form-control" name="idPersona480-2">
 									</div>
 									<div class="col-md-3">								
-										<input type="text" class="form-control" name="cargoPersona440-2">
+										<input type="text" class="form-control" name="cargoPersona480-2">
 									</div>							
 								</div><!-- Fin del form-group -->
 
 								<br><br><br><br><br><br><hr>
 
-								<input type="hidden" name="id440" value="0">
-								<br><br>
+								<input type="hidden" name="id480" value="0">
+								<br>
 								<div class="form-group">
 			                        <div class="col-md-4 col-md-offset-2">
-			                            <button type="submit" onclick="guardarEvaluacion440()" class="btn btn-primary">
+			                            <button type="submit" onclick="guardarEvaluacion480()" class="btn btn-primary">
 			                                Guardar
 			                            </button>			                            
 			                        </div>			                       
 			                    </div>
 
-			                    <br><br><br><hr>
+			                    <br><br><hr>
 
 			                    <div class="form-group">
 			                    	<div class="panel panel-default">
@@ -967,7 +972,7 @@
 			                    			<table class="table table-bordered" id="tablaEvaluados">
 												<thead>
 													<tr>
-														<th></th>
+														480<th></th>
 														<th>Establecimiento</th>
 														<th>Acta Número</th>
 														<th>Fecha Evaluación</th>

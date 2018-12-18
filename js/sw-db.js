@@ -1,19 +1,23 @@
 
-var db = new PouchDB('inscritosCargados493');
-var db1 = new PouchDB('inscritosNuevos493');
-var db2 = new PouchDB('evaluaciones440');
+var db493 = new PouchDB('inscritosCargados493');
+var dbNuevos493 = new PouchDB('inscritosNuevos493');
+var db440 = new PouchDB('evaluaciones440');
+var db474 = new PouchDB('evaluaciones474');
+var db479 = new PouchDB('evaluaciones479');
+var db480 = new PouchDB('evaluaciones480');
+var db495 = new PouchDB('evaluaciones495');
 
-mostrarInscritos();
+mostrarInscritos493();
 
-db.changes({
+db493.changes({
 	since: 'now',
 	live: true
-}).on('change', mostrarInscritos);
+}).on('change', mostrarInscritos493);
 
-db1.changes({
+dbNuevos493.changes({
 	since: 'now',
 	live: true
-}).on('change', mostrarInscritos);
+}).on('change', mostrarInscritos493);
 
 function createColumns(arreglo){
 	var td = document.createElement('td');
@@ -22,9 +26,38 @@ function createColumns(arreglo){
 }
 
 function escogerInscrito(registro){
-	//alert(registro._id);
-	if(document.getElementsByName('razonSocial440')[0] === undefined){
-		console.log('Debería estar acá');
+	if(document.getElementsByName('razonSocial479')[0] !== undefined){
+		//console.log(document.getElementsByName('razonSocial479')[0]);
+		console.log('Debería estar en 479');
+		document.getElementsByName('razonSocial479')[0].value = registro.RSO;
+		document.getElementsByName('nit479')[0].value = registro.NIT;
+		document.getElementsByName('nombreComercial479')[0].value = registro.NOCO;
+		document.getElementsByName('inscripcion479')[0].value = registro.N_INSCRIP;
+		document.getElementsByName('propietario479')[0].value = registro.NOMBRE_P;	
+	}else if(document.getElementsByName('razonSocial495')[0] !== undefined) {
+		console.log('Debería estar en 495');
+		document.getElementsByName('razonSocial495')[0].value = registro.RSO;
+		document.getElementsByName('nit495')[0].value = registro.NIT;
+		document.getElementsByName('nombreComercial495')[0].value = registro.NOCO;
+		document.getElementsByName('inscripcion495')[0].value = registro.N_INSCRIP;
+		document.getElementsByName('propietario495')[0].value = registro.NOMBRE_P;
+	}else if(document.getElementsByName('razonSocial480')[0] !== undefined) {
+		console.log('Debería estar en 480');
+		document.getElementsByName('razonSocial480')[0].value = registro.RSO;
+		document.getElementsByName('nit480')[0].value = registro.NIT;
+		document.getElementsByName('nombreComercial480')[0].value = registro.NOCO;
+		document.getElementsByName('inscripcion480')[0].value = registro.N_INSCRIP;
+		document.getElementsByName('propietario480')[0].value = registro.NOMBRE_P;
+	}else if(document.getElementsByName('razonSocial474')[0] !== undefined){
+		console.log('Debería estar en 474');
+		document.getElementsByName('razonSocial474')[0].value = registro.RSO;
+		document.getElementsByName('nit474')[0].value = registro.NIT;
+		document.getElementsByName('nombreComercial474')[0].value = registro.NOCO;
+		document.getElementsByName('inscripcion474')[0].value = registro.N_INSCRIP;
+		document.getElementsByName('propietario474')[0].value = registro.NOMBRE_P;
+	}else{
+		console.log('Deberíamos estar en el 493');
+		//console.log(document.getElementsByName('razonSocial479')[0]);
 		document.getElementsByName('id493')[0].value = registro._id;
 		document.getElementsByName('fecha493')[0].value = registro.FECHA;
 		document.getElementsByName('razonSocial493')[0].value = registro.RSO;
@@ -32,13 +65,6 @@ function escogerInscrito(registro){
 		document.getElementsByName('nombreComercial493')[0].value = registro.NOCO;
 		document.getElementsByName('inscripcion493')[0].value = registro.N_INSCRIP;
 		document.getElementsByName('propietario493')[0].value = registro.NOMBRE_P;
-	}else{
-		console.log('No debería ejecutarse esto en el F493');
-		document.getElementsByName('razonSocial440')[0].value = registro.RSO;
-		document.getElementsByName('nit440')[0].value = registro.NIT;
-		document.getElementsByName('nombreComercial440')[0].value = registro.NOCO;
-		document.getElementsByName('inscripcion440')[0].value = registro.N_INSCRIP;
-		document.getElementsByName('propietario440')[0].value = registro.NOMBRE_P;		
 	}
 } 
 
@@ -59,8 +85,8 @@ function createRadio(registro){
 	return td;
 }
 
-function mostrarInscritos(){
-	db.allDocs({include_docs: true, descending: true}).then ( doc => {
+function mostrarInscritos493(){
+	db493.allDocs({include_docs: true, descending: true}).then ( doc => {
 		var tbody = document.getElementById('inscritos');
 		tbody.innerHTML = '';
 		var contador = 0;
@@ -81,19 +107,16 @@ function mostrarInscritos(){
 }
 
 /*function eliminarInscritos(){
-	db.destroy().then(resp => console.log);
+	db493.destroy().then(resp => console.log);
 }*/
 
 //Aquí se usa la función json(), que funciona similar a JSON.parse()
-function cargarInscritos(){
+function cargarInscritos493(){
 	//fetch('http://localhost/formularioVisaludAPI/public/inscritos')
 	fetch('https://sisbenpro.com/public/inscritosVisual')
 		.then( resp => resp.json() )
 		.then( respObj => {
-			//console.log (id);
-			//console.log(respObj);
-			//eliminarInscritos();
-			db.destroy().then( response => {
+			db493.destroy().then( response => {
 				console.log('Base de datos anterior eliminada');
 				db = new PouchDB('inscritosCargados493');
 				console.log('Nueva base de datos creada');
@@ -102,7 +125,7 @@ function cargarInscritos(){
 					// Con la siguiente línea se añade la variable _id al objeto			
 					registro = Object.assign(id,registro);   
 					//console.log(registro);
-					db.put(registro, function callback(err, result){
+					db493.put(registro, function callback(err, result){
 						if (!err) {
 							console.log('inscrito guardado en base de datos');
 						}else {
@@ -110,13 +133,14 @@ function cargarInscritos(){
 						}
 					});
 				});
-				mostrarInscritos();
+				mostrarInscritos493();
 			});
-		});
+		})
+		.catch( err => alert('Hubo problemas con la conexión a la base de datos. Intente una vez más o revise su conexión a internet') );
 }
 
 function cargarServidor(){
-	db2.allDocs({include_docs: true, descending: true}).then ( doc => {
+	db440.allDocs({include_docs: true, descending: true}).then ( doc => {
 		var data;
 		doc.rows.forEach( registro => {
 			data = 'noco='+registro.doc.NOCO+'&&'+
@@ -327,14 +351,14 @@ function guardarInscrito493(){
 		var insertar = { _id: id };
 		inscrito = Object.assign( insertar, inscrito );
 		console.log(inscrito);
-		db1.put(inscrito, function callback(err, result){
+		dbNuevos493.put(inscrito, function callback(err, result){
 			if (!err) {
 				alert('inscrito guardado en base de datos');
 			}else {
 				alert('problemas guardando inscrito en base de datos');
 			}
 		});
-		db.put(inscrito, function callback(err, result){
+		db493.put(inscrito, function callback(err, result){
 			if (!err) {
 				alert('inscrito guardado en base de datos');
 			}else {
@@ -344,13 +368,13 @@ function guardarInscrito493(){
 	}else{
 		id = idExistente;
 		var insertar;
-		db.get(idExistente).then( doc => {
+		db493.get(idExistente).then( doc => {
 			insertar = { 
 				_id: doc._id,
 				_rev: doc._rev
 			};
 			inscrito = Object.assign(insertar, inscrito);
-			db.put(inscrito, function callback(err, result){
+			db493.put(inscrito, function callback(err, result){
 				if (!err) {
 					alert('inscrito guardado en base de datos');
 				}else {
@@ -364,7 +388,7 @@ function guardarInscrito493(){
 			insertar = { _id: id };
 			inscrito = Object.assign( insertar, inscrito );
 			console.log(inscrito);
-			db1.put(inscrito, function callback(err, result){
+			dbNuevos493.put(inscrito, function callback(err, result){
 				if (!err) {
 					alert('inscrito guardado en base de datos');
 				}else {
@@ -376,44 +400,44 @@ function guardarInscrito493(){
 	}
 }
 
-function guardarEvaluacion440(){
+function guardarEvaluacion474(){
 	//var depto = $('input:text[name=depto]').val();
-	var ciudad = $('input:text[name=ciudad440]').val();
-	var fecha = document.getElementsByName('fecha440')[0].value;
-	var acta = document.getElementsByName('acta440')[0].value;
-	var entidad = document.getElementsByName('entidad440')[0].value;
-	var razonSocial = $('input:text[name=razonSocial440]').val();
-	var nitEsta = $('input:text[name=nit440]').val();
-	var inscripcion = document.getElementsByName('inscripcion440')[0].value;
-	var nombreComercial = $('input:text[name=nombreComercial440]').val();
-	var direccion = document.getElementsByName('direccion440')[0].value;
-	var matriculaMercantil = document.getElementsByName('matriculaMercantil440')[0].value;
-	var depto = document.getElementsByName('dpto440')[0].value;
-	var mpio = document.getElementsByName('mpio440')[0].value;
-	var nomTerr = document.getElementsByName('nomTerr440')[0].value;
-	var faxInscrito = document.getElementsByName('fax440')[0].value;
-	var telInscrito = document.getElementsByName('tel440')[0].value + ' - ' + document.getElementsByName('cel440')[0].value;
-	var correoPropInscrito = document.getElementsByName('correo440')[0].value;
-	var nombrePropietario = $('input:text[name=propietario440]').val();
-	var tipoIdProp = document.getElementsByName('tipoIdProp440')[0].value;
-	var documentoProp = document.getElementsByName('idPropietario440')[0].value;
-	var nombreRepLegal = $('input:text[name=repLegal440]').val();
-	var tipoIdRepLegal = document.getElementsByName('tipoIdRl440')[0].value;
-	var documentoRepLegal = document.getElementsByName('idRepLegal440')[0].value;
-	var dirNotifInsc = document.getElementsByName('dirNotif440')[0].value;
-	var deptoNotifInsc = document.getElementsByName('deptoNotif440')[0].value;
-	var mpioNotifInsc = document.getElementsByName('mpioNotif440')[0].value;
-	var horarios = document.getElementsByName('horarios440')[0].value;
-	var otrasEspecies = document.getElementsByName('otrasEspecies')[0].value;
-	var fechaUltVisita = document.getElementsByName('fechaUltVisita440')[0].value;
-	var conceptoUltVisita = document.getElementsByName('concepto440')[0].value;
-	var textoConcepto = document.getElementsByName('textoConcepto440')[0].value;
-	var porcentaje = document.getElementsByName('porcentaje440')[0].value;
-	var motivoUltVisita = document.getElementsByName('motivo440')[0].value;
-	var textoMotivo = document.getElementsByName('textoMotivo440')[0].value;
-	var cumplimiento = document.getElementsByName('cumplimiento440')[0].value;
-	var conceptoEval = document.getElementsByName('conceptoEval440')[0].value;
-	var idExistente = document.getElementsByName('id440')[0].value;
+	var ciudad = $('input:text[name=ciudad474]').val();
+	var fecha = document.getElementsByName('fecha474')[0].value;
+	var acta = document.getElementsByName('acta474')[0].value;
+	var entidad = document.getElementsByName('entidad474')[0].value;
+	var razonSocial = $('input:text[name=razonSocial474]').val();
+	var nitEsta = $('input:text[name=nit474]').val();
+	var inscripcion = document.getElementsByName('inscripcion474')[0].value;
+	var nombreComercial = $('input:text[name=nombreComercial474]').val();
+	var direccion = document.getElementsByName('direccion474')[0].value;
+	var matriculaMercantil = document.getElementsByName('matriculaMercantil474')[0].value;
+	var depto = document.getElementsByName('dpto474')[0].value;
+	var mpio = document.getElementsByName('mpio474')[0].value;
+	var nomTerr = document.getElementsByName('nomTerr474')[0].value;
+	var faxInscrito = document.getElementsByName('fax474')[0].value;
+	var telInscrito = document.getElementsByName('tel474')[0].value + ' - ' + document.getElementsByName('cel474')[0].value;
+	var correoPropInscrito = document.getElementsByName('correo474')[0].value;
+	var nombrePropietario = $('input:text[name=propietario474]').val();
+	var tipoIdProp = document.getElementsByName('tipoIdProp474')[0].value;
+	var documentoProp = document.getElementsByName('idPropietario474')[0].value;
+	var nombreRepLegal = $('input:text[name=repLegal474]').val();
+	var tipoIdRepLegal = document.getElementsByName('tipoIdRl474')[0].value;
+	var documentoRepLegal = document.getElementsByName('idRepLegal474')[0].value;
+	var dirNotifInsc = document.getElementsByName('dirNotif474')[0].value;
+	var deptoNotifInsc = document.getElementsByName('deptoNotif474')[0].value;
+	var mpioNotifInsc = document.getElementsByName('mpioNotif474')[0].value;
+	var horarios = document.getElementsByName('horarios474')[0].value;
+	//var otrasEspecies = document.getElementsByName('otrasEspecies')[0].value;
+	var fechaUltVisita = document.getElementsByName('fechaUltVisita474')[0].value;
+	var conceptoUltVisita = document.getElementsByName('concepto474')[0].value;
+	var textoConcepto = document.getElementsByName('textoConcepto474')[0].value;
+	var porcentaje = document.getElementsByName('porcentaje474')[0].value;
+	var motivoUltVisita = document.getElementsByName('motivo474')[0].value;
+	var textoMotivo = document.getElementsByName('textoMotivo474')[0].value;
+	var cumplimiento = document.getElementsByName('cumplimiento474')[0].value;
+	var conceptoEval = document.getElementsByName('conceptoEval474')[0].value;
+	var idExistente = document.getElementsByName('id474')[0].value;
 
 	/*
 	var zona = document.getElementsByName('zona493')[0].value;
@@ -440,14 +464,14 @@ function guardarEvaluacion440(){
 	var caserio = '';
 	var otro = '';
 
-	var territorio = document.getElementsByName('territorio440');	
+	var territorio = document.getElementsByName('territorio474');	
 	
 	/*var arrTerritorio = [];
 	for (var i = territorio.length - 1; i >= 0; i--) {
 		if (territorio[i].checked){
 			arrTerritorio.push(territorio[i].value);
-		}
-	};  //Con esto recogemos valores de checkbox */
+		}7
+};  //Con esto recogemos valores de checkbox */
 
 	var radioTerritorio = "";
 	for (var i = territorio.length - 1; i >= 0; i--) {
@@ -536,7 +560,7 @@ function guardarEvaluacion440(){
 		OTRAS: '',
 		CTIPOPRO: '',		//Campos no funcionales, deben retirarse
 		NTIPOPRO: '',		//Campos no funcionales, deben retirarse
-		OTIPOPRO: otrasEspecies,
+		//OTIPOPRO: otrasEspecies,
 		UV_F: fechaUltVisita,
 		UV_C: conceptoUltVisita,
 		NOMBRE_C: textoConcepto,
@@ -643,7 +667,7 @@ function guardarEvaluacion440(){
 		insertar = { _id: id };
 		evaluado = Object.assign( insertar, evaluado );
 		console.log(evaluado);
-		return db2.put(evaluado, function callback(err, result){
+		return db474.put(evaluado, function callback(err, result){
 			if (!err) {
 				alert('evaluado guardado en base de datos');
 				mostrarEvaluados();
@@ -652,14 +676,14 @@ function guardarEvaluacion440(){
 			}
 		});			
 	}else{
-		db2.get(idExistente).then( doc => {
+		db474.get(idExistente).then( doc => {
 			insertar = { 
 				_id: doc._id,
 				_rev: doc._rev
 			};
 			evaluado = Object.assign( insertar, evaluado );
 			console.log(evaluado);
-			return db2.put(evaluado, function callback(err, result){
+			return db474.put(evaluado, function callback(err, result){
 				if (!err) {
 					alert('evaluado guardado en base de datos');
 					mostrarEvaluados();
@@ -674,14 +698,14 @@ function guardarEvaluacion440(){
 function escogerEvaluado(registro){
 	//alert(registro._id);
 	//console.log('No debería ejecutarse esto en el F493');
-	document.getElementsByName('id440')[0].value = registro._id;
-	document.getElementsByName('razonSocial440')[0].value = registro.RSO;
-	document.getElementsByName('nit440')[0].value = registro.NIT;
-	document.getElementsByName('nombreComercial440')[0].value = registro.NOCO;
-	document.getElementsByName('inscripcion440')[0].value = registro.N_INSCRIP;
-	document.getElementsByName('propietario440')[0].value = registro.NOMBRE_P;
-	document.getElementsByName('acta440')[0].value = registro.acta;
-	document.getElementsByName('fecha440')[0].value = registro.fecha;
+	document.getElementsByName('id474')[0].value = registro._id;
+	document.getElementsByName('razonSocial474')[0].value = registro.RSO;
+	document.getElementsByName('nit474')[0].value = registro.NIT;
+	document.getElementsByName('nombreComercial474')[0].value = registro.NOCO;
+	document.getElementsByName('inscripcion474')[0].value = registro.N_INSCRIP;
+	document.getElementsByName('propietario474')[0].value = registro.NOMBRE_P;
+	document.getElementsByName('acta474')[0].value = registro.acta;
+	document.getElementsByName('fecha474')[0].value = registro.fecha;
 } 
 
 function createRadioEvaluados(registro){
@@ -702,7 +726,7 @@ function createRadioEvaluados(registro){
 }
 
 function mostrarEvaluados(){
-	db2.allDocs({include_docs: true, descending: true}).then ( doc => {
+	db474.allDocs({include_docs: true, descending: true}).then ( doc => {
 		var tbody = document.getElementById('evaluados');
 		tbody.innerHTML = '';
 		var contador = 0;
