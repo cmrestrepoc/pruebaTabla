@@ -671,7 +671,7 @@ function guardarEvaluacion474(){
 		return db474.put(evaluado, function callback(err, result){
 			if (!err) {
 				alert('evaluado guardado en base de datos');
-				mostrarEvaluados();
+				mostrarEvaluados474();
 			}else {
 				alert('problemas guardando evaluado en base de datos');
 			}
@@ -686,10 +686,71 @@ function guardarEvaluacion474(){
 			console.log(evaluado);
 			return db474.put(evaluado, function callback(err, result){
 				if (!err) {
-					alert('evaluado guardado en base de datos');
-					mostrarEvaluados();
+					alert('evaluado modificado en base de datos');
+					mostrarEvaluados474();
 				}else {
-					alert('problemas guardando evaluado en base de datos');
+					alert('problemas modificando evaluado en base de datos');
+				}
+			});						
+		});
+	}
+}
+
+function guardarEvaluacion440(){
+	//var depto = $('input:text[name=depto]').val();
+	var fecha = document.getElementsByName('fecha440')[0].value;
+	var acta = document.getElementsByName('acta440')[0].value;
+	var razonSocial = $('input:text[name=razonSocial440]').val();
+	var nitEsta = $('input:text[name=nit474]').val();
+	var inscripcion = document.getElementsByName('inscripcion440')[0].value;
+	var nombreComercial = $('input:text[name=nombreComercial440]').val();
+	var nombrePropietario = $('input:text[name=propietario440]').val();
+	var cumplimiento = document.getElementsByName('cumplimiento440')[0].value;
+	var conceptoEval = document.getElementsByName('conceptoEval440')[0].value;
+	var idExistente = document.getElementsByName('id440')[0].value;
+	
+	//console.log(arrTerritorio);
+	var evaluado = {
+		FECHA: fecha,
+		ACTA: acta,
+		RSO: razonSocial,
+		NIT: nitEsta,
+		N_INSCRIPC: inscripcion,
+		NOCO: nombreComercial,
+		NOMBRE_P: nombrePropietario,
+		CONCEPTO: conceptoEval,
+		P_CUMPL: cumplimiento
+		};
+	
+	var id;
+	var insertar;
+	if(idExistente == 0){
+		id = new Date().toISOString();
+		insertar = { _id: id };
+		evaluado = Object.assign( insertar, evaluado );
+		console.log(evaluado);
+		return db440.put(evaluado, function callback(err, result){
+			if (!err) {
+				alert('evaluado guardado en base de datos');
+				mostrarEvaluados440();
+			}else {
+				alert('problemas guardando evaluado en base de datos');
+			}
+		});			
+	}else{
+		db440.get(idExistente).then( doc => {
+			insertar = { 
+				_id: doc._id,
+				_rev: doc._rev
+			};
+			evaluado = Object.assign( insertar, evaluado );
+			console.log(evaluado);
+			return db440.put(evaluado, function callback(err, result){
+				if (!err) {
+					alert('evaluado modificado en base de datos');
+					mostrarEvaluados440();
+				}else {
+					alert('problemas modificando evaluado en base de datos');
 				}
 			});						
 		});
@@ -699,15 +760,17 @@ function guardarEvaluacion474(){
 function escogerEvaluado(registro, formulario){
 	//alert(registro._id);
 	//console.log('No debería ejecutarse esto en el F493');
-	console.log(formulario);
-	document.getElementsByName('id474')[0].value = registro._id;
-	document.getElementsByName('razonSocial474')[0].value = registro.RSO;
-	document.getElementsByName('nit474')[0].value = registro.NIT;
-	document.getElementsByName('nombreComercial474')[0].value = registro.NOCO;
-	document.getElementsByName('inscripcion474')[0].value = registro.N_INSCRIP;
-	document.getElementsByName('propietario474')[0].value = registro.NOMBRE_P;
-	document.getElementsByName('acta474')[0].value = registro.acta;
-	document.getElementsByName('fecha474')[0].value = registro.fecha;
+	//console.log(formulario);
+	document.getElementsByName('id'+formulario)[0].value = registro._id;
+	document.getElementsByName('razonSocial'+formulario)[0].value = registro.RSO;
+	document.getElementsByName('nit'+formulario)[0].value = registro.NIT;
+	document.getElementsByName('nombreComercial'+formulario)[0].value = registro.NOCO;
+	document.getElementsByName('inscripcion'+formulario)[0].value = registro.N_INSCRIP;
+	document.getElementsByName('propietario'+formulario)[0].value = registro.NOMBRE_P;
+	document.getElementsByName('acta'+formulario)[0].value = registro.ACTA;
+	document.getElementsByName('fecha'+formulario)[0].value = registro.FECHA;
+	document.getElementsByName('conceptoEval'+formulario)[0].value = registro.CONCEPTO;
+	document.getElementsByName('cumplimiento'+formulario)[0].value = registro.P_CUMPL;
 } 
 
 function createRadioEvaluados(registro, formulario){
@@ -727,6 +790,16 @@ function createRadioEvaluados(registro, formulario){
 	return td;
 }
 
+function setColumnas(tr, registro, contador){
+	tr.appendChild(createColumns(contador));
+	tr.appendChild(createColumns(registro.NOCO));
+	tr.appendChild(createColumns(registro.ACTA));
+	tr.appendChild(createColumns(registro.FECHA));
+	tr.appendChild(createColumns(registro.P_CUMPL));
+	tr.appendChild(createColumns(registro.CONCEPTO));
+	return tr;		
+}
+
 function mostrarEvaluados474(){
 	db474.allDocs({include_docs: true, descending: true}).then ( doc => {
 		var tbody = document.getElementById('evaluados');
@@ -736,13 +809,8 @@ function mostrarEvaluados474(){
 			//console.log(registro.doc._id);
 			contador++;
 			var tr = document.createElement('tr');
-			tr.appendChild(createColumns(contador));
-			tr.appendChild(createColumns(registro.doc.NOCO));
-			tr.appendChild(createColumns(registro.doc.ACTA));
-			tr.appendChild(createColumns(registro.doc.FECHA));
-			tr.appendChild(createColumns(registro.doc.P_CUMPL));
-			tr.appendChild(createColumns(registro.doc.CONCEPTO));
-			tr.appendChild(createRadioEvaluados(registro.doc, 474));
+			tr = setColumnas(tr, registro.doc, contador);
+			tr.appendChild(createRadioEvaluados(registro.doc, '474'));
 			tbody.appendChild(tr);
 		});
 		$('#tablaEvaluados').DataTable();
@@ -758,13 +826,59 @@ function mostrarEvaluados440(){
 			//console.log(registro.doc._id);
 			contador++;
 			var tr = document.createElement('tr');
-			tr.appendChild(createColumns(contador));
-			tr.appendChild(createColumns(registro.doc.NOCO));
-			tr.appendChild(createColumns(registro.doc.ACTA));
-			tr.appendChild(createColumns(registro.doc.FECHA));
-			tr.appendChild(createColumns(registro.doc.P_CUMPL));
-			tr.appendChild(createColumns(registro.doc.CONCEPTO));
-			tr.appendChild(createRadioEvaluados(registro.doc), 440);
+			tr = setColumnas(tr, registro.doc, contador);
+			tr.appendChild(createRadioEvaluados(registro.doc, '440'));
+			tbody.appendChild(tr);
+		});
+		$('#tablaEvaluados').DataTable();
+	});
+}
+
+function mostrarEvaluados495(){
+	db495.allDocs({include_docs: true, descending: true}).then ( doc => {
+		var tbody = document.getElementById('evaluados');
+		tbody.innerHTML = '';
+		var contador = 0;
+		doc.rows.forEach( registro => {
+			//console.log(registro.doc._id);
+			contador++;
+			var tr = document.createElement('tr');
+			tr = setColumnas(tr, registro.doc, contador);
+			tr.appendChild(createRadioEvaluados(registro.doc, '495'));
+			tbody.appendChild(tr);
+		});
+		$('#tablaEvaluados').DataTable();
+	});
+}
+
+function mostrarEvaluados480(){
+	db480.allDocs({include_docs: true, descending: true}).then ( doc => {
+		var tbody = document.getElementById('evaluados');
+		tbody.innerHTML = '';
+		var contador = 0;
+		doc.rows.forEach( registro => {
+			//console.log(registro.doc._id);
+			contador++;
+			var tr = document.createElement('tr');
+			tr = setColumnas(tr, registro.doc, contador);
+			tr.appendChild(createRadioEvaluados(registro.doc, '480'));
+			tbody.appendChild(tr);
+		});
+		$('#tablaEvaluados').DataTable();
+	});
+}
+
+function mostrarEvaluados479(){
+	db479.allDocs({include_docs: true, descending: true}).then ( doc => {
+		var tbody = document.getElementById('evaluados');
+		tbody.innerHTML = '';
+		var contador = 0;
+		doc.rows.forEach( registro => {
+			//console.log(registro.doc._id);
+			contador++;
+			var tr = document.createElement('tr');
+			tr = setColumnas(tr, registro.doc, contador);
+			tr.appendChild(createRadioEvaluados(registro.doc, '479'));
 			tbody.appendChild(tr);
 		});
 		$('#tablaEvaluados').DataTable();
