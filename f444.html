@@ -96,15 +96,17 @@
 							<div class="col-md-1" style="padding:0;margin-left:7px">
 								<label class="col-md-12 control-label">Furgón:</label>
 								<select class="form-control" name="furgon444">
-									<option value="s">SI</option>
-									<option value="n">NO</option>
+									<option></option>
+									<option value="S">SI</option>
+									<option value="N">NO</option>
 								</select>
 							</div>
 							<div class="col-md-1" style="padding:0;margin-left:7px">
 								<label class="col-md-12 control-label">Rmque:</label>
 								<select class="form-control" name="rmque444">
-									<option value="s">SI</option>
-									<option value="n">NO</option>
+									<option></option>
+									<option value="S">SI</option>
+									<option value="N">NO</option>
 								</select>
 							</div>
 							<div class="col-md-1" style="padding:0;margin-left:7px">
@@ -114,8 +116,9 @@
 							<div class="col-md-1" style="padding:0;margin-left:7px">
 								<label class="col-md-12 control-label">sRmqe:</label>
 								<select class="form-control" name="srmque444">
-									<option value="s">SI</option>
-									<option value="n">NO</option>
+									<option></option>
+									<option value="S">SI</option>
+									<option value="N">NO</option>
 								</select>
 							</div>
 							<div class="col-md-1" style="padding:0;margin-left:7px">
@@ -125,20 +128,29 @@
 							<div class="col-md-1" style="padding:0;margin-left:7px">
 								<label class="col-md-12 control-label">Isoter.:</label>
 								<select class="form-control" name="isotermo444">
-									<option value="s">SI</option>
-									<option value="n">NO</option>
+									<option></option>
+									<option value="S">SI</option>
+									<option value="N">NO</option>
 								</select>
 							</div>
 							<div class="col-md-1" style="padding:0;margin-left:7px">
 								<label class="col-md-12 control-label">U. Frío:</label>
-								<select class="form-control" name="srmque444">
-									<option value="s">SI</option>
-									<option value="n">NO</option>
+								<select class="form-control" name="ufrio444">
+									<option></option>
+									<option value="S">SI</option>
+									<option value="N">NO</option>
 								</select>
+							</div>
+							<br><br><br><br><br><br>
+							<div class="col-md-8" style="padding:0 2px 0 10px">
+								<label class="col-md-5 control-label">Tipo de alimento a transportar:</label>
+								<div class="col-md-7">
+									<input type="text" class="form-control" name="producto444">									
+								</div>
 							</div>
 						</div><!-- Fin del form-group -->
 
-						<br><br><br><br><br><hr>
+						<br><br><hr>
 
 						<div class="form-group">
 							<label class="control-label col-md-12" style="text-decoration:underline">IDENTIFICACIÓN DEL PROPIETARIO</label>
@@ -150,18 +162,19 @@
 							<div class="col-md-4">
 								<label class="col-md-12 control-label">Identificación:</label>
 								<div class="col-md-4">
-									<select class="form-control" name="tipoId444">
-										<option value="cc">CC</option>
-										<option value="ce">CE</option>
-										<option value="nit">NIT</option>
+									<select class="form-control" name="tipoIdProp444" id="tipoIdProp444">
+										<option value="nulo"></option>
+										<option value="CC">CC</option>
+										<option value="CE">CE</option>
+										<option value="NIT">NIT</option>
 									</select>
 								</div>
 								<div class="col-md-8">
-									<input type="text" class="form-control" name="identificacion444">
+									<input type="text" class="form-control" name="idPropietario444">
 								</div>							
 							</div>		
 							<div class="col-md-4">
-								<label class="col-md-12 control-label" style="padding-left:0">Dirección:</label>
+								<label class="col-md-12 control-label">Dirección:</label>
 								<input type="text" class="form-control" name="direccion444">
 							</div>
 						</div><!-- Fin del form-group -->
@@ -184,11 +197,11 @@
 							<div class="col-md-6">
 								<div class="col-md-6">
 									<label class="control-label">Depto Notif:</label>
-									<input type="text" class="form-control" value="Valle del Cauca" name="deptoNotif444">
+									<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif444">
 								</div>
 								<div class="col-md-6">
 									<label class="control-label">Mpio Notif:</label>
-									<input type="text" class="form-control" value="Candelaria" name="mpioNotif444">
+									<input type="text" class="form-control" value="CANDELARIA" name="mpioNotif444">
 								</div>										
 							</div>														
 						</div><!-- Fin del form-group -->
@@ -199,6 +212,25 @@
 							<div class="col-md-6">
 								<label class="col-md-12 control-label">Correo:</label>
 								<input type="email" class="form-control" name="correoProp444">
+							</div>
+							<div class="col-md-6">
+								<label class="col-md-6 control-label">Usuario autoriza Notifiación y/o firma electrónica</label>
+								<div class="col-md-3">
+									<label class="col-md-12 control-label">Notific.</label>
+									<select class="form-control" name="autorizaNoti493" id="autorizaNoti493">
+										<option value="nulo"></option>
+										<option value="S">Si</option>
+										<option value="N">No</option>
+									</select>
+								</div>
+								<div class="col-md-3">
+									<label class="col-md-12 control-label">Firma</label>
+									<select class="form-control" name="autorizaFirma493" id="autorizaFirma493">
+										<option value="nulo"></option>
+										<option value="S">Si</option>
+										<option value="N">No</option>
+									</select>
+								</div>
 							</div>						
 						</div><!-- Fin del form-group -->
 
@@ -215,8 +247,8 @@
 							</div>
 							<label class="col-md-1 control-label" style="padding-right:0">Inscripción</label>								
 							<div class="col-md-3">								
-								<input type="text" class="form-control" name="idInscribe444">
-							</div>														
+								<input type="text" class="form-control" name="inscripcionRep444">
+							</div>
 						</div><!-- Fin del form-group -->
 
 						<br><br>
@@ -267,40 +299,49 @@
 
 						<br><br><br><br><br><br><br><br><br><hr>
 
-						<input type="hidden" name="id493" value="0">
+						<input type="hidden" name="id444" value="0">
 						<br>
 						<div class="form-group">
-	                        <div class="col-md-3 col-md-offset-2">
+	                        <div class="col-md-2 col-md-offset-2">
 	                            <a type="submit" onclick="guardarInscrito444()" class="btn btn-primary">
 	                                Guardar
 	                            </a>
 	                        </div>
 
-	                        <div class="col-md-3 col-md-offset-2">
-	                            <a id="todosInscritos" onclick="cargarInscritos()" class="btn btn-primary">
+	                        <div class="col-md-4">
+	                            <a id="todosInscritos" onclick="cargarInscritos444()" class="btn btn-primary">
 	                                Cargar inscritos desde servidor
+	                            </a>
+	                        </div>
+
+	                        <div class="col-md-3">
+	                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+	                                Cerrar Sesión con Servidor
 	                            </a>
 	                        </div>
 	                    </div><!-- Fin del form-group -->
 
 	                    <br><br><br>
 
+	                    <script type="text/javascript">mostrarInscritos444('444');</script>
 	                    <div class="form-group">
 	                    	<div class="panel panel-default">
 	                    		<div class="panel-heading">INSCRITOS EN BD</div>
 	                    		<div class="panel-body">	                    			
-	                    			<table class="table table-bordered" id="tablaInscritos">
+	                    			<table class="table table-bordered" id="tablaInscritos444">
 										<thead>
 											<tr>
 												<th></th>
-												<th>Establecimiento</th>
+												<th>ID</th>
+												<th>Placa</th>
 												<th>Inscripción No.</th>
 												<th>Fecha Inscrip.</th>
 												<th>Nom. Propietario</th>
+												<th>Ident. Propietario</th>												
 												<th></th>
 											</tr>									
 										</thead>
-										<tbody id="inscritos"></tbody>
+										<tbody id="inscritos444"></tbody>
 									</table>													
 	                    		</div>
 	                    	</div>

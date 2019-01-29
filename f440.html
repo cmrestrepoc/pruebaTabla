@@ -61,7 +61,7 @@
 
 						<!-- Nav tabs -->
 						<ul id="misTabs" class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#inscritos493" aria-controls="inscritos493" role="tab" data-toggle="tab">Inscritos</a></li>
+							<li role="presentation" class="active"><a href="#tabInscritos569" aria-controls="tabInscritos569" role="tab" data-toggle="tab">Inscritos</a></li>
 							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab">Datos del Establecimiento</a></li>
 							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab">Evaluación</a></li>
 							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados440()">Observaciones - Notificaciones</a></li>
@@ -69,39 +69,47 @@
 
 						<!-- Tab panes -->
 						<div class="tab-content" id="miTabContent">
-							<div role="tabpanel" class="tab-pane fade active in" id="inscritos493" aria-labelledby="inscritos493-tab">
+							<div role="tabpanel" class="tab-pane fade active in" id="tabInscritos569" aria-labelledby="tabInscritos569-tab">
 								<br>
 								<div class="form-group">                    
 			                        <div class="col-md-3 col-md-offset-2">
-			                            <a id="todosInscritos" onclick="cargarInscritos493()" class="btn btn-primary">
+			                            <a id="todosInscritos" onclick="cargarInscritos569()" class="btn btn-primary">
 			                                Cargar inscritos desde servidor
 			                            </a>
 			                        </div>
-			                        <div class="col-md-4">
+			                        <div class="col-md-3">
 			                        	<a type="submit" onclick="cargarServidor()" class="btn btn-primary">
 			                                Subir información a servidor
+			                            </a>
+			                        </div>
+			                        <div class="col-md-3">
+			                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+			                                Cerrar Sesión con Servidor
 			                            </a>
 			                        </div>
 			                    </div><!-- Fin del form-group -->
 
 			                    <br><br> 
 
-								<div class="form-group">
+								<script type="text/javascript">mostrarInscritos569('440');</script>
+	                    		<div class="form-group">
 									<div class="panel panel-default">
 			                    		<div class="panel-heading">INSCRITOS EN BD</div>
 			                    		<div class="panel-body">
-			                    			<table class="table table-bordered" id="tablaInscritos">
+			                    			<table class="table table-bordered" id="tablaInscritos569">
 												<thead>
 													<tr>
 														<th></th>
+														<th>ID</th>
 														<th>Establecimiento</th>
 														<th>Inscripción No.</th>
 														<th>Fecha Inscrip.</th>
 														<th>Nom. Propietario</th>
+														<th>Ident. Propietario</th>									
 														<th></th>
 													</tr>	
 												</thead>
-												<tbody id="inscritos"></tbody>
+												<tbody id="inscritos569"></tbody>
 											</table>
 										</div>
 	                    			</div>
@@ -155,14 +163,14 @@
 								<br><br><br><hr>
 
 								<div class="form-group">
-									<div class="col-md-4">
-										<label class="col-md-12 control-label">Dirección:</label>
-										<input type="text" class="form-control" name="direccion440">
-									</div>
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Matrícula Mercantil:</label>
 										<input type="text" class="form-control" name="matriculaMercantil440">
 									</div>
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Dirección:</label>
+										<input type="text" class="form-control" name="direccion440">
+									</div>				
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Departamento:</label>
 										<input type="text" class="form-control" name="dpto440" value="VALLE DEL CAUCA">
@@ -178,7 +186,7 @@
 									<div class="col-md-2" style="margin-left:50px">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="barrio">
+										    	<input type="radio" name="territorio440" value="barrio" id="barrio">
 										    </span>
 										    <input type="text" class="form-control" name="barrio" value="Barrio">
 										</div>
@@ -186,7 +194,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="vereda">
+										    	<input type="radio" name="territorio440" value="vereda" id="vereda">
 										    </span>
 										    <input type="text" class="form-control" name="vereda" value="Vereda">
 										</div>
@@ -194,7 +202,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="comuna">
+										    	<input type="radio" name="territorio440" value="comuna" id="comuna">
 										    </span>
 										    <input type="text" class="form-control" name="comuna" value="Comuna">
 										</div>
@@ -202,7 +210,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="localidad">
+										    	<input type="radio" name="territorio440" value="localidad" id="localidad">
 										    </span>
 										    <input type="text" class="form-control" name="localidad" value="Localidad">
 										</div>
@@ -210,7 +218,7 @@
 									<div class="col-md-3">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="corregimiento">
+										    	<input type="radio" name="territorio440" value="corregimiento" id="corregimiento">
 										    </span>
 										    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
 										</div>
@@ -219,7 +227,7 @@
 									<div class="col-md-2" style="margin-left:50px">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="caserio">
+										    	<input type="radio" name="territorio440" value="caserio" id="caserio">
 										    </span>
 										    <input type="text" class="form-control" name="caserio" value="Caserío">
 										</div>
@@ -227,7 +235,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="sector">
+										    	<input type="radio" name="territorio440" value="sector" id="sector">
 										    </span>
 										    <input type="text" class="form-control" name="sector" value="Sector">
 										</div>
@@ -235,7 +243,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="upz">
+										    	<input type="radio" name="territorio440" value="upz" id="upz">
 										    </span>
 										    <input type="text" class="form-control" name="upz" value="Upz">
 										</div>
@@ -243,7 +251,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="otro">
+										    	<input type="radio" name="territorio440" value="otro" id="otro">
 										    </span>
 										    <input type="text" class="form-control" name="otro" value="Otro">
 										</div>
@@ -276,7 +284,7 @@
 			                    <div class="form-group">
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">Correo</label>
-										<input type="text" class="form-control" name="correo440">
+										<input type="text" class="form-control" name="correoProp440">
 									</div>
 									<div class="col-md-4" style="padding:0">
 										<label class="col-md-12 control-label">Propietario:</label>
@@ -285,10 +293,11 @@
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Identificación:</label>
 										<div class="col-md-5">
-											<select class="form-control" name="tipoIdProp440">
-												<option value="cc">CC</option>
-												<option value="ce">CE</option>
-												<option value="nit">NIT</option>
+											<select class="form-control" name="tipoIdProp440" id="tipoIdProp440">
+												<option value="nulo"></option>
+												<option value="CC">CC</option>
+												<option value="CE">CE</option>
+												<option value="NIT">NIT</option>
 											</select>
 										</div>
 										<div class="col-md-7" style="padding:0">
@@ -308,9 +317,10 @@
 											<label class="col-md-12 control-label">Identificación:</label>
 											<div class="col-md-5">
 												<select class="form-control" name="tipoIdRl440">
-													<option value="cc">CC</option>
-													<option value="ce">CE</option>
-													<option value="nit">NIT</option>
+													<option value="nulo"></option>
+													<option value="CC">CC</option>
+													<option value="CE">CE</option>
+													<option value="NIT">NIT</option>
 												</select>
 											</div>
 											<div class="col-md-7" style="padding:0">
@@ -318,18 +328,23 @@
 											</div>											
 										</div>										
 									</div>
-									<div class="col-md-6" style="padding:0">
-										<div class="col-md-5" style="padding:0">
-											<label class="col-md-12 control-label">Dir Notif:</label>
-										<input type="text" class="form-control" name="dirNotif440">
-										</div>										
-										<div class="col-md-4">
-											<label class="control-label col-md-12">Depto N.:</label>
-											<input type="text" class="form-control" value="Valle del Cauca" name="deptoNotif440">
+									<div class="col-md-6">
+										<label class="col-md-6 control-label">Usuario autoriza Notifiación y/o firma electrónica</label>
+										<div class="col-md-3">
+											<label class="col-md-12 control-label">Notific.</label>
+											<select class="form-control" name="autorizaNoti493" id="autorizaNoti493">
+												<option value="nulo"></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
 										</div>
-										<div class="col-md-3" style="padding:0">
-											<label class="control-label col-md-12">Mpio N.:</label>
-											<input type="text" class="form-control" value="Candelaria" name="mpioNotif440">
+										<div class="col-md-3">
+											<label class="col-md-12 control-label">Firma</label>
+											<select class="form-control" name="autorizaFirma493" id="autorizaFirma493">
+												<option value="nulo"></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
 										</div>
 									</div>									
 								</div><!-- Fin del form-group -->
@@ -390,8 +405,9 @@
 										<label class="col-md-12 control-label">Otros Productos:</label>
 										<div class="col-md-6">
 											<select class="form-control" name="otrosProductos">
-												<option value="s">S</option>
-												<option value="n">N</option>
+												<option></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
 											</select>
 										</div>								
 									</div>													

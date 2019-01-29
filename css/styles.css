@@ -34,6 +34,15 @@ header img{
 	float: left;
 }
 
+#index{
+	/*background-color: yellow;*/
+	height: 120px;
+	/*line-height: 160px;*/
+	padding-top: 20px;
+	padding-left: 80px;
+	padding-right: 100px;
+}
+
 .titulos{
 	text-align: center;
 }
@@ -152,6 +161,35 @@ header img{
 
 #deriActaVehiculos{
 	margin-top: 62px;
+}
+
+.cajonFirma{
+	/* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
+	/*background-color:red;*/
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+
+.botonFirma{
+	/*background-color:yellow;*/ 
+	height:410px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+}
+
+#firma{
+	border:2px solid #888;
+	border-radius: 4px;
+	/*background-color:gray;*/
+	width:880px;
+	height: 400px;
+	position: relative;
 }
 
 

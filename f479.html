@@ -64,7 +64,7 @@
 							<li role="presentation" class="active"><a href="#inscritos493" aria-controls="inscritos493" role="tab" data-toggle="tab">Inscritos</a></li>
 							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab">Datos del Establecimiento</a></li>
 							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab">Evaluación</a></li>
-							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados()">Observaciones - Notificaciones</a></li>
+							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados479()">Observaciones - Notificaciones</a></li>
 						</ul>
 
 						<!-- Tab panes -->
@@ -77,16 +77,22 @@
 			                                Cargar inscritos desde servidor
 			                            </a>
 			                        </div>
-			                        <div class="col-md-4">
+			                        <div class="col-md-3">
 			                        	<a type="submit" onclick="cargarServidor()" class="btn btn-primary">
 			                                Subir información a servidor
+			                            </a>
+			                        </div>
+			                        <div class="col-md-3">
+			                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+			                                Cerrar Sesión con Servidor
 			                            </a>
 			                        </div>
 			                    </div><!-- Fin del form-group -->
 
 			                    <br><br> 
 
-								<div class="form-group">
+								<script type="text/javascript">mostrarInscritos493('479');</script>
+	                    		<div class="form-group">
 									<div class="panel panel-default">
 			                    		<div class="panel-heading">INSCRITOS EN BD</div>
 			                    		<div class="panel-body">
@@ -94,10 +100,12 @@
 												<thead>
 													<tr>
 														<th></th>
+														<th>ID</th>
 														<th>Establecimiento</th>
 														<th>Inscripción No.</th>
 														<th>Fecha Inscrip.</th>
 														<th>Nom. Propietario</th>
+														<th>Ident. Propietario</th>									
 														<th></th>
 													</tr>	
 												</thead>
@@ -208,7 +216,7 @@
 									</div>
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">Nombre Comercial:</label>
-										<input type="text" class="form-control" name="nombreComercial">
+										<input type="text" class="form-control" name="nombreComercial479">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Inscripción No:</label>
@@ -218,13 +226,13 @@
 								<br><br><br><hr>
 
 								<div class="form-group">
-									<div class="col-md-4">
-										<label class="col-md-12 control-label">Dirección:</label>
-										<input type="text" class="form-control" name="direccion479">
-									</div>
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Matrícula Mercantil:</label>
 										<input type="text" class="form-control" name="matriculaMercantil479">
+									</div>
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Dirección:</label>
+										<input type="text" class="form-control" name="direccion479">
 									</div>
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Departamento:</label>
@@ -241,7 +249,7 @@
 									<div class="col-md-2" style="margin-left:50px">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio479" value="barrio">
+										    	<input type="radio" name="territorio479" value="barrio" id="barrio">
 										    </span>
 										    <input type="text" class="form-control" name="barrio" value="Barrio">
 										</div>
@@ -249,7 +257,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio479" value="vereda">
+										    	<input type="radio" name="territorio479" value="vereda" id="vereda">
 										    </span>
 										    <input type="text" class="form-control" name="vereda" value="Vereda">
 										</div>
@@ -257,7 +265,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio479" value="comuna">
+										    	<input type="radio" name="territorio479" value="comuna" id="comuna">
 										    </span>
 										    <input type="text" class="form-control" name="comuna" value="Comuna">
 										</div>
@@ -265,7 +273,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio479" value="localidad">
+										    	<input type="radio" name="territorio479" value="localidad" id="localidad">
 										    </span>
 										    <input type="text" class="form-control" name="localidad" value="Localidad">
 										</div>
@@ -273,7 +281,7 @@
 									<div class="col-md-3">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio479" value="corregimiento">
+										    	<input type="radio" name="territorio479" value="corregimiento" id="corregimiento">
 										    </span>
 										    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
 										</div>
@@ -282,7 +290,7 @@
 									<div class="col-md-2" style="margin-left:50px">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio479" value="caserio">
+										    	<input type="radio" name="territorio479" value="caserio" id="caserio">
 										    </span>
 										    <input type="text" class="form-control" name="caserio" value="Caserío">
 										</div>
@@ -290,7 +298,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio479" value="sector">
+										    	<input type="radio" name="territorio479" value="sector" id="sector">
 										    </span>
 										    <input type="text" class="form-control" name="sector" value="Sector">
 										</div>
@@ -298,7 +306,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio479" value="upz">
+										    	<input type="radio" name="territorio479" value="upz" id="upz">
 										    </span>
 										    <input type="text" class="form-control" name="upz" value="Upz">
 										</div>
@@ -306,7 +314,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio479" value="otro">
+										    	<input type="radio" name="territorio479" value="otro" id="otro">
 										    </span>
 										    <input type="text" class="form-control" name="otro" value="Otro">
 										</div>
@@ -339,7 +347,7 @@
 			                    <div class="form-group">
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">Correo</label>
-										<input type="text" class="form-control" name="correo479">
+										<input type="text" class="form-control" name="correoProp479">
 									</div>
 									<div class="col-md-4" style="padding:0">
 										<label class="col-md-12 control-label">Propietario:</label>
@@ -348,7 +356,8 @@
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Identificación:</label>
 										<div class="col-md-5">
-											<select class="form-control" name="tipoIdProp479">
+											<select class="form-control" name="tipoIdProp479" id="tipoIdProp479">
+												<option value="nulo"></option>
 												<option value="cc">CC</option>
 												<option value="ce">CE</option>
 												<option value="nit">NIT</option>
@@ -388,11 +397,11 @@
 										</div>										
 										<div class="col-md-4">
 											<label class="control-label col-md-12">Depto N.:</label>
-											<input type="text" class="form-control" value="Valle del Cauca" name="deptoNotif479">
+											<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif479">
 										</div>
 										<div class="col-md-3" style="padding:0">
 											<label class="control-label col-md-12">Mpio N.:</label>
-											<input type="text" class="form-control" value="Candelaria" name="mpioNotif479">
+											<input type="text" class="form-control" value="CANDELARIA" name="mpioNotif479">
 										</div>
 									</div>									
 								</div><!-- Fin del form-group -->
