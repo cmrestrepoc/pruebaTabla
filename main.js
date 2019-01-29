@@ -225,7 +225,7 @@ function firma_touchStart(){
 	dibujarPunto(ctx, touchX, touchY, 6);
 
 	// Prevenir un evento mousedown adicional
-	event.preventDefault();
+	//event.preventDefault();
 }
 
 // Dibujar algo cuando un movimiento de dedo sobre la pantalla sea detectado
@@ -238,7 +238,7 @@ function firma_touchMove(e){
 	//la pantalla por definición
 	dibujarPunto(ctx, touchX, touchY, 6);
 
-	event.preventDefault();
+	//event.preventDefault();
 }
 
 function getTouchPos(e){
@@ -248,8 +248,8 @@ function getTouchPos(e){
 	if (e.touches) {
 		if (e.touches.length == 1) {
 			var touch = e.touches[0];
-			touchX = touch.pageX-touch.target.offsetLeft;
-			touchY = touch.pageY-touch.target.offsetTop;
+			touchX = touch.pageX - touch.target.offsetLeft;
+			touchY = touch.pageY - touch.target.offsetTop;
 		}
 	}
 }
