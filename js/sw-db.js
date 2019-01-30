@@ -386,10 +386,15 @@ function guardarTraidos(dbBase, respObj){
 
 function cerrarSesionServidor(){
 	var identidad = JSON.parse(localStorage.getItem('identity'));
-	fetch('https://sisbenpro.com/public/cerrarSesion/'+identidad.usuario)
-	.then( res => res.json() )
-	.then( jsonRes => alert(jsonRes.res) );
-	localStorage.removeItem('identity');
+	if (identidad != undefined) {
+		fetch('https://sisbenpro.com/public/cerrarSesion/'+identidad.usuario)
+		.then( res => res.json() )
+		.then( jsonRes => alert(jsonRes.res) );
+		localStorage.removeItem('identity');
+	}else{
+		alert('No hay una sesión abierta con el servidor en este momento');
+	}
+	
 }
 
 function verificarSesion(){
@@ -569,7 +574,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 }
 
 function guardarComunesInscritos(formulario){
-	
+
 	var inscrito = {
 		//Campos comunes a todos los formularios en general
 		

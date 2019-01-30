@@ -168,11 +168,10 @@ var touchX, touchY;
 //funcion para dibujar un punto en una posicion especifica
 function dibujarPunto(ctx,x,y,size){
 	// color negro completamente opaco
-	r=0; g=0; b=0; a=255;
+	//r=0; g=0; b=0; a=255;
 
 	// Estilo de llenado
-	//ctx.fillStyle = "rgba(0,0,0,1)";
-	ctx.fillStyle = "rgba("+r+","+g+","+b+","+(a/255)+")";
+	ctx.fillStyle = "rgba(0,0,0,1)";
 
 	// Dibujar un circulo lleno
 	ctx.beginPath();
