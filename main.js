@@ -222,7 +222,7 @@ function firma_touchStart(){
 	// Actualizar coordenadas
 	getTouchPos();
 
-	dibujarPunto(ctx, touchX, touchY, 6);
+	dibujarPunto(ctx, touchX, touchY, 12);
 
 	// Prevenir un evento mousedown adicional
 	//event.preventDefault();
@@ -236,7 +236,7 @@ function firma_touchMove(e){
 	// Durante un evento de arrastre sobre el touch, diferente de un movimiento de ratón
 	//no see requiere checkear si el touch permanece, ua que siempre habrá contacto con 
 	//la pantalla por definición
-	dibujarPunto(ctx, touchX, touchY, 6);
+	dibujarPunto(ctx, touchX, touchY, 12);
 
 	//event.preventDefault();
 }
