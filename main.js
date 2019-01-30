@@ -225,7 +225,7 @@ function firma_touchStart(){
 	dibujarPunto(ctx, touchX, touchY, 12);
 
 	// Prevenir un evento mousedown adicional
-	//event.preventDefault();
+	event.preventDefault();
 }
 
 // Dibujar algo cuando un movimiento de dedo sobre la pantalla sea detectado
@@ -238,7 +238,7 @@ function firma_touchMove(e){
 	//la pantalla por definición
 	dibujarPunto(ctx, touchX, touchY, 12);
 
-	//event.preventDefault();
+	event.preventDefault();
 }
 
 function getTouchPos(e){
