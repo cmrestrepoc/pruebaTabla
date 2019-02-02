@@ -565,7 +565,7 @@ function guardarComunesEstablecimientos(formulario){
 }
 
 function firmar(){
-	window.location.replace('firma.html');
+	window.location.replace('firmaJquery.html');
 }
 
 function guardarInscrito493(){
