@@ -163,7 +163,7 @@ header img{
 	margin-top: 62px;
 }
 
-.cajonFirma{
+#firmaAutoridad{
 	/* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
 	/*background-color:red;*/
 	-webkit-touch-callout: none;
@@ -174,16 +174,21 @@ header img{
     user-select: none;
 }
 
+.cajonFirma{
+	float:left;
+}
+
 .botonFirma{
 	/*background-color:yellow;*/ 
+	float:left;
 	height:410px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 }
 
 #firma{
+	float:left;
 	border:2px solid #888;
 	border-radius: 4px;
 	/*background-color:gray;*/
