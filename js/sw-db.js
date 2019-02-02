@@ -564,6 +564,10 @@ function guardarComunesEstablecimientos(formulario){
 	return inscrito;
 }
 
+function firmar(){
+	window.location.replace('firma.html');
+}
+
 function guardarInscrito493(){
 	var idExistente = document.getElementsByName('id493')[0].value;
 
