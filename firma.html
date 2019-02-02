@@ -102,7 +102,7 @@
         drawDot(ctx,touchX,touchY,3);
 
         // Prevents an additional mousedown event being triggered
-        //event.preventDefault();
+        event.preventDefault();
     }
 
     // Draw something and prevent the default scrolling when touch movement is detected
@@ -114,7 +114,7 @@
         drawDot(ctx,touchX,touchY,3); 
 
         // Prevent a scrolling action as a result of this touchmove triggering.
-        //event.preventDefault();
+        event.preventDefault();
     }
 
     // Get the touch position relative to the top-left of the canvas
@@ -189,7 +189,7 @@
 #firma {
     float:left;
     height:300px;
-    width:700px;
+    width:720px;
     border:2px solid #888;
     border-radius:4px;
     position:relative; /* Necessary for correct mouse co-ords in Firefox */
@@ -229,7 +229,7 @@
                         <input type="submit" class="btn btn-primary" value="Limpiar" id="clearbutton" onclick="clearCanvas(canvas,ctx);">
                     </div>
                     <div class="cajonFirma">
-                        <canvas id="firma" height="300" width="800">
+                        <canvas id="firma" height="300" width="720">
                         </canvas>
                     </div>
                 </div>
