@@ -1,6 +1,30 @@
 <html>
 <head>
+<meta charset="utf-8"/>
 <title>Sketchpad</title>
+
+<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Color de la aplicación -->
+<meta name="theme-color" content="#65c0ba" />
+
+<!-- Optomización para móvil -->
+<meta name="MobileOptimized" content="width" />
+<meta name="HandleFriendly" content="true" />
+
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./css/styles.css">
+<link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+<script src="./js/jquery-3.3.1.slim.min.js"></script>
+<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+<script src="./js/bootstrap.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/pouchdb.min.js"></script>
+<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="./js/sw-db.js"></script>
 
 <script type="text/javascript">
     // Variables for referencing the canvas and 2dcanvas context
@@ -36,7 +60,7 @@
     // Keep track of the mouse button being pressed and draw a dot at current location
     function sketchpad_mouseDown() {
         mouseDown=1;
-        drawDot(ctx,mouseX,mouseY,12);
+        drawDot(ctx,mouseX,mouseY,6);
     }
 
     // Keep track of the mouse button being released
@@ -51,7 +75,7 @@
 
         // Draw a dot if the mouse button is currently being pressed
         if (mouseDown==1) {
-            drawDot(ctx,mouseX,mouseY,12);
+            drawDot(ctx,mouseX,mouseY,6);
         }
     }
 
@@ -75,7 +99,7 @@
         // Update the touch co-ordinates
         getTouchPos();
 
-        drawDot(ctx,touchX,touchY,12);
+        drawDot(ctx,touchX,touchY,6);
 
         // Prevents an additional mousedown event being triggered
         event.preventDefault();
@@ -87,7 +111,7 @@
         getTouchPos(e);
 
         // During a touchmove event, unlike a mousemove event, we don't need to check if the touch is engaged, since there will always be contact with the screen by definition.
-        drawDot(ctx,touchX,touchY,12); 
+        drawDot(ctx,touchX,touchY,6); 
 
         // Prevent a scrolling action as a result of this touchmove triggering.
         event.preventDefault();
@@ -114,7 +138,7 @@
     // Set-up the canvas and add our event handlers after the page has loaded
     function init() {
         // Get the specific canvas element from the HTML document
-        canvas = document.getElementById('sketchpad');
+        canvas = document.getElementById('firma');
 
         // If the browser supports the canvas tag, get the 2d drawing context for this canvas
         if (canvas.getContext)
@@ -145,48 +169,74 @@
     -ms-user-select: none;
     user-select: none;
 }
-.leftside {
+.cajonBoton {
     float:left;
-    width:220px;
+    width:420px;
     height:285px;
     background-color:#def;
     padding:10px;
     border-radius:4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
-.rightside {
+
+.cajonFirma {
     float:left;
     margin-left:10px;
 }
-#sketchpad {
+#firma {
     float:left;
     height:300px;
-    width:400px;
+    width:800px;
     border:2px solid #888;
     border-radius:4px;
     position:relative; /* Necessary for correct mouse co-ords in Firefox */
 }
-#clearbutton {
+
+/*#clearbutton {
     font-size: 15px;
     padding: 10px;
     -webkit-appearance: none;
-    background: #eee;
+    background: blue;
+    color:white;
     border: 1px solid #888;
-}
+}*/
 </style>
 </head>
 
 <body onload="init()">
-    <div id="sketchpadapp">
-        <div class="leftside">
-             Touchscreen and mouse support HTML5 canvas sketchpad.<br/><br/>
-             Draw something by tapping or dragging.<br/><br/>
-             Works on iOS, Android and desktop/laptop touchscreens using Chrome/Firefox/Safari.<br/><br/>
-             <input type="submit" value="Clear Sketchpad" id="clearbutton" onclick="clearCanvas(canvas,ctx);">
+    <header>
+        <a href="index.html">
+            <img src="./img/escudo.jpg" />
+        </a>
+        <div class="titulos">
+            <h1>MUNICIPIO DE CANDELARIA (V)</h1>
+            <h2>Vigilancia en Salud Pública</h2>
         </div>
-        <div class="rightside">
-            <canvas id="sketchpad" height="300" width="400">
-            </canvas>
-        </div>
+    </header><br><br>
+
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                FIRMA
+            </div>                                              
+            <div class="panel-body">
+                <div id="sketchpadapp">
+                    <div class="cajonBoton">
+                        <h1>FIRMA DE LA AUTORIDAD SANITARIA</h1>
+                        <input type="submit" class="btn btn-primary" value="Limpiar" id="clearbutton" onclick="clearCanvas(canvas,ctx);">
+                    </div>
+                    <div class="cajonFirma">
+                        <canvas id="firma" height="300" width="800">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div> 
     </div>
+                                 
+    
 </body>
 </html>
