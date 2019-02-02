@@ -28,7 +28,7 @@ function limpiarCanvas(canvas,ctx){
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function firma_mouseDown(){
+/*function firma_mouseDown(){
 	mouseDown = 1;
 	dibujarPunto(ctx, mouseX, mouseY, 6); // Hacer pruebas cambiando el 12
 }
@@ -58,7 +58,7 @@ function getMousePos(e){
 		mouseX = e.layerX;
 		mouseY = e.layerY;
 	}
-}
+}*/
 
 // Dibujar algo cuando un touch sea detectado
 function firma_touchStart(){
@@ -104,9 +104,9 @@ function inicio_firma(){
 		ctx = canvas.getContext('2d');
 
 	if (ctx) {
-		canvas.addEventListener('mousedown', firma_mouseDown, false);
+		/*canvas.addEventListener('mousedown', firma_mouseDown, false);
 		canvas.addEventListener('mousemove', firma_mouseMove, false);
-		window.addEventListener('mouseup', firma_mouseUp, false);
+		window.addEventListener('mouseup', firma_mouseUp, false);*/
 
 		canvas.addEventListener('touchstart', firma_touchStart, false);
 		canvas.addEventListener('touchmove', firma_touchMove, false);
