@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta charset="utf-8"/>
-<title>Sketchpad</title>
+<title>Visalud</title>
 
 <link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
 
@@ -60,7 +60,7 @@
     // Keep track of the mouse button being pressed and draw a dot at current location
     function sketchpad_mouseDown() {
         mouseDown=1;
-        drawDot(ctx,mouseX,mouseY,6);
+        drawDot(ctx,mouseX,mouseY,3);
     }
 
     // Keep track of the mouse button being released
@@ -75,7 +75,7 @@
 
         // Draw a dot if the mouse button is currently being pressed
         if (mouseDown==1) {
-            drawDot(ctx,mouseX,mouseY,6);
+            drawDot(ctx,mouseX,mouseY,3);
         }
     }
 
@@ -99,10 +99,10 @@
         // Update the touch co-ordinates
         getTouchPos();
 
-        drawDot(ctx,touchX,touchY,6);
+        drawDot(ctx,touchX,touchY,3);
 
         // Prevents an additional mousedown event being triggered
-        event.preventDefault();
+        //event.preventDefault();
     }
 
     // Draw something and prevent the default scrolling when touch movement is detected
@@ -111,10 +111,10 @@
         getTouchPos(e);
 
         // During a touchmove event, unlike a mousemove event, we don't need to check if the touch is engaged, since there will always be contact with the screen by definition.
-        drawDot(ctx,touchX,touchY,6); 
+        drawDot(ctx,touchX,touchY,3); 
 
         // Prevent a scrolling action as a result of this touchmove triggering.
-        event.preventDefault();
+        //event.preventDefault();
     }
 
     // Get the touch position relative to the top-left of the canvas
@@ -171,7 +171,7 @@
 }
 .cajonBoton {
     float:left;
-    width:420px;
+    width:270px;
     height:285px;
     background-color:#def;
     padding:10px;
@@ -225,7 +225,7 @@
             <div class="panel-body">
                 <div id="sketchpadapp">
                     <div class="cajonBoton">
-                        <h1>FIRMA DE LA AUTORIDAD SANITARIA</h1>
+                        <h6>FIRMA DE LA AUTORIDAD SANITARIA</h6>
                         <input type="submit" class="btn btn-primary" value="Limpiar" id="clearbutton" onclick="clearCanvas(canvas,ctx);">
                     </div>
                     <div class="cajonFirma">
