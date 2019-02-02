@@ -35,7 +35,7 @@
 	</head>
 	<body onload="inicio_firma()">
 		<header>
-			<a href="index.html">
+			<a href="menu0.html">
 				<img src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
@@ -114,7 +114,7 @@
 								<label class="col-md-3 control-label" style="padding:0">Identificación:</label>
 								<div class="col-md-3">
 									<select class="form-control" name="tipoIdProp493" id="tipoIdProp493">
-										<option value="nulo"></option>
+										<option></option>
 										<option value="CC">CC</option>
 										<option value="CE">CE</option>
 										<option value="NIT">NIT</option>
@@ -136,7 +136,7 @@
 							<label class="col-md-1 control-label">Zona:</label>				
 							<div class="col-md-2">
 								<select class="form-control" name="zona493" id="zona493">
-									<option value="nulo"></option>
+									<option></option>
 									<option value="U">URBANA</option>
 									<option value="R">RURAL</option>
 								</select>														
@@ -146,14 +146,15 @@
 						<br><br><br><br>
 
 						<div class="form-group">
-							<div class="col-md-2" style="margin-left:50px">
+							<!--div class="col-md-2" style="margin-left:50px">
 								<div class="input-group">
 									<span class="input-group-addon">
 								    	<input type="radio" name="territorio493" value="comuna" id="comuna">
 								    </span>
 								    <input type="text" class="form-control" name="comuna" value="Comuna">
 								</div>
-							</div>
+							</div-->
+							<label class="col-md-2 control-label" style="text-align:right; padding-right:0">Tipo de territorio:</label>
 							<div class="col-md-2">
 								<div class="input-group">
 									<span class="input-group-addon">
@@ -162,7 +163,7 @@
 								    <input type="text" class="form-control" name="barrio" value="Barrio">
 								</div>
 							</div>									
-							<div class="col-md-2">
+							<!--div class="col-md-2">
 								<div class="input-group">
 									<span class="input-group-addon">
 								    	<input type="radio" name="territorio493" value="localidad" id="localidad">
@@ -177,8 +178,8 @@
 								    </span>
 								    <input type="text" class="form-control" name="sector" value="Sector">
 								</div>
-							</div>								
-							<div class="col-md-3">
+							</div-->								
+							<div class="col-md-2" style="padding:0">
 								<div class="input-group">
 									<span class="input-group-addon">
 								    	<input type="radio" name="territorio493" value="corregimiento" id="corregimiento">
@@ -186,8 +187,7 @@
 								    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
 								</div>
 							</div>
-							<br><br><br>
-							<div class="col-md-2" style="margin-left:50px">
+							<!--div class="col-md-2" style="margin-left:50px">
 								<div class="input-group">
 									<span class="input-group-addon">
 								    	<input type="radio" name="territorio493" value="upz" id="upz">
@@ -202,22 +202,17 @@
 								    </span>
 								    <input type="text" class="form-control" name="caserio" value="Caserío">
 								</div>
-							</div>
+							</div-->							
 							<div class="col-md-2">
 								<div class="input-group">
 									<span class="input-group-addon">
-								    	<input type="radio" name="territorio493" value="otro" id="otro">
+								    	<input type="radio" name="territorio493" value="vereda" id="vereda">
 								    </span>
-								    <input type="text" class="form-control" name="otro" value="Otro">
+								    <input type="text" class="form-control" name="vereda" value="Vereda">
 								</div>
-							</div>					
-						</div>
-
-	                    <br><br>
-
-	                    <div class="form-group">
-							<div class="col-md-5">
-								<label class="col-md-12 control-label">Cual:</label>
+							</div>
+							<label class="col-md-1 control-label" style="text-align:right;padding:0">Nombre:</label>
+							<div class="col-md-3">
 								<select class="form-control" name="nomTerr493">
 									<option></option>
 									<option value="SAMANES">SAMANES</option>
@@ -246,7 +241,12 @@
 									<option value="SAN JOAQUIN">SAN JOAQUIN</option>
 									<option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
 								</select>
-							</div>													
+							</div>				
+						</div>
+
+	                    <br><br><br>
+
+	                    <div class="form-group">																			
 							<div class="col-md-3">
 								<label class="col-md-12 control-label">Celular:</label>
 								<input type="text" class="form-control" name="cel493">	
@@ -258,31 +258,30 @@
 							<div class="col-md-2">
 								<label class="col-md-12 control-label">Teléfono:</label>
 								<input type="text" class="form-control" name="tel493">		
+							</div>
+							<div class="col-md-5">
+								<label class="col-md-12 control-label">Correo:</label>
+								<input type="email" class="form-control" name="correoProp493">
 							</div>							
 						</div><!-- Fin del form-group -->
 
-						<br><br><br><br>
+						<br><br><br><br><br>
 
-						<div class="form-group">
-							<div class="col-md-6">
-								<label class="col-md-12 control-label">Correo:</label>
-								<input type="email" class="form-control" name="correoProp493">
-							</div>
-
-							<div class="col-md-6">
-								<label class="col-md-6 control-label">Usuario autoriza Notifiación y/o firma electrónica</label>
-								<div class="col-md-3">
+						<div class="form-group">							
+							<div class="col-md-10">
+								<label class="col-md-6 col-md-offset-1 control-label">Usuario autoriza Notifiación y/o firma electrónica</label>
+								<div class="col-md-2">
 									<label class="col-md-12 control-label">Notific.</label>
 									<select class="form-control" name="autorizaNoti493">
-										<option value="nulo"></option>
+										<option></option>
 										<option value="S">Si</option>
 										<option value="N">No</option>
 									</select>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-2">
 									<label class="col-md-12 control-label">Firma</label>
 									<select class="form-control" name="autorizaFirma493">
-										<option value="nulo"></option>
+										<option></option>
 										<option value="S">Si</option>
 										<option value="N">No</option>
 									</select>
@@ -290,7 +289,7 @@
 							</div>							
 						</div><!-- Fin del form-group -->
 
-						<br><br><br><br>
+						<br><br><br><br><br>
 
 						<div class="form-group">
 							<div class="col-md-4">
@@ -309,7 +308,7 @@
 								<div class="col-md-2" style="padding:0px">
 									<label class="col-md-12 control-label">Visitado:</label>
 									<select class="form-control" name="visitado493" id="visitado493">
-										<option value="nulo"></option>
+										<option></option>
 										<option value="S">Si</option>
 										<option value="N">No</option>
 									</select>											
@@ -578,7 +577,7 @@
 								<input type="text" class="form-control" name="inscribe493">
 							</div>
 							<div class="col-md-2">								
-								<label class="col-md-12 control-label">Identicación:</label>
+								<label class="col-md-12 control-label">Identificación:</label>
 								<input type="text" class="form-control" name="idInscribe493">
 							</div>
 							<div class="col-md-3">								
@@ -628,8 +627,8 @@
 								<div class="panel-heading">
 									FIRMA
 								</div>												
-								<div class="panel-body">
-									<div class="cajonFirma col-md-10">
+								<div class="cajonFirma panel-body">
+									<div class="col-md-10">
 			                        	<canvas id="firma" name="firma" width="800px" height="400px"></canvas>
 			                        </div>
 			                        <div class="botonFirma col-md-2">

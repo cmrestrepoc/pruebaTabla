@@ -23,6 +23,7 @@ const CACHE_NAME = 'v2_cache_visalud_pwa';
 var urlsToCache = [
 	'./',
 	'./index.html',
+	'./menu0.html',
 	'./f440.html',
 	'./f493.html',
 	'./f479.html',
@@ -40,6 +41,7 @@ var urlsToCache = [
 	'./js/sw-db.js',
 	'./js/pouchdb.min.js',
 	'./js/jquery.dataTables.min.js',
+	'./js/login.js',
 	'./img/escudo130.ico',
 	'./img/escudo.png',
 	'./img/escudo.jpg',

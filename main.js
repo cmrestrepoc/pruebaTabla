@@ -73,7 +73,7 @@ function evaluarBloque(evaluacion, puntaje, resultado, indice){
 	
 	evaluaciones.forEach( eva => {
 		//console.log ((evaluaciones[i].value*puntos[i].innerHTML));
-		suma = suma + (evaluaciones[i].value*puntos[i].innerHTML);
+		suma = suma + (eva.value*puntos[i].innerHTML);
 		i++;
 	})
 	
@@ -222,7 +222,7 @@ function firma_touchStart(){
 	// Actualizar coordenadas
 	getTouchPos();
 
-	dibujarPunto(ctx, touchX, touchY, 12);
+	dibujarPunto(ctx, touchX, touchY, 6);
 
 	// Prevenir un evento mousedown adicional
 	event.preventDefault();
@@ -234,9 +234,9 @@ function firma_touchMove(e){
 	getTouchPos(e);
 
 	// Durante un evento de arrastre sobre el touch, diferente de un movimiento de ratón
-	//no see requiere checkear si el touch permanece, ua que siempre habrá contacto con 
+	//no see requiere checkear si el touch permanece, ya que siempre habrá contacto con 
 	//la pantalla por definición
-	dibujarPunto(ctx, touchX, touchY, 12);
+	dibujarPunto(ctx, touchX, touchY, 6);
 
 	event.preventDefault();
 }
