@@ -29,9 +29,9 @@
 <script src="./js/jqscribble.extrabrushes.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-    /*function save()
+    function save()
     {
-        $("#firma").data("jqScribble").save(function(imageData)
+        /*$("#firma").data("jqScribble").save(function(imageData)
         {
             if(confirm("Ahora se creará un archivo usando image_save.php. Está bien?"))
             {
@@ -40,9 +40,13 @@
                     $('body').append(response);
                 }); 
             }
+        });*/
+        let canvas = document.getElementById('firma');
+        canvas.toBlob(function(blob) {
+        saveAs(blob, "firma.png");
         });
     }
-    function addImage()
+    /*function addImage()
     {
         var img = prompt("Enter the URL of the image.");
         if(img !== '')$("#firma").data("jqScribble").update({backgroundImage: img});
@@ -101,9 +105,9 @@
 </style>
 </head>
 
-<body onload="init()">
+<body>
     <header>
-        <a href="index.html">
+        <a href="menu0.html">
             <img src="./img/escudo.jpg" />
         </a>
         <div class="titulos">
@@ -122,6 +126,8 @@
                     <div class="cajonBoton">
                         <h6>FIRMA DE LA AUTORIDAD SANITARIA</h6>
                         <input type="submit" class="btn btn-primary" value="Limpiar" id="limpiar" onclick='$("#firma").data("jqScribble").clear();'>
+                        <br><br>
+                        <input type="submit" class="btn btn-primary" value="Guardar" id="guardar" onclick="save()">
                     </div>
                     <div class="cajonFirma">
                         <canvas id="firma" height="300" width="720">
