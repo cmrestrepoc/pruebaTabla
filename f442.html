@@ -438,60 +438,10 @@
 								</div><!-- Fin del form-group -->
 								<br><br><br><hr>
 
-								<div class="form-group">
-									<label class="control-label col-md-2" style="text-align:right">ÚLTIMA INSPECCIÓN:</label>
-									<div class="col-md-7">
-										<div class="col-md-4" style="padding:0">
-											<label class="col-md-12 control-label">Fecha:</label>
-											<input type="date" class="form-control" name="fechaUltVisita442">
-										</div>
-										<div class="col-md-7 col-md-offset-1" style="padding:0">
-											<label class="col-md-12 control-label">Concepto última inspección:</label>
-											<div class="col-md-3">
-												<select class="form-control" name="concepto442" onchange="setConcepto(this,'textoConcepto442')">
-													<option></option>				
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-												</select>
-											</div>
-											<div class="col-md-9" style="padding:0">
-												<input type="text" class="form-control" name="textoConcepto442">
-											</div>
-										</div>												
-									</div>
-									<div class="col-md-3">
-										<label class="control-label col-md-12">Porcentaje Cumplimiento</label>
-										<div class="col-md-6">
-											<input type="number" class="form-control" name="porcentaje442">
-										</div>%									
-									</div>
-								</div><!-- Fin del form-group -->
-
-								<br><br><br><hr>
-
-								<div class="form-group">
-									<div class="col-md-6" style="padding:0"><br>
-										<label class="control-lable col-md-3" style="text-align:right" style="padding:0">Motivo de la visita:</label>
-										<div class="col-md-2" style="padding:0">
-											<select class="form-control" name="motivo442" onchange="setMotivo(this,'textoMotivo442')">
-												<option></option>				
-												<option value="01">01</option>
-												<option value="02">02</option>
-												<option value="03">03</option>
-												<option value="04">04</option>
-												<option value="05">05</option>
-												<option value="06">06</option>					
-												<option value="09">09</option>
-											</select>
-										</div>
-										<div class="col-md-7">
-											<input type="text" class="form-control" name="textoMotivo442">
-										</div>
-									</div>									
-									<div class="col-md-6">
+								<div class="form-group">									
+									<div class="col-md-10 col-md-offset-1">
 										<label class="col-md-6 control-label">Usuario autoriza Notifiación y/o firma electrónica</label>
-										<div class="col-md-3">
+										<div class="col-md-2">
 											<label class="col-md-12 control-label">Notific.</label>
 											<select class="form-control" name="autorizaNoti442">
 												<option></option>
@@ -499,7 +449,7 @@
 												<option value="N">No</option>
 											</select>
 										</div>
-										<div class="col-md-3">
+										<div class="col-md-2">
 											<label class="col-md-12 control-label">Firma</label>
 											<select class="form-control" name="autorizaFirma442">
 												<option></option>
@@ -1123,6 +1073,16 @@
 														</select>
 													</td>
 												</tr>
+											</tbody>
+										</table>
+									</div>													
+								</div>
+								
+								<div class="col-md-6">
+									<br>
+									<div class="form-group" style="border-style:ridge; padding:3px">
+										<table class="table" style="font-size:12px">
+											<tbody>
 												<tr>
 													<td>49.</td>
 													<td>En caso de expender carne y/o productos cárnicos comestibles, estos son almacenados separados (incluidas las carnes de diferentes especies) y de tal forma que se favorece la circulación del aire. Si expende canales, sus partes y/o productos cárnicos comestibles de aves, se disponen de manera ordenada y separadas por secciones en las neveras de exhibición o en los cuartos fríos. (Resolución 3009/2010: Artículo 67, Numeral 31. Resolución 240/2013: Artículo 129, Numeral 1. Resolución 242/2013: Artículo 130, Numeral 30 y 31. Resolución 242/2013: Artículo 54, Numeral 2; Artículo 55, Numeral 30 y 36)</td>
@@ -1148,11 +1108,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>18.</td>
-													<td>Las lámparas se encuentran en buen estado de mantenimiento, son de fácil limpieza y poseen la protección necesaria para evitar la caída de partículas extrañas. (Resolución 240/2013: Artículo 130, Numeral 14. Resolución 242/2013: Artículo 55, Numeral 14).</td>
+													<td>51.</td>
+													<td>El establecimiento dispone de suministro de agua potable en cantidad y presión suficiente para las actividades que se realicen, así como para realizar operaciones de limpieza y desinfección efectivas. (Decreto 1500/2007: Artículo 26, Numeral 1.1.11.1. Resolución 3009/2010: Artículo 67, Numeral 3. Resolución 240/2013: Artículo 130, Numeral 3. Resolución 242/2013: Artículo 55, Numeral 3)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta18">
+														<select class="form-control" name="pregunta51">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1160,33 +1120,23 @@
 													</td>
 												</tr>
 												<tr>
-													<td>19.</td>
-													<td>Cuenta con los servicios sanitarios (baños) en material higiénico sanitario, en cantidad suficiente con respecto a la cantidad de personal que labora en él, son funcionales y se encuentran separados de las áreas donde se manipula la carne y los productos cárnicos comestibles. (Resolución 3009/2010: Artículo 67, Numeral 15, 16. Resolución 240/2013: Artículo 130, Numeral 15, 16. Resolución 242/2013: Artículo 55, Numeral 15, 16)</td>
+													<td>52.</td>
+													<td>Si el establecimiento obtiene el agua a partir de una explotación subterranea, garantiza la potabilidad de esta y cuenta con autorización por parte de la autoridad ambiental. (Decreto 1500/2007: Artículo 26, Numeral 1.1.11.2)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta19">
+														<select class="form-control" name="pregunta52">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
 														</select>
 													</td>
 												</tr>												
-											</tbody>
-										</table>
-									</div>													
-								</div>
-								
-								<div class="col-md-6">
-									<br>
-									<div class="form-group" style="border-style:ridge; padding:3px">
-										<table class="table" style="font-size:12px">
-											<tbody>
 												<tr>
-													<td>20.</td>
-													<td>Los servicios sanitarios cuentan con los implementos requeridos para la higiene personal como: papel higiénico, dispensador con jabón desinfectante, implementos desechables o equipos automáticos para el secado de manos y papeleras de accionamiento no manual. (Resolución 3009/2010: Artículo 67, Numeral 15. Resolución 240/2013: Artículo 130, Numeral 15. Resolución 242/2013: Artículo 55, Numeral 15)</td>
+													<td>53.</td>
+													<td>En caso de usar hielo, este proviene de un establecimiento autorizado para desarrollar dicha actividad, o en caso de ser elaborado en el expendio, se realiza a partir de agua potable de manera que no se genera su contaminación. (Decreto 1500/2007: Artículo 26, Numeral 1.1.11.3)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta20">
+														<select class="form-control" name="pregunta53">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1194,11 +1144,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>21.</td>
-													<td>Los servicios sanitarios cuentan con sistema de ventilación o extracción de olores y no se encuentra dirigido a las áreas donde se manipula carne y/o productos cárnicos comestibles. (Resolución 3009/2010: Artículo 67, Numeral 18. Resolución 240/2013: Artículo 130, Numeral 18. Resolución 242/2013: Artículo 55, Numeral 18).</td>
+													<td>54.</td>
+													<td>El establecimiento cuenta con los sistemas de desagüe que permiten la evacuación rápida y eficiente de los residuos líquidos. (Decreto 1500/2007: Artículo 26, Numeral 1.1.9. Resolución 3009/2010: Artículo 67, Numeral 11.1. Resolución 240/2013: Artículo 130, Numeral 11.1. Resolución 242/2013: Artículo 55, Numeral 11.1)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta21">
+														<select class="form-control" name="pregunta54">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1206,11 +1156,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>22.</td>
-													<td>Cuenta con casilleros o sistemas para el almacenamiento de la dotación y su diseño permite la circulación de aire. (Resolución 3009/2010: Artículo 67, Numeral 17. Resolución 240/2013: Artículo 130, Numeral 17. Resolución 242/2013: Artículo 55, Numeral 17).</td>
+													<td>55.</td>
+													<td>El establecimiento cuenta con los recipientes para la disposición temporal de los residuos sólidos, de material lavable y desinfectable debidamente tapados y se encuentran alejados del lugar donde se manipulen los alimentos. (Resolución 3009/2010: Artículo 67, Numeral 20.2. Resolución 240/2013: Artículo 130, Numeral 20.2. Resolución 242/2013: Artículo 55, Numeral 20.2)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta22">
+														<select class="form-control" name="pregunta55">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1218,11 +1168,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>23.</td>
-													<td>Cuenta con instalaciones para operaciones de limpieza, desinfección y secado de las manos de los manipuladores en las áreas de corte o cercanas a estas de accionamiento no manual. (Resolución 3009/2010: Artículo 67, Numeral 19.1. Resolución 240/2013: Artículo 130, Numeral 19.1. Resolución 242/2013: Artículo 55, Numeral 19.1).</td>
+													<td>56.</td>
+													<td>Los residuos sólidos se disponen de forma que se evita la contaminación de los productos, áreas donde se manipulen o de los equipos y utensilios. (Decreto 1500/2007: Artículo 26, Numeral 1.1.9. Resolución 3009/2010: Artículo 67, Numeral 20.1. Resolución 240/2013: Artículo 130, Numeral 20.1. Resolución 242/2013: Artículo 55, Numeral 20.1)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta23">
+														<select class="form-control" name="pregunta56">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1230,11 +1180,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>24.</td>
-													<td>Cuenta con sistemas para la limpieza y desinfección de cuchillos, sierras y chairas en las áreas de corte o cercanas a estas (Resolución 3009/2010: Artículo 67, Numeral 19.2. Resolución 240/2013: Artículo 130, Numeral 19.2. Resolución 242/2013: Artículo 55, Numeral 19.2)</td>
+													<td>57.</td>
+													<td>En el establecimiento no se evidencia presencia de plagas o daños ocasionados por éstas y se cuenta con medidas de control integral de tipo preventivo, para evitar su refugio y proliferación. (Decreto 1500/2007: Artículo 26, Numeral 1.1.8)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta24">
+														<select class="form-control" name="pregunta57">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1242,11 +1192,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>25.</td>
-													<td>El establecimiento cuenta con los equipos y utensilios necesarios para el desarrollo de las actividades; los cuales están diseñados, construidos, instalados, son de fácil limpieza y desinfección y su mantenimeinto evita la contaminación de la carne o los productos cárnicos comestibles.(Decreto 1500/2007: Artículo 26, Numeral 1.1.1. Resolución 3009/2010: Artículo 67, Numerales 22, 23 y 24. Resolución 240/2013: Artículo 130, Numerales 22, 23 Y 24. Resolución 242/2013: Artículo 22: Numerales 2.1 y 3.2; Artículo 55, Numerales 22, 23, 24 y 33).</td>
+													<td>58.</td>
+													<td>El establecimiento realiza las operaciones de limpieza y desinfección a las instalaciones, equipos y utensilios, evitando la creación de condiciones insalubres que puedan contaminar el alimento. En caso de contar con sistema de ventilación, se limpia periódicamente para evitar la acumulación de polvo. Las sustancias y utensilios para las labores de limpieza y desinfección se almacenan de forma que se evita la contaminación de la carne y los productos cárnicos comestibles. (Decreto 1500/2007: Artículo 26, Numeral 1.1.12. Resolución 3009/2010: Artículo 67, Numeral 12. Resolución 240/2013: Artículo 130, Numeral 12. Resolución 242/2013: Artículo 55, Numerales 12 y 38).</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta25">
+														<select class="form-control" name="pregunta58">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1254,11 +1204,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>26.</td>
-													<td>El personal manipulador no presenta signos y/o síntomas de enfermedad (heridas infectadas, irritaciones cutáneas o diarrea, entre otras) o en caso de presentarse, el establecimiento implementa las medidas preventivas y correctivas necesarias para evitar la contaminación de la carne y productos cárnicos comestibles. (Decreto 1500/2007: Artículo 26, Numeral 1.1.13. Resolución 3009/2010: Artículo 15, Numeral 1, 3.16; Artículo 67, Numeral 21.2. Resolución 240/2013: Artículo 14, Numeral 1; Artículo 15; Artículo 17: Numeral 16; Artículo 130: Numeral 21.2. Resolución 242/2013: Artículo 13: Numeral 1; Artículo 14; Artículo 16: Numeral 16; Artículo 55: Numeral 21.2)</td>
+													<td>59.</td>
+													<td>Si el establecimiento realiza las actividades de desprese, deshuesado y/o fileteado, cuenta con un área cuya ubicación, construcción y diseño es acorde al volumen del producto manejado, evitando la contaminación cruzada. El área se mantiene a una temperatura máxima de 12°C durante el desarrollo de dichas actividades. (Resolución 242/2013: Artículo 22, Numerales 1.1, 1.2, 1.3; Artículo 55, Numeral 32)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta26">
+														<select class="form-control" name="pregunta59">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1266,11 +1216,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>27.</td>
-													<td>Todos los manipuladores de alimentos cumplen con las prácticas higiénicas (no comer, no fumar, no toser, no usan accesorios, presentan uñas cortas, protectores de cabello, barba o bigote, entre otras). (Resolución 3009/2010: Artículo 15: Numeral 3.1, 3.7, 3.8, 3.11, 3.12, 3.15, 3.17; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 14, Numeral 3; Artículo 17: Numeral 1, 7, 8, 11, 12, 15, 17. Resolución 242/2013: Artículo 13, Numeral 3; Artículo 16, Numeral 1, 7, 8, 11, 12, 15, 17)</td>
+													<td>60.</td>
+													<td>Cuenta con un programa documentado de mantenimiento de instalacionas y equipos, el cual incluye las actividades de monitoreo, registro y verificación. (Decreto 1500/2007: Artículo 26, Numeral 1.2.1)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta27">
+														<select class="form-control" name="pregunta60">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1278,11 +1228,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>28.</td>
-													<td>Los manipuladores de alimentos se lavan y desinfectan las manos cada vez que sea necesario. En caso de usar guantes son sometidos al mismo cuidado higiénico de las manos. (Resolución 3009/2010: Artículo 15: Numeral 3.6, 3.14; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 17, Numerales 6, 14. Resolución 242/2013: Artículo 13, Numeral 6, 14)</td>
+													<td>61.</td>
+													<td>Cuenta con los soportes del reconocimiento médico que acredite su aptitud para manipular alimentos con una vigencia máxima de un año. (Decreto 1500/2007: Artículo 26, Numeral1.1.13. Resolución 3009/2010: Artículo 15, Numeral 1; Artículo 67, Numeral 21.2. Resolución 240/2013: Artículo 14, Numeral 1; Artículo 15. Resolución 242/2013: Artículo 13, Numeral 1; Artículo 14)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta28">
+														<select class="form-control" name="pregunta61">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1290,11 +1240,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>29.</td>
-													<td>Cuenta con avisos alusivos al cumplimiento de las buenas prácticas higiénicas. (Resolución 3009/2010: Artículo 15: Numeral 3.19; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 17, Numeral 19. Resolución 242/2013: Artículo 13, Numeral 19).</td>
+													<td>62.</td>
+													<td>Cuenta con programa de proveedores en el que se identifican los proveedores de canales, sus partes y/o productos cárnicos comestibles, así como los insumos y materiales de empaque. Si el establecimiento realiza las actividades de desprese, deshuese o fileteo, mantiene la identificación del producto hasta su venta. (Decreto 1500/2007: Artículo 26, Numeral 1.2.2. Resolución 242/2013: Artículo 22, Numeral 3.3; Artículo 55, Numeral 32)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta29">
+														<select class="form-control" name="pregunta62">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1302,11 +1252,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>30.</td>
-													<td>La dotación de trabajo se mantiene limpia y es de color claro, sin botones o accesorios. En caso de uso de delantales, estos permanecen atados al cuerpo. (Resolución 3009/2010: Artículo 15, Numeral 3.2, 3.3; Artículo 67, Numeral 21.2. Resolución 240/2013: Artículo 17, Numeral 2, 3; Artículo 130: Numeral 21.2. Resolución 242/2013: Artículo 16, Numeral 2, 3; Artículo 55: Numeral 21.2)</td>
+													<td>63.</td>
+													<td>Cuenta con un programa para prevenir la cría y refugio de plagas, con enfoque de control integral, soportado con un diagnóstico inicial, indicando las medidasde seguimiento a las actividades y soportadas por registros. (Decreto 1500/2007: Artículo 26, Numeral 1.1.8)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta30">
+														<select class="form-control" name="pregunta63">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1314,11 +1264,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>31.</td>
-													<td>El personal usa tapabocas y cubre tanto la boca como la nariz. (Resolución 3009/2010: Artículo 15: Numeral 3.10; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 17, Numeral 10; Artículo 130: Numeral 21.2. Resolución 242/2013: Artículo 16, Numeral 10; Artículo 55: Numeral 21.2)</td>
+													<td>64.</td>
+													<td>Cuenta con un programa de manejo de residuos sólidos y líquidos que garanticen una eficiente separación, recolección, conducción, almacenamiento, evacuación y disposición final, soportado mediante registros para la verificación de las mencionadas actividades.(Decreto 1500/2007: Artículo 26, Numeral 1.1.9)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta31">
+														<select class="form-control" name="pregunta64">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>
@@ -1326,23 +1276,11 @@
 													</td>
 												</tr>
 												<tr>
-													<td>32.</td>
-													<td>El personal usa calzado cerrado, de tacón bajo e impermeable. (Resolución 3009/2010: Artículo 15: Numeral 3.13; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 17, Numeral 13; Artículo 130: Numeral 21.2. Resolución 242/2013: Artículo 16, Numeral 13; Artículo 55: Numeral 21.2)</td>
+													<td>65.</td>
+													<td>Cuenta con un programa documentado para garantizar que el agua sea de calidad potable y cumpla con la normatividad vigente en la materia (Decreto 1575 de 2007 y Resolucion 2115 de 2007), que incluye las actividades de monitoreo, verificación y registro. (Decreto 1500/2007: Artículo 26, Numeral 1.1.11)</td>
 													<td>
 														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta32">
-															<option></option>
-															<option value="S">Si</option>
-															<option value="N">No</option>
-														</select>
-													</td>
-												</tr>
-												<tr>
-													<td>33.</td>
-													<td>El establecimiento suministra la dotación de trabajo a los manipuladores y cuenta con dotación para los visitantes. (Resolución 3009/2010: Artículo 15: Numeral 3.18, 3.20; Artículo 67: Numeral 21.2. Resolución 240/2013: Artículo 17, Numeral 18, 20; Artículo 130: Numeral 21.2. Resolución 242/2013: Artículo 16, Numeral 18, 20; Artículo 55: Numeral 21.2)</td>
-													<td>
-														<label class="control-label">Respuesta</label>
-														<select class="form-control" name="pregunta33">
+														<select class="form-control" name="pregunta65">
 															<option></option>
 															<option value="S">Si</option>
 															<option value="N">No</option>

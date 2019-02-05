@@ -51,7 +51,6 @@
 
 		<div class="container">
 			<div class="row">
-				
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						FT480: Acta de Inspección Sanitaria con Enfoque de Riesgo para Ventas de Alimentos y Bebidas en Vía Pública
@@ -127,6 +126,9 @@
 											<label class="col-md-12 control-label">Fecha:</label>
 											<input type="date" class="form-control" name="fecha480">
 										</div>
+										<script type="text/javascript">
+											cargarInicio('480');
+										</script>										
 										<div class="col-md-3">
 											<label class="col-md-12 control-label">Acta No:</label>
 											<input type="number" class="form-control" name="acta480">
@@ -1032,7 +1034,12 @@
 			                            <button type="submit" onclick="guardarEvaluacion('480')" class="btn btn-primary">
 			                                Guardar
 			                            </button>			                            
-			                        </div>			                       
+			                        </div>
+			                       	<div class="col-md-2">
+			                       		<button class="btn btn-primary" onclick="firmaEvaluacion()">
+			                       			Firmar
+			                       		</button>
+			                       	</div>			                       
 			                    </div>
 
 			                    <br><br><hr>

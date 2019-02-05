@@ -1,9 +1,12 @@
 function login(){
 	let estado;
+	let consecutivo = 0;
+	localStorage.setItem('consecutivo', JSON.stringify(consecutivo));
 	let clave = document.getElementsByName('password')[0].value;
-	clave == 'VISALUD|*candelaria2019' ? estado = true : estado = false;
+	clave == 'GC130' ? estado = true : estado = false;
 	localStorage.setItem('estado', JSON.stringify(estado));
 	if (estado) {
+		alert('Login exitoso');
 		window.location.replace("menu0.html");
 	}else{
 		alert('Clave incorrecta');

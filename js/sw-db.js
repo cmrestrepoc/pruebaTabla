@@ -4,6 +4,8 @@ function verificarSesionLocal(){
 	if (estado == 'false') {
 		console.log(estado);
 		window.location.replace("index.html");
+	}else{
+		console.log("Problemas con el if");
 	}
 }
 
@@ -412,15 +414,64 @@ function cargarInscritos569(){
 	}).catch( err => console.log('Error: ', err) );
 }
 
-function cargarServidor(){
-	db440.allDocs({include_docs: true, descending: true}).then ( doc => {
-		var data;
+function cargarServidor(formulario){
+	let db;
+	//console.log(formulario);
+	switch(formulario){
+		case '440':
+			db = db440;
+			break;
+		case '479':
+			//console.log('Estamos dentro del 479');
+			db = db479;
+			break;
+		default:
+			console.log('Problemas con el formulario');
+			break;
+	}
+
+	db.allDocs({include_docs: true, descending: true}).then ( doc => {
+		console.log('Estamos en el formulario:',formulario);
 		doc.rows.forEach( registro => {
-			data = 'noco='+registro.doc.NOCO+'&&'+
-						'acta='+registro.doc.ACTA+'&&'+
-						'fecha='+registro.doc.FECHA+'&&'+
-						'p_cumpl='+registro.doc.P_CUMPL+'&&'+
-						'concepto='+registro.doc.CONCEPTO;
+			let data = 'ACTA=' + registro.doc.ACTA + '&&' +
+						'formulario=' + formulario + '&&' +
+						'N_INSCRIP=' + registro.doc.N_INSCRIP + '&&' +
+						'DIRECC=' + registro.doc.DIRECC + '&&' +
+						'FAX=' + registro.doc.FAX + '&&' +
+						'TELS=' + registro.doc.TELS + '&&' +
+						'CORREO=' + registro.doc.CORREO + '&&' +
+						'NOMBRE_P=' + registro.doc.NOMBRE_P + '&&' +
+						'TID_P=' + registro.doc.TID_P + '&&' +
+						'DOC_P=' + registro.doc.DOC_P + '&&' +
+						'NOMBRE_RL=' + registro.doc.NOMBRE_RL + '&&' +
+						'TID_RL=' + registro.doc.TID_RL + '&&' +
+						'DOC_RL=' + registro.doc.DOC_RL + '&&' +
+						'DIR_NOT=' + registro.doc.DIR_NOT + '&&' +
+						'DPTO_NOTI=' + registro.doc.DPTO_NOTI + '&&' +
+						'MPIO_NOTI=' + registro.doc.MPIO_NOTI + '&&' +
+						'HORARIOS=' + registro.doc.HORARIOS + '&&' +
+						'NUTRA=' + registro.doc.NUTRA + '&&' +
+						'F_UV=' + registro.doc.F_UV + '&&' +
+						'CCUV=' + registro.doc.CCUV + '&&' +
+						'CUV=' + registro.doc.CUV + '&&' +
+						'UV_P=' + registro.doc.UV_P + '&&' +
+						'NMOTIVO=' + registro.doc.NMOTIVO + '&&' +
+						'MOTIVO=' + registro.doc.MOTIVO + '&&' +
+						'AUTORIZA=' + registro.doc.AUTORIZA + '&&' +
+						'P_CUMPL=' + registro.doc.P_CUMPL + '&&' +
+						'N_MUESTRAS=' + registro.doc.N_MUESTRAS + '&&' +
+						'N_ACTAS=' + registro.doc.N_ACTAS + '&&' +
+						'AMS=' + registro.doc.AMS + '&&' +
+						'DETA_MS=' + registro.doc.DETA_MS + '&&' +
+						'NOCO=' + registro.doc.NOCO + '&&' +
+						'FECHA=' + registro.doc.FECHA + '&&' +
+						'P_CUMPL=' + registro.doc.P_CUMPL + '&&' +
+						'FIRMA_F1=' + registro.doc.FIRMA_F1 + '&&' +
+						'FIRMA_F2=' + registro.doc.FIRMA_F2 + '&&' +
+						'FIRMA_E1=' + registro.doc.FIRMA_E1 + '&&' +
+						'FIRMA_E2=' + registro.doc.FIRMA_E2 + '&&' +
+						'CONCEPTO='+registro.doc.CONCEPTO;
+			
 			fetch('https://sisbenpro.com/public/evaluacionesTabla', {
 				method: 'POST',
 				headers: {
@@ -429,7 +480,8 @@ function cargarServidor(){
 				mode: 'no-cors',
 				body: data
 			})
-			.then( res => console.log('respuesta POST', res.body) )
+			.then( res => res.json() )
+			.then( jsonRes => console.log(jsonRes) )
 			.catch( err => console.log('error POST', err) );
 		});
 		alert('Archivos en proceso de envío');	
@@ -527,6 +579,9 @@ function guardarComunesInscritos(formulario){
 		DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
 		DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
 		MPIO_NOTI: document.getElementsByName('mpioNotif' + formulario)[0].value,
+		FIRMA_F1: localStorage.getItem('firmaAutoridad'),
+		FIRMA_E1: localStorage.getItem('firmaInscribe'),
+		AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,
 		
 		//Campos comunes a los formularios de inscripción 493, 444, 569
 		CELULAR: document.getElementsByName('cel' + formulario)[0].value,
@@ -564,8 +619,12 @@ function guardarComunesEstablecimientos(formulario){
 	return inscrito;
 }
 
-function firmar(){
-	window.location.replace('firmaJquery.html');
+function firmaInscripcion() {
+	window.location.assign('firmaInscripcion.html');
+}
+
+function firmaEvaluacion(){
+	window.location.assign('firmaEvaluacion.html');
 }
 
 function guardarInscrito493(){
@@ -584,7 +643,6 @@ function guardarInscrito493(){
 
 	var adicional = {		
 		ZONA: document.getElementsByName('zona493')[0].value,
-		AUTORIZA: document.getElementsByName('autorizaProp493')[0].value,
 		ACTIVIDAD: actividad,
 		CARGO_F1: document.getElementsByName('cargoRecibe493')[0].value,
 		CARGO_E1: document.getElementsByName('cargoInscribe493')[0].value,
@@ -749,6 +807,10 @@ function guardarComunesEvaluados(formulario){
 		NOMBRE_E2: document.getElementsByName('funcionario' + formulario + '-2')[0].value,
 		ID_E2: document.getElementsByName('idFuncionario' + formulario + '-2')[0].value,
 		CARGO_E2: document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value,
+		FIRMA_F1: localStorage.getItem('firmaAut1'),
+		FIRMA_F2: localStorage.getItem('firmaAut2'),
+		FIRMA_E1: localStorage.getItem('firmaIns1'),
+		FIRMA_E2: localStorage.getItem('firmaIns2'),
 		FPV: fechaPV,
 		GRABADO: 'S'
 	};

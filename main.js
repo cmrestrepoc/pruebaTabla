@@ -155,3 +155,23 @@ function loginServer(){
 	})
 	.catch( err => alert('Problemas con la conexión a internet', err.json()) );
 }
+
+function cargarInicio(formulario){
+	let fecha = new Date();
+	console.log(fecha.getFullYear());
+	let mes = fecha.getMonth() + 1;
+	let dia = fecha.getUTCDate();
+	let cadenaMes = mes < 10 ? '0' + mes : mes;
+	let cadenaDia = fecha.getUTCDate() < 10 ? '0' + fecha.getUTCDate() : fecha.getUTCDate();
+	let cadenaFecha = fecha.getFullYear() + '-' + cadenaMes + '-' + cadenaDia;
+	console.log(cadenaFecha);
+	document.getElementsByName('fecha' + formulario)[0].value = cadenaFecha;
+
+	/*let consec = JSON.parse(localStorage.getItem('consecutivo'));
+	if (consec < 10) {
+
+	}else if (consec >= 10 && consec < 100) {
+
+	}else if (consec < ) {}
+	let acta = formulario*/
+}

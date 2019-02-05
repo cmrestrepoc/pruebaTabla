@@ -163,10 +163,10 @@ header img{
 	margin-top: 62px;
 }
 
-#firmaAutoridad{
+/*#firmaAutoridad{
 	/* Prevent nearby text being highlighted when accidentally dragging mouse outside confines of the canvas */
 	/*background-color:red;*/
-	-webkit-touch-callout: none;
+/*	-webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -179,7 +179,6 @@ header img{
 }
 
 .botonFirma{
-	/*background-color:yellow;*/ 
 	float:left;
 	height:410px;
 	display: flex;
@@ -191,13 +190,11 @@ header img{
 	float:left;
 	border:2px solid #888;
 	border-radius: 4px;
-	/*background-color:gray;*/
 	width:880px;
 	height: 400px;
 	position: relative;
 }
-
-
+*/
 
 /*@media all and (max-width: 1000px){
 	header{
