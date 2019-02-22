@@ -62,8 +62,8 @@
 						<!-- Nav tabs -->
 						<ul id="misTabs" class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#inscritos493" aria-controls="inscritos493" role="tab" data-toggle="tab">Inscritos</a></li>
-							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab">Datos del Establecimiento</a></li>
-							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab">Evaluación</a></li>
+							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab()">Datos del Establecimiento</a></li>
+							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab" onclick="validarCambioTab()">Evaluación</a></li>
 							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados('474')">Observaciones - Notificaciones</a></li>
 						</ul>
 
@@ -127,6 +127,9 @@
 											<label class="col-md-12 control-label">Fecha:</label>
 											<input type="date" class="form-control" name="fecha474">
 										</div>
+										<script type="text/javascript">
+											cargarInicio('474');
+										</script>										
 										<div class="col-md-3">
 											<label class="col-md-12 control-label">Acta No:</label>
 											<input type="number" class="form-control" name="acta474">

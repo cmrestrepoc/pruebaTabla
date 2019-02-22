@@ -62,9 +62,9 @@
 						<!-- Nav tabs -->
 						<ul id="misTabs" class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#tabInscritos569" aria-controls="tabInscritos569" role="tab" data-toggle="tab">Inscritos</a></li>
-							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab">Datos del Establecimiento</a></li>
-							<li role="presentation"><a href="#evaluacionPrt1" aria-controls="evaluacionPrt1" role="tab" data-toggle="tab">Evaluación Parte 1</a></li>
-							<li role="presentation"><a href="#evaluacionPrt2" aria-controls="evaluacionPrt2" role="tab" data-toggle="tab">Evaluación Parte 2</a></li>
+							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab()">Datos del Establecimiento</a></li>
+							<li role="presentation"><a href="#evaluacionPrt1" aria-controls="evaluacionPrt1" role="tab" data-toggle="tab" onclick="validarCambioTab()">Evaluación Parte 1</a></li>
+							<li role="presentation"><a href="#evaluacionPrt2" aria-controls="evaluacionPrt2" role="tab" data-toggle="tab" onclick="validarCambioTab()">Evaluación Parte 2</a></li>
 							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados('442')">Observaciones - Notificaciones</a></li>
 						</ul>
 
@@ -128,6 +128,9 @@
 											<label class="col-md-12 control-label">Fecha:</label>
 											<input type="date" class="form-control" name="fecha442">
 										</div>
+										<script type="text/javascript">
+											cargarInicio('442');
+										</script>										
 										<div class="col-md-3">
 											<label class="col-md-12 control-label">Autori. san. prov.:</label>
 											<input type="number" class="form-control" name="acta442">

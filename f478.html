@@ -2,7 +2,7 @@
 <html lang="es">
 	<head>
 		<meta charset="utf-8"/>
-		<title>F440</title>
+		<title>F478</title>
 
 		<!-- favicon -->
 		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
@@ -42,7 +42,7 @@
 			<div class="titulos">
 				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
 				<h2>Vigilancia en Salud Pública</h2>
-				<h2>Acta FT440</h2>
+				<h2>Acta FT478</h2>
 			</div>
 
 		</header>
@@ -54,31 +54,31 @@
 				
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						FT440: Acta de Inspección Sanitaria con Enfoque de Riesgo para Expendios de Carne
+						FT478: Acta de Inspección Sanitaria con Enfoque de Riesgo para Preparación de Alimentos
 					</div>
 						
 					<div class="panel-body">
 
 						<!-- Nav tabs -->
 						<ul id="misTabs" class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#tabInscritos569" aria-controls="tabInscritos569" role="tab" data-toggle="tab">Inscritos</a></li>
+							<li role="presentation" class="active"><a href="#inscritos493" aria-controls="inscritos493" role="tab" data-toggle="tab">Inscritos</a></li>
 							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab()">Datos del Establecimiento</a></li>
 							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab" onclick="validarCambioTab()">Evaluación</a></li>
-							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados('440')">Observaciones - Notificaciones</a></li>
+							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados('478')">Observaciones - Notificaciones</a></li>
 						</ul>
 
 						<!-- Tab panes -->
 						<div class="tab-content" id="miTabContent">
-							<div role="tabpanel" class="tab-pane fade active in" id="tabInscritos569" aria-labelledby="tabInscritos569-tab">
+							<div role="tabpanel" class="tab-pane fade active in" id="inscritos493" aria-labelledby="inscritos493-tab">
 								<br>
 								<div class="form-group">                    
 			                        <div class="col-md-3 col-md-offset-2">
-			                            <a id="todosInscritos" onclick="cargarInscritos569()" class="btn btn-primary">
+			                            <a id="todosInscritos" onclick="cargarInscritos493()" class="btn btn-primary">
 			                                Cargar inscritos desde servidor
 			                            </a>
 			                        </div>
 			                        <div class="col-md-3">
-			                        	<a type="submit" onclick="cargarServidor('440')" class="btn btn-primary">
+			                        	<a type="submit" onclick="cargarServidor('478')" class="btn btn-primary">
 			                                Subir información a servidor
 			                            </a>
 			                        </div>
@@ -91,12 +91,12 @@
 
 			                    <br><br> 
 
-								<script type="text/javascript">mostrarInscritos569('440');</script>
+								<script type="text/javascript">mostrarInscritos493('478');</script>
 	                    		<div class="form-group">
 									<div class="panel panel-default">
 			                    		<div class="panel-heading">INSCRITOS EN BD</div>
 			                    		<div class="panel-body">
-			                    			<table class="table table-bordered" id="tablaInscritos569">
+			                    			<table class="table table-bordered" id="tablaInscritos">
 												<thead>
 													<tr>
 														<th></th>
@@ -109,7 +109,7 @@
 														<th></th>
 													</tr>	
 												</thead>
-												<tbody id="inscritos569"></tbody>
+												<tbody id="inscritos"></tbody>
 											</table>
 										</div>
 	                    			</div>
@@ -118,49 +118,125 @@
 
 							<div role="tabpanel" class="tab-pane fade" id="datos" aria-labelledby="datos-tab">								
 								<div class="form-group">
-									<div class="col-md-2">
-										<label class="col-md-12 control-label">Ciudad:</label>
-										<input type="text" class="form-control" name="ciudad440" value="CANDELARIA">
-									</div>
-									<div class="col-md-10">
-										<div class="col-md-3">
+									<div class="col-md-7">
+										<div class="col-md-4">
 											<label class="col-md-12 control-label">Fecha:</label>
-											<input type="date" class="form-control" name="fecha440">
+											<input type="date" class="form-control" name="fecha478" onchange="calcularFechaPV(this.value)">
 										</div>
 										<script type="text/javascript">
-											cargarInicio('440');
+											cargarInicio('478');
 										</script>										
-										<div class="col-md-3">
-											<label class="col-md-12 control-label">Acta No:</label>
-											<input type="number" class="form-control" name="acta440">
-										</div>
-
-										<div class="col-md-6" style="padding:0">
+										<div class="col-md-8" style="padding:0">
 											<label class="col-md-12 control-label">Entidad:</label>
-											<input type="text" class="form-control" name="entidad440" value="SECRETARÍA DE SALUD MUNICIPAL - CANDELARIA">
+											<input type="text" class="form-control" name="entidad478" value="SECRETARÍA DE SALUD MUNICIPAL - CANDELARIA">
 										</div>
 									</div>
-															
+									<div class="col-md-5">
+										<label class="col-md-8 control-label" style="text-align: right; line-height: 30px">
+											Gran Superficie
+										</label>
+										<div class="col-md-3">
+											<select class="form-control" name="granSuperficie">
+												<option></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
+										</div>
+										<label class="col-md-8 control-label" style="text-align: right; line-height: 30px">
+											Con preparación de alimentos
+										</label>
+										<div class="col-md-3">
+											<select class="form-control" name="granSuperficie">
+												<option></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
+										</div>										
+									</div>					
 								</div>
 
 								<br><br><br><hr>
 
 								<div class="form-group">
+									<label class="col-md-2 control-label" style="text-align:right">TIPO DE ESTABLECIMIENTO:</label>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="restaurante">
+											   </span>
+											   <input type="text" class="form-control" name="restaurante" value="Restaurante">
+										</div>
+									</div>									
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="cafeteria">
+											   </span>
+											   <input type="text" class="form-control" name="cafeteria" value="Cafeteria">
+										</div>
+									</div>								
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="panaderia">
+											   </span>
+											   <input type="text" class="form-control" name="panaderia" value="Panaderia">
+										</div>
+									</div>									
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="fruteria">
+											   </span>
+											   <input type="text" class="form-control" name="fruteria" value="Fruteria">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="comRapidas">
+											   </span>
+											   <input type="text" class="form-control" name="comRapidas" value="C. Rápidas">
+										</div>
+									</div>									
+									<br><br><br>									
+									<div class="col-md-2 col-md-offset-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+											    <input type="checkbox" name="tipoEstablecimiento" value="comedores">
+											   </span>
+											   <input type="text" class="form-control" name="comedores" value="Comedores">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label class="control-label col-md-4">Tipo de Comedor:</label>
+										<div class="col-md-8">
+											<select name="cualEstab" class="form-control">
+												<option></option>
+												<option value="PROGRAMAS SOCIALES">Programas Sociales</option>
+												<option value="CARCELARIOS PENITENCIARIOS">Carcelarios-Penitenciarios</option>
+											</select>
+										</div>
+									</div>																															
+								</div><!-- Fin del form-group -->
+								<br><hr>
+
+								<div class="form-group">
 									<div class="col-md-4">
 										<label class="col-md-6 control-label">Razón Social:</label>
-										<input type="text" class="form-control" name="razonSocial440">
+										<input type="text" class="form-control" name="razonSocial478">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-6 control-label">Nit/CC:</label>
-										<input type="text" class="form-control" name="nit440">
+										<input type="text" class="form-control" name="nit478">
 									</div>
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">Nombre Comercial:</label>
-										<input type="text" class="form-control" name="nombreComercial440">
+										<input type="text" class="form-control" name="nombreComercial478">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Inscripción No:</label>
-										<input type="text" class="form-control" name="inscripcion440">
+										<input type="text" class="form-control" name="inscripcion478">
 									</div>
 								</div><!-- Fin del form-group -->
 								<br><br><br><hr>
@@ -168,19 +244,19 @@
 								<div class="form-group">
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Matrícula Mercantil:</label>
-										<input type="text" class="form-control" name="matriculaMercantil440">
+										<input type="text" class="form-control" name="matriculaMercantil478">
 									</div>
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">Dirección:</label>
-										<input type="text" class="form-control" name="direccion440">
-									</div>				
+										<input type="text" class="form-control" name="direccion478">
+									</div>
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Departamento:</label>
-										<input type="text" class="form-control" name="dpto440" value="VALLE DEL CAUCA">
+										<input type="text" class="form-control" name="dpto478" value="VALLE DEL CAUCA">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Municipio:</label>
-										<input type="text" class="form-control" name="mpio440" value="CANDELARIA">
+										<input type="text" class="form-control" name="mpio478" value="CANDELARIA">
 									</div>
 								</div><!-- Fin del form-group -->
 								<br><br><br><hr>
@@ -190,7 +266,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="barrio" id="barrio">
+										    	<input type="radio" name="territorio478" value="barrio" id="barrio">
 										    </span>
 										    <input type="text" class="form-control" name="barrio" value="Barrio">
 										</div>
@@ -198,7 +274,7 @@
 									<!--div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="comuna" id="comuna">
+										    	<input type="radio" name="territorio478" value="comuna" id="comuna">
 										    </span>
 										    <input type="text" class="form-control" name="comuna" value="Comuna">
 										</div>
@@ -206,7 +282,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="localidad" id="localidad">
+										    	<input type="radio" name="territorio478" value="localidad" id="localidad">
 										    </span>
 										    <input type="text" class="form-control" name="localidad" value="Localidad">
 										</div>
@@ -214,7 +290,7 @@
 									<div class="col-md-2" style="padding:0">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="corregimiento" id="corregimiento">
+										    	<input type="radio" name="territorio478" value="corregimiento" id="corregimiento">
 										    </span>
 										    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
 										</div>
@@ -222,7 +298,7 @@
 									<!--div class="col-md-2" style="margin-left:50px">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="caserio" id="caserio">
+										    	<input type="radio" name="territorio478" value="caserio" id="caserio">
 										    </span>
 										    <input type="text" class="form-control" name="caserio" value="Caserío">
 										</div>
@@ -230,7 +306,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="sector" id="sector">
+										    	<input type="radio" name="territorio478" value="sector" id="sector">
 										    </span>
 										    <input type="text" class="form-control" name="sector" value="Sector">
 										</div>
@@ -238,7 +314,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="upz" id="upz">
+										    	<input type="radio" name="territorio478" value="upz" id="upz">
 										    </span>
 										    <input type="text" class="form-control" name="upz" value="Upz">
 										</div>
@@ -246,7 +322,7 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="otro" id="otro">
+										    	<input type="radio" name="territorio478" value="otro" id="otro">
 										    </span>
 										    <input type="text" class="form-control" name="otro" value="Otro">
 										</div>
@@ -254,14 +330,14 @@
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
-										    	<input type="radio" name="territorio440" value="vereda" id="vereda">
+										    	<input type="radio" name="territorio478" value="vereda" id="vereda">
 										    </span>
 										    <input type="text" class="form-control" name="vereda" value="Vereda">
 										</div>
 									</div>
 									<label class="col-md-1 control-label" style="text-align:right;padding:0">Nombre:</label>
 									<div class="col-md-3">
-										<select class="form-control" name="nomTerr440">
+										<select class="form-control" name="nomTerr478">
 											<option></option>
 											<option value="SAMANES">SAMANES</option>
 											<option value="OBRERO">OBRERO</option>
@@ -297,19 +373,19 @@
 			                    <div class="form-group">
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">Correo</label>
-										<input type="text" class="form-control" name="correoProp440">
+										<input type="text" class="form-control" name="correoProp478">
 									</div>													
 									<div class="col-md-3">
 										<label class="col-md-12 control-label">Celular:</label>
-										<input type="text" class="form-control" name="cel440">	
+										<input type="text" class="form-control" name="cel478">	
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Fax:</label>
-										<input type="text" class="form-control" name="fax440">		
+										<input type="text" class="form-control" name="fax478">		
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Teléfono:</label>
-										<input type="text" class="form-control" name="tel440">		
+										<input type="text" class="form-control" name="tel478">		
 									</div>							
 								</div><!-- Fin del form-group -->
 
@@ -319,12 +395,12 @@
 									<div class="col-md-6">
 										<div class="col-md-6" style="padding:0">
 											<label class="col-md-12 control-label">Propietario:</label>
-											<input type="text" class="form-control" name="propietario440">
+											<input type="text" class="form-control" name="propietario478">
 										</div>
 										<div class="col-md-6">
 											<label class="col-md-12 control-label">Identificación:</label>
 											<div class="col-md-5">
-												<select class="form-control" name="tipoIdProp440" id="tipoIdProp440">
+												<select class="form-control" name="tipoIdProp478" id="tipoIdProp478">
 													<option></option>
 													<option value="CC">CC</option>
 													<option value="CE">CE</option>
@@ -332,19 +408,19 @@
 												</select>
 											</div>
 											<div class="col-md-7" style="padding:0">
-												<input type="text" class="form-control" name="idPropietario440" placeholder="# identificación">
+												<input type="text" class="form-control" name="idPropietario478" placeholder="# identificación">
 											</div>							
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="col-md-6" style="padding:0">
 											<label class="col-md-12 control-label">Rep. Legal:</label>
-											<input type="text" class="form-control" name="repLegal440">
+											<input type="text" class="form-control" name="repLegal478">
 										</div>										
 										<div class="col-md-6" style="padding:0">					
 											<label class="col-md-12 control-label">Identificación:</label>
 											<div class="col-md-5">
-												<select class="form-control" name="tipoIdRl440">
+												<select class="form-control" name="tipoIdRl478">
 													<option></option>
 													<option value="CC">CC</option>
 													<option value="CE">CE</option>
@@ -352,7 +428,7 @@
 												</select>
 											</div>
 											<div class="col-md-7" style="padding:0">
-												<input type="text" class="form-control" name="idRepLegal440" placeholder="# identificación">
+												<input type="text" class="form-control" name="idRepLegal478" placeholder="# identificación">
 											</div>											
 										</div>										
 									</div>
@@ -364,93 +440,44 @@
 									<div class="col-md-6" style="padding:0">
 										<div class="col-md-5" style="padding:0">
 											<label class="col-md-12 control-label">Dir Notif:</label>
-										<input type="text" class="form-control" name="dirNotif440">
+										<input type="text" class="form-control" name="dirNotif478">
 										</div>										
 										<div class="col-md-4">
 											<label class="control-label col-md-12">Depto N.:</label>
-											<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif440">
+											<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif478">
 										</div>
 										<div class="col-md-3" style="padding:0">
 											<label class="control-label col-md-12">Mpio N.:</label>
-											<input type="text" class="form-control" value="CANDELARIA" name="mpioNotif440">
+											<input type="text" class="form-control" value="CANDELARIA" name="mpioNotif478">
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="col-md-8">
 											<label class="col-md-12 control-label">Horarios:</label>
-											<input type="text" class="form-control" name="horarios440">
+											<input type="text" class="form-control" name="horarios478">
 										</div>
 										<div class="col-md-4" style="padding:0">
 											<label class="col-md-12 control-label">No. Trabajadores:</label>
 											<div class="col-md-8">
-												<input type="number" class="form-control" name="noTrabajadores440">
+												<input type="number" class="form-control" name="noTrabajadores478">
 											</div>								
 										</div>
 									</div>								
 								</div><!-- Fin del form-group -->
-								
-								<br><br><br><hr>
 
-								<div class="form-group">
-									<div class="col-md-6">
-										<label class="col-md-12 control-label">EXPENDE CARNE:</label>
-										<div class="col-md-4" style="padding:0">
-											<div class="input-group">
-												<span class="input-group-addon">
-											    	<input type="checkbox" name="tipoCarneExpende" value="bovina">
-											    </span>
-											    <input type="text" class="form-control" name="bovina" value="Bovina">
-											</div>
-										</div>									
-										<div class="col-md-4">
-											<div class="input-group">
-												<span class="input-group-addon">
-											    	<input type="checkbox" name="tipoCarneExpende" value="porcina">
-											    </span>
-											    <input type="text" class="form-control" name="porcina" value="Porcina">
-											</div>
-										</div>								
-										<div class="col-md-4">
-											<div class="input-group">
-												<span class="input-group-addon">
-											    	<input type="checkbox" name="tipoCarneExpende" value="aves">
-											    </span>
-											    <input type="text" class="form-control" name="aves" value="Aves">
-											</div>
-										</div>
-									</div>
-									
-									<div class="col-md-4" style="padding:0">
-										<label class="col-md-12 control-label">Otras Especies:</label>
-										<div class="col-md-12">
-											<input type="text" class="form-control" name="otrasEspecies">
-										</div>								
-									</div>
-
-									<div class="col-md-2" style="padding:0">
-										<label class="col-md-12 control-label">Otros Productos:</label>
-										<div class="col-md-6">
-											<select class="form-control" name="otrosProductos">
-												<option></option>
-												<option value="S">Si</option>
-												<option value="N">No</option>
-											</select>
-										</div>								
-									</div>													
-								</div><!-- Fin del form-group -->
-								<br><br><br><hr>
+								<br><br><br><hr>								
 
 								<div class="form-group">
 									<label class="control-label col-md-2" style="text-align:right">ÚLTIMA INSPECCIÓN:</label>
 									<div class="col-md-7">
 										<div class="col-md-4" style="padding:0">
 											<label class="col-md-12 control-label">Fecha:</label>
-											<input type="date" class="form-control" name="fechaUltVisita440">
+											<input type="date" class="form-control" name="fechaUltVisita478">
 										</div>
 										<div class="col-md-7 col-md-offset-1" style="padding:0">
 											<label class="col-md-12 control-label">Concepto última inspección:</label>
 											<div class="col-md-3">
-												<select class="form-control" name="concepto440" onchange="setConcepto(this,'textoConcepto440')">
+												<select class="form-control" name="concepto478" onchange="setConcepto(this, 'textoConcepto478')">
 													<option></option>				
 													<option value="1">1</option>
 													<option value="2">2</option>
@@ -458,14 +485,14 @@
 												</select>
 											</div>
 											<div class="col-md-9" style="padding:0">
-												<input type="text" class="form-control" name="textoConcepto440">
+												<input type="text" class="form-control" name="textoConcepto478">
 											</div>
 										</div>												
 									</div>
 									<div class="col-md-3">
 										<label class="control-label col-md-12">Porcentaje Cumplimiento</label>
 										<div class="col-md-6">
-											<input type="number" class="form-control" name="porcentaje440">
+											<input type="number" class="form-control" name="porcentaje478">
 										</div>%									
 									</div>
 								</div><!-- Fin del form-group -->
@@ -476,7 +503,7 @@
 									<div class="col-md-6" style="padding:0"><br>
 										<label class="control-lable col-md-3" style="text-align:right" style="padding:0">Motivo de la visita:</label>
 										<div class="col-md-2" style="padding:0">
-											<select class="form-control" name="motivo440" onchange="setMotivo(this,'textoMotivo440')">
+											<select class="form-control" name="motivo478" onchange="setMotivo(this,'textoMotivo478')">
 												<option></option>				
 												<option value="01">01</option>
 												<option value="02">02</option>
@@ -488,14 +515,14 @@
 											</select>
 										</div>
 										<div class="col-md-7">
-											<input type="text" class="form-control" name="textoMotivo440">
+											<input type="text" class="form-control" name="textoMotivo478">
 										</div>
 									</div>									
 									<div class="col-md-6">
 										<label class="col-md-6 control-label">Usuario autoriza Notifiación y/o firma electrónica</label>
 										<div class="col-md-3">
 											<label class="col-md-12 control-label">Notific.</label>
-											<select class="form-control" name="autorizaNoti440">
+											<select class="form-control" name="autorizaNoti478">
 												<option></option>
 												<option value="S">Si</option>
 												<option value="N">No</option>
@@ -503,7 +530,7 @@
 										</div>
 										<div class="col-md-3">
 											<label class="col-md-12 control-label">Firma</label>
-											<select class="form-control" name="autorizaFirma440">
+											<select class="form-control" name="autorizaFirma478">
 												<option></option>
 												<option value="S">Si</option>
 												<option value="N">No</option>
@@ -511,7 +538,7 @@
 										</div>
 									</div>									
 								</div><!-- Fin del form-group -->
-								<br><br><br><br>
+								<br><br><hr>
 							</div><!-- Fin del tab-pane -->	
 
 							<div role="tabpanel" aria-labelledby="evaluacion-tab" class="tab-pane fade" id="evaluacion">
@@ -539,7 +566,7 @@
 														<tbody>	
 															<tr>
 																<th scope="row">1.1 Localización y diseño</th>
-																<td name="puntaje_1">4</td>
+																<td name="puntaje_1">2</td>
 																<td>
 																	<select class="form-control" name="evaluacion_1">
 																		<option value="1">1</option>
@@ -551,7 +578,7 @@
 															</tr>
 															<tr>
 																<th scope="row">1.2 Condiciones en pisos y paredes</th>
-																<td name="puntaje_1">4</td>
+																<td name="puntaje_1">2</td>
 																<td>
 																	<select class="form-control" name="evaluacion_1">
 																		<option value="1">1</option>
@@ -563,7 +590,7 @@
 															</tr>
 															<tr>
 																<th scope="row">1.3 Techos, iluminación y ventilación</th>
-																<td name="puntaje_1">4</td>
+																<td name="puntaje_1">2</td>
 																<td>
 																	<select class="form-control" name="evaluacion_1">
 																		<option value="1">1</option>
@@ -575,7 +602,7 @@
 															</tr>
 															<tr>
 																<th scope="row">1.4 Instalaciones Sanitarias</th>
-																<td name="puntaje_1">5</td>
+																<td name="puntaje_1">3</td>
 																<td>
 																	<select class="form-control" name="evaluacion_1">
 																		<option value="1">1</option>
@@ -584,6 +611,18 @@
 																	</select>
 																</td>
 																<td><textarea class="form-control" name="hallazgos_1_4"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">1.5 Distribución y áreas</th>
+																<td name="puntaje_1">2</td>
+																<td>
+																	<select class="form-control" name="evaluacion_1">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_1_5"></textarea></td>
 															</tr>
 														</tbody>
 													</table>
@@ -595,7 +634,7 @@
 														<input type="text" class="form-control" name="evalBloque1">
 													</div>
 													<div class="col-md-3">
-														<label>17%</label>
+														<label>11%</label>
 													</div>
 												<br><br>
 												</div>
@@ -613,7 +652,7 @@
 														<tbody>	
 															<tr>
 																<th scope="row">2.1 Condiciones de equipos y utensilios</th>
-																<td name="puntaje_2">6</td>
+																<td name="puntaje_2">3</td>
 																<td>
 																	<select class="form-control" name="evaluacion_2">
 																		<option value="1">1</option>
@@ -624,8 +663,8 @@
 																<td><textarea class="form-control" name="hallazgos_2_1"></textarea></td>
 															</tr>
 															<tr>
-																<th scope="row">2.2 Condiciones de equipos de conservación</th>
-																<td name="puntaje_2">7</td>
+																<th scope="row">2.2 Diseño y funcionamiento de eq. y utensilios</th>
+																<td name="puntaje_2">3</td>
 																<td>
 																	<select class="form-control" name="evaluacion_2">
 																		<option value="1">1</option>
@@ -634,6 +673,18 @@
 																	</select>
 																</td>
 																<td><textarea class="form-control" name="hallazgos_2_2"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">2.3 Superficies de contacto con el alimento</th>
+																<td name="puntaje_2">4</td>
+																<td>
+																	<select class="form-control" name="evaluacion_2">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_2_3"></textarea></td>
 															</tr>							
 														</tbody>
 													</table>
@@ -645,7 +696,7 @@
 														<input type="text" class="form-control" name="evalBloque2">
 													</div>
 													<div class="col-md-3">
-														<label>13%</label>
+														<label>10%</label>
 													</div>
 												<br><br>			
 												</div>
@@ -662,8 +713,8 @@
 														</thead>
 														<tbody>	
 															<tr>
-																<th scope="row">3.1 Estado de salud (signos y lesiones)</th>
-																<td name="puntaje_3">8</td>
+																<th scope="row">3.1 Estado de salud</th>
+																<td name="puntaje_3">5</td>
 																<td>
 																	<select class="form-control" name="evaluacion_3">
 																		<option value="1">1</option>
@@ -674,8 +725,8 @@
 																<td><textarea class="form-control" name="hallazgos_3_1"></textarea></td>
 															</tr>
 															<tr>
-																<th scope="row">3.2 Prácticas higiénicas</th>
-																<td name="puntaje_3">8</td>
+																<th scope="row">3.2 Reconocimiento Médico</th>
+																<td name="puntaje_3">2</td>
 																<td>
 																	<select class="form-control" name="evaluacion_3">
 																		<option value="1">1</option>
@@ -684,6 +735,30 @@
 																	</select>
 																</td>
 																<td><textarea class="form-control" name="hallazgos_3_2"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">3.3 Prácticas higiénicas</th>
+																<td name="puntaje_3">6</td>
+																<td>
+																	<select class="form-control" name="evaluacion_3">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_3_3"></textarea></td>
+															</tr>
+															<tr>
+																<th scope="row">3.4 Educación y capacitación</th>
+																<td name="puntaje_3">3</td>
+																<td>
+																	<select class="form-control" name="evaluacion_3">
+																		<option value="1">1</option>
+																		<option value="0.5">2</option>
+																		<option value="0">3</option>
+																	</select>
+																</td>
+																<td><textarea class="form-control" name="hallazgos_3_4"></textarea></td>
 															</tr>						
 														</tbody>
 													</table>
@@ -713,8 +788,8 @@
 													</thead>
 													<tbody>	
 														<tr>
-															<th scope="row">4.1 Requisitos legales</th>
-															<td name="puntaje_4">7</td>
+															<th scope="row">4.1 Control de materias primas e insumos</th>
+															<td name="puntaje_4">4</td>
 															<td>
 																<select class="form-control" name="evaluacion_4">
 																	<option value="1">1</option>
@@ -725,8 +800,8 @@
 															<td><textarea class="form-control" name="hallazgos_4_1"></textarea></td>
 														</tr>
 														<tr>
-															<th scope="row">4.2 Manejo de temperatura</th>
-															<td name="puntaje_4">9</td>
+															<th scope="row">4.2 Prevención de contaminación cruzada</th>
+															<td name="puntaje_4">8</td>
 															<td>
 																<select class="form-control" name="evaluacion_4">
 																	<option value="1">1</option>
@@ -737,8 +812,8 @@
 															<td><textarea class="form-control" name="hallazgos_4_2"></textarea></td>
 														</tr>
 														<tr>
-															<th scope="row">4.3 Condiciones de almacenamiento</th>
-															<td name="puntaje_4">5</td>
+															<th scope="row">4.3 Control de proceso</th>
+															<td name="puntaje_4">3</td>
 															<td>
 																<select class="form-control" name="evaluacion_4">
 																	<option value="1">1</option>
@@ -747,7 +822,31 @@
 																</select>
 															</td>
 															<td><textarea class="form-control" name="hallazgos_4_3"></textarea></td>
-														</tr>						
+														</tr>
+														<tr>
+															<th scope="row">4.4 Operaciones de envasado y embalaje</th>
+															<td name="puntaje_4">3</td>
+															<td>
+																<select class="form-control" name="evaluacion_4">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_4_4"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">4.5 Procedencia y requisitos legales</th>
+															<td name="puntaje_4">4</td>
+															<td>
+																<select class="form-control" name="evaluacion_4">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_4_5"></textarea></td>
+														</tr>
 													</tbody>
 												</table>
 
@@ -758,7 +857,7 @@
 													<input type="text" class="form-control" name="evalBloque4">
 												</div>
 												<div class="col-md-3">
-													<label>21%</label>
+													<label>22%</label>
 												</div>
 													
 											</div>
@@ -776,7 +875,7 @@
 													<tbody>	
 														<tr>
 															<th scope="row">5.1 Suministro y calidad de agua potable</th>
-															<td name="puntaje_5">7</td>
+															<td name="puntaje_5">4</td>
 															<td>
 																<select class="form-control" name="evaluacion_5">
 																	<option value="1">1</option>
@@ -788,7 +887,7 @@
 														</tr>
 														<tr>
 															<th scope="row">5.2 Residuos líquidos</th>
-															<td name="puntaje_5">5</td>
+															<td name="puntaje_5">2</td>
 															<td>
 																<select class="form-control" name="evaluacion_5">
 																	<option value="1">1</option>
@@ -800,7 +899,7 @@
 														</tr>
 														<tr>
 															<th scope="row">5.3 Residuos sólidos</th>
-															<td name="puntaje_5">5</td>
+															<td name="puntaje_5">2</td>
 															<td>
 																<select class="form-control" name="evaluacion_5">
 																	<option value="1">1</option>
@@ -812,7 +911,7 @@
 														</tr>
 														<tr>
 															<th scope="row">5.4 Control integral de plagas</th>
-															<td name="puntaje_5">9</td>
+															<td name="puntaje_5">7</td>
 															<td>
 																<select class="form-control" name="evaluacion_5">
 																	<option value="1">1</option>
@@ -824,7 +923,7 @@
 														</tr>
 														<tr>
 															<th scope="row">5.5 Limpieza y desinfección de áreas, equipos y utensilios</th>
-															<td name="puntaje_5">7</td>
+															<td name="puntaje_5">4</td>
 															<td>
 																<select class="form-control" name="evaluacion_5">
 																	<option value="1">1</option>
@@ -833,6 +932,18 @@
 																</select>
 																</td>
 															<td><textarea class="form-control" name="hallazgos_5_5"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">5.6 Soportes documentales</th>
+															<td name="puntaje_5">3</td>
+															<td>
+																<select class="form-control" name="evaluacion_5">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+																</td>
+															<td><textarea class="form-control" name="hallazgos_5_6"></textarea></td>
 														</tr>
 													</tbody>
 												</table>
@@ -844,7 +955,69 @@
 													<input type="text" class="form-control" name="evalBloque5">
 												</div>
 												<div class="col-md-3">
-													<label>33%</label>
+													<label>22%</label>
+												</div>
+												<br><br>		
+											</div>
+
+											<div class="form-group col-md-6" style="border-style:ridge; padding:3px">
+												<table class="table" style="font-size:12px">
+													<thead>
+														<tr>
+															<th scope="col">6. ALMACENAMIENTO Y COMERCIALIZACIÓN</th>
+															<th scope="col">P</th>
+															<th scope="col">EVALUAC.</th>
+															<th scope="col">HALLAZGOS</th>
+														</tr>
+													</thead>
+													<tbody>	
+														<tr>
+															<th scope="row">6.1 Condiciones generales de almacenamiento</th>
+															<td name="puntaje_6">5</td>
+															<td>
+																<select class="form-control" name="evaluacion_6">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_6_1"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">6.2 Manejo y conservación congelados/frios</th>
+															<td name="puntaje_6">10</td>
+															<td>
+																<select class="form-control" name="evaluacion_6">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_6_2"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">6.3 Manejo y exhibición a temp. ambiente</th>
+															<td name="puntaje_6">5</td>
+															<td>
+																<select class="form-control" name="evaluacion_6">
+																	<option value="1">1</option>
+																	<option value="0.5">2</option>
+																	<option value="0">3</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="hallazgos_6_3"></textarea></td>
+														</tr>														
+													</tbody>
+												</table>
+
+												<div class="col-md-4">
+													<button class="btn btn-primary" onClick="evaluarBloque('evaluacion_6','puntaje_6','evalBloque6',5)">Eval. bloque 6</button>
+												</div>
+												<div class="col-md-5">
+													<input type="text" class="form-control" name="evalBloque6">
+												</div>
+												<div class="col-md-3">
+													<label>20%</label>
 												</div>
 												<br><br>		
 											</div>
@@ -862,17 +1035,17 @@
 										<div class="panel-body">
 											<div class="form-group">
 												<div class="col-md-3">
-													<button class="btn btn-primary" style="font-size:13px" onClick="consolidarPuntaje('conceptoEval440','cumplimiento440')">Cumplimiento</button>
+													<button class="btn btn-primary" style="font-size:13px" onClick="consolidarPuntaje('conceptoEval478','cumplimiento478')">Cumplimiento</button>
 												</div>
 												<div class="col-md-3">
-													<input class="form-control" type="number" name="cumplimiento440"></input>
+													<input class="form-control" type="number" name="cumplimiento478"></input>
 												</div>
 
 												<div class="col-md-3" style="text-align:right">
 													<label class="control-label">Concepto:</label>
 												</div>
 												<div class="col-md-3" style="padding-left:0">
-													<input class="form-control" type="number" name="conceptoEval440"></input>
+													<input class="form-control" type="number" name="conceptoEval478"></input>
 												</div>										
 											</div>
 										</div>
@@ -886,14 +1059,14 @@
 											<div class="form-group">
 												<label class="control-label col-md-12">¿Aplica alguna medida?</label>
 												<div class="col-md-3">
-													<select class="form-control" name="medidaSeguridad440">
+													<select class="form-control" name="medidaSeguridad478">
 														<option></option>
 														<option value="S">SI</option>
 														<option value="N">NO</option>
 													</select>
 												</div><br><br><br><br>
 												<label class="control-label col-md-12">Detalle, en caso afirmativo</label>
-												<textarea class="form-control" name="medida440"></textarea>
+												<textarea class="form-control" name="medida478"></textarea>
 											</div>
 										</div>
 									</div>
@@ -912,14 +1085,14 @@
 														<label class="control-label" style="text-align:right">Número de Muestras</label>
 													</div>
 													<div class="col-md-3">
-														<input class="form-control" type="number" name="numeroMuestras440"></input>
+														<input class="form-control" type="number" name="numeroMuestras478"></input>
 													</div>
 
 													<div class="col-md-3">
 														<label class="control-label" style="text-align:right">Número de Acta</label>
 													</div>
 													<div class="col-md-3" style="padding-left:0">
-														<input class="form-control" type="number" name="numeroActa440"></input>
+														<input class="form-control" type="number" name="numeroActa478"></input>
 													</div>										
 												</div>
 											</div>
@@ -934,12 +1107,12 @@
 
 									<label class="col-md-3 control-label" style="text-align:right">Por parte de la autoridad sanitaria:</label>		
 									<div class="col-md-9">
-										<textarea class="form-control" name="obAutoridad440"></textarea>
+										<textarea class="form-control" name="obAutoridad478"></textarea>
 									</div>
 									<br><br><br>
 									<label class="col-md-3 control-label" style="text-align:right">Por parte del establecimiento:</label>
 									<div class="col-md-9">
-										<textarea class="form-control" name="obPersona440"></textarea>
+										<textarea class="form-control" name="obPersona478"></textarea>
 									</div>
 								</div><!-- Fin del form-group -->
 								<br><br><hr>
@@ -952,27 +1125,27 @@
 									</div>
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">___</label>
-										<input type="text" class="form-control" name="funcionario440-1">
+										<input type="text" class="form-control" name="funcionario478-1">
 									</div>
 									<div class="col-md-2">								
 										<label class="col-md-12 control-label">Identificación:</label>
-										<input type="text" class="form-control" name="idFuncionario440-1">
+										<input type="text" class="form-control" name="idFuncionario478-1">
 									</div>
 									<div class="col-md-3">								
 										<label class="col-md-12 control-label">Cargo:</label>
-										<input type="text" class="form-control" name="cargoFuncionario440-1">
+										<input type="text" class="form-control" name="cargoFuncionario478-1">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Funcionario 2:</label>
 									</div>
 									<div class="col-md-5">
-										<input type="text" class="form-control" name="funcionario440-2">
+										<input type="text" class="form-control" name="funcionario478-2">
 									</div>
 									<div class="col-md-2">								
-										<input type="text" class="form-control" name="idFuncionario440-2">
+										<input type="text" class="form-control" name="idFuncionario478-2">
 									</div>
 									<div class="col-md-3">								
-										<input type="text" class="form-control" name="cargoFuncionario440-2">
+										<input type="text" class="form-control" name="cargoFuncionario478-2">
 									</div>							
 								</div><!-- Fin del form-group -->
 
@@ -986,37 +1159,38 @@
 									</div>
 									<div class="col-md-5">
 										<label class="col-md-12 control-label">___</label>
-										<input type="text" class="form-control" name="persona440-1">
+										<input type="text" class="form-control" name="persona478-1">
 									</div>
 									<div class="col-md-2">								
 										<label class="col-md-12 control-label">Identificación:</label>
-										<input type="text" class="form-control" name="idPersona440-1">
+										<input type="text" class="form-control" name="idPersona478-1">
 									</div>
 									<div class="col-md-3">								
 										<label class="col-md-12 control-label">Cargo:</label>
-										<input type="text" class="form-control" name="cargoPersona440-1">
+										<input type="text" class="form-control" name="cargoPersona478-1">
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Persona 2:</label>
 									</div>
 									<div class="col-md-5">
-										<input type="text" class="form-control" name="persona440-2">
+										<input type="text" class="form-control" name="persona478-2">
 									</div>
 									<div class="col-md-2">								
-										<input type="text" class="form-control" name="idPersona440-2">
+										<input type="text" class="form-control" name="idPersona478-2">
 									</div>
 									<div class="col-md-3">								
-										<input type="text" class="form-control" name="cargoPersona440-2">
+										<input type="text" class="form-control" name="cargoPersona478-2">
 									</div>							
 								</div><!-- Fin del form-group -->
 
 								<br><br><br><br><br><br><hr>
 
-								<input type="hidden" name="id440" value="0">
+								<input type="hidden" name="id478" value="0">
+								
 								<br><br>
 								<div class="form-group">
 			                        <div class="col-md-4 col-md-offset-2">
-			                            <button type="submit" onclick="guardarEvaluacion('440')" class="btn btn-primary">
+			                            <button onclick="guardarEvaluacion('478')" class="btn btn-primary">
 			                                Guardar
 			                            </button>			                            
 			                        </div>
@@ -1024,7 +1198,7 @@
 			                       		<button class="btn btn-primary" onclick="firmaEvaluacion()">
 			                       			Firmar
 			                       		</button>
-			                       	</div>			                       
+			                       	</div>		                       
 			                    </div>
 
 			                    <br><br><br><hr>

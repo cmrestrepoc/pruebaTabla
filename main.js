@@ -168,10 +168,20 @@ function cargarInicio(formulario){
 	document.getElementsByName('fecha' + formulario)[0].value = cadenaFecha;
 
 	/*let consec = JSON.parse(localStorage.getItem('consecutivo'));
+	//consec++;
+	let consecutivo;
 	if (consec < 10) {
-
+		consecutivo = '000' + consec;
 	}else if (consec >= 10 && consec < 100) {
+		consecutivo = '00' + consec;
+	}else if (consec >= 100 && consec < 1000 ) {
+		consecutivo = '0' + consec;
+	}else{
+		consecutivo = consec;
+	}
 
-	}else if (consec < ) {}
-	let acta = formulario*/
+	//localStorage.setItem('consecutivo', JSON.stringify(consec));
+	let acta = formulario + '-' + consecutivo;
+	console.log(acta);
+	document.getElementsByName('acta' + formulario)[0].value = acta;*/
 }

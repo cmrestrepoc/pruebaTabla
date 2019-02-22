@@ -45,6 +45,13 @@ header img{
 
 .titulos{
 	text-align: center;
+	float: left;
+	width: 84%;
+}
+
+.logout{
+	float:left;
+	width: 8%;
 }
 
 #menu1{

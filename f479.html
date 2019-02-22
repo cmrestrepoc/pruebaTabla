@@ -62,8 +62,8 @@
 						<!-- Nav tabs -->
 						<ul id="misTabs" class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#inscritos493" aria-controls="inscritos493" role="tab" data-toggle="tab">Inscritos</a></li>
-							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab">Datos del Establecimiento</a></li>
-							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab">Evaluación</a></li>
+							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab()">Datos del Establecimiento</a></li>
+							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab" onclick="validarCambioTab()">Evaluación</a></li>
 							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados('479')">Observaciones - Notificaciones</a></li>
 						</ul>
 
@@ -125,8 +125,11 @@
 									<div class="col-md-10">
 										<div class="col-md-3">
 											<label class="col-md-12 control-label">Fecha:</label>
-											<input type="date" class="form-control" name="fecha479" onchange="calcularFechaPV(this.value)">
+											<input type="date" class="form-control" name="fecha479">
 										</div>
+										<script type="text/javascript">
+											cargarInicio('479');
+										</script>										
 										<div class="col-md-3">
 											<label class="col-md-12 control-label">Acta No:</label>
 											<input type="number" class="form-control" name="acta479">
@@ -213,7 +216,7 @@
 									</div>
 									<div class="col-md-2">
 										<label class="col-md-6 control-label">Nit/CC:</label>
-										<input type="text" class="form-control" name="nit479">
+										<input type="text" class="form-control" name="nit479" required="required">
 									</div>
 									<div class="col-md-4">
 										<label class="col-md-12 control-label">Nombre Comercial:</label>
@@ -1077,7 +1080,7 @@
 								<br><br>
 								<div class="form-group">
 			                        <div class="col-md-4 col-md-offset-2">
-			                            <button onclick="guardarEvaluacion('479')" class="btn btn-primary">
+			                            <button type="submit" onclick="guardarEvaluacion('479')" class="btn btn-primary">
 			                                Guardar
 			                            </button>			                            
 			                        </div>

@@ -432,6 +432,7 @@ function cargarServidor(formulario){
 
 	db.allDocs({include_docs: true, descending: true}).then ( doc => {
 		console.log('Estamos en el formulario:',formulario);
+		let contador = 0;
 		doc.rows.forEach( registro => {
 			let data = 'ACTA=' + registro.doc.ACTA + '&&' +
 						'formulario=' + formulario + '&&' +
@@ -470,25 +471,29 @@ function cargarServidor(formulario){
 						'FIRMA_F2=' + registro.doc.FIRMA_F2 + '&&' +
 						'FIRMA_E1=' + registro.doc.FIRMA_E1 + '&&' +
 						'FIRMA_E2=' + registro.doc.FIRMA_E2 + '&&' +
-						'CONCEPTO='+registro.doc.CONCEPTO;
+						'CONCEPTO=' + registro.doc.CONCEPTO;
 			
 			fetch('https://sisbenpro.com/public/evaluacionesTabla', {
 				method: 'POST',
 				headers: {
+					'Accept': '*/*',
 					'Content-Type': 'application/x-www-form-urlencoded'
 				},
-				mode: 'no-cors',
+				//mode: 'no-cors',
 				body: data
 			})
-			.then( res => res.json() )
-			.then( jsonRes => console.log(jsonRes) )
+			.then( res => {
+				res.json() 
+				.then( jsonRes => console.log(jsonRes.res) )
+				.catch( err => console.log('error JSON', err) );
+			})
 			.catch( err => console.log('error POST', err) );
 		});
 		alert('Archivos en proceso de envío');	
 	});	
 }
 
-function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
+function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente, formulario){
 	//var id = 0;
 	if(idExistente == 0){
 		var indice = '';
@@ -504,7 +509,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 				indice = String(ultimo);
 			}
 			//console.log(indice);
-			var insertar = { _id: indice };
+			var insertar = { _id: indice, N_INSCRIP: formulario + '-' + indice };
 			inscrito = Object.assign( insertar, inscrito );
 			//console.log(inscrito);
 
@@ -567,7 +572,7 @@ function guardarComunesInscritos(formulario){
 		CIUDAD: document.getElementsByName('mpio' + formulario)[0].value,
 		COMUN: 130,*/
 		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
-		N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
+		//N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
 		//ENTIDAD: 'SECRETARÍA DE SALUD MUNICIPAL',
 		NOMBRE_P: document.getElementsByName('propietario' + formulario)[0].value,
 		TID_P: document.getElementsByName('tipoIdProp' + formulario)[0].value,
@@ -652,7 +657,7 @@ function guardarInscrito493(){
 
 	inscrito = Object.assign( inscrito, inscritoEsta, adicional );
 	
-	persistirInscrito(db493, dbNuevos493, inscrito, idExistente);
+	persistirInscrito(db493, dbNuevos493, inscrito, idExistente, '493');
 }
 
 function guardarInscrito444(){
@@ -676,7 +681,7 @@ function guardarInscrito444(){
 	
 	inscrito = Object.assign( inscrito, adicional );
 	
-	persistirInscrito(db444, dbNuevos444, inscrito, idExistente);
+	persistirInscrito(db444, dbNuevos444, inscrito, idExistente, '444');
 }
 
 function guardarInscrito569(){
@@ -700,39 +705,16 @@ function guardarInscrito569(){
 	
 	inscrito = Object.assign( inscrito, inscritoEsta, adicional );
 	
-	persistirInscrito(db569, dbNuevos569, inscrito, idExistente);
-}
-
-function calcularFechaPV(fecha){
-	var separada = fecha.split("-");
-	var mes = parseInt(separada[1]);
-	var dia = parseInt(separada[2]);
-	var mesPV = mes+1;
-	var fechaPV;
-
-	//console.log(dia);
-
-	if (mesPV == 2 && dia >= 28) {
-		diaPV = '28';
-	}else if((mesPV == 11 || mesPV == 4 || mesPV == 6 || mesPV == 9) && dia == 31){
-		diaPV = '30';
-	}else{
-		diaPV = separada[2];	
-	}
-	fechaPV = separada[0] + "-" + mesPV.toString() + "-" + diaPV;
-	//console.log(fechaPV);
-
-	return fechaPV;
+	persistirInscrito(db569, dbNuevos569, inscrito, idExistente, '569');
 }
 
 function guardarComunesEvaluados(formulario){
 	var fecha = document.getElementsByName('fecha' + formulario)[0].value;
-	var fechaPV = calcularFechaPV(fecha);
 
 	var evaluado = {
 		//Campos comunes a todos los formularios en general
 		FECHA: fecha,
-		ACTA: document.getElementsByName('acta' + formulario)[0].value,
+		//ACTA: document.getElementsByName('acta' + formulario)[0].value,
 		N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
 		DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
 		FAX: document.getElementsByName('fax' + formulario)[0].value,
@@ -811,7 +793,6 @@ function guardarComunesEvaluados(formulario){
 		FIRMA_F2: localStorage.getItem('firmaAut2'),
 		FIRMA_E1: localStorage.getItem('firmaIns1'),
 		FIRMA_E2: localStorage.getItem('firmaIns2'),
-		FPV: fechaPV,
 		GRABADO: 'S'
 	};
 	return evaluado;
@@ -835,7 +816,11 @@ function guardarEvaluadosEstablecimientos(formulario){
 	return evaluado;	
 }
 
-function persistirEvaluado(db, evaluado){
+function validarEvaluado(evaluado){
+	
+}
+
+function persistirEvaluado(db, evaluado, formulario){
 	var indice = '';
 	db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
@@ -849,7 +834,7 @@ function persistirEvaluado(db, evaluado){
 			indice = String(ultimo);
 		}
 		//console.log(indice);
-		var insertar = { _id: indice };
+		var insertar = { _id: indice, ACTA: formulario + '-' + indice };
 		evaluado = Object.assign( insertar, evaluado );
 		//console.log(evaluado);
 
@@ -992,8 +977,10 @@ function guardarEvaluacion(formulario){
 	}
 	
 	evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
-	
-	persistirEvaluado(db, evaluado);
+
+	validarInscrito(evaluado);
+	persistirEvaluado(db, evaluado, formulario);
+	location.reload();
 }
 
 function setColumnas(tr, registro, contador){
@@ -1038,5 +1025,19 @@ function mostrarEvaluados(formulario){
 		case '495':
 			traerEvaluados(db495);
 			break;
+	}
+	validarCambioTab();
+}
+
+function validarCambioTab(){
+	let listCheckboxes = document.getElementsByName('seleInscrito');
+	let arreglo = Array.from(listCheckboxes);
+	let check = arreglo.map( elemento => {
+		return elemento.checked; 
+	});	
+	let verificador = check.indexOf(true);
+	if (verificador == -1) {
+		alert('Recuerde que debe escoger un inscrito para poder continuar diligenciando este formulario');
+		location.reload();
 	}
 }
