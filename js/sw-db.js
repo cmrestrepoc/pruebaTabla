@@ -414,6 +414,27 @@ function cargarInscritos569(){
 	}).catch( err => console.log('Error: ', err) );
 }
 
+function fetchEvaluados(data){
+	if (verificarSesion()) {
+		var credenciales = JSON.parse(localStorage.getItem('identity'));
+		var data = 'nombreUsuario='+credenciales.usuario+'&&'
+					+'token='+credenciales.token+'&&' + data;
+		
+		return fetch('https://sisbenpro.com/public/evaluacionesTabla', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					},
+					mode: 'no-cors',
+					body: data
+				})
+				.then( res => res.json() )
+				.catch( err => console.log('Hubo problemas con la conexión a la base de datos. Intente una vez más o revise su conexión a internet '+err.json()) );
+	} else{
+		location.assign("./loginserver.html");
+	}
+}
+
 function cargarServidor(formulario){
 	let db;
 	//console.log(formulario);
@@ -431,11 +452,9 @@ function cargarServidor(formulario){
 	}
 
 	db.allDocs({include_docs: true, descending: true}).then ( doc => {
-		console.log('Estamos en el formulario:',formulario);
-		let contador = 0;
-		doc.rows.forEach( registro => {
-			let data = 'ACTA=' + registro.doc.ACTA + '&&' +
-						'formulario=' + formulario + '&&' +
+		doc.rows.forEach( async registro => {
+			let data = 'formulario='+formulario + '&&' +
+						'ACTA=' + registro.doc.ACTA + '&&' +
 						'N_INSCRIP=' + registro.doc.N_INSCRIP + '&&' +
 						'DIRECC=' + registro.doc.DIRECC + '&&' +
 						'FAX=' + registro.doc.FAX + '&&' +
@@ -471,25 +490,15 @@ function cargarServidor(formulario){
 						'FIRMA_F2=' + registro.doc.FIRMA_F2 + '&&' +
 						'FIRMA_E1=' + registro.doc.FIRMA_E1 + '&&' +
 						'FIRMA_E2=' + registro.doc.FIRMA_E2 + '&&' +
-						'CONCEPTO=' + registro.doc.CONCEPTO;
+						'CONCEPTO=' + registro.doc.CONCEPTO;			
 			
-			fetch('https://sisbenpro.com/public/evaluacionesTabla', {
-				method: 'POST',
-				headers: {
-					'Accept': '*/*',
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-				//mode: 'no-cors',
-				body: data
+			await fetchEvaluados(data)
+			.then( resJson => {
+				console.log(resJson.res);
+				alert('Archivos en proceso de envío');
 			})
-			.then( res => {
-				res.json() 
-				.then( jsonRes => console.log(jsonRes.res) )
-				.catch( err => console.log('error JSON', err) );
-			})
-			.catch( err => console.log('error POST', err) );
-		});
-		alert('Archivos en proceso de envío');	
+			.catch( err => console.log('Problema en el envío de archivos: ', err) );
+		});	
 	});	
 }
 
