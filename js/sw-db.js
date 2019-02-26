@@ -495,7 +495,9 @@ function cargarServidor(formulario){
 			.then( resJson => {
 				if(resJson.res){
 					console.log('Archivos en proceso de envío: ' + resJson.res);
-					return;
+					return resJson.res;
+				}else{
+					fetchEvaluados(data);
 				}
 			})
 			.catch( err => console.log('Problema en el envío de archivos: ', err) );
