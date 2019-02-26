@@ -425,11 +425,10 @@ function fetchEvaluados(data){
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					},
-					mode: 'no-cors',
 					body: data
 				})
 				.then( res => res.json() )
-				.catch( err => console.log('Hubo problemas con la conexión a la base de datos. Intente una vez más o revise su conexión a internet '+err.json()) );
+				.catch( err => console.log('Hubo problemas con la conexión a la base de datos. Intente una vez más o revise su conexión a internet ', err) );
 	} else{
 		location.assign("./loginserver.html");
 	}
@@ -443,7 +442,7 @@ function cargarServidor(formulario){
 			db = db440;
 			break;
 		case '479':
-			//console.log('Estamos dentro del 479');
+			console.log('Estamos dentro del 479');
 			db = db479;
 			break;
 		default:
@@ -452,7 +451,7 @@ function cargarServidor(formulario){
 	}
 
 	db.allDocs({include_docs: true, descending: true}).then ( doc => {
-		doc.rows.forEach( async registro => {
+		let array = doc.rows.map( async registro => {
 			let data = 'formulario='+formulario + '&&' +
 						'ACTA=' + registro.doc.ACTA + '&&' +
 						'N_INSCRIP=' + registro.doc.N_INSCRIP + '&&' +
@@ -475,8 +474,8 @@ function cargarServidor(formulario){
 						'CCUV=' + registro.doc.CCUV + '&&' +
 						'CUV=' + registro.doc.CUV + '&&' +
 						'UV_P=' + registro.doc.UV_P + '&&' +
-						'NMOTIVO=' + registro.doc.NMOTIVO + '&&' +
-						'MOTIVO=' + registro.doc.MOTIVO + '&&' +
+						'NMOTIVO=' + registro.doc.MOTIVO + '&&' +
+						'MOTIVO=' + registro.doc.NMOTIVO + '&&' +
 						'AUTORIZA=' + registro.doc.AUTORIZA + '&&' +
 						'P_CUMPL=' + registro.doc.P_CUMPL + '&&' +
 						'N_MUESTRAS=' + registro.doc.N_MUESTRAS + '&&' +
@@ -492,10 +491,12 @@ function cargarServidor(formulario){
 						'FIRMA_E2=' + registro.doc.FIRMA_E2 + '&&' +
 						'CONCEPTO=' + registro.doc.CONCEPTO;			
 			
-			await fetchEvaluados(data)
+			return await fetchEvaluados(data)
 			.then( resJson => {
-				console.log(resJson.res);
-				alert('Archivos en proceso de envío');
+				if(resJson.res){
+					console.log('Archivos en proceso de envío: ' + resJson.res);
+					return;
+				}
 			})
 			.catch( err => console.log('Problema en el envío de archivos: ', err) );
 		});	
@@ -538,7 +539,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente, formulario){
 			});					
 		});					
 	}else{
-		id = idExistente;
+		//id = idExistente;
 		var insertar;
 		dbBase.get(idExistente).then( doc => {
 			insertar = { 
@@ -865,10 +866,13 @@ function guardarEvaluacion(formulario){
 	switch(formulario){
 		case '440':
 			var tipocarne;
+			var adicional;
+			var tipoEsta = [];
+			
 			for (var i = 0; i < document.getElementsByName('tipoCarneExpende').length; i++){
 				tipocarne = document.getElementsByName('tipoCarneExpende')[i].checked ? document.getElementsByName('tipoCarneExpende')[i].value : console.log(i);
 			}
-			var adicional = {
+			adicional = {
 				TIPOCARNE: tipocarne,
 				OTRAS: document.getElementsByName('otrasEspecies')[0].value,
 				OTIPOPRO: document.getElementsByName('otrosProductos')[0].value,
@@ -886,7 +890,7 @@ function guardarEvaluacion(formulario){
 			db = db440;
 			break;
 		case '474':
-			var adicional = {
+			adicional = {
 				E14: document.getElementsByName('evaluacion_1')[3].value,
 				H14: document.getElementsByName('hallazgos_1_4')[0].value,
 				E23: document.getElementsByName('evaluacion_2')[2].value,
@@ -905,12 +909,12 @@ function guardarEvaluacion(formulario){
 			db = db474;
 			break;
 		case '479':
-			var tipoEsta = [];
+			tipoEsta = [];
 			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
-			};
+			}
 			console.log(tipoEsta);
-			var adicional = {
+			adicional = {
 				ACTIVIDAD: tipoEsta,
 				CUAL: document.getElementsByName('cualEstab')[0].value,
 				E14: document.getElementsByName('evaluacion_1')[3].value,
@@ -935,12 +939,12 @@ function guardarEvaluacion(formulario){
 			db = db479;
 			break;
 		case '480':
-			var tipoEsta = [];
+			tipoEsta = [];
 			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 			};
 			console.log(tipoEsta);
-			var adicional = {
+			adicional = {
 				ACTIVIDAD: tipoEsta,
 				E33: document.getElementsByName('evaluacion_3')[2].value,
 				H33: document.getElementsByName('hallazgos_3_3')[0].value,
@@ -954,11 +958,11 @@ function guardarEvaluacion(formulario){
 			db = db480;
 			break;
 		case '495':
-			var tipoEsta = [];
+			tipoEsta = [];
 			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
-			};
-			var adicional = {
+			}
+			adicional = {
 				ACTIVIDAD: tipoEsta,
 				E14: document.getElementsByName('evaluacion_1')[3].value,
 				H14: document.getElementsByName('hallazgos_1_4')[0].value,
@@ -987,9 +991,8 @@ function guardarEvaluacion(formulario){
 	
 	evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
 
-	validarInscrito(evaluado);
 	persistirEvaluado(db, evaluado, formulario);
-	location.reload();
+	//location.reload();
 }
 
 function setColumnas(tr, registro, contador){
