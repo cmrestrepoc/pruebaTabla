@@ -414,21 +414,60 @@ function cargarInscritos569(){
 	}).catch( err => console.log('Error: ', err) );
 }
 
-function fetchEvaluados(data){
+function fetchEvaluados(doc, formulario){
+	let dataInicial = 'formulario='+formulario + '&&' +
+						'ACTA=' + doc.ACTA + '&&' +
+						'N_INSCRIP=' + doc.N_INSCRIP + '&&' +
+						'DIRECC=' + doc.DIRECC + '&&' +
+						'FAX=' + doc.FAX + '&&' +
+						'TELS=' + doc.TELS + '&&' +
+						'CORREO=' + doc.CORREO + '&&' +
+						'NOMBRE_P=' + doc.NOMBRE_P + '&&' +
+						'TID_P=' + doc.TID_P + '&&' +
+						'DOC_P=' + doc.DOC_P + '&&' +
+						'NOMBRE_RL=' + doc.NOMBRE_RL + '&&' +
+						'TID_RL=' + doc.TID_RL + '&&' +
+						'DOC_RL=' + doc.DOC_RL + '&&' +
+						'DIR_NOT=' + doc.DIR_NOT + '&&' +
+						'DPTO_NOTI=' + doc.DPTO_NOTI + '&&' +
+						'MPIO_NOTI=' + doc.MPIO_NOTI + '&&' +
+						'HORARIOS=' + doc.HORARIOS + '&&' +
+						'NUTRA=' + doc.NUTRA + '&&' +
+						'F_UV=' + doc.F_UV + '&&' +
+						'CCUV=' + doc.CCUV + '&&' +
+						'CUV=' + doc.CUV + '&&' +
+						'UV_P=' + doc.UV_P + '&&' +
+						'NMOTIVO=' + doc.NMOTIVO + '&&' +
+						'MOTIVO=' + doc.MOTIVO + '&&' +
+						'AUTORIZA=' + doc.AUTORIZA + '&&' +
+						'P_CUMPL=' + doc.P_CUMPL + '&&' +
+						'N_MUESTRAS=' + doc.N_MUESTRAS + '&&' +
+						'N_ACTAS=' + doc.N_ACTAS + '&&' +
+						'AMS=' + doc.AMS + '&&' +
+						'DETA_MS=' + doc.DETA_MS + '&&' +
+						'NOCO=' + doc.NOCO + '&&' +
+						'FECHA=' + doc.FECHA + '&&' +
+						'P_CUMPL=' + doc.P_CUMPL + '&&' +
+						'FIRMA_F1=' + doc.FIRMA_F1 + '&&' +
+						'FIRMA_F2=' + doc.FIRMA_F2 + '&&' +
+						'FIRMA_E1=' + doc.FIRMA_E1 + '&&' +
+						'FIRMA_E2=' + doc.FIRMA_E2 + '&&' +
+						'CONCEPTO=' + doc.CONCEPTO;
 	if (verificarSesion()) {
 		var credenciales = JSON.parse(localStorage.getItem('identity'));
 		var data = 'nombreUsuario='+credenciales.usuario+'&&'
-					+'token='+credenciales.token+'&&' + data;
+					+'token='+credenciales.token+'&&' + dataInicial;
 		
-		return fetch('https://sisbenpro.com/public/evaluacionesTabla', {
+		return new Promise((resolve, reject) => {
+			fetch('https://sisbenpro.com/public/evaluacionesTabla', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
 					},
 					body: data
-				})
-				.then( res => res.json() )
-				.catch( err => console.log('Hubo problemas con la conexión a la base de datos. Intente una vez más o revise su conexión a internet ', err) );
+			}).then( res => resolve(res) )
+			.catch( () => reject(doc._id) );
+		});		
 	} else{
 		location.assign("./loginserver.html");
 	}
@@ -451,57 +490,16 @@ function cargarServidor(formulario){
 	}
 
 	db.allDocs({include_docs: true, descending: true}).then ( doc => {
-		let array = doc.rows.map( async registro => {
-			let data = 'formulario='+formulario + '&&' +
-						'ACTA=' + registro.doc.ACTA + '&&' +
-						'N_INSCRIP=' + registro.doc.N_INSCRIP + '&&' +
-						'DIRECC=' + registro.doc.DIRECC + '&&' +
-						'FAX=' + registro.doc.FAX + '&&' +
-						'TELS=' + registro.doc.TELS + '&&' +
-						'CORREO=' + registro.doc.CORREO + '&&' +
-						'NOMBRE_P=' + registro.doc.NOMBRE_P + '&&' +
-						'TID_P=' + registro.doc.TID_P + '&&' +
-						'DOC_P=' + registro.doc.DOC_P + '&&' +
-						'NOMBRE_RL=' + registro.doc.NOMBRE_RL + '&&' +
-						'TID_RL=' + registro.doc.TID_RL + '&&' +
-						'DOC_RL=' + registro.doc.DOC_RL + '&&' +
-						'DIR_NOT=' + registro.doc.DIR_NOT + '&&' +
-						'DPTO_NOTI=' + registro.doc.DPTO_NOTI + '&&' +
-						'MPIO_NOTI=' + registro.doc.MPIO_NOTI + '&&' +
-						'HORARIOS=' + registro.doc.HORARIOS + '&&' +
-						'NUTRA=' + registro.doc.NUTRA + '&&' +
-						'F_UV=' + registro.doc.F_UV + '&&' +
-						'CCUV=' + registro.doc.CCUV + '&&' +
-						'CUV=' + registro.doc.CUV + '&&' +
-						'UV_P=' + registro.doc.UV_P + '&&' +
-						'NMOTIVO=' + registro.doc.MOTIVO + '&&' +
-						'MOTIVO=' + registro.doc.NMOTIVO + '&&' +
-						'AUTORIZA=' + registro.doc.AUTORIZA + '&&' +
-						'P_CUMPL=' + registro.doc.P_CUMPL + '&&' +
-						'N_MUESTRAS=' + registro.doc.N_MUESTRAS + '&&' +
-						'N_ACTAS=' + registro.doc.N_ACTAS + '&&' +
-						'AMS=' + registro.doc.AMS + '&&' +
-						'DETA_MS=' + registro.doc.DETA_MS + '&&' +
-						'NOCO=' + registro.doc.NOCO + '&&' +
-						'FECHA=' + registro.doc.FECHA + '&&' +
-						'P_CUMPL=' + registro.doc.P_CUMPL + '&&' +
-						'FIRMA_F1=' + registro.doc.FIRMA_F1 + '&&' +
-						'FIRMA_F2=' + registro.doc.FIRMA_F2 + '&&' +
-						'FIRMA_E1=' + registro.doc.FIRMA_E1 + '&&' +
-						'FIRMA_E2=' + registro.doc.FIRMA_E2 + '&&' +
-						'CONCEPTO=' + registro.doc.CONCEPTO;			
-			
-			return await fetchEvaluados(data)
-			.then( resJson => {
-				if(resJson.res){
-					console.log('Archivos en proceso de envío: ' + resJson.res);
-					return resJson.res;
-				}else{
-					fetchEvaluados(data);
-				}
-			})
-			.catch( err => console.log('Problema en el envío de archivos: ', err) );
-		});	
+		//console.log(doc.rows.length);
+		console.log('Cantidad de registros en indexDB para este formulario: ', doc.rows.length);
+		let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario));
+		console.log(promesas);
+		Promise
+			.all(promesas)
+			.then( resJson => console.log('Respuesta del Servidor: ' + resJson.res) )
+			.catch( id => {
+				console.log('Problema en el envío del registro: ', id);
+			});
 	});	
 }
 
@@ -1040,7 +1038,7 @@ function mostrarEvaluados(formulario){
 			traerEvaluados(db495);
 			break;
 	}
-	validarCambioTab();
+	//validarCambioTab();
 }
 
 function validarCambioTab(){
