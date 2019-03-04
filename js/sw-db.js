@@ -497,9 +497,7 @@ function cargarServidor(formulario){
 		Promise
 			.all(promesas)
 			.then( resJson => console.log('Respuesta del Servidor: ' + resJson.res) )
-			.catch( id => {
-				console.log('Problema en el envío del registro: ', id);
-			});
+			.catch( id => console.log('Problema en el envío del registro: ', id));
 	});	
 }
 

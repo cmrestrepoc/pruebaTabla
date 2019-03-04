@@ -108,6 +108,36 @@ function consolidarPuntaje(con, puntaje){
 	document.getElementsByName(puntaje)[0].value = puntajeTotal;
 }
 
+function crearInput(name){
+	let input = document.createElement('input');
+	input.type = 'text';
+	input.className = 'form-control';
+	input.setAttribute('name', name);
+
+	return input; 
+}
+
+function crearColumna(name){
+	let td = document.createElement('td');
+	td.appendChild(crearInput(name));
+	return td;
+}
+
+function crearMuestra(){
+	let tbody = document.getElementById('muestras');
+	let tr = document.createElement('tr');
+	
+	tr.appendChild(crearColumna('Orden'));
+	tr.appendChild(crearColumna('Um'));
+	tr.appendChild(crearColumna('Contenido'));
+	tr.appendChild(crearColumna('Temperatura'));
+	tr.appendChild(crearColumna('TipoEnvase'));
+	tr.appendChild(crearColumna('LoteFechaV'));
+	tr.appendChild(crearColumna('RegSanit'));
+
+	tbody.appendChild(tr);
+}
+
 function loginServer(){
 	let user = document.getElementsByName('nomUsuario')[0].value;
 	let clave = document.getElementsByName('password')[0].value;
