@@ -126,6 +126,8 @@ function crearColumna(name){
 function crearMuestra(){
 	let tbody = document.getElementById('muestras');
 	let tr = document.createElement('tr');
+	//let listado = document.getElementById('listadoMuestras');
+	//let hr = document.createElement('hr');
 	
 	tr.appendChild(crearColumna('Orden'));
 	tr.appendChild(crearColumna('Um'));
@@ -136,6 +138,7 @@ function crearMuestra(){
 	tr.appendChild(crearColumna('RegSanit'));
 
 	tbody.appendChild(tr);
+	//listado.appendChild(hr);
 }
 
 function loginServer(){
