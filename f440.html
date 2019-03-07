@@ -62,8 +62,8 @@
 						<!-- Nav tabs -->
 						<ul id="misTabs" class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#tabInscritos569" aria-controls="tabInscritos569" role="tab" data-toggle="tab">Inscritos</a></li>
-							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab()">Datos del Establecimiento</a></li>
-							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab" onclick="validarCambioTab()">Evaluación</a></li>
+							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab(0)">Datos del Establecimiento</a></li>
+							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab" onclick="validarCambioTab(1)">Evaluación</a></li>
 							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados('440')">Observaciones - Notificaciones</a></li>
 						</ul>
 
@@ -116,11 +116,13 @@
 								</div><!-- Fin del form-group -->
 							</div><!-- Fin del tab-pane -->
 
-							<div role="tabpanel" class="tab-pane fade" id="datos" aria-labelledby="datos-tab">								
+							<div role="tabpanel" class="tab-pane fade" id="datos" aria-labelledby="datos-tab">				
+								
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
+
 								<div class="form-group">
-									<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
-										<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
-									</div><br>
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Ciudad:</label>
 										<input type="text" class="form-control" name="ciudad440" value="CANDELARIA">

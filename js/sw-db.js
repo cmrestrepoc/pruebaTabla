@@ -1039,21 +1039,27 @@ function mostrarEvaluados(formulario){
 	switch(formulario){
 		case '440':
 			traerEvaluados(db440);
+			validarCambioTab(2);
 			break;
 		case '474':
 			traerEvaluados(db474);
+			validarCambioTab(2);
 			break;
 		case '479':
 			traerEvaluados(db479);
+			validarCambioTab(2);
 			break;
 		case '480':
 			traerEvaluados(db480);
+			validarCambioTab(2);
 			break;
 		case '495':
 			traerEvaluados(db495);
+			validarCambioTab(2);
 			break;
+		case '442':
+			validarCambioTab(3);
 	}
-	validarCambioTab(2);
 }
 
 function validarCambioTab(i){

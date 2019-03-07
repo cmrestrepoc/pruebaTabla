@@ -62,9 +62,9 @@
 						<!-- Nav tabs -->
 						<ul id="misTabs" class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#tabInscritos569" aria-controls="tabInscritos569" role="tab" data-toggle="tab">Inscritos</a></li>
-							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab()">Datos del Establecimiento</a></li>
-							<li role="presentation"><a href="#evaluacionPrt1" aria-controls="evaluacionPrt1" role="tab" data-toggle="tab" onclick="validarCambioTab()">Evaluación Parte 1</a></li>
-							<li role="presentation"><a href="#evaluacionPrt2" aria-controls="evaluacionPrt2" role="tab" data-toggle="tab" onclick="validarCambioTab()">Evaluación Parte 2</a></li>
+							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab(0)">Datos del Establecimiento</a></li>
+							<li role="presentation"><a href="#evaluacionPrt1" aria-controls="evaluacionPrt1" role="tab" data-toggle="tab" onclick="validarCambioTab(1)">Evaluación Parte 1</a></li>
+							<li role="presentation"><a href="#evaluacionPrt2" aria-controls="evaluacionPrt2" role="tab" data-toggle="tab" onclick="validarCambioTab(2)">Evaluación Parte 2</a></li>
 							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados('442')">Observaciones - Notificaciones</a></li>
 						</ul>
 
@@ -890,6 +890,10 @@
 							</div>
 
 							<div role="tabpanel" aria-labelledby="observacion-tab" class="tab-pane fade" id="evaluacionPrt2">
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
+
 								<div class="col-md-6"><br>
 									<div class="form-group" style="border-style:ridge; padding:3px">
 										<table class="table" style="font-size:12px">
