@@ -63,17 +63,16 @@
 						<!-- Nav tabs -->
 						<ul id="misTabs" class="nav nav-tabs" role="tablist">
 							<li role="presentation" class="active"><a href="#inscritos493" aria-controls="inscritos493" role="tab" data-toggle="tab">Inscritos</a></li>
-							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab()">Datos del Establecimiento</a></li>
-							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab" onclick="validarCambioTab()">Evaluación</a></li>
-							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="validarCambioTab()">Observaciones - Notificaciones</a></li>
-							<li role="presentation"><a href="#evaluados" aria-controls="evaluados" role="tab" data-toggle="tab" onclick="mostrarEvaluados('479')">Evaluados</a></li>
+							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab(0)">Datos del Establecimiento</a></li>
+							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab" onclick="validarCambioTab(1)">Evaluación</a></li>
+							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados('479')">Observaciones - Notificaciones</a></li>
 						</ul>
 
 						<!-- Tab panes -->
 						<div class="tab-content" id="miTabContent">
 							<div role="tabpanel" class="tab-pane fade active in" id="inscritos493" aria-labelledby="inscritos493-tab">
 								<br>
-								<div class="form-group">                    
+								<div class="form-group">                  
 			                        <div class="col-md-3 col-md-offset-2">
 			                            <a id="todosInscritos" onclick="cargarInscritos493()" class="btn btn-primary">
 			                                Cargar inscritos desde servidor
@@ -90,8 +89,8 @@
 			                            </a>
 			                        </div>
 			                    </div><!-- Fin del form-group -->
-
-			                    <br><br> 
+			                    
+			                    <br><br>
 
 								<script type="text/javascript">mostrarInscritos493('479');</script>
 	                    		<div class="form-group">
@@ -119,6 +118,9 @@
 							</div><!-- Fin del tab-pane -->
 
 							<div role="tabpanel" class="tab-pane fade" id="datos" aria-labelledby="datos-tab">								
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
 								<div class="form-group">
 									<div class="col-md-2">
 										<label class="col-md-12 control-label">Ciudad:</label>
@@ -533,8 +535,11 @@
 
 							<div role="tabpanel" aria-labelledby="evaluacion-tab" class="tab-pane fade" id="evaluacion">
 
-								<br>
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
 
+								<br>
 								<div class="col-md-12">
 									<div class="panel panel-default">
 										<div class="panel-heading">
@@ -994,6 +999,11 @@
 							</div><!-- Fin del tab-pane -->
 
 							<div role="tabpanel" aria-labelledby="observacion-tab" class="tab-pane fade" id="observaciones">
+								
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
+
 								<div class="form-group">
 									<br><label class="control-label col-md-12">VI. OBSERVACIONES</label><br><br>
 
@@ -1093,9 +1103,7 @@
 			                       	</div>		                       
 			                    </div>
 
-			                </div><!-- Fin del tab-pane -->
-
-			                <div role="tabpanel" aria-labelledby="evaluados-tab" class="tab-pane fade" id="evaluados">
+			                    <br><br>
 
 			                    <div class="form-group">
 			                    	<div class="panel panel-default">
@@ -1119,7 +1127,7 @@
 									
 								</div><!-- Fin del form-group -->
 
-							</div><!-- Fin del tab-pane -->
+			                </div><!-- Fin del tab-pane -->
 
 						</div><!-- Fin del tab-content -->						
 

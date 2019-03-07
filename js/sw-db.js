@@ -148,6 +148,11 @@ function escogerInscrito(registro, formulario){
 
 	}else{
 		// Aquí se puede introducir un método para calcular automáticamente un número de acta
+		let alerta = document.getElementsByName('alertaInscrito');
+		let arreglo = Array.from(alerta); //en este caso alerta es un iterable pero no un arreglo, hay que convertirlo primero
+		let arr = arreglo.map( item => {
+			item.style.display = "none";
+		});
 		console.log('Debería estar en ' + formulario);
 		document.getElementsByName('entidad' + formulario).value = registro.ENTIDAD;
 	}
@@ -262,7 +267,11 @@ function crearTabla(doc, idBody, idTabla, formulario, formularioActual){
 
 function mostrarInscritos493(formulario){
 	db493.allDocs({include_docs: true, descending: true}).then ( doc => {
-		crearTabla(doc, 'inscritos', '#tablaInscritos', '493', formulario);
+		if(doc.length > 0){
+			crearTabla(doc, 'inscritos', '#tablaInscritos', '493', formulario);
+		}else{
+			return;
+		}
 	});
 
 	/*dbNuevos493.allDocs({include_docs: true, descending: true}).then ( doc => {
@@ -272,13 +281,21 @@ function mostrarInscritos493(formulario){
 
 function mostrarInscritos569(formulario){
 	db569.allDocs({include_docs: true, descending: true}).then ( doc => {
-		crearTabla(doc, 'inscritos569', '#tablaInscritos569', '569', formulario);
+		if(doc.length > 0){
+			crearTabla(doc, 'inscritos569', '#tablaInscritos569', '569', formulario);
+		}else{
+			return;
+		}
 	});
 }
 
 function mostrarInscritos444(formulario){
 	db444.allDocs({include_docs: true, descending: true}).then ( doc => {
-		crearTabla(doc, 'inscritos444', '#tablaInscritos444', '444', formulario);
+		if(doc.length > 0){
+			crearTabla(doc, 'inscritos444', '#tablaInscritos444', '444', formulario);	
+		}else{
+			return;
+		}
 	});
 }
 
@@ -824,9 +841,9 @@ function guardarEvaluadosEstablecimientos(formulario){
 	return evaluado;	
 }
 
-function validarEvaluado(evaluado){
+/*function validarEvaluado(evaluado){
 	
-}
+}*/
 
 function persistirEvaluado(db, evaluado, formulario){
 	var indice = '';
@@ -1036,10 +1053,10 @@ function mostrarEvaluados(formulario){
 			traerEvaluados(db495);
 			break;
 	}
-	//validarCambioTab();
+	validarCambioTab(2);
 }
 
-function validarCambioTab(){
+function validarCambioTab(i){
 	let listCheckboxes = document.getElementsByName('seleInscrito');
 	let arreglo = Array.from(listCheckboxes);
 	let check = arreglo.map( elemento => {
@@ -1047,7 +1064,6 @@ function validarCambioTab(){
 	});	
 	let verificador = check.indexOf(true);
 	if (verificador == -1) {
-		alert('Recuerde que debe escoger un inscrito para poder continuar diligenciando este formulario');
-		location.reload();
+		document.getElementsByName('alertaInscrito')[i].style.display = "block";
 	}
 }
