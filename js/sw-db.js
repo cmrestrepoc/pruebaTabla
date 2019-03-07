@@ -262,16 +262,17 @@ function crearTabla(doc, idBody, idTabla, formulario, formularioActual){
 			tbody.appendChild(tr);
 		});
 		$(idTabla).DataTable();
-		//return tbody;
+		return tbody;
 }
 
 function mostrarInscritos493(formulario){
 	db493.allDocs({include_docs: true, descending: true}).then ( doc => {
-		if(doc.length > 0){
+		//console.log(doc.length);
+		//if(doc.length > 0){
 			crearTabla(doc, 'inscritos', '#tablaInscritos', '493', formulario);
-		}else{
+		//}else{
 			return;
-		}
+		//}
 	});
 
 	/*dbNuevos493.allDocs({include_docs: true, descending: true}).then ( doc => {
