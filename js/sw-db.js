@@ -282,21 +282,21 @@ function mostrarInscritos493(formulario){
 
 function mostrarInscritos569(formulario){
 	db569.allDocs({include_docs: true, descending: true}).then ( doc => {
-		if(doc.length > 0){
+		//if(doc.length > 0){
 			crearTabla(doc, 'inscritos569', '#tablaInscritos569', '569', formulario);
-		}else{
-			return;
-		}
+		//}else{
+		//	return;
+		//}
 	});
 }
 
 function mostrarInscritos444(formulario){
 	db444.allDocs({include_docs: true, descending: true}).then ( doc => {
-		if(doc.length > 0){
+		//if(doc.length > 0){
 			crearTabla(doc, 'inscritos444', '#tablaInscritos444', '444', formulario);	
-		}else{
-			return;
-		}
+		//}else{
+		//	return;
+		//}
 	});
 }
 
