@@ -991,10 +991,17 @@ function guardarEvaluacion(formulario){
 			db = db495;
 			break;
 	}
+	if(localStorage.getItem('evaluado') && (localStorage.getItem('firmaAut1') || localStorage.getItem('firmaAut2') || localStorage.getItem('firmaIns1') || localStorage.getItem('firmaIns2'))){
+		let eva = JSON.parse(localStorage.getItem('evaluado'));
+		persistirEvaluado(db, eva, formulario);
+		localStorage.removeItem('evaluado','firmaIns1','firmaIns2','firmaAut1','firmaAut2');
+	}else{
+		evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
+		localStorage.setItem('evaluado', JSON.stringify(evaluado));
+		firmaEvaluacion();	
+	}
 	
-	evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
-
-	persistirEvaluado(db, evaluado, formulario);
+	//persistirEvaluado(db, evaluado, formulario);
 	//location.reload();
 }
 
