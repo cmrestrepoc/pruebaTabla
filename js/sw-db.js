@@ -271,7 +271,7 @@ function mostrarInscritos493(formulario){
 		//if(doc.length > 0){
 			crearTabla(doc, 'inscritos', '#tablaInscritos', '493', formulario);
 		//}else{
-			return;
+			//return;
 		//}
 	});
 
