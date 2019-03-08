@@ -267,12 +267,7 @@ function crearTabla(doc, idBody, idTabla, formulario, formularioActual){
 
 function mostrarInscritos493(formulario){
 	db493.allDocs({include_docs: true, descending: true}).then ( doc => {
-		//console.log(doc.length);
-		//if(doc.length > 0){
-			crearTabla(doc, 'inscritos', '#tablaInscritos', '493', formulario);
-		//}else{
-			//return;
-		//}
+		crearTabla(doc, 'inscritos', '#tablaInscritos', '493', formulario);
 	});
 
 	/*dbNuevos493.allDocs({include_docs: true, descending: true}).then ( doc => {
@@ -282,21 +277,13 @@ function mostrarInscritos493(formulario){
 
 function mostrarInscritos569(formulario){
 	db569.allDocs({include_docs: true, descending: true}).then ( doc => {
-		//if(doc.length > 0){
-			crearTabla(doc, 'inscritos569', '#tablaInscritos569', '569', formulario);
-		//}else{
-		//	return;
-		//}
+		crearTabla(doc, 'inscritos569', '#tablaInscritos569', '569', formulario);
 	});
 }
 
 function mostrarInscritos444(formulario){
 	db444.allDocs({include_docs: true, descending: true}).then ( doc => {
-		//if(doc.length > 0){
-			crearTabla(doc, 'inscritos444', '#tablaInscritos444', '444', formulario);	
-		//}else{
-		//	return;
-		//}
+		crearTabla(doc, 'inscritos444', '#tablaInscritos444', '444', formulario);
 	});
 }
 
