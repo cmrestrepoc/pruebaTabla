@@ -81,22 +81,21 @@ function escogerInscrito(registro, formulario){
 	document.getElementsByName('mpioNotif' + formulario)[0].value = registro.MPIO_NOT;
 	document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
 	
-	if(formulario == '444'){
-		console.log('Estamos en 444');
-		document.getElementsByName('inscripcionRep444')[0].value = registro.N_INSCRIP;
-		document.getElementsByName('fecha444_2')[0].value = registro.FECHA;
-		document.getElementsByName('funcionario444')[0].value = registro.NOMBRE_F1;
-		document.getElementsByName('marca444')[0].value = registro.MARCAV;
-		document.getElementsByName('modelo444')[0].value = registro.MODELOV;
-		document.getElementsByName('placa444')[0].value = registro.PLACA;
-		document.getElementsByName('furgon444')[0].value = registro.FURGON;
-		document.getElementsByName('rmque444')[0].value = registro.REMOLQUE;
-		document.getElementsByName('placaRemolque444')[0].value = registro.PLACAREM;
-		document.getElementsByName('srmque444')[0].value = registro.SEMIREM;
-		document.getElementsByName('placaSrmque444')[0].value = registro.PLACASEMI;
-		document.getElementsByName('isotermo444')[0].value = registro.ISOTERMO;
-		document.getElementsByName('ufrio444')[0].value = registro.U_UFRIO;
-		document.getElementsByName('producto444')[0].value = registro.PRODUCTO;
+	if(formulario == '444' || formulario == '472' || formulario == '441'){
+		console.log('Inscritos 444');
+		document.getElementsByName('marca' + formulario)[0].value = registro.MARCAV;
+		document.getElementsByName('modelo' + formulario)[0].value = registro.MODELOV;
+		document.getElementsByName('placa' + formulario)[0].value = registro.PLACA;
+		document.getElementsByName('isotermo' + formulario)[0].value = registro.ISOTERMO;
+		document.getElementsByName('ufrio' + formulario)[0].value = registro.U_UFRIO;
+		document.getElementsByName('producto' + formulario)[0].value = registro.PRODUCTO;
+		if (formulario == '444' || formulario == '441') {
+			document.getElementsByName('furgon' + formulario)[0].value = registro.FURGON;
+			document.getElementsByName('rmque' + formulario)[0].value = registro.REMOLQUE;
+			document.getElementsByName('placaRemolque' + formulario)[0].value = registro.PLACAREM;
+			document.getElementsByName('srmque' + formulario)[0].value = registro.SEMIREM;
+			document.getElementsByName('placaSrmque' + formulario)[0].value = registro.PLACASEMI;	
+		}
 	}else{
 		document.getElementsByName('dirNotif' + formulario)[0].value = registro.DIR_NOT;
 		document.getElementsByName('nombreComercial' + formulario)[0].value = registro.NOCO;
@@ -144,6 +143,11 @@ function escogerInscrito(registro, formulario){
 		if(!(formulario == '444')){
 			document.getElementsByName('funcUltVisita' + formulario)[0].value = registro.DIR_NOT_E;
 			document.getElementsByName('visitado' + formulario)[0].value = registro.VISITADO;
+		}else{
+			document.getElementsByName('inscripcionRep444')[0].value = registro.N_INSCRIP;
+			document.getElementsByName('fecha444_2')[0].value = registro.FECHA;
+			document.getElementsByName('funcionario444')[0].value = registro.NOMBRE_F1;
+		
 		}
 
 	}else{
@@ -994,7 +998,11 @@ function guardarEvaluacion(formulario){
 	if(localStorage.getItem('evaluado') && (localStorage.getItem('firmaAut1') || localStorage.getItem('firmaAut2') || localStorage.getItem('firmaIns1') || localStorage.getItem('firmaIns2'))){
 		let eva = JSON.parse(localStorage.getItem('evaluado'));
 		persistirEvaluado(db, eva, formulario);
-		localStorage.removeItem('evaluado','firmaIns1','firmaIns2','firmaAut1','firmaAut2');
+		localStorage.removeItem('evaluado');
+		localStorage.removeItem('firmaAut1');
+		localStorage.removeItem('firmaAut2');
+		localStorage.removeItem('firmaIns1');
+		localStorage.removeItem('firmaIns2');
 	}else{
 		evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
 		localStorage.setItem('evaluado', JSON.stringify(evaluado));
