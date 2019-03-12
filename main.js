@@ -145,7 +145,7 @@ function loginServer(){
 	let user = document.getElementsByName('nomUsuario')[0].value;
 	let clave = document.getElementsByName('password')[0].value;
 
-	let data = 'nombreUsuario='+user+'&&clave='+clave;
+	let data = 'nombreUsuario='+user+'&clave='+clave;
 
 	let identity = {
 		usuario: user,

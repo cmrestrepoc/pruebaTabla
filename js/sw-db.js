@@ -164,8 +164,8 @@ function escogerInscrito(registro, formulario){
 		let arreglo = Array.from(alerta); //en este caso alerta es un iterable pero no un arreglo, hay que convertirlo primero
 		let arr = arreglo.map( item => {
 			item.style.display = "none";
+			return item;
 		});
-		console.log('Debería estar en ' + formulario);
 		document.getElementsByName('entidad' + formulario).value = registro.ENTIDAD;
 	}
 
@@ -181,13 +181,13 @@ function escogerInscrito(registro, formulario){
 				var actividad = [];
 				for (var i = 0; i < document.getElementsByName('actividad' + formulario).length; i++) {
 					actividad.push(document.getElementsByName('actividad' + formulario)[i].value);
-				};
+				}
 
 				var mapActividad = new Map();
 				var j = 0;
 				// El siguiente for busca si la key está en el array, busca por el key. Con forEach 
 				//hay que cambiar el orden
-				for (valor in registro.ACTIVIDAD){
+				for (let valor in registro.ACTIVIDAD){
 					mapActividad.set(registro.ACTIVIDAD[valor],valor);
 					j++;
 				}
@@ -351,15 +351,15 @@ function cerrarSesionServidor(){
 function verificarSesion(){
 	var identidad = localStorage.getItem('identity');
 	console.log(identidad);
-	return bool = identidad != undefined ? true: false;
+	return identidad != undefined ? true: false;
 }
 
 function fetchInscritos(formulario){
 	console.log(verificarSesion());
 	if (verificarSesion()) {
 		var credenciales = JSON.parse(localStorage.getItem('identity'));
-		var data = 'nombreUsuario='+credenciales.usuario+'&&'
-					+'token='+credenciales.token+'&&'
+		var data = 'nombreUsuario='+credenciales.usuario+'&'
+					+'token='+credenciales.token+'&'
 					+'formulario='+formulario;
 		console.log('Estamos en el formulario: ', formulario);
 		return fetch('https://sisbenpro.com/public/inscritosVisual', {
@@ -432,48 +432,48 @@ function cargarInscritos569(){
 }
 
 function fetchEvaluados(doc, formulario){
-	let dataInicial = 'formulario='+formulario + '&&' +
-						'ACTA=' + doc.ACTA + '&&' +
-						'N_INSCRIP=' + doc.N_INSCRIP + '&&' +
-						'DIRECC=' + doc.DIRECC + '&&' +
-						'FAX=' + doc.FAX + '&&' +
-						'TELS=' + doc.TELS + '&&' +
-						'CORREO=' + doc.CORREO + '&&' +
-						'NOMBRE_P=' + doc.NOMBRE_P + '&&' +
-						'TID_P=' + doc.TID_P + '&&' +
-						'DOC_P=' + doc.DOC_P + '&&' +
-						'NOMBRE_RL=' + doc.NOMBRE_RL + '&&' +
-						'TID_RL=' + doc.TID_RL + '&&' +
-						'DOC_RL=' + doc.DOC_RL + '&&' +
-						'DIR_NOT=' + doc.DIR_NOT + '&&' +
-						'DPTO_NOTI=' + doc.DPTO_NOTI + '&&' +
-						'MPIO_NOTI=' + doc.MPIO_NOTI + '&&' +
-						'HORARIOS=' + doc.HORARIOS + '&&' +
-						'NUTRA=' + doc.NUTRA + '&&' +
-						'F_UV=' + doc.F_UV + '&&' +
-						'CCUV=' + doc.CCUV + '&&' +
-						'CUV=' + doc.CUV + '&&' +
-						'UV_P=' + doc.UV_P + '&&' +
-						'NMOTIVO=' + doc.NMOTIVO + '&&' +
-						'MOTIVO=' + doc.MOTIVO + '&&' +
-						'AUTORIZA=' + doc.AUTORIZA + '&&' +
-						'P_CUMPL=' + doc.P_CUMPL + '&&' +
-						'N_MUESTRAS=' + doc.N_MUESTRAS + '&&' +
-						'N_ACTAS=' + doc.N_ACTAS + '&&' +
-						'AMS=' + doc.AMS + '&&' +
-						'DETA_MS=' + doc.DETA_MS + '&&' +
-						'NOCO=' + doc.NOCO + '&&' +
-						'FECHA=' + doc.FECHA + '&&' +
-						'P_CUMPL=' + doc.P_CUMPL + '&&' +
-						'FIRMA_F1=' + doc.FIRMA_F1 + '&&' +
-						'FIRMA_F2=' + doc.FIRMA_F2 + '&&' +
-						'FIRMA_E1=' + doc.FIRMA_E1 + '&&' +
-						'FIRMA_E2=' + doc.FIRMA_E2 + '&&' +
+	let dataInicial = 'formulario='+formulario + '&' +
+						'ACTA=' + doc.ACTA + '&' +
+						'N_INSCRIP=' + doc.N_INSCRIP + '&' +
+						'DIRECC=' + doc.DIRECC + '&' +
+						'FAX=' + doc.FAX + '&' +
+						'TELS=' + doc.TELS + '&' +
+						'CORREO=' + doc.CORREO + '&' +
+						'NOMBRE_P=' + doc.NOMBRE_P + '&' +
+						'TID_P=' + doc.TID_P + '&' +
+						'DOC_P=' + doc.DOC_P + '&' +
+						'NOMBRE_RL=' + doc.NOMBRE_RL + '&' +
+						'TID_RL=' + doc.TID_RL + '&' +
+						'DOC_RL=' + doc.DOC_RL + '&' +
+						'DIR_NOT=' + doc.DIR_NOT + '&' +
+						'DPTO_NOTI=' + doc.DPTO_NOTI + '&' +
+						'MPIO_NOTI=' + doc.MPIO_NOTI + '&' +
+						'HORARIOS=' + doc.HORARIOS + '&' +
+						'NUTRA=' + doc.NUTRA + '&' +
+						'F_UV=' + doc.F_UV + '&' +
+						'CCUV=' + doc.CCUV + '&' +
+						'CUV=' + doc.CUV + '&' +
+						'UV_P=' + doc.UV_P + '&' +
+						'NMOTIVO=' + doc.NMOTIVO + '&' +
+						'MOTIVO=' + doc.MOTIVO + '&' +
+						'AUTORIZA=' + doc.AUTORIZA + '&' +
+						'P_CUMPL=' + doc.P_CUMPL + '&' +
+						'N_MUESTRAS=' + doc.N_MUESTRAS + '&' +
+						'N_ACTAS=' + doc.N_ACTAS + '&' +
+						'AMS=' + doc.AMS + '&' +
+						'DETA_MS=' + doc.DETA_MS + '&' +
+						'NOCO=' + doc.NOCO + '&' +
+						'FECHA=' + doc.FECHA + '&' +
+						'P_CUMPL=' + doc.P_CUMPL + '&' +
+						'FIRMA_F1=' + doc.FIRMA_F1 + '&' +
+						'FIRMA_F2=' + doc.FIRMA_F2 + '&' +
+						'FIRMA_E1=' + doc.FIRMA_E1 + '&' +
+						'FIRMA_E2=' + doc.FIRMA_E2 + '&' +
 						'CONCEPTO=' + doc.CONCEPTO;
 	if (verificarSesion()) {
 		var credenciales = JSON.parse(localStorage.getItem('identity'));
-		var data = 'nombreUsuario='+credenciales.usuario+'&&'
-					+'token='+credenciales.token+'&&' + dataInicial;
+		var data = 'nombreUsuario='+credenciales.usuario+'&'
+					+'token='+credenciales.token+'&' + dataInicial;
 		
 		return new Promise((resolve, reject) => {
 			fetch('https://sisbenpro.com/public/evaluacionesTabla', {
@@ -503,7 +503,7 @@ function cargarServidor(formulario){
 			break;
 		default:
 			console.log('Problemas con el formulario');
-			break;
+			return;
 	}
 
 	db.allDocs({include_docs: true, descending: true}).then ( doc => {
@@ -1152,8 +1152,13 @@ function guardarEvaluacion(formulario){
 				E56: document.getElementsByName('evaluacion_5')[5].value,
 				H56: document.getElementsByName('hallazgos_5_6')[0].value
 			};
+			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '442':
+			adicional = {
+				PREGUNTAS: Array.from(document.getElementsByName('pregunta'))
+			};
+			evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
 			break;
 		case '333':
 			break;
@@ -1195,9 +1200,9 @@ function guardarEvaluacion(formulario){
 	//location.reload();
 }
 
-function setColumnas(tr, registro, contador){
+function setColumnas(tr, registro, contador, evaluado){
 	tr.appendChild(createColumns(contador));
-	tr.appendChild(createColumns(registro.NOCO));
+	evaluado == 'E' ? tr.appendChild(createColumns(registro.NOCO)) : (registro.doc.PLACA === null ? registro.doc.PLACAREM : registro.doc.PLACA);
 	tr.appendChild(createColumns(registro.ACTA));
 	tr.appendChild(createColumns(registro.FECHA));
 	tr.appendChild(createColumns(registro.P_CUMPL));
@@ -1205,7 +1210,7 @@ function setColumnas(tr, registro, contador){
 	return tr;		
 }
 
-function traerEvaluados(db){
+function traerEvaluados(db, evaluado){
 	db.allDocs({include_docs: true, descending: true}).then ( doc => {
 		var tbody = document.getElementById('evaluados');
 		tbody.innerHTML = '';
@@ -1213,7 +1218,7 @@ function traerEvaluados(db){
 		doc.rows.forEach( registro => {
 			contador++;
 			var tr = document.createElement('tr');
-			tr = setColumnas(tr, registro.doc, contador);
+			tr = setColumnas(tr, registro.doc, contador, evaluado);
 			tbody.appendChild(tr);
 		});
 		$('#tablaEvaluados').DataTable();
@@ -1223,43 +1228,51 @@ function traerEvaluados(db){
 function mostrarEvaluados(formulario){
 	switch(formulario){
 		case '440':
-			traerEvaluados(db440);
+			traerEvaluados(db440, 'E');
 			validarCambioTab(2);
 			break;
 		case '474':
-			traerEvaluados(db474);
+			traerEvaluados(db474, 'E');
 			validarCambioTab(2);
 			break;
 		case '479':
-			traerEvaluados(db479);
+			traerEvaluados(db479, 'E');
 			validarCambioTab(2);
 			break;
 		case '480':
-			traerEvaluados(db480);
+			traerEvaluados(db480, 'E');
 			validarCambioTab(2);
 			break;
 		case '495':
-			traerEvaluados(db495);
+			traerEvaluados(db495, 'E');
 			validarCambioTab(2);
 			break;
 		case '442':
-			traerEvaluados(db442);
+			traerEvaluados(db442, 'E');
 			validarCambioTab(3);
 			break;
 		case '478':
-			traerEvaluados(db478);
+			traerEvaluados(db478, 'E');
 			validarCambioTab(2);
 			break;
 		case '475':
-			traerEvaluados(db475);
+			traerEvaluados(db475, 'E');
 			validarCambioTab(2);
 			break;
 		case '481':
-			traerEvaluados(db481);
+			traerEvaluados(db481, 'E');
 			validarCambioTab(2);
 			break;
 		case '333':
-			traerEvaluados(db333);
+			traerEvaluados(db333, 'E');
+			break;
+		case '441':
+			traerEvaluados(db441, 'V');
+			validarCambioTab(2);
+			break;
+		case '472':
+			traerEvaluados(db472, 'V');
+			validarCambioTab(2);
 			break;
 	}
 }
