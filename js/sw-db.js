@@ -23,6 +23,14 @@ var db474 = new PouchDB('evaluaciones474');
 var db479 = new PouchDB('evaluaciones479');
 var db480 = new PouchDB('evaluaciones480');
 var db495 = new PouchDB('evaluaciones495');
+var db478 = new PouchDB('evaluaciones478');
+var db475 = new PouchDB('evaluaciones475');
+var db481 = new PouchDB('evaluaciones481');
+var db442 = new PouchDB('evaluaciones442');
+//var db333 = new PouchDB('evaluaciones333');
+
+var db441 = new PouchDB('evaluaciones441');
+var db472 = new PouchDB('evaluaciones472');
 
 
 db493.changes({
@@ -740,9 +748,6 @@ function guardarComunesEvaluados(formulario){
 		NOMBRE_P: document.getElementsByName('propietario' + formulario)[0].value,
 		TID_P: document.getElementsByName('tipoIdProp' + formulario)[0].value,
 		DOC_P: document.getElementsByName('idPropietario' + formulario)[0].value,
-		NOMBRE_RL: document.getElementsByName('repLegal' + formulario)[0].value,
-		TID_RL: document.getElementsByName('tipoIdRl' + formulario)[0].value,
-		DOC_RL: document.getElementsByName('idRepLegal' + formulario)[0].value,
 		DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
 		DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
 		MPIO_NOTI: document.getElementsByName('mpioNotif' + formulario)[0].value,
@@ -762,34 +767,6 @@ function guardarComunesEvaluados(formulario){
 		AMS: document.getElementsByName('medidaSeguridad' + formulario)[0].value,
 		DETA_MS: document.getElementsByName('medida' + formulario)[0].value,
 
-		E11: document.getElementsByName('evaluacion_1')[0].value,
-		H11: document.getElementsByName('hallazgos_1_1')[0].value,
-		E12: document.getElementsByName('evaluacion_1')[1].value,
-		H12: document.getElementsByName('hallazgos_1_2')[0].value,
-		E13: document.getElementsByName('evaluacion_1')[2].value,
-		H13: document.getElementsByName('hallazgos_1_3')[0].value,
-		EB1: document.getElementsByName('evalBloque1')[0].value,
-		E21: document.getElementsByName('evaluacion_2')[0].value,
-		H21: document.getElementsByName('hallazgos_2_1')[0].value,
-		E22: document.getElementsByName('evaluacion_2')[1].value,
-		H22: document.getElementsByName('hallazgos_2_2')[0].value,
-		EB2: document.getElementsByName('evalBloque2')[0].value,
-		E31: document.getElementsByName('evaluacion_3')[0].value,
-		H31: document.getElementsByName('hallazgos_3_1')[0].value,
-		E32: document.getElementsByName('evaluacion_3')[1].value,
-		H32: document.getElementsByName('hallazgos_3_2')[0].value,
-		EB3: document.getElementsByName('evalBloque3')[0].value,
-		E41: document.getElementsByName('evaluacion_4')[0].value,
-		H41: document.getElementsByName('hallazgos_4_1')[0].value,
-		E42: document.getElementsByName('evaluacion_4')[1].value,
-		H42: document.getElementsByName('hallazgos_4_2')[0].value,
-		EB4: document.getElementsByName('evalBloque4')[0].value,
-		E51: document.getElementsByName('evaluacion_5')[0].value,
-		H51: document.getElementsByName('hallazgos_5_1')[0].value,
-		E52: document.getElementsByName('evaluacion_5')[1].value,
-		H52: document.getElementsByName('hallazgos_5_2')[0].value,
-		EB5: document.getElementsByName('evalBloque5')[0].value,
-		
 		//ACTA, UV_P, HORARIOS, NUTRA, son los únicos campos que son exclusivos de las evaluaciones, los otros son comunes con los inscritos
 		
 		OBS_AS: document.getElementsByName('obAutoridad' + formulario)[0].value,
@@ -815,6 +792,72 @@ function guardarComunesEvaluados(formulario){
 	return evaluado;
 }
 
+function comunesEvaluadosEstabPreguntas(formulario){
+	let evaluado = {
+		E11: document.getElementsByName('evaluacion_1')[0].value,
+		H11: document.getElementsByName('hallazgos_1_1')[0].value,
+		E12: document.getElementsByName('evaluacion_1')[1].value,
+		H12: document.getElementsByName('hallazgos_1_2')[0].value,
+		E13: document.getElementsByName('evaluacion_1')[2].value,
+		H13: document.getElementsByName('hallazgos_1_3')[0].value,
+		EB1: document.getElementsByName('evalBloque1')[0].value,
+		E21: document.getElementsByName('evaluacion_2')[0].value,
+		H21: document.getElementsByName('hallazgos_2_1')[0].value,
+		EB2: document.getElementsByName('evalBloque2')[0].value,
+		E31: document.getElementsByName('evaluacion_3')[0].value,
+		H31: document.getElementsByName('hallazgos_3_1')[0].value,
+		E32: document.getElementsByName('evaluacion_3')[1].value,
+		H32: document.getElementsByName('hallazgos_3_2')[0].value,
+		EB3: document.getElementsByName('evalBloque3')[0].value,
+		E41: document.getElementsByName('evaluacion_4')[0].value,
+		H41: document.getElementsByName('hallazgos_4_1')[0].value,
+		E42: document.getElementsByName('evaluacion_4')[1].value,
+		H42: document.getElementsByName('hallazgos_4_2')[0].value,
+		EB4: document.getElementsByName('evalBloque4')[0].value,
+		E51: document.getElementsByName('evaluacion_5')[0].value,
+		H51: document.getElementsByName('hallazgos_5_1')[0].value,
+		E52: document.getElementsByName('evaluacion_5')[1].value,
+		H52: document.getElementsByName('hallazgos_5_2')[0].value,
+		EB5: document.getElementsByName('evalBloque5')[0].value
+	}
+	return evaluado;
+}
+
+function guardarEvaluadosVehiculos(formulario){
+	let evaluado = {
+		MARCAV: document.getElementsByName('marca' + formulario)[0].value,
+		MODELOV: document.getElementsByName('modelo' + formulario)[0].value,
+		PLACA: document.getElementsByName('placa' + formulario)[0].value,
+		ISOTERMO: document.getElementsByName('isotermo' + formulario)[0].value,
+		U_UFRIO: document.getElementsByName('ufrio' + formulario)[0].value,
+		PRODUCTO: document.getElementsByName('producto' + formulario)[0].value,
+		E11: document.getElementsByName('evaluacion_1')[0].value,
+		H11: document.getElementsByName('hallazgos_1_1')[0].value,
+		EB1: document.getElementsByName('evalBloque1')[0].value,
+		E21: document.getElementsByName('evaluacion_2')[0].value,
+		H21: document.getElementsByName('hallazgos_2_1')[0].value,
+		EB2: document.getElementsByName('evalBloque2')[0].value,
+		E31: document.getElementsByName('evaluacion_3')[0].value,
+		H31: document.getElementsByName('hallazgos_3_1')[0].value,
+		E32: document.getElementsByName('evaluacion_3')[1].value,
+		H32: document.getElementsByName('hallazgos_3_2')[0].value,
+		E33: document.getElementsByName('evaluacion_3')[2].value,
+		H33: document.getElementsByName('hallazgos_3_3')[0].value,
+		E34: document.getElementsByName('evaluacion_3')[3].value,
+		H34: document.getElementsByName('hallazgos_3_4')[0].value,
+		EB3: document.getElementsByName('evalBloque3')[0].value,
+		E41: document.getElementsByName('evaluacion_4')[0].value,
+		H41: document.getElementsByName('hallazgos_4_1')[0].value,
+		EB4: document.getElementsByName('evalBloque4')[0].value,
+		E51: document.getElementsByName('evaluacion_5')[0].value,
+		H51: document.getElementsByName('hallazgos_5_1')[0].value,
+		E52: document.getElementsByName('evaluacion_5')[1].value,
+		H52: document.getElementsByName('hallazgos_5_2')[0].value,
+		EB5: document.getElementsByName('evalBloque5')[0].value
+	}
+	return evaluado;
+}
+
 function guardarEvaluadosEstablecimientos(formulario){
 	var territorio = [];
 	for (var i = 0; i < document.getElementsByName('territorio' + formulario).length; i++){
@@ -822,6 +865,9 @@ function guardarEvaluadosEstablecimientos(formulario){
 	}
 
 	var evaluado = {
+		NOMBRE_RL: document.getElementsByName('repLegal' + formulario)[0].value,
+		TID_RL: document.getElementsByName('tipoIdRl' + formulario)[0].value,
+		DOC_RL: document.getElementsByName('idRepLegal' + formulario)[0].value,
 		NOCO: document.getElementsByName('nombreComercial' + formulario)[0].value,
 		RSO: document.getElementsByName('razonSocial' + formulario)[0].value,
 		NIT: document.getElementsByName('nit' + formulario)[0].value,
@@ -866,9 +912,11 @@ function persistirEvaluado(db, evaluado, formulario){
 }
 
 function guardarEvaluacion(formulario){
-	var evaluado = guardarComunesEvaluados(formulario);
-	var evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-	var db;
+	let evaluado = guardarComunesEvaluados(formulario);
+	let evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+	let preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
+	let evaluadoVehi = guardarEvaluadosVehiculos(formulario);
+	let db;
 	
 	switch(formulario){
 		case '440':
@@ -885,6 +933,8 @@ function guardarEvaluacion(formulario){
 				OTIPOPRO: document.getElementsByName('otrosProductos')[0].value,
 				E14: document.getElementsByName('evaluacion_1')[3].value,
 				H14: document.getElementsByName('hallazgos_1_4')[0].value,
+				E22: document.getElementsByName('evaluacion_2')[1].value,
+				H22: document.getElementsByName('hallazgos_2_2')[0].value,
 				E43: document.getElementsByName('evaluacion_4')[2].value,
 				H43: document.getElementsByName('hallazgos_4_3')[0].value,
 				E53: document.getElementsByName('evaluacion_5')[2].value,
@@ -895,11 +945,14 @@ function guardarEvaluacion(formulario){
 				H55: document.getElementsByName('hallazgos_5_5')[0].value
 			};
 			db = db440;
+			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '474':
 			adicional = {
 				E14: document.getElementsByName('evaluacion_1')[3].value,
 				H14: document.getElementsByName('hallazgos_1_4')[0].value,
+				E22: document.getElementsByName('evaluacion_2')[1].value,
+				H22: document.getElementsByName('hallazgos_2_2')[0].value,
 				E23: document.getElementsByName('evaluacion_2')[2].value,
 				H23: document.getElementsByName('hallazgos_2_3')[0].value,
 				E33: document.getElementsByName('evaluacion_3')[2].value,
@@ -914,6 +967,7 @@ function guardarEvaluacion(formulario){
 				H46: document.getElementsByName('hallazgos_4_6')[0].value
 			};
 			db = db474;
+			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '479':
 			tipoEsta = [];
@@ -926,6 +980,8 @@ function guardarEvaluacion(formulario){
 				CUAL: document.getElementsByName('cualEstab')[0].value,
 				E14: document.getElementsByName('evaluacion_1')[3].value,
 				H14: document.getElementsByName('hallazgos_1_4')[0].value,
+				E22: document.getElementsByName('evaluacion_2')[1].value,
+				H22: document.getElementsByName('hallazgos_2_2')[0].value,
 				E33: document.getElementsByName('evaluacion_3')[2].value,
 				H33: document.getElementsByName('hallazgos_3_3')[0].value,
 				E34: document.getElementsByName('evaluacion_3')[3].value,
@@ -944,6 +1000,7 @@ function guardarEvaluacion(formulario){
 				H56: document.getElementsByName('hallazgos_5_6')[0].value
 			};
 			db = db479;
+			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '480':
 			tipoEsta = [];
@@ -953,6 +1010,8 @@ function guardarEvaluacion(formulario){
 			console.log(tipoEsta);
 			adicional = {
 				ACTIVIDAD: tipoEsta,
+				E22: document.getElementsByName('evaluacion_2')[1].value,
+				H22: document.getElementsByName('hallazgos_2_2')[0].value,
 				E33: document.getElementsByName('evaluacion_3')[2].value,
 				H33: document.getElementsByName('hallazgos_3_3')[0].value,
 				E53: document.getElementsByName('evaluacion_5')[2].value,
@@ -963,6 +1022,7 @@ function guardarEvaluacion(formulario){
 				H55: document.getElementsByName('hallazgos_5_5')[0].value				
 			};
 			db = db480;
+			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '495':
 			tipoEsta = [];
@@ -975,6 +1035,8 @@ function guardarEvaluacion(formulario){
 				H14: document.getElementsByName('hallazgos_1_4')[0].value,
 				E15: document.getElementsByName('evaluacion_1')[4].value,
 				H15: document.getElementsByName('hallazgos_1_5')[0].value,
+				E22: document.getElementsByName('evaluacion_2')[1].value,
+				H22: document.getElementsByName('hallazgos_2_2')[0].value,
 				E33: document.getElementsByName('evaluacion_3')[2].value,
 				H33: document.getElementsByName('hallazgos_3_3')[0].value,
 				E34: document.getElementsByName('evaluacion_3')[3].value,
@@ -993,7 +1055,128 @@ function guardarEvaluacion(formulario){
 				H61: document.getElementsByName('hallazgos_6_1')[0].value				
 			};
 			db = db495;
+			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
+		case '478':
+			tipoEsta = [];
+			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
+				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
+			};
+			console.log(tipoEsta);
+			adicional = {
+				ACTIVIDAD: tipoEsta,
+				GRS: document.getElementsByName('grs')[0].value,
+				GRSCON: document.getElementsByName('grscon')[0].value,
+				E14: document.getElementsByName('evaluacion_1')[3].value,
+				H14: document.getElementsByName('hallazgos_1_4')[0].value,
+				E15: document.getElementsByName('evaluacion_1')[4].value,
+				H15: document.getElementsByName('hallazgos_1_5')[0].value,
+				E22: document.getElementsByName('evaluacion_2')[1].value,
+				H22: document.getElementsByName('hallazgos_2_2')[0].value,
+				E23: document.getElementsByName('evaluacion_2')[2].value,
+				H23: document.getElementsByName('hallazgos_2_3')[0].value,
+				E33: document.getElementsByName('evaluacion_3')[2].value,
+				H33: document.getElementsByName('hallazgos_3_3')[0].value,
+				E34: document.getElementsByName('evaluacion_3')[3].value,
+				H34: document.getElementsByName('hallazgos_3_4')[0].value,
+				E43: document.getElementsByName('evaluacion_4')[2].value,
+				H43: document.getElementsByName('hallazgos_4_3')[0].value,
+				E44: document.getElementsByName('evaluacion_4')[3].value,
+				H44: document.getElementsByName('hallazgos_4_4')[0].value,
+				E45: document.getElementsByName('evaluacion_4')[4].value,
+				H45: document.getElementsByName('hallazgos_4_5')[0].value,
+				E53: document.getElementsByName('evaluacion_5')[2].value,
+				H53: document.getElementsByName('hallazgos_5_3')[0].value,
+				E54: document.getElementsByName('evaluacion_5')[3].value,
+				H54: document.getElementsByName('hallazgos_5_4')[0].value,
+				E55: document.getElementsByName('evaluacion_5')[4].value,
+				H55: document.getElementsByName('hallazgos_5_5')[0].value,
+				E56: document.getElementsByName('evaluacion_5')[5].value,
+				H56: document.getElementsByName('hallazgos_5_6')[0].value,
+				E61: document.getElementsByName('evaluacion_6')[0].value,
+				H61: document.getElementsByName('hallazgos_6_1')[0].value,
+				E62: document.getElementsByName('evaluacion_6')[1].value,
+				H62: document.getElementsByName('hallazgos_6_2')[0].value,
+				E63: document.getElementsByName('evaluacion_6')[2].value,
+				H63: document.getElementsByName('hallazgos_6_3')[0].value				
+			};
+			db = db478;
+			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
+			break;
+		case '475':
+			tipoEsta = [];
+			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
+				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
+			};
+			console.log(tipoEsta);
+			adicional = {
+				ACTIVIDAD: tipoEsta,
+				E11: document.getElementsByName('evaluacion_1')[0].value,
+				H11: document.getElementsByName('hallazgos_1_1')[0].value,
+				E12: document.getElementsByName('evaluacion_1')[1].value,
+				H12: document.getElementsByName('hallazgos_1_2')[0].value,
+				EB1: document.getElementsByName('evalBloque1')[0].value,
+				E21: document.getElementsByName('evaluacion_2')[0].value,
+				H21: document.getElementsByName('hallazgos_2_1')[0].value,
+				E22: document.getElementsByName('evaluacion_2')[1].value,
+				H22: document.getElementsByName('hallazgos_2_2')[0].value,
+				E23: document.getElementsByName('evaluacion_2')[2].value,
+				H23: document.getElementsByName('hallazgos_2_3')[0].value,
+				E24: document.getElementsByName('evaluacion_2')[3].value,
+				H24: document.getElementsByName('hallazgos_2_4')[0].value,
+				E25: document.getElementsByName('evaluacion_2')[4].value,
+				H25: document.getElementsByName('hallazgos_2_5')[0].value,
+				EB2: document.getElementsByName('evalBloque2')[0].value,			
+			};
+			db = db475;
+			evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
+			break;
+		case '481':
+			let ata = document.getElementsByName('tipoEstablecimiento')[0].checked ? '' : 'X';
+			adicional = {
+				ATA: ata,
+				E14: document.getElementsByName('evaluacion_1')[3].value,
+				H14: document.getElementsByName('hallazgos_1_4')[0].value,
+				E33: document.getElementsByName('evaluacion_3')[2].value,
+				H33: document.getElementsByName('hallazgos_3_3')[0].value,
+				E34: document.getElementsByName('evaluacion_3')[3].value,
+				H34: document.getElementsByName('hallazgos_3_4')[0].value,
+				E43: document.getElementsByName('evaluacion_4')[2].value,
+				H43: document.getElementsByName('hallazgos_4_3')[0].value,
+				E53: document.getElementsByName('evaluacion_5')[2].value,
+				H53: document.getElementsByName('hallazgos_5_3')[0].value,
+				E54: document.getElementsByName('evaluacion_5')[3].value,
+				H54: document.getElementsByName('hallazgos_5_4')[0].value,
+				E55: document.getElementsByName('evaluacion_5')[4].value,
+				H55: document.getElementsByName('hallazgos_5_5')[0].value,
+				E56: document.getElementsByName('evaluacion_5')[5].value,
+				H56: document.getElementsByName('hallazgos_5_6')[0].value
+			};
+			break;
+		case '442':
+			break;
+		case '333':
+			break;
+		case '441':
+			adicional = {
+				NOMBRE_CO: document.getElementsByName('conductor441')[0].value,
+				TID_CO: document.getElementsByName('tipoIdCond441')[0].value,
+				DOC_CO: document.getElementsByName('idConductor441')[0].value,
+				E53: document.getElementsByName('evaluacion_5')[2].value,
+				H53: document.getElementsByName('hallazgos_5_3')[0].value
+			};
+			db = db441;
+			evaluado = Object.assign( evaluado, evaluadoVehi, adicional );
+			break;
+		case '472':
+			adicional = {
+				ESTACAS: document.getElementsByName('camioneta472')[0].value, 
+				FURGON: document.getElementsByName('camion472')[0].value,
+				MOTOCAR: document.getElementsByName('moto472')[0].value,
+				OTRO: document.getElementsByName('otro472')[0].value
+			};
+			db = db472;
+			evaluado = Object.assign( evaluado, evaluadoVehi, adicional);
 	}
 	if(localStorage.getItem('evaluado') && (localStorage.getItem('firmaAut1') || localStorage.getItem('firmaAut2') || localStorage.getItem('firmaIns1') || localStorage.getItem('firmaIns2'))){
 		let eva = JSON.parse(localStorage.getItem('evaluado'));
@@ -1004,7 +1187,6 @@ function guardarEvaluacion(formulario){
 		localStorage.removeItem('firmaIns1');
 		localStorage.removeItem('firmaIns2');
 	}else{
-		evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
 		localStorage.setItem('evaluado', JSON.stringify(evaluado));
 		firmaEvaluacion();	
 	}
@@ -1061,7 +1243,24 @@ function mostrarEvaluados(formulario){
 			validarCambioTab(2);
 			break;
 		case '442':
+			traerEvaluados(db442);
 			validarCambioTab(3);
+			break;
+		case '478':
+			traerEvaluados(db478);
+			validarCambioTab(2);
+			break;
+		case '475':
+			traerEvaluados(db475);
+			validarCambioTab(2);
+			break;
+		case '481':
+			traerEvaluados(db481);
+			validarCambioTab(2);
+			break;
+		case '333':
+			traerEvaluados(db333);
+			break;
 	}
 }
 
