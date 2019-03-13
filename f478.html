@@ -77,16 +77,6 @@
 			                                Cargar inscritos desde servidor
 			                            </a>
 			                        </div>
-			                        <div class="col-md-3">
-			                        	<a type="submit" onclick="cargarServidor('478')" class="btn btn-primary">
-			                                Subir información a servidor
-			                            </a>
-			                        </div>
-			                        <div class="col-md-3">
-			                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
-			                                Cerrar Sesión con Servidor
-			                            </a>
-			                        </div>
 			                    </div><!-- Fin del form-group -->
 
 			                    <br><br> 
@@ -125,7 +115,7 @@
 									<div class="col-md-7">
 										<div class="col-md-4">
 											<label class="col-md-12 control-label">Fecha:</label>
-											<input type="date" class="form-control" name="fecha478" onchange="calcularFechaPV(this.value)">
+											<input type="date" class="form-control" name="fecha478">
 										</div>
 										<script type="text/javascript">
 											cargarInicio('478');
@@ -1206,11 +1196,16 @@
 			                                Guardar
 			                            </button>			                            
 			                        </div>
-			                       	<div class="col-md-2">
-			                       		<button class="btn btn-primary" onclick="firmaEvaluacion()">
-			                       			Firmar
-			                       		</button>
-			                       	</div>		                       
+			                        <div class="col-md-3">
+			                        	<a type="submit" onclick="cargarServidor('478')" class="btn btn-primary">
+			                                Subir información a servidor
+			                            </a>
+			                        </div>
+			                        <div class="col-md-3">
+			                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+			                                Cerrar Sesión con Servidor
+			                            </a>
+			                        </div>		                       
 			                    </div>
 
 			                    <br><br><br><hr>

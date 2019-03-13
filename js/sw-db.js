@@ -27,7 +27,7 @@ var db478 = new PouchDB('evaluaciones478');
 var db475 = new PouchDB('evaluaciones475');
 var db481 = new PouchDB('evaluaciones481');
 var db442 = new PouchDB('evaluaciones442');
-//var db333 = new PouchDB('evaluaciones333');
+var db333 = new PouchDB('evaluaciones333');
 
 var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
@@ -68,6 +68,88 @@ dbNuevos444.changes({
 	since: 'now',
 	live: true
 }).on('change', mostrarInscritos444);*/
+
+function dbActasForm(formulario){
+	let db;
+	switch(formulario){
+		case '440':
+			db = db440;
+			break;
+		case '474':
+			db = db474;
+			break;
+		case '479':
+			db = db479;
+			break;
+		case '480':
+			db = db480;
+			break;
+		case '495':
+			db = db495;
+			break;
+		case '478':
+			db = db478;
+		case '475':
+			db = db475;
+			break;
+		case '481':
+			db = db481; 
+			break;
+		case '442':
+			db = db442;
+			break;
+		case '333':
+			db = db333;
+			break;
+		case '441':
+			db = db441;
+			break;
+		case '472':
+			db = db472;
+			break;
+	}
+	return db;
+}
+
+function cargarInicio(formulario){
+	let fecha = new Date();
+	console.log(fecha.getFullYear());
+	let mes = fecha.getMonth() + 1;
+	let dia = fecha.getUTCDate();
+	let cadenaMes = mes < 10 ? '0' + mes : mes;
+	let cadenaDia = fecha.getUTCDate() < 10 ? '0' + fecha.getUTCDate() : fecha.getUTCDate();
+	let cadenaFecha = fecha.getFullYear() + '-' + cadenaMes + '-' + cadenaDia;
+	console.log(cadenaFecha);
+	document.getElementsByName('fecha' + formulario)[0].value = cadenaFecha;
+
+	let db = dbActasForm(formulario);
+
+	if(localStorage.getItem('evaluado') && (localStorage.getItem('firmaAut1') || localStorage.getItem('firmaAut2') || localStorage.getItem('firmaIns1') || localStorage.getItem('firmaIns2'))){
+		let eva = JSON.parse(localStorage.getItem('evaluado'));
+		persistirEvaluado(db, eva, formulario);
+		localStorage.removeItem('evaluado');
+		localStorage.removeItem('firmaAut1');
+		localStorage.removeItem('firmaAut2');
+		localStorage.removeItem('firmaIns1');
+		localStorage.removeItem('firmaIns2');
+	}
+
+	if (localStorage.getItem('Accion')) {
+		switch(localStorage.getItem('Accion')){
+			case 'cargarInscritos493':
+			cargarInscritos493();
+			break;
+			case 'cargarInscritos444':
+			cargarInscritos444();
+			break;
+			case 'cargarInscritos569':
+			cargarInscritos569();
+			break;
+		}
+	}else{
+		console.log("No hay acción");
+	}
+}
 
 function createColumns(arreglo){
 	var td = document.createElement('td');
@@ -379,6 +461,7 @@ function fetchInscritos(formulario){
 
 //Aquí se usa la función json(), que funciona similar a JSON.parse()
 function cargarInscritos493(){
+	localStorage.setItem('Accion', 'cargarInscritos493');
 	var promesa = fetchInscritos('493');
 	promesa.then( respObj => {
 		if (respObj.err != undefined) {
@@ -388,6 +471,7 @@ function cargarInscritos493(){
 			console.log('Base de datos anterior eliminada');
 			db493 = new PouchDB('inscritosCargados493');
 			console.log('Nueva base de datos creada');
+			localStorage.removeItem('Accion');
 			guardarTraidos(db493, respObj);
 			mostrarInscritos493();
 			//cerrarSesionServidor();
@@ -397,6 +481,7 @@ function cargarInscritos493(){
 
 function cargarInscritos444(){
 	//fetch('http://localhost/formularioVisaludAPI/public/inscritos')
+	localStorage.setItem('Accion', 'cargarInscritos444');
 	var promesa = fetchInscritos('444');
 	promesa.then( respObj => {
 		if (respObj.err != undefined) {
@@ -406,6 +491,7 @@ function cargarInscritos444(){
 			console.log('Base de datos anterior eliminada');
 			db444 = new PouchDB('inscritosCargados444');
 			console.log('Nueva base de datos creada');
+			localStorage.removeItem('Accion');
 			guardarTraidos(db444, respObj);
 			mostrarInscritos444();
 			//cerrarSesionServidor();
@@ -415,6 +501,7 @@ function cargarInscritos444(){
 
 function cargarInscritos569(){
 	//fetch('http://localhost/formularioVisaludAPI/public/inscritos')
+	localStorage.setItem('Accion', 'cargarInscritos569');
 	var promesa = fetchInscritos('569');
 	promesa.then( respObj => {
 		if (respObj.err != undefined) {
@@ -424,6 +511,7 @@ function cargarInscritos569(){
 			console.log('Base de datos anterior eliminada');
 			db569 = new PouchDB('inscritosCargados569');
 			console.log('Nueva base de datos creada');
+			localStorage.removeItem('Accion');
 			guardarTraidos(db569, respObj);
 			mostrarInscritos569();
 			//cerrarSesionServidor();
@@ -904,6 +992,7 @@ function persistirEvaluado(db, evaluado, formulario){
 		db.put(evaluado, function callback(err, result){
 			if (!err) {
 				alert('evaluado guardado en base de datos');
+				location.reload();
 			}else {
 				alert('problemas guardando evaluado en base de datos',err);
 			}
@@ -913,17 +1002,19 @@ function persistirEvaluado(db, evaluado, formulario){
 
 function guardarEvaluacion(formulario){
 	let evaluado = guardarComunesEvaluados(formulario);
-	let evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-	let preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
-	let evaluadoVehi = guardarEvaluadosVehiculos(formulario);
-	let db;
+	let db = dbActasForm(formulario);
+	let preguntasComunes;
+	let evaluadoEsta;
+	let evaluadoVehi;
 	
 	switch(formulario){
 		case '440':
 			var tipocarne;
 			var adicional;
 			var tipoEsta = [];
-			
+			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+	
 			for (var i = 0; i < document.getElementsByName('tipoCarneExpende').length; i++){
 				tipocarne = document.getElementsByName('tipoCarneExpende')[i].checked ? document.getElementsByName('tipoCarneExpende')[i].value : console.log(i);
 			}
@@ -944,10 +1035,11 @@ function guardarEvaluacion(formulario){
 				E55: document.getElementsByName('evaluacion_5')[4].value,
 				H55: document.getElementsByName('hallazgos_5_5')[0].value
 			};
-			db = db440;
 			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '474':
+			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			adicional = {
 				E14: document.getElementsByName('evaluacion_1')[3].value,
 				H14: document.getElementsByName('hallazgos_1_4')[0].value,
@@ -966,10 +1058,11 @@ function guardarEvaluacion(formulario){
 				E46: document.getElementsByName('evaluacion_4')[5].value,
 				H46: document.getElementsByName('hallazgos_4_6')[0].value
 			};
-			db = db474;
 			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '479':
+			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			tipoEsta = [];
 			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
@@ -999,10 +1092,11 @@ function guardarEvaluacion(formulario){
 				E56: document.getElementsByName('evaluacion_5')[5].value,
 				H56: document.getElementsByName('hallazgos_5_6')[0].value
 			};
-			db = db479;
 			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '480':
+			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			tipoEsta = [];
 			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
@@ -1021,10 +1115,11 @@ function guardarEvaluacion(formulario){
 				E55: document.getElementsByName('evaluacion_5')[4].value,
 				H55: document.getElementsByName('hallazgos_5_5')[0].value				
 			};
-			db = db480;
 			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '495':
+			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			tipoEsta = [];
 			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
@@ -1054,10 +1149,11 @@ function guardarEvaluacion(formulario){
 				E61: document.getElementsByName('evaluacion_6')[0].value,
 				H61: document.getElementsByName('hallazgos_6_1')[0].value				
 			};
-			db = db495;
 			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '478':
+			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			tipoEsta = [];
 			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
@@ -1100,10 +1196,10 @@ function guardarEvaluacion(formulario){
 				E63: document.getElementsByName('evaluacion_6')[2].value,
 				H63: document.getElementsByName('hallazgos_6_3')[0].value				
 			};
-			db = db478;
 			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '475':
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			tipoEsta = [];
 			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
@@ -1128,10 +1224,11 @@ function guardarEvaluacion(formulario){
 				H25: document.getElementsByName('hallazgos_2_5')[0].value,
 				EB2: document.getElementsByName('evalBloque2')[0].value,			
 			};
-			db = db475;
 			evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
 			break;
 		case '481':
+			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			let ata = document.getElementsByName('tipoEstablecimiento')[0].checked ? '' : 'X';
 			adicional = {
 				ATA: ata,
@@ -1155,6 +1252,7 @@ function guardarEvaluacion(formulario){
 			evaluado = Object.assign( evaluado, evaluadoEsta, preguntasComunes, adicional );
 			break;
 		case '442':
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			adicional = {
 				PREGUNTAS: Array.from(document.getElementsByName('pregunta'))
 			};
@@ -1163,6 +1261,7 @@ function guardarEvaluacion(formulario){
 		case '333':
 			break;
 		case '441':
+			evaluadoVehi = guardarEvaluadosVehiculos(formulario);
 			adicional = {
 				NOMBRE_CO: document.getElementsByName('conductor441')[0].value,
 				TID_CO: document.getElementsByName('tipoIdCond441')[0].value,
@@ -1170,31 +1269,22 @@ function guardarEvaluacion(formulario){
 				E53: document.getElementsByName('evaluacion_5')[2].value,
 				H53: document.getElementsByName('hallazgos_5_3')[0].value
 			};
-			db = db441;
 			evaluado = Object.assign( evaluado, evaluadoVehi, adicional );
 			break;
 		case '472':
+			evaluadoVehi = guardarEvaluadosVehiculos(formulario);
 			adicional = {
 				ESTACAS: document.getElementsByName('camioneta472')[0].value, 
 				FURGON: document.getElementsByName('camion472')[0].value,
 				MOTOCAR: document.getElementsByName('moto472')[0].value,
 				OTRO: document.getElementsByName('otro472')[0].value
 			};
-			db = db472;
 			evaluado = Object.assign( evaluado, evaluadoVehi, adicional);
+			break;
 	}
-	if(localStorage.getItem('evaluado') && (localStorage.getItem('firmaAut1') || localStorage.getItem('firmaAut2') || localStorage.getItem('firmaIns1') || localStorage.getItem('firmaIns2'))){
-		let eva = JSON.parse(localStorage.getItem('evaluado'));
-		persistirEvaluado(db, eva, formulario);
-		localStorage.removeItem('evaluado');
-		localStorage.removeItem('firmaAut1');
-		localStorage.removeItem('firmaAut2');
-		localStorage.removeItem('firmaIns1');
-		localStorage.removeItem('firmaIns2');
-	}else{
-		localStorage.setItem('evaluado', JSON.stringify(evaluado));
-		firmaEvaluacion();	
-	}
+	
+	localStorage.setItem('evaluado', JSON.stringify(evaluado));
+	firmaEvaluacion();	
 	
 	//persistirEvaluado(db, evaluado, formulario);
 	//location.reload();
@@ -1205,8 +1295,8 @@ function setColumnas(tr, registro, contador, evaluado){
 	evaluado == 'E' ? tr.appendChild(createColumns(registro.NOCO)) : (registro.doc.PLACA === null ? registro.doc.PLACAREM : registro.doc.PLACA);
 	tr.appendChild(createColumns(registro.ACTA));
 	tr.appendChild(createColumns(registro.FECHA));
-	tr.appendChild(createColumns(registro.P_CUMPL));
-	tr.appendChild(createColumns(registro.CONCEPTO));
+	evaluado != 'D' ? tr.appendChild(createColumns(registro.P_CUMPL)) : console.log('');
+	evaluado != 'D' ? tr.appendChild(createColumns(registro.CONCEPTO)) : console.log('');
 	return tr;		
 }
 
@@ -1248,7 +1338,7 @@ function mostrarEvaluados(formulario){
 			validarCambioTab(2);
 			break;
 		case '442':
-			traerEvaluados(db442, 'E');
+			traerEvaluados(db442, 'D');
 			validarCambioTab(3);
 			break;
 		case '478':

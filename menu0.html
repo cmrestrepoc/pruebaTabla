@@ -25,10 +25,11 @@
 		<link rel="stylesheet" type="text/css" href="./css/styles.css">
 
 		<script src="./js/jquery-3.3.1.slim.min.js"></script>
-		<script src="./js/bootstrap.js"></script>
+		<!--script src="./js/bootstrap.js"></script-->
 		<script src="./js/bootstrap.min.js"></script>
 		<script src="./js/pouchdb.min.js"></script>
 		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="./js/sw-db.js"></script>
 		<script type="text/javascript" src="./js/login.js"></script>
 
 	</head>
@@ -43,7 +44,52 @@
 				<h4>IVC a Establecimientos y Vehículos</h4>
 			</div>
 			<div class="logout">
-				<button type="submit" class="btn btn-primary" name="logout" onclick="logout()">Cerrar Sesion</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#opciones">OPCIONES</button>
+				<!-- Modal -->
+				<div class="modal fade" id="opciones" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title" id="myModalLabel">Escoja una de las siguientes opciones: </h4>
+				      </div>
+				      <div class="modal-body">
+				        <br>
+				        <div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+				        		<button type="button" class="btn btn-primary" onclick="logout()">Cerrar Sesión en la Aplicación</button>	
+				        	</div>
+				        </div><br>
+				        <div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+				        		<button type="button" class="btn btn-primary" onclick="cargarInscritos493()">Cargar Inscritos Estab. Alimentos</button>	
+				        	</div>
+				        </div><br>
+				        <div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+				        		<button type="button" class="btn btn-primary" onclick="cargarInscritos569()">Cargar Inscritos Estab. Prod. Cárnicos</button>	
+				        	</div>
+				        </div><br>
+				        <div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+				        		<button type="button" class="btn btn-primary" onclick="cargarInscritos444()">Cargar Inscritos Vehículos</button>	
+				        	</div>
+				        </div><br>
+				        <div class="row">
+				        	<div class="col-md-9 col-md-offset-3">
+				        		<button type="button" class="btn btn-primary" onclick="cerrarSesionServidor()">Cerrar Sesión con el servidor</button>	
+				        	</div>
+				        </div><br>
+				      </div>
+				      <div class="modal-footer">
+				      	<div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaOpciones" style="display: block">
+							<strong>Cuidado!</strong> Texto Adicional.
+						</div>
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
 			</div>
 		</header>
 

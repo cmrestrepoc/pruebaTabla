@@ -78,16 +78,6 @@
 			                                Cargar inscritos desde servidor
 			                            </a>
 			                        </div>
-			                        <div class="col-md-3">
-			                        	<a type="submit" onclick="cargarServidor()" class="btn btn-primary">
-			                                Subir información a servidor
-			                            </a>
-			                        </div>
-			                        <div class="col-md-3">
-			                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
-			                                Cerrar Sesión con Servidor
-			                            </a>
-			                        </div>
 			                    </div><!-- Fin del form-group -->
 
 			                    <br><br> 
@@ -136,7 +126,7 @@
 											cargarInicio('442');
 										</script>										
 										<div class="col-md-3">
-											<label class="col-md-12 control-label">Autori. san. prov.:</label>
+											<label class="col-md-12 control-label">Autorización prov.:</label>
 											<input type="text" class="form-control" name="acta442">
 										</div>
 
@@ -1355,6 +1345,16 @@
 			                            <button type="submit" onclick="guardarEvaluacion('442')" class="btn btn-primary">
 			                                Guardar
 			                            </button>			                            
+			                        </div>
+			                        <div class="col-md-3">
+			                        	<a type="submit" onclick="cargarServidor('442')" class="btn btn-primary">
+			                                Subir información a servidor
+			                            </a>
+			                        </div>
+			                        <div class="col-md-3">
+			                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+			                                Cerrar Sesión con Servidor
+			                            </a>
 			                        </div>			                       
 			                    </div>
 
@@ -1371,8 +1371,6 @@
 														<th>Establecimiento</th>
 														<th>Acta Número</th>
 														<th>Fecha Evaluación</th>
-														<th>P. Cumplimiento</th>
-														<th>Concepto</th>
 													</tr>									
 												</thead>
 												<tbody id="evaluados"></tbody>
