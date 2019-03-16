@@ -424,6 +424,7 @@ function cerrarSesionServidor(){
 		.then( res => res.json() )
 		.then( jsonRes => alert(jsonRes.res) );
 		localStorage.removeItem('identity');
+		alert('Su sesión con el servidor ha sido cerrada correctamente');
 	}else{
 		alert('No hay una sesión abierta con el servidor en este momento');
 	}
