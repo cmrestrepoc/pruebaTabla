@@ -165,7 +165,7 @@ function loginServer(){
 			if (jsonRes.err != undefined) {
 				var identidad = JSON.parse(localStorage.getItem('identity'));
 				if (identidad != undefined) {
-					var identidad = JSON.parse(localStorage.getItem('identity'));
+					//identidad = JSON.parse(localStorage.getItem('identity'));
 					fetch('https://sisbenpro.com/public/cerrarSesion/'+identidad.usuario)
 					.then( res => res.json() )
 					.then( jsonRes => alert('Sesión cerrada por precaución. ' + jsonRes.res) );
