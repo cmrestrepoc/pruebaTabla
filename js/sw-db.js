@@ -422,9 +422,9 @@ function cerrarSesionServidor(){
 	if (identidad != undefined) {
 		fetch('https://sisbenpro.com/public/cerrarSesion/'+identidad.usuario)
 		.then( res => res.json() )
-		.then( jsonRes => alert(jsonRes.res) );
+		.then( jsonRes => alert(jsonRes.res) )
+		.catch( err => alert("Problemas en la respuesta del servidor " + err) );
 		localStorage.removeItem('identity');
-		alert('Su sesión con el servidor ha sido cerrada correctamente');
 	}else{
 		alert('No hay una sesión abierta con el servidor en este momento');
 	}
