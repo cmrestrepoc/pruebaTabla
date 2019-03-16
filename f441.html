@@ -18,6 +18,13 @@
 
 		<!-- Configuración General PWA -->
 		<link rel="manifest" href="manifest.json" />
+		
+		<style>
+			body {
+				/* Disables pull-to-refresh but allows overscroll glow effects. */
+				overscroll-behavior-y: contain;
+			}
+		</style>
 
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
@@ -38,7 +45,7 @@
 	<body>
 		<header>
 			<a href="menu0.html">
-				<img src="./img/escudo.jpg" />
+				<img alt src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
 				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
@@ -72,16 +79,6 @@
 						<div class="tab-content" id="miTabContent">
 							<div role="tabpanel" class="tab-pane fade active in" id="tabInscritos444" aria-labelledby="tabInscritos444-tab">
 								<br>
-								<div class="form-group">                  
-			                        <div class="col-md-3 col-md-offset-2">
-			                            <a id="todosInscritos" onclick="cargarInscritos444()" class="btn btn-primary">
-			                                Cargar inscritos desde servidor
-			                            </a>
-			                        </div>
-			                    </div><!-- Fin del form-group -->
-			                    
-			                    <br><br>
-
 								<script type="text/javascript">mostrarInscritos444('441');</script>
 	                    		<div class="form-group">
 									<div class="panel panel-default">

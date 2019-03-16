@@ -19,6 +19,13 @@
 		<!-- Configuración General PWA -->
 		<link rel="manifest" href="manifest.json" />
 
+		<style>
+			body {
+				/* Disables pull-to-refresh but allows overscroll glow effects. */
+				overscroll-behavior-y: contain;
+			}
+		</style>
+
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="./css/styles.css">
@@ -72,16 +79,6 @@
 						<div class="tab-content" id="miTabContent">
 							<div role="tabpanel" class="tab-pane fade active in" id="tabInscritos569" aria-labelledby="tabInscritos569-tab">
 								<br>
-								<div class="form-group">                    
-			                        <div class="col-md-3 col-md-offset-2">
-			                            <a id="todosInscritos" onclick="cargarInscritos569()" class="btn btn-primary">
-			                                Cargar inscritos desde servidor
-			                            </a>
-			                        </div>
-			                    </div><!-- Fin del form-group -->
-
-			                    <br><br> 
-
 								<script type="text/javascript">mostrarInscritos569('442');</script>
 	                    		<div class="form-group">
 									<div class="panel panel-default">
