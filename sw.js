@@ -48,7 +48,7 @@ function limpiarCache() {
 	caches.open(CACHE_NAME)
 		.then(cache => {
 			console.log("cache keys: ", cache.keys);
-			setTimeout(() => location.reload(), 3000);
+			setTimeout(() => location.reload(), 1000);
 			return cache.keys()
 				.then(keys => {
 					console.log("keys: ", keys.length);
