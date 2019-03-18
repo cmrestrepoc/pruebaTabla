@@ -36,7 +36,7 @@
 	<body>
 		<header>
 			<a href="menu0.html">
-				<img src="./img/escudo.jpg" />
+				<img alt src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
 				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
@@ -200,14 +200,6 @@
 						<br><br><br><br><br>
 
 						<div class="form-group">
-							<!--div class="col-md-2" style="margin-left:50px">
-								<div class="input-group">
-									<span class="input-group-addon">
-								    	<input type="radio" name="territorio569" value="comuna" id="comuna">
-								    </span>
-								    <input type="text" class="form-control" name="comuna" value="Comuna">
-								</div>
-							</div-->
 							<label class="col-md-2 control-label" style="text-align:right; padding-right:0">Tipo de territorio:</label>
 							<div class="col-md-2">
 								<div class="input-group">
@@ -217,22 +209,6 @@
 								    <input type="text" class="form-control" name="barrio" value="Barrio">
 								</div>
 							</div>									
-							<!--div class="col-md-2">
-								<div class="input-group">
-									<span class="input-group-addon">
-								    	<input type="radio" name="territorio569" value="localidad" id="localidad">
-								    </span>
-								    <input type="text" class="form-control" name="localidad" value="Localidad">
-								</div>
-							</div>								
-							<div class="col-md-2">
-								<div class="input-group">
-									<span class="input-group-addon">
-								    	<input type="radio" name="territorio569" value="sector" id="sector">
-								    </span>
-								    <input type="text" class="form-control" name="sector" value="Sector">
-								</div>
-							</div-->								
 							<div class="col-md-2" style="padding:0">
 								<div class="input-group">
 									<span class="input-group-addon">
@@ -241,22 +217,6 @@
 								    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
 								</div>
 							</div>
-							<!--div class="col-md-2" style="margin-left:50px">
-								<div class="input-group">
-									<span class="input-group-addon">
-								    	<input type="radio" name="territorio569" value="upz" id="upz">
-								    </span>
-								    <input type="text" class="form-control" name="upz" value="Upz">
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="input-group">
-									<span class="input-group-addon">
-								    	<input type="radio" name="territorio569" value="caserio" id="caserio">
-								    </span>
-								    <input type="text" class="form-control" name="caserio" value="Caserío">
-								</div>
-							</div-->
 							<div class="col-md-2">
 								<div class="input-group">
 									<span class="input-group-addon">
@@ -456,10 +416,6 @@
 								<label class="col-md-12 control-label">Identificación:</label>
 								<input type="text" class="form-control" name="idInscribe569">
 							</div>
-							<!--div class="col-md-3">								
-								<label class="col-md-12 control-label">Cargo:</label>
-								<input type="text" class="form-control" name="cargoInscribe569">
-							</div-->
 							<div class="col-md-3 col-md-offset-1">
 								<label class="col-md-12 control-label">Persona que recibe:</label>
 							</div>
@@ -468,10 +424,7 @@
 							</div>
 							<div class="col-md-2">								
 								<input type="text" class="form-control" name="idRecibe569">
-							</div>
-							<!--div class="col-md-3">								
-								<input type="text" class="form-control" name="cargoRecibe569">
-							</div-->							
+							</div>							
 						</div><!-- Fin del form-group -->
 
 						<br><br><br><br><br><br><br><br>
@@ -492,7 +445,7 @@
 	                        </div>
 
 	                        <div class="col-md-4">
-	                            <a id="todosInscritos" onclick="cargarInscritos569()" class="btn btn-primary">
+	                            <a id="todosInscritos" onclick="cargarInscritos('569')" class="btn btn-primary">
 	                                Cargar inscritos desde servidor
 	                            </a>
 	                        </div>

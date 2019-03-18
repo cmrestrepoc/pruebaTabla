@@ -89,6 +89,7 @@ function dbActasForm(formulario){
 			break;
 		case '478':
 			db = db478;
+			break;
 		case '475':
 			db = db475;
 			break;
@@ -115,7 +116,6 @@ function cargarInicio(formulario){
 	let fecha = new Date();
 	console.log(fecha.getFullYear());
 	let mes = fecha.getMonth() + 1;
-	let dia = fecha.getUTCDate();
 	let cadenaMes = mes < 10 ? '0' + mes : mes;
 	let cadenaDia = fecha.getUTCDate() < 10 ? '0' + fecha.getUTCDate() : fecha.getUTCDate();
 	let cadenaFecha = fecha.getFullYear() + '-' + cadenaMes + '-' + cadenaDia;
@@ -137,13 +137,13 @@ function cargarInicio(formulario){
 	if (localStorage.getItem('Accion')) {
 		switch(localStorage.getItem('Accion')){
 			case 'cargarInscritos493':
-			cargarInscritos493();
+			cargarInscritos('493');
 			break;
 			case 'cargarInscritos444':
-			cargarInscritos444();
+			cargarInscritos('444');
 			break;
 			case 'cargarInscritos569':
-			cargarInscritos569();
+			cargarInscritos('569');
 			break;
 		}
 	}else{
@@ -186,18 +186,15 @@ function escogerInscrito(registro, formulario){
 			document.getElementsByName('srmque' + formulario)[0].value = registro.SEMIREM;
 			document.getElementsByName('placaSrmque' + formulario)[0].value = registro.PLACASEMI;	
 		}
-	}else{
+	}else{ 
 		document.getElementsByName('dirNotif' + formulario)[0].value = registro.DIR_NOT;
 		document.getElementsByName('nombreComercial' + formulario)[0].value = registro.NOCO;
 		document.getElementsByName('razonSocial' + formulario)[0].value = registro.RSO;
 		document.getElementsByName('nit' + formulario)[0].value = registro.NIT;
-		document.getElementsByName('concepto' + formulario)[0].value = registro.CCUV;
-		document.getElementsByName('textoConcepto' + formulario)[0].value = registro.CUV;
-		document.getElementsByName('fechaUltVisita' + formulario)[0].value = registro.F_UV;
 		document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
 		document.getElementsByName('matriculaMercantil' + formulario)[0].value = registro.MAMER;
 
-		if (!(registro.TERRITORIO == undefined)) {
+		if (registro.TERRITORIO != undefined) {
 			console.log('Territorio: ', registro.TERRITORIO);
 			switch(registro.TERRITORIO){
 				case 'barrio':
@@ -216,7 +213,12 @@ function escogerInscrito(registro, formulario){
 			console.log('Territorio Null');
 			$('input:radio[name=territorio'+formulario+']').prop('checked', false);
 		}
-		
+
+		if (formulario != '442'){
+			document.getElementsByName('concepto' + formulario)[0].value = registro.CCUV;
+			document.getElementsByName('textoConcepto' + formulario)[0].value = registro.CUV;
+			document.getElementsByName('fechaUltVisita' + formulario)[0].value = registro.F_UV;
+		}	
 	}
 
 	if(formulario == '493' || formulario == '569'|| formulario == '444'){
@@ -230,7 +232,7 @@ function escogerInscrito(registro, formulario){
 		document.getElementsByName('recibe' + formulario)[0].value = registro.NOMBRE_F1;
 		document.getElementsByName('idRecibe' + formulario)[0].value = registro.ID_F1;
 
-		if(!(formulario == '444')){
+		if(!formulario == '444'){
 			document.getElementsByName('funcUltVisita' + formulario)[0].value = registro.DIR_NOT_E;
 			document.getElementsByName('visitado' + formulario)[0].value = registro.VISITADO;
 		}else{
@@ -460,64 +462,48 @@ function fetchInscritos(formulario){
 	}
 }
 
+function dbInscritosFromForm(formulario){
+	let db;
+	switch(formulario){
+		case '493':
+			db = db493;
+			break;
+		case '569':
+			db = db569;
+			break;
+		case '444':
+			db = db444;
+			break;
+	}
+	return db;
+}
+
 //Aquí se usa la función json(), que funciona similar a JSON.parse()
-function cargarInscritos493(){
-	localStorage.setItem('Accion', 'cargarInscritos493');
-	var promesa = fetchInscritos('493');
+function cargarInscritos(formulario){
+	let db = dbInscritosFromForm(formulario);
+	localStorage.setItem('Accion', 'cargarInscritos' + formulario);
+	var promesa = fetchInscritos(formulario);
 	promesa.then( respObj => {
 		if (respObj.err != undefined) {
+			respObj.err == "ERROR TOKEN" ? 
+			alert('Hubo problemas con el servidor. Es necesario cerrar Sesión con el servidor y volver a introducir credenciales') : 
 			alert('Error: ' + respObj.err);
 		}
-		db493.destroy().then( response => {
+		db.destroy().then( response => {
 			console.log('Base de datos anterior eliminada');
-			db493 = new PouchDB('inscritosCargados493');
+			db = new PouchDB('inscritosCargados' + formulario);
 			console.log('Nueva base de datos creada');
 			localStorage.removeItem('Accion');
-			guardarTraidos(db493, respObj);
-			mostrarInscritos493();
+			guardarTraidos(db, respObj);
 			//cerrarSesionServidor();
 		});		
 	}).catch( err => console.log('Error: ', err) );
 }
 
-function cargarInscritos444(){
-	//fetch('http://localhost/formularioVisaludAPI/public/inscritos')
-	localStorage.setItem('Accion', 'cargarInscritos444');
-	var promesa = fetchInscritos('444');
-	promesa.then( respObj => {
-		if (respObj.err != undefined) {
-			alert('Error: ' + respObj.err);
-		}
-		db444.destroy().then( response => {
-			console.log('Base de datos anterior eliminada');
-			db444 = new PouchDB('inscritosCargados444');
-			console.log('Nueva base de datos creada');
-			localStorage.removeItem('Accion');
-			guardarTraidos(db444, respObj);
-			mostrarInscritos444();
-			//cerrarSesionServidor();
-		});
-	}).catch( err => console.log('Error: ', err) );
-}
-
-function cargarInscritos569(){
-	//fetch('http://localhost/formularioVisaludAPI/public/inscritos')
-	localStorage.setItem('Accion', 'cargarInscritos569');
-	var promesa = fetchInscritos('569');
-	promesa.then( respObj => {
-		if (respObj.err != undefined) {
-			alert('Error: ' + respObj.err);
-		}
-		db569.destroy().then( response => {
-			console.log('Base de datos anterior eliminada');
-			db569 = new PouchDB('inscritosCargados569');
-			console.log('Nueva base de datos creada');
-			localStorage.removeItem('Accion');
-			guardarTraidos(db569, respObj);
-			mostrarInscritos569();
-			//cerrarSesionServidor();
-		});
-	}).catch( err => console.log('Error: ', err) );
+function cargarTodosLosInscritos(){
+	cargarInscritos('493');
+	cargarInscritos('569');
+	cargarInscritos('444');
 }
 
 function fetchEvaluados(doc, formulario){
@@ -995,7 +981,7 @@ function persistirEvaluado(db, evaluado, formulario){
 				alert('evaluado guardado en base de datos');
 				location.reload();
 			}else {
-				alert('problemas guardando evaluado en base de datos',err);
+				alert('problemas guardando evaluado en base de datos: ', err);
 			}
 		});
 	});
@@ -1016,7 +1002,7 @@ function guardarEvaluacion(formulario){
 			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 	
-			for (var i = 0; i < document.getElementsByName('tipoCarneExpende').length; i++){
+			for (let i = 0; i < document.getElementsByName('tipoCarneExpende').length; i++){
 				tipocarne = document.getElementsByName('tipoCarneExpende')[i].checked ? document.getElementsByName('tipoCarneExpende')[i].value : console.log(i);
 			}
 			adicional = {
@@ -1065,7 +1051,7 @@ function guardarEvaluacion(formulario){
 			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			tipoEsta = [];
-			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
+			for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 			}
 			console.log(tipoEsta);
@@ -1099,7 +1085,7 @@ function guardarEvaluacion(formulario){
 			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			tipoEsta = [];
-			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
+			for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 			};
 			console.log(tipoEsta);
@@ -1122,7 +1108,7 @@ function guardarEvaluacion(formulario){
 			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			tipoEsta = [];
-			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
+			for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 			}
 			adicional = {
@@ -1156,7 +1142,7 @@ function guardarEvaluacion(formulario){
 			preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			tipoEsta = [];
-			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
+			for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 			};
 			console.log(tipoEsta);
@@ -1202,7 +1188,7 @@ function guardarEvaluacion(formulario){
 		case '475':
 			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			tipoEsta = [];
-			for (var i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
+			for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 			};
 			console.log(tipoEsta);

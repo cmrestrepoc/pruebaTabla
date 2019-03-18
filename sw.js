@@ -6,19 +6,6 @@
 // Asignar un nombre y versión de la cache
 const CACHE_NAME = 'v2_cache_visalud_pwa';
 
-/*function limpiarCache( cacheName, numeroItems ) {
-	caches.open(cacheName)
-		.then(cache => {
-			return cache.keys()
-				.then(keys => {
-					if (keys.length > numeroItems) {
-						cache.delete( keys[0] )
-							.then( limpiarCache(cacheName,numeroItems) );
-					}
-				});
-		});
-}*/
-
 // ficheros a cachear en la aplicación
 var urlsToCache = [
 	'./',
@@ -56,10 +43,30 @@ var urlsToCache = [
 	'./img/llave.png'
 ];
 
+let i = 0;
+function limpiarCache() {
+	caches.open(CACHE_NAME)
+		.then(cache => {
+			console.log("cache keys: ", cache.keys);
+			setTimeout(() => location.reload(), 3000);
+			return cache.keys()
+				.then(keys => {
+					console.log("keys: ", keys.length);
+					console.log("urlstocache: ", urlsToCache.length);
+					console.log(keys[0]);
+					console.log("valor i: ", i);
+					if ((keys.length > (urlsToCache.length - i)) && (i <= urlsToCache.length)) {
+						i++;
+						cache.delete( keys[0] )
+							.then( limpiarCache() );
+					}
+				});
+		});
+}
 
 // Evento Install
 
-/* variable que representa el serviceWorker, 
+/* self es una variable que representa el serviceWorker, 
 con ella se va a instalar el sw y a guardar en
 cache los recursos estáticos*/
 self.addEventListener('install', e => {
