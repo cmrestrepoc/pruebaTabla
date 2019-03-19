@@ -459,7 +459,9 @@ function fetchInscritos(formulario){
 					+'token='+credenciales.token+'&'
 					+'formulario='+formulario;
 		console.log('Estamos en el formulario: ', formulario);
-		return fetch('https://sisbenpro.com/public/inscritosVisual', {
+		
+		return new Promise((resolve, reject) => {
+			fetch('https://sisbenpro.com/public/inscritosVisual', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
@@ -467,8 +469,9 @@ function fetchInscritos(formulario){
 					//mode: 'no-cors',
 					body: data
 				})
-				.then( res => res.json() )
-				.catch( err => console.log('Hubo problemas con la conexión a la base de datos. Intente una vez más o revise su conexión a internet '+err.json()) );
+				.then( res => resolve(res.json()) )
+				.catch( err => reject(err.json()) );
+			});
 	} else{
 		location.assign("./loginserver.html");
 	}
@@ -518,7 +521,9 @@ function cargarTodosLosInscritos(){
 			localStorage.removeItem('Accion') :
 			localStorage.setItem('Accion', 'cargarTodosLosInscritos');
 	}	
-	var promesa = fetchInscritos('493');
+	let promesa = fetchInscritos('493');
+	let promesa1 = fetchInscritos('569');
+	let promesa2 = fetchInscritos('444');
 		promesa.then( respObj => {
 			if (respObj.err != undefined) {
 				respObj.err == "ERROR TOKEN" ? 
@@ -527,15 +532,13 @@ function cargarTodosLosInscritos(){
 				return;
 			}	
 			guardarTraidos('493', db493, respObj);
-			alert("Inscritos cargados correctamente");		
-		}).catch( err => console.log('Error: ', err) );
-	
-	promesa = fetchInscritos('569');
-		promesa.then( respObj => {
-			guardarTraidos('569', db569, respObj);		
-		}).catch( err => console.log('Error: ', err) );
+			promesa1.then( respObj1 => {
+				guardarTraidos( '569', db569, respObj1 );
+				promesa2.then ( respObj2 => guardarTraidos( '444', db444, respObj2 ))
+						.catch( err2 => console.log('Error', err2 ) );
+			}).catch( err1 => console.log('Error: ', err1) );
 
-	
+		}).catch( err => console.log('Error: ', err) );	
 }
 
 function fetchEvaluados(doc, formulario){
