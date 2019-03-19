@@ -43,27 +43,6 @@ var urlsToCache = [
 	'./img/llave.png'
 ];
 
-let i = 0;
-function limpiarCache() {
-	caches.open(CACHE_NAME)
-		.then(cache => {
-			console.log("cache keys: ", cache.keys);
-			setTimeout(() => location.reload(), 1000);
-			return cache.keys()
-				.then(keys => {
-					console.log("keys: ", keys.length);
-					console.log("urlstocache: ", urlsToCache.length);
-					console.log(keys[0]);
-					console.log("valor i: ", i);
-					if ((keys.length > (urlsToCache.length - i)) && (i <= urlsToCache.length)) {
-						i++;
-						cache.delete( keys[0] )
-							.then( limpiarCache() );
-					}
-				});
-		});
-}
-
 // Evento Install
 
 /* self es una variable que representa el serviceWorker, 
@@ -164,4 +143,24 @@ self.addEventListener('fetch', e => {
 	);*/
 });
 
-//Victoria2510.Samuel2112
+let i = 0;
+function limpiarCache() {
+	caches.open(CACHE_NAME)
+		.then(cache => {
+			console.log("cache keys: ", cache.keys);
+			setTimeout(() => location.reload(), 1000);
+			return cache.keys()
+				.then(keys => {
+					console.log("keys: ", keys.length);
+					console.log("urlstocache: ", urlsToCache.length);
+					console.log(keys[0]);
+					console.log("valor i: ", i);
+					if ((keys.length > (urlsToCache.length - i)) && (i <= urlsToCache.length)) {
+						i++;
+						cache.delete( keys[0] )
+							.then( limpiarCache() );
+					}
+				});
+		});
+}
+

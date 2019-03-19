@@ -1,16 +1,3 @@
-
-function verificarSesionLocal(){
-	let estado = localStorage.getItem('estado');
-	if (estado == 'false') {
-		console.log(estado);
-		window.location.replace("index.html");
-	}else{
-		console.log("Problemas con el if");
-	}
-}
-
-verificarSesionLocal();
-
 var db493 = new PouchDB('inscritosCargados493');
 var dbNuevos493 = new PouchDB('inscritosNuevos493');
 var db569 = new PouchDB('inscritosCargados569');
@@ -68,6 +55,20 @@ dbNuevos444.changes({
 	since: 'now',
 	live: true
 }).on('change', mostrarInscritos444);*/
+
+
+function verificarSesionLocal(){
+	let estado = localStorage.getItem('estado');
+	if (estado == 'false') {
+		console.log(estado);
+		window.location.replace("index.html");
+	}else{
+		console.log("Problemas con el if");
+	}
+	verificarAccion();
+}
+
+verificarSesionLocal();
 
 function dbActasForm(formulario){
 	let db;
@@ -133,7 +134,9 @@ function cargarInicio(formulario){
 		localStorage.removeItem('firmaIns1');
 		localStorage.removeItem('firmaIns2');
 	}
+}
 
+function verificarAccion(){
 	if (localStorage.getItem('Accion')) {
 		switch(localStorage.getItem('Accion')){
 			case 'cargarInscritos493':
@@ -144,6 +147,9 @@ function cargarInicio(formulario){
 			break;
 			case 'cargarInscritos569':
 			cargarInscritos('569');
+			break;
+			case 'cargarTodosLosInscritos':
+			cargarTodosLosInscritos();
 			break;
 		}
 	}else{
@@ -387,42 +393,48 @@ function mostrarInscritos444(formulario){
 	db493.destroy().then(resp => console.log);
 }*/
 
-function guardarTraidos(dbBase, respObj){
+function guardarTraidos(formulario, dbBase, respObj){
 	var indice = 0;
-	respObj.forEach( registro => {
-		//console.log('Registro: ',registro);
-		if(registro.id < 10){
-			indice = '000' + String(registro.id);
-		}else if (registro.id >= 10 && registro.id < 100){
-			indice = '00' + String(registro.id);
-		}else if (registro.id >= 100 && registro.id < 1000){
-			indice = '0' + String(registro.id);
-		}else{
-			indice = String(registro.id);
-		}
+	dbBase.destroy().then( response => {
+		console.log('Base de datos anterior eliminada');
+		dbBase = new PouchDB('inscritosCargados' + formulario);
+		console.log('Nueva base de datos creada');
 		
-		if (registro.ACTIVIDAD) {
-			registro.ACTIVIDAD = JSON.parse(registro.ACTIVIDAD);	
-		}
-		
-		var id = { _id: indice };
-		// Con la siguiente línea se añade la variable _id al objeto			
-		registro = Object.assign(id,registro);   
-		//console.log('Registro: ',registro);
-		dbBase.put(registro, function callback(err, result){
-			if (!err) {
-				console.log('inscrito guardado en base de datos');
-			}else {
-				console.log('problemas guardando inscrito en base de datos', err);
+		respObj.forEach( registro => {
+			//console.log('Registro: ',registro);
+			if(registro.id < 10){
+				indice = '000' + String(registro.id);
+			}else if (registro.id >= 10 && registro.id < 100){
+				indice = '00' + String(registro.id);
+			}else if (registro.id >= 100 && registro.id < 1000){
+				indice = '0' + String(registro.id);
+			}else{
+				indice = String(registro.id);
 			}
+			
+			if (registro.ACTIVIDAD) {
+				registro.ACTIVIDAD = JSON.parse(registro.ACTIVIDAD);	
+			}
+			
+			var id = { _id: indice };
+			// Con la siguiente línea se añade la variable _id al objeto			
+			registro = Object.assign(id,registro);   
+			//console.log('Registro: ',registro);
+			dbBase.put(registro, function callback(err, result){
+				if (!err) {
+					console.log('inscrito guardado en base de datos');
+				}else {
+					console.log('problemas guardando inscrito en base de datos', err);
+				}
+			});
 		});
-	});
+	});	
 }
 
 function cerrarSesionServidor(){
 	var identidad = JSON.parse(localStorage.getItem('identity'));
 	if (identidad != undefined) {
-		fetch('https://sisbenpro.com/public/cerrarSesion/'+identidad.usuario)
+		fetch('https://sisbenpro.com/public/cerrarSesion/' + identidad.usuario)
 		.then( res => res.json() )
 		.then( jsonRes => alert(jsonRes.res) )
 		.catch( err => alert("Problemas en la respuesta del servidor " + err) );
@@ -481,29 +493,49 @@ function dbInscritosFromForm(formulario){
 //Aquí se usa la función json(), que funciona similar a JSON.parse()
 function cargarInscritos(formulario){
 	let db = dbInscritosFromForm(formulario);
-	localStorage.setItem('Accion', 'cargarInscritos' + formulario);
+	if(!localStorage.getItem('identity')){
+		localStorage.getItem('Accion') == 'cargarInscritos' + formulario ? 
+			localStorage.removeItem('Accion') :
+			localStorage.setItem('Accion', 'cargarInscritos' + formulario);
+	}
 	var promesa = fetchInscritos(formulario);
 	promesa.then( respObj => {
 		if (respObj.err != undefined) {
 			respObj.err == "ERROR TOKEN" ? 
 			alert('Hubo problemas con el servidor. Es necesario cerrar Sesión con el servidor y volver a introducir credenciales') : 
 			alert('Error: ' + respObj.err);
-		}
-		db.destroy().then( response => {
-			console.log('Base de datos anterior eliminada');
-			db = new PouchDB('inscritosCargados' + formulario);
-			console.log('Nueva base de datos creada');
-			localStorage.removeItem('Accion');
-			guardarTraidos(db, respObj);
-			//cerrarSesionServidor();
-		});		
+		}else{
+			guardarTraidos(formulario, db, respObj);
+			alert("Inscritos cargados correctamente");
+				//cerrarSesionServidor();
+		}		
 	}).catch( err => console.log('Error: ', err) );
 }
 
 function cargarTodosLosInscritos(){
-	cargarInscritos('493');
-	cargarInscritos('569');
-	cargarInscritos('444');
+	if(!localStorage.getItem('identity')){
+		localStorage.getItem('Accion') == 'cargarTodosLosInscritos' ?
+			localStorage.removeItem('Accion') :
+			localStorage.setItem('Accion', 'cargarTodosLosInscritos');
+	}	
+	var promesa = fetchInscritos('493');
+		promesa.then( respObj => {
+			if (respObj.err != undefined) {
+				respObj.err == "ERROR TOKEN" ? 
+				alert('Hubo problemas con el servidor. Es necesario cerrar Sesión con el servidor y volver a introducir credenciales') : 
+				alert('Error: ' + respObj.err);
+				return;
+			}	
+			guardarTraidos('493', db493, respObj);
+			alert("Inscritos cargados correctamente");		
+		}).catch( err => console.log('Error: ', err) );
+	
+	promesa = fetchInscritos('569');
+		promesa.then( respObj => {
+			guardarTraidos('569', db569, respObj);		
+		}).catch( err => console.log('Error: ', err) );
+
+	
 }
 
 function fetchEvaluados(doc, formulario){
