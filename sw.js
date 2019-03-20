@@ -93,7 +93,7 @@ self.addEventListener('fetch', e => {
 
 	//Cache and network race (prueba)
 
-	const respuesta = new Promise( (resolve, reject) => {
+	/*const respuesta = new Promise( (resolve, reject) => {
 		let rechazada = false;
 		
 		const falloUnaVez = () => {
@@ -113,7 +113,7 @@ self.addEventListener('fetch', e => {
 		}).catch( falloUnaVez );
 	});
 
-	e.respondWith( respuesta );
+	e.respondWith( respuesta );*/
 
 	//Cache with network update
 	/*if (e.request.clone().method === 'POST') {
@@ -132,7 +132,7 @@ self.addEventListener('fetch', e => {
 	e.respondWith( respuesta );*/
 
 	// Codigo como está en el curso del Tico: Network with cache fallback
-	/*const respuesta = fetch( e.request ).then( res => {
+	const respuesta = fetch( e.request ).then( res => {
 
 		if(!res) return caches.match(e.request);
 
@@ -148,7 +148,7 @@ self.addEventListener('fetch', e => {
 		return caches.match( e.request );
 	});
 	
-	e.respondWith( respuesta );*/
+	e.respondWith( respuesta );
 
 //////////////////
 	/*

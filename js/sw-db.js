@@ -522,23 +522,23 @@ function cargarTodosLosInscritos(){
 			localStorage.setItem('Accion', 'cargarTodosLosInscritos');
 	}	
 	let promesa = fetchInscritos('493');
-	let promesa1 = fetchInscritos('569');
-	let promesa2 = fetchInscritos('444');
-		promesa.then( respObj => {
-			if (respObj.err != undefined) {
-				respObj.err == "ERROR TOKEN" ? 
-				alert('Hubo problemas con el servidor. Es necesario cerrar Sesión con el servidor y volver a introducir credenciales') : 
-				alert('Error: ' + respObj.err);
-				return;
-			}	
-			guardarTraidos('493', db493, respObj);
-			promesa1.then( respObj1 => {
-				guardarTraidos( '569', db569, respObj1 );
-				promesa2.then ( respObj2 => guardarTraidos( '444', db444, respObj2 ))
-						.catch( err2 => console.log('Error', err2 ) );
-			}).catch( err1 => console.log('Error: ', err1) );
+	promesa.then( respObj => {
+		if (respObj.err != undefined) {
+			respObj.err == "ERROR TOKEN" ? 
+			alert('Hubo problemas con el servidor. Es necesario cerrar Sesión con el servidor y volver a introducir credenciales') : 
+			alert('Error: ' + respObj.err);
+			return;
+		}	
+		guardarTraidos('493', db493, respObj);
+		let promesa1 = fetchInscritos('569');
+		promesa1.then( respObj1 => {
+			guardarTraidos( '569', db569, respObj1 );
+			let promesa2 = fetchInscritos('444');
+			promesa2.then ( respObj2 => guardarTraidos( '444', db444, respObj2 ))
+					.catch( err2 => console.log('Error', err2 ) );
+		}).catch( err1 => console.log('Error: ', err1) );
 
-		}).catch( err => console.log('Error: ', err) );	
+	}).catch( err => console.log('Error: ', err) );	
 }
 
 function fetchEvaluados(doc, formulario){
