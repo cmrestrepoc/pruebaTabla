@@ -119,7 +119,7 @@ self.addEventListener('fetch', e => {
 	/*if (e.request.clone().method === 'POST') {
 		return fetch(e.request);
 	}
-
+	
 	const respuesta = caches.open(CACHE_NAME).then( cache => {
 
 		fetch( e.request )

@@ -65,7 +65,6 @@ function verificarSesionLocal(){
 	}else{
 		console.log("Problemas con el if");
 	}
-	verificarAccion();
 }
 
 verificarSesionLocal();
@@ -469,9 +468,10 @@ function fetchInscritos(formulario){
 					//mode: 'no-cors',
 					body: data
 				})
-				.then( res => resolve(res.json()) )
-				.catch( err => reject(err.json()) );
-			});
+				.then( res => resolve(res) )
+				.catch( err => reject(err) );
+			}).then( resp => resp.json() )
+			.catch( error=>error.json() );
 	} else{
 		location.assign("./loginserver.html");
 	}
@@ -496,11 +496,11 @@ function dbInscritosFromForm(formulario){
 //Aquí se usa la función json(), que funciona similar a JSON.parse()
 function cargarInscritos(formulario){
 	let db = dbInscritosFromForm(formulario);
-	if(!localStorage.getItem('identity')){
+	//if(!localStorage.getItem('identity')){
 		localStorage.getItem('Accion') == 'cargarInscritos' + formulario ? 
 			localStorage.removeItem('Accion') :
 			localStorage.setItem('Accion', 'cargarInscritos' + formulario);
-	}
+	//}
 	var promesa = fetchInscritos(formulario);
 	promesa.then( respObj => {
 		if (respObj.err != undefined) {
