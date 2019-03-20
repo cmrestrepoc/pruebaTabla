@@ -91,15 +91,34 @@ original desde el servidor una vez haya conexión
 a internet */
 self.addEventListener('fetch', e => {
 
+	//Cache and network race (prueba)
+
+	const respuesta = new Promise( (resolve, reject) => {
+		let rechazada = false;
+		
+		const falloUnaVez = () => {
+			if (rechazada) {
+				console.log("No es posible que funcione la App");
+			} else {
+				rechazada = true;
+			}
+		}
+
+		fetch( e.request ).then( res=> {
+			res.ok ? resolve(res) : falloUnaVez();
+		}).catch( falloUnaVez );
+
+		caches.match( e.request ).then( res => {
+			res ? resolve(res) : falloUnaVez();
+		}).catch( falloUnaVez );
+	});
+
+	e.respondWith( respuesta );
+
 	//Cache with network update
-
-	if (e.request.clone().method === 'POST') {
+	/*if (e.request.clone().method === 'POST') {
 		return fetch(e.request);
-	};
-
-	/*if (e.request.url.includes('bootstrap.min.js')){
-		return e.respondWith( caches.match( e.request ) );
-	}*/
+	}
 
 	const respuesta = caches.open(CACHE_NAME).then( cache => {
 
@@ -110,7 +129,7 @@ self.addEventListener('fetch', e => {
 
 	});
 
-	e.respondWith( respuesta );
+	e.respondWith( respuesta );*/
 
 	// Codigo como está en el curso del Tico: Network with cache fallback
 	/*const respuesta = fetch( e.request ).then( res => {
