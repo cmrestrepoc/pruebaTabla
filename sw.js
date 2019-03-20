@@ -97,6 +97,10 @@ self.addEventListener('fetch', e => {
 		return fetch(e.request);
 	};
 
+	if (e.request.url.includes('bootstrap.min.js')){
+		return e.respondWith( caches.match( e.request ) );
+	}
+
 	const respuesta = caches.open(CACHE_NAME).then( cache => {
 
 		fetch( e.request )
