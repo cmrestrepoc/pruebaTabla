@@ -188,3 +188,16 @@ function loginServer(){
 	})
 	.catch( err => alert('Problemas con la conexión a internet', err.json()) );
 }
+
+function estabNumInscripcion(valor, formulario){
+	document.getElementsByName('incripcion' + formulario)[0].value += valor;
+}
+
+function vehiNumInscripcion(valor){
+	document.getElementsByName('incripcion444')[0].value = valor;
+}
+
+function auxiliarInscVehi(valor){
+	if(!document.getElementsByName('placaSrmque444') && !document.getElementsByName('placaRemolque444'))
+		document.getElementsByName('inscripcion444')[0].value = valor;
+}
