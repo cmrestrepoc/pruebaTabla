@@ -516,11 +516,11 @@ function cargarInscritos(formulario){
 }
 
 function cargarTodosLosInscritos(){
-	if(!localStorage.getItem('identity')){
+//	if(!localStorage.getItem('identity')){
 		localStorage.getItem('Accion') == 'cargarTodosLosInscritos' ?
 			localStorage.removeItem('Accion') :
 			localStorage.setItem('Accion', 'cargarTodosLosInscritos');
-	}	
+//	}	
 	let promesa = fetchInscritos('493');
 	promesa.then( respObj => {
 		if (respObj.err != undefined) {
