@@ -571,7 +571,9 @@ function cargarTodosLosInscritos(){
 		promesa1.then( respObj1 => {
 			guardarTraidos( '569', db569, respObj1 );
 			let promesa2 = fetchInscritos('444');
-			promesa2.then ( respObj2 => guardarTraidos( '444', db444, respObj2 ))
+			localStorage.removeItem('Accion');
+			promesa2.then ( respObj2 => guardarTraidos( '444', db444, respObj2 ) )
+					.then( () => alert('Inscritos descargados correctamente') )
 					.catch( err2 => console.log('Error', err2 ) );
 		}).catch( err1 => console.log('Error: ', err1) );
 
