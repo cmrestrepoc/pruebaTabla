@@ -24,9 +24,9 @@
 		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="./css/styles.css">
 
-		<script src="./js/jquery-3.3.1.slim.min.js"></script>
-		<script src="./js/bootstrap.min.js"></script>
-		<script src="./js/pouchdb.min.js"></script>
+		<script type="text/javascript" src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./js/pouchdb.min.js"></script>
 		<script type="text/javascript" src="main.js"></script>
 		<script type="text/javascript" src="./js/sw-db.js"></script>
 		<script type="text/javascript" src="./js/login.js"></script>
@@ -34,7 +34,7 @@
 
 	</head>
 
-	<body onload="verificarSesionLocal()">
+	<body onload="verificarSesionLocal(); verificarAccion();">
 		<header id="index">
 			<img alt style="width: 8%" src="./img/escudo.jpg" />
 			<div class="titulos">

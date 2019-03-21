@@ -36,6 +36,8 @@ var urlsToCache = [
 	'./js/sw-db.js',
 	'./js/pouchdb.min.js',
 	'./js/jquery.dataTables.min.js',
+	'./js/jquery.jqscribble.js',
+	'./js/jquery.extrabrushes.js',
 	'./js/login.js',
 	'./img/escudo130.ico',
 	'./img/escudo.png',
