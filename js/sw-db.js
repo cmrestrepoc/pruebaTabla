@@ -172,19 +172,25 @@ function createColumns(arreglo){
 	return td;
 }
 
+function calcularIndice(ultimo){
+	let indice;
+	if(ultimo < 10){
+		indice = '000' + String(ultimo);
+	}else if (ultimo >= 10 && ultimo < 100){
+		indice = '00' + String(ultimo);
+	}else if (ultimo >= 100 && ultimo < 1000){
+		indice = '0' + String(ultimo);
+	}else{
+		indice = String(ultimo);
+	}
+	return indice;		
+}
+
 function calcularNumActa(formulario){
 	let db = dbActasForm(formulario);
 	return db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
-		if(ultimo < 10){
-			indice = '000' + String(ultimo);
-		}else if (ultimo >= 10 && ultimo < 100){
-			indice = '00' + String(ultimo);
-		}else if (ultimo >= 100 && ultimo < 1000){
-			indice = '0' + String(ultimo);
-		}else{
-			indice = String(ultimo);
-		}
+		let indice = calcularIndice(ultimo);
 		let fecha = calcularFecha();
 		let cadenaFecha = fecha.dia + fecha.mes + fecha.anio;
 		//console.log(indice);
@@ -262,6 +268,7 @@ function escogerInscrito(registro, formulario){
 		console.log('Debería estar en ' + formulario);
 		document.getElementsByName('id' + formulario)[0].value = registro._id;
 		document.getElementsByName('fecha' + formulario)[0].value = registro.FECHA;
+		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
 		document.getElementsByName('obAutoridad' + formulario)[0].value = registro.OBSERVA_AU;
 		document.getElementsByName('obPersona' + formulario)[0].value = registro.OBSERVA_F1;
 		document.getElementsByName('inscribe' + formulario)[0].value = registro.NOMBRE_E1;
@@ -438,16 +445,8 @@ function guardarTraidos(formulario, dbBase, respObj){
 		
 		respObj.forEach( registro => {
 			//console.log('Registro: ',registro);
-			if(registro.id < 10){
-				indice = '000' + String(registro.id);
-			}else if (registro.id >= 10 && registro.id < 100){
-				indice = '00' + String(registro.id);
-			}else if (registro.id >= 100 && registro.id < 1000){
-				indice = '0' + String(registro.id);
-			}else{
-				indice = String(registro.id);
-			}
-			
+			let indice  = calcularIndice(registro.id);
+					
 			if (registro.ACTIVIDAD) {
 				registro.ACTIVIDAD = JSON.parse(registro.ACTIVIDAD);	
 			}
@@ -670,20 +669,11 @@ function cargarServidor(formulario){
 function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente, formulario){
 	//var id = 0;
 	if(idExistente == 0){
-		var indice = '';
 		dbBase.info().then( result => {
 			var ultimo = result.doc_count + 1;
-			if(ultimo < 10){
-				indice = '000' + String(ultimo);
-			}else if (ultimo >= 10 && ultimo < 100){
-				indice = '00' + String(ultimo);
-			}else if (ultimo >= 100 && ultimo < 1000){
-				indice = '0' + String(ultimo);
-			}else{
-				indice = String(ultimo);
-			}
+			let indice  = calcularIndice(ultimo);
 			//console.log(indice);
-			var insertar = { _id: indice, N_INSCRIP: formulario + '-' + indice };
+			var insertar = { _id: indice };
 			inscrito = Object.assign( insertar, inscrito );
 			//console.log(inscrito);
 
@@ -746,7 +736,7 @@ function guardarComunesInscritos(formulario){
 		CIUDAD: document.getElementsByName('mpio' + formulario)[0].value,
 		COMUN: 130,*/
 		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
-		//N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
+		N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
 		//ENTIDAD: 'SECRETARÍA DE SALUD MUNICIPAL',
 		NOMBRE_P: document.getElementsByName('propietario' + formulario)[0].value,
 		TID_P: document.getElementsByName('tipoIdProp' + formulario)[0].value,
