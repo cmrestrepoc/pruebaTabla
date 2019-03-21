@@ -186,7 +186,7 @@ function calcularNumActa(formulario){
 			indice = String(ultimo);
 		}
 		let fecha = calcularFecha();
-		let cadenaFecha = fecha.anio + fecha.mes + fecha.dia;
+		let cadenaFecha = fecha.dia + fecha.mes + fecha.anio;
 		//console.log(indice);
 		let acta = formulario + cadenaFecha + indice;
 		console.log(acta);
