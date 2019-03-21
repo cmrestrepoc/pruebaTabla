@@ -190,14 +190,15 @@ function loginServer(){
 }
 
 function estabNumInscripcion(valor, formulario){
-	document.getElementsByName('incripcion' + formulario)[0].value += valor;
+	document.getElementsByName('inscripcion' + formulario)[0].value += valor;
 }
 
 function vehiNumInscripcion(valor){
-	document.getElementsByName('incripcion444')[0].value = valor;
+	document.getElementsByName('inscripcion444')[0].value += valor;
 }
 
 function auxiliarInscVehi(valor){
-	if(!document.getElementsByName('placaSrmque444') && !document.getElementsByName('placaRemolque444'))
-		document.getElementsByName('inscripcion444')[0].value = valor;
+	if(document.getElementsByName('placaSrmque444')[0].value == '' && document.getElementsByName('placaRemolque444')[0].value == ''){
+		document.getElementsByName('inscripcion444')[0].value += valor;
+	}
 }
