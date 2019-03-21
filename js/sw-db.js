@@ -112,13 +112,23 @@ function dbActasForm(formulario){
 	return db;
 }
 
-function cargarInicio(formulario){
+function calcularFecha(){
 	let fecha = new Date();
 	console.log(fecha.getFullYear());
 	let mes = fecha.getMonth() + 1;
 	let cadenaMes = mes < 10 ? '0' + mes : mes;
 	let cadenaDia = fecha.getUTCDate() < 10 ? '0' + fecha.getUTCDate() : fecha.getUTCDate();
-	let cadenaFecha = fecha.getFullYear() + '-' + cadenaMes + '-' + cadenaDia;
+	
+	return {
+		dia: cadenaDia,
+		mes: cadenaMes,
+		anio: fecha.getFullYear()
+	};
+}
+
+function cargarInicio(formulario){
+	let fecha = calcularFecha();
+	let cadenaFecha = fecha.anio + '-' + fecha.mes + '-' + fecha.dia;
 	console.log(cadenaFecha);
 	document.getElementsByName('fecha' + formulario)[0].value = cadenaFecha;
 
@@ -160,6 +170,28 @@ function createColumns(arreglo){
 	var td = document.createElement('td');
 	td.innerHTML = arreglo;
 	return td;
+}
+
+function calcularNumActa(formulario){
+	let db = dbActasForm(formulario);
+	return db.info().then( result => {
+		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
+		if(ultimo < 10){
+			indice = '000' + String(ultimo);
+		}else if (ultimo >= 10 && ultimo < 100){
+			indice = '00' + String(ultimo);
+		}else if (ultimo >= 100 && ultimo < 1000){
+			indice = '0' + String(ultimo);
+		}else{
+			indice = String(ultimo);
+		}
+		let fecha = calcularFecha();
+		let cadenaFecha = fecha.anio + fecha.mes + fecha.dia;
+		//console.log(indice);
+		let acta = formulario + cadenaFecha + indice;
+		console.log(acta);
+		return acta;
+	});
 }
 
 function escogerInscrito(registro, formulario){
@@ -249,6 +281,11 @@ function escogerInscrito(registro, formulario){
 
 	}else{
 		// Aquí se puede introducir un método para calcular automáticamente un número de acta
+		calcularNumActa(formulario).then( acta => {
+			console.log("Valor de acta recibido ", acta);
+			document.getElementsByName('acta' + formulario)[0].value = acta;
+		});
+		
 		let alerta = document.getElementsByName('alertaInscrito');
 		let arreglo = Array.from(alerta); //en este caso alerta es un iterable pero no un arreglo, hay que convertirlo primero
 		let arr = arreglo.map( item => {
@@ -994,22 +1031,10 @@ function guardarEvaluadosEstablecimientos(formulario){
 }*/
 
 function persistirEvaluado(db, evaluado, formulario){
-	var indice = '';
-	db.info().then( result => {
-		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
-		if(ultimo < 10){
-			indice = '000' + String(ultimo);
-		}else if (ultimo >= 10 && ultimo < 100){
-			indice = '00' + String(ultimo);
-		}else if (ultimo >= 100 && ultimo < 1000){
-			indice = '0' + String(ultimo);
-		}else{
-			indice = String(ultimo);
-		}
-		//console.log(indice);
-		var insertar = { _id: indice, ACTA: formulario + '-' + indice };
+	calcularNumActa(formulario).then( acta => {
+		var insertar = { _id: acta.substring(11, 14), ACTA: acta };
 		evaluado = Object.assign( insertar, evaluado );
-		//console.log(evaluado);
+		console.log(evaluado);
 
 		db.put(evaluado, function callback(err, result){
 			if (!err) {
@@ -1020,6 +1045,7 @@ function persistirEvaluado(db, evaluado, formulario){
 			}
 		});
 	});
+	
 }
 
 function guardarEvaluacion(formulario){
