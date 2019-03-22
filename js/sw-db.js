@@ -1303,6 +1303,7 @@ function guardarEvaluacion(formulario){
 			let muestras = [];
 			for(let i=0; i<longitud; i++){
 				muestras[i] = {
+					acta: document.getElementsByName('acta' + formulario)[0].value,
 					Orden: document.getElementsByName('Orden')[i].value,
 					Um: document.getElementsByName('Um')[i].value,
 					Contenido: document.getElementsByName('Contenido')[i].value,
@@ -1312,7 +1313,8 @@ function guardarEvaluacion(formulario){
 					RegSanit: document.getElementsByName('RegSanit')[i].value
 				};
 			}
-			adicional = {
+			evaluado = {
+				MUESTRAS: muestras,
 				FECHA: document.getElementsByName('fecha' + formulario)[0].value,
 				N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
 				DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
@@ -1342,7 +1344,6 @@ function guardarEvaluacion(formulario){
 				GRABADO: 'S'
 			};
 			localStorage.setItem('form', '333');
-			evaluado = Object.assign( muestras, adicional);
 			break;
 		case '441':
 			evaluadoVehi = guardarEvaluadosVehiculos(formulario);
