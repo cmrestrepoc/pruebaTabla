@@ -780,7 +780,7 @@ function guardarComunesEstablecimientos(formulario){
 		DIR_NOT_E: document.getElementsByName('funcUltVisita' + formulario)[0].value,
 		MAMER: document.getElementsByName('matriculaMercantil' + formulario)[0].value,
 		NOLOCA: document.getElementsByName('nomTerr' + formulario)[0].value,
-		VISITADO: document.getElementsByName('visitado493')[0].value,
+		VISITADO: document.getElementsByName('visitado' + formulario)[0].value,
 		
 		TERRITORIO: territorio
 	}
@@ -1041,8 +1041,8 @@ function persistirEvaluado(db, evaluado, formulario){
 }
 
 function guardarEvaluacion(formulario){
-	let evaluado = guardarComunesEvaluados(formulario);
-	let db = dbActasForm(formulario);
+	let evaluado;
+	formulario != '333' ? evaluado = guardarComunesEvaluados(formulario) : null;
 	let preguntasComunes;
 	let evaluadoEsta;
 	let evaluadoVehi;
@@ -1140,7 +1140,7 @@ function guardarEvaluacion(formulario){
 			tipoEsta = [];
 			for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
-			};
+			}
 			console.log(tipoEsta);
 			adicional = {
 				ACTIVIDAD: tipoEsta,
@@ -1197,7 +1197,7 @@ function guardarEvaluacion(formulario){
 			tipoEsta = [];
 			for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
-			};
+			}
 			console.log(tipoEsta);
 			adicional = {
 				ACTIVIDAD: tipoEsta,
@@ -1243,7 +1243,7 @@ function guardarEvaluacion(formulario){
 			tipoEsta = [];
 			for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 				document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
-			};
+			}
 			console.log(tipoEsta);
 			adicional = {
 				ACTIVIDAD: tipoEsta,
@@ -1299,6 +1299,37 @@ function guardarEvaluacion(formulario){
 			evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
 			break;
 		case '333':
+			adicional = {
+				FECHA: document.getElementsByName('fecha' + formulario)[0].value,
+				N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
+				DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
+				TELS: document.getElementsByName('tel' + formulario)[0].value + ' ' + document.getElementsByName('cel' + formulario)[0].value,
+				CORREO: document.getElementsByName('correoProp' + formulario)[0].value,
+				NOMBRE_P: document.getElementsByName('propietario' + formulario)[0].value,
+				TID_P: document.getElementsByName('tipoIdProp' + formulario)[0].value,
+				DOC_P: document.getElementsByName('idPropietario' + formulario)[0].value,
+				AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,			
+				OBS_AS: document.getElementsByName('obAutoridad' + formulario)[0].value,
+				NOMBRE_F1: document.getElementsByName('funcionario' + formulario + '-1')[0].value,
+				ID_F1: document.getElementsByName('idFuncionario' + formulario + '-1')[0].value,
+				CARGO_F1: document.getElementsByName('cargoFuncionario' + formulario + '-1')[0].value,
+				NOMBRE_F2: document.getElementsByName('funcionario' + formulario + '-2')[0].value,
+				ID_F2: document.getElementsByName('idFuncionario' + formulario + '-2')[0].value,
+				CARGO_F2: document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value,
+				NOMBRE_E1: document.getElementsByName('persona' + formulario + '-1')[0].value,
+				ID_E1: document.getElementsByName('idPersona' + formulario + '-1')[0].value,
+				CARGO_E1: document.getElementsByName('cargoPersona' + formulario + '-1')[0].value,
+				NOMBRE_E2: document.getElementsByName('persona' + formulario + '-2')[0].value,
+				ID_E2: document.getElementsByName('idPersona' + formulario + '-2')[0].value,
+				CARGO_E2: document.getElementsByName('cargoPersona' + formulario + '-2')[0].value,
+				FIRMA_F1: localStorage.getItem('firmaAut1'),
+				FIRMA_F2: localStorage.getItem('firmaAut2'),
+				FIRMA_E1: localStorage.getItem('firmaIns1'),
+				FIRMA_E2: localStorage.getItem('firmaIns2'),
+				GRABADO: 'S'
+			};
+			localStorage.setItem('form', '333');
+			evaluado = adicional;
 			break;
 		case '441':
 			evaluadoVehi = guardarEvaluadosVehiculos(formulario);

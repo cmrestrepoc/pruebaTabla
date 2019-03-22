@@ -55,21 +55,19 @@
     $(document).ready(function()
     {
         $("#firmaAut1").jqScribble();
-    });
-    $(document).ready(function()
-    {
         $("#firmaAut2").jqScribble();
-    });
-    $(document).ready(function()
-    {
         $("#firmaIns1").jqScribble();
-    });
-    $(document).ready(function()
-    {
         $("#firmaIns2").jqScribble();
+
+        if(localStorage.getItem('form') == '333'|| localStorage.getItem('form') == '243') {
+            let elemento = document.getElementsByName('firma');
+            elemento[0].innerHTML = "POR PARTE DE LA EMPRESA";
+            localStorage.getItem('form') == '333' ? elemento[1].innerHTML = "POR PARTE DEL LABORATORIO" : elemento[1].innerHTML = "TESTIGO DE LA ENCUESTA";
+        } 
     });
 
     function regresar(){
+        localStorage.removeItem('form');
         history.back();
     }
 </script>
@@ -117,7 +115,7 @@
 <body>
     <header>
         <a href="menu0.html">
-            <img src="./img/escudo.jpg" />
+            <img alt src="./img/escudo.jpg" />
         </a>
         <div class="titulos">
             <h1>MUNICIPIO DE CANDELARIA (V)</h1>
@@ -178,7 +176,7 @@
             <div class="panel-body">
                 <div id="contenedor">
                     <div class="cajonBoton">
-                        <h6>FIRMA 1 DE QUIEN INSCRIBE</h6>
+                        <h6 name="firma">FIRMA 1 DE QUIEN INSCRIBE</h6>
                         <input type="submit" class="btn btn-primary" value="Limpiar" id="limpiar" onclick='$("#firmaIns1").data("jqScribble").clear();'>
                         <br><br>
                         <input type="submit" class="btn btn-primary" value="Guardar" id="guardar" onclick="save('firmaIns1')">
@@ -198,7 +196,7 @@
             <div class="panel-body">
                 <div id="contenedor">
                     <div class="cajonBoton">
-                        <h6>FIRMA 2 DE QUIEN INSCRIBE</h6>
+                        <h6 name="firma">FIRMA 2 DE QUIEN INSCRIBE</h6>
                         <input type="submit" class="btn btn-primary" value="Limpiar" id="limpiar" onclick='$("#firmaIns2").data("jqScribble").clear();'>
                         <br><br>
                         <input type="submit" class="btn btn-primary" value="Guardar" id="guardar" onclick="save('firmaIns2')">

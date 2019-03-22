@@ -37,7 +37,7 @@
 	<body>
 		<header>
 			<a href="menu0.html">
-				<img src="./img/escudo.jpg" />
+				<img alt src="./img/escudo.jpg" />
 			</a>
 			<div class="titulos">
 				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
@@ -283,7 +283,7 @@
 											Nombre:
 										</label>
 										<div class="col-md-10" style="padding: 0px">
-											<input type="text" class="form-control" name="inscribe333">
+											<input type="text" class="form-control" name="funcionario333-1">
 										</div>
 									</div><br><br><br><br>
 									<div class="col-md-6">
@@ -291,7 +291,7 @@
 											Identificación:
 										</label>
 										<div class="col-md-6" style="padding: 0px">
-											<input type="text" class="form-control" name="idInscribe333">
+											<input type="text" class="form-control" name="idFuncionario333-1">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -299,7 +299,7 @@
 											Cargo:
 										</label>
 										<div class="col-md-9" style="padding: 0px">
-											<input type="text" class="form-control" name="cargoInscribe333">
+											<input type="text" class="form-control" name="cargoFuncionario333-1">
 										</div>
 									</div>		
 								</div><br><br><br>
@@ -309,7 +309,7 @@
 											Nombre:
 										</label>
 										<div class="col-md-10" style="padding: 0px">
-											<input type="text" class="form-control" name="inscribe333">
+											<input type="text" class="form-control" name="funcionario333-2">
 										</div>
 									</div><br><br><br>
 									<div class="col-md-6">
@@ -317,7 +317,7 @@
 											Identificación:
 										</label>
 										<div class="col-md-6" style="padding: 0px">
-											<input type="text" class="form-control" name="idInscribe333">
+											<input type="text" class="form-control" name="idFuncionario333-2">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -325,7 +325,7 @@
 											Cargo:
 										</label>
 										<div class="col-md-9" style="padding: 0px">
-											<input type="text" class="form-control" name="cargoInscribe333">
+											<input type="text" class="form-control" name="cargoFuncionario333-2">
 										</div>
 									</div>		
 								</div>
@@ -338,7 +338,7 @@
 											Nombre:
 										</label>
 										<div class="col-md-10" style="padding: 0px">
-											<input type="text" class="form-control" name="inscribe333">
+											<input type="text" class="form-control" name="persona333-1">
 										</div>
 									</div><br><br><br><br>
 									<div class="col-md-6">
@@ -346,7 +346,7 @@
 											Identificación:
 										</label>
 										<div class="col-md-6" style="padding: 0px">
-											<input type="text" class="form-control" name="idInscribe333">
+											<input type="text" class="form-control" name="idPersona333-1">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -354,7 +354,7 @@
 											Cargo:
 										</label>
 										<div class="col-md-9" style="padding: 0px">
-											<input type="text" class="form-control" name="cargoInscribe333">
+											<input type="text" class="form-control" name="cargoPersona333-1">
 										</div>
 									</div>
 								</div><br><br><br>
@@ -365,7 +365,7 @@
 											Nombre:
 										</label>
 										<div class="col-md-10" style="padding: 0px">
-											<input type="text" class="form-control" name="inscribe333">
+											<input type="text" class="form-control" name="persona333-2">
 										</div>
 									</div><br><br><br><br>
 									<div class="col-md-6">
@@ -373,7 +373,7 @@
 											Identificación:
 										</label>
 										<div class="col-md-6" style="padding: 0px">
-											<input type="text" class="form-control" name="idInscribe333">
+											<input type="text" class="form-control" name="idPersona333-2">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -381,7 +381,7 @@
 											Cargo:
 										</label>
 										<div class="col-md-9" style="padding: 0px">
-											<input type="text" class="form-control" name="cargoInscribe333">
+											<input type="text" class="form-control" name="cargoPersona333-2">
 										</div>
 									</div>
 								</div>
@@ -391,33 +391,24 @@
 						<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 						<input type="hidden" name="id333" value="0">
-
-						<div class="form-group">
-	                        <div class="col-md-2 col-md-offset-1">
-	                            <a type="submit" onclick="guardarInscrito333()" class="btn btn-primary">
-	                                Guardar
-	                            </a>
-	                        </div>
-
-	                        <div class="col-md-2">
-	                            <a type="submit" onclick="firmaInscripcion('333')" class="btn btn-primary">
-	                                Firmar
-	                            </a>
-	                        </div>
-
-	                        <div class="col-md-4">
-	                            <a id="todosInscritos" onclick="cargarInscritos333()" class="btn btn-primary">
-	                                Cargar inscritos desde servidor
-	                            </a>
-	                        </div>
-
-	                        <div class="col-md-3">
-	                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
-	                                Cerrar Sesión con Servidor
-	                            </a>
-	                        </div>                   	                        	                     
-	                    </div><!-- Fin del form-group -->
-
+							<br><br>
+							<div class="form-group">
+			                    <div class="col-md-4 col-md-offset-2">
+			                        <button type="submit" onclick="guardarEvaluacion('333')" class="btn btn-primary">
+			                            Guardar
+			                        </button>			                            
+			                    </div>
+			                    <div class="col-md-3">
+			                    	<a type="submit" onclick="cargarServidor('333')" class="btn btn-primary">
+			                            Subir información a servidor
+			                        </a>
+			                    </div>
+			                    <div class="col-md-3">
+			                        <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+			                            Cerrar Sesión con Servidor
+			                        </a>
+			                    </div>			                       
+			                </div><!-- Fin del form-group -->
 	                    <br><br><br><br>
 
 	                    <script type="text/javascript">mostrarInscritos493('333');</script>
