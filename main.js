@@ -127,7 +127,7 @@ function crearMuestra(){
 	let tbody = document.getElementById('muestras');
 	let tr = document.createElement('tr');
 	let listado = document.getElementById('listadoMuestras');
-	let hr = document.createElement('hr');
+	//let br = document.createElement('br');
 	
 	tr.appendChild(crearColumna('Orden'));
 	tr.appendChild(crearColumna('Um'));
@@ -138,7 +138,7 @@ function crearMuestra(){
 	tr.appendChild(crearColumna('RegSanit'));
 
 	tbody.appendChild(tr);
-	listado.parentNode.insertBefore(hr, listado.nextSibling);
+	//listado.parentNode.insertBefore(br, listado.nextSibling);
 }
 
 function loginServer(){

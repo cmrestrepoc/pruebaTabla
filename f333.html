@@ -57,11 +57,7 @@
 					</div>
 					<div class="panel-body">
 						<div class="form-group">
-							<div class="col-md-4">
-								<label class="col-md-12 control-label">Departamento:</label>
-								<input type="text" class="form-control" name="depto333" value="VALLE DEL CAUCA">
-							</div>
-							<div class="col-md-8">
+							<div class="col-md-9">
 								<div class="col-md-4">
 									<label class="col-md-12 control-label">Mpio:</label>
 									<input type="text" class="form-control" name="mpio333" value="CANDELARIA">
@@ -78,7 +74,10 @@
 									<input type="text" class="form-control" name="inscripcion333">
 								</div>
 							</div>						
-																						
+							<div class="col-md-3">
+								<label class="col-md-12 control-label">Acta No.:</label>
+								<input type="text" class="form-control" name="acta333">
+							</div>															
 						</div>
 
 						<br><br><br><br>
@@ -197,44 +196,49 @@
 												
 						</div><!-- Fin del form-group -->
 
-						<br><br><br><hr>
+						<br><br><br><br>
 
 						<div class="form-group" id="listadoMuestras">
-							<label class="control-label col-md-12">Listado de Muestras:</label>
-							<br><br>			
-							<div class="table-responsive col-md-offset-1 col-md-10">
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Orden</th>
-											<th>No. U/M</th>
-											<th>Contenido</th>
-											<th>Temp. °C</th>
-											<th>Envase</th>
-											<th>Lote/F. V.</th>
-											<th>Reg Sanit</th>
-										</tr>
-									</thead>
-									<tbody id="muestras">
-										<tr>
-											<td><input class="form-control" type="text" name="Orden"></td>
-											<td><input class="form-control" type="text" name="Um"></td>
-											<td><input class="form-control" type="text" name="Contenido"></td>
-											<td><input class="form-control" type="text" name="Temperatura"></td>
-											<td><input class="form-control" type="text" name="TipoEnvase"></td>
-											<td><input class="form-control" type="text" name="LoteFechaV"></td>
-											<td><input class="form-control" type="text" name="RegSanit"></td>
-										</tr>
-									</tbody>
-								</table>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									Listado de Muestras:
+								</div>
+								<div class="panel-body">
+									<div class="table-responsive col-md-offset-1 col-md-10">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th>Orden</th>
+													<th>No. U/M</th>
+													<th>Contenido</th>
+													<th>Temp. °C</th>
+													<th>Envase</th>
+													<th>Lote/F. V.</th>
+													<th>Reg Sanit</th>
+												</tr>
+											</thead>
+											<tbody id="muestras">
+												<tr>
+													<td><input class="form-control" type="text" name="Orden"></td>
+													<td><input class="form-control" type="text" name="Um"></td>
+													<td><input class="form-control" type="text" name="Contenido"></td>
+													<td><input class="form-control" type="text" name="Temperatura"></td>
+													<td><input class="form-control" type="text" name="TipoEnvase"></td>
+													<td><input class="form-control" type="text" name="LoteFechaV"></td>
+													<td><input class="form-control" type="text" name="RegSanit"></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 							</div>
-							<br><br><br><br><br><br>
+							<br>
 							<div class="col-md-4 col-md-offset-2">
 								<button class="btn btn-primary" onclick="crearMuestra()">Adicionar Muestra</button>	
 							</div>
 						</div><!-- Fin del form-group -->
 
-						<br><br><br><hr>
+						<br><br><br><br>
 
 						<div class="form-group">							
 							<div class="col-md-10">
@@ -261,51 +265,130 @@
 						<br><br><br><br>
 
 						<div class="form-group">
-							<label class="col-md-3 control-label">Observaciones por autoridad sanitaria:</label>		
+							<label class="col-md-3 control-label">Observaciones por parte de la autoridad sanitaria:</label>		
 							<div class="col-md-9">
 								<textarea class="form-control" name="obAutoridad333"></textarea>
 							</div>
-							<br><br><br>
-							<label class="col-md-3 control-label">Observaciones por persona que se inscribe:</label>
-							<div class="col-md-9">
-								<textarea class="form-control" name="obPersona333"></textarea>
+							<br><br><br>							
+						</div><!-- Fin del form-group -->
+
+						<br><br>
+
+						<div class="form-group">
+							<div class="col-md-6">
+								<label class="col-md-12 control-label">POR LA ENTIDAD DE SALUD</label>
+								<div class="row">
+									<div class="col-md-12">
+										<label class="col-md-2 control-label" style="padding-left: 0px">
+											Nombre:
+										</label>
+										<div class="col-md-10" style="padding: 0px">
+											<input type="text" class="form-control" name="inscribe333">
+										</div>
+									</div><br><br><br><br>
+									<div class="col-md-6">
+										<label class="col-md-6 control-label" style="padding-left: 0px">
+											Identificación:
+										</label>
+										<div class="col-md-6" style="padding: 0px">
+											<input type="text" class="form-control" name="idInscribe333">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label class="col-md-3 control-label" style="padding-left: 0px">
+											Cargo:
+										</label>
+										<div class="col-md-9" style="padding: 0px">
+											<input type="text" class="form-control" name="cargoInscribe333">
+										</div>
+									</div>		
+								</div><br><br><br>
+								<div class="row">
+									<div class="col-md-12">
+										<label class="col-md-2 control-label" style="padding-left: 0px">
+											Nombre:
+										</label>
+										<div class="col-md-10" style="padding: 0px">
+											<input type="text" class="form-control" name="inscribe333">
+										</div>
+									</div><br><br><br>
+									<div class="col-md-6">
+										<label class="col-md-6 control-label" style="padding-left: 0px;">
+											Identificación:
+										</label>
+										<div class="col-md-6" style="padding: 0px">
+											<input type="text" class="form-control" name="idInscribe333">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label class="col-md-3 control-label" style="padding-left: 0px">
+											Cargo:
+										</label>
+										<div class="col-md-9" style="padding: 0px">
+											<input type="text" class="form-control" name="cargoInscribe333">
+										</div>
+									</div>		
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row">
+									<label class="col-md-12 control-label">POR PARTE DE LA EMPRESA</label>
+									<div class="col-md-12">
+										<label class="col-md-2 control-label" style="padding-left: 0px">
+											Nombre:
+										</label>
+										<div class="col-md-10" style="padding: 0px">
+											<input type="text" class="form-control" name="inscribe333">
+										</div>
+									</div><br><br><br><br>
+									<div class="col-md-6">
+										<label class="col-md-6 control-label" style="padding-left: 0px">
+											Identificación:
+										</label>
+										<div class="col-md-6" style="padding: 0px">
+											<input type="text" class="form-control" name="idInscribe333">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label class="col-md-3 control-label" style="padding-left: 0px">
+											Cargo:
+										</label>
+										<div class="col-md-9" style="padding: 0px">
+											<input type="text" class="form-control" name="cargoInscribe333">
+										</div>
+									</div>
+								</div><br><br><br>
+								<div class="row">
+									<label class="col-md-12 control-label">POR PARTE DEL LABORATORIO</label>
+									<div class="col-md-12">
+										<label class="col-md-2 control-label" style="padding-left: 0px">
+											Nombre:
+										</label>
+										<div class="col-md-10" style="padding: 0px">
+											<input type="text" class="form-control" name="inscribe333">
+										</div>
+									</div><br><br><br><br>
+									<div class="col-md-6">
+										<label class="col-md-6 control-label" style="padding-left: 0px">
+											Identificación:
+										</label>
+										<div class="col-md-6" style="padding: 0px">
+											<input type="text" class="form-control" name="idInscribe333">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label class="col-md-3 control-label" style="padding-left: 0px">
+											Cargo:
+										</label>
+										<div class="col-md-9" style="padding: 0px">
+											<input type="text" class="form-control" name="cargoInscribe333">
+										</div>
+									</div>
+								</div>
 							</div>							
 						</div><!-- Fin del form-group -->
 
-						<br><br><br>
-
-						<div class="form-group">									
-							<div class="col-md-3">
-								<label class="col-md-12 control-label">__</label>
-								<label class="col-md-12 control-label">Persona que inscribe:</label>
-							</div>
-							<div class="col-md-4">
-								<label class="col-md-12 control-label">___</label>
-								<input type="text" class="form-control" name="inscribe333">
-							</div>
-							<div class="col-md-2">								
-								<label class="col-md-12 control-label">Identificación:</label>
-								<input type="text" class="form-control" name="idInscribe333">
-							</div>
-							<div class="col-md-3">								
-								<label class="col-md-12 control-label">Cargo:</label>
-								<input type="text" class="form-control" name="cargoInscribe333">
-							</div>
-							<div class="col-md-3">
-								<label class="col-md-12 control-label">Persona que recibe:</label>
-							</div>
-							<div class="col-md-4">
-								<input type="text" class="form-control" name="recibe333">
-							</div>
-							<div class="col-md-2">								
-								<input type="text" class="form-control" name="idRecibe333">
-							</div>
-							<div class="col-md-3">								
-								<input type="text" class="form-control" name="cargoRecibe333">
-							</div>							
-						</div><!-- Fin del form-group -->
-
-						<br><br><br><br><br><br><br>
+						<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 						<input type="hidden" name="id333" value="0">
 
