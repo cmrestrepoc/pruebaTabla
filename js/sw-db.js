@@ -1299,6 +1299,19 @@ function guardarEvaluacion(formulario){
 			evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
 			break;
 		case '333':
+			let longitud = document.getElementsByName('orden');
+			let muestras = [];
+			for(let i=0; i<longitud; i++){
+				muestras[i] = {
+					Orden: document.getElementsByName('Orden')[i].value,
+					Um: document.getElementsByName('Um')[i].value,
+					Contenido: document.getElementsByName('Contenido')[i].value,
+					Temperatura: document.getElementsByName('Temperatura')[i].value,
+					TipoEnvase: document.getElementsByName('TipoEnvase')[i].value,
+					LoteFechaV: document.getElementsByName('LoteFechaV')[i].value,
+					RegSanit: document.getElementsByName('RegSanit')[i].value
+				};
+			}
 			adicional = {
 				FECHA: document.getElementsByName('fecha' + formulario)[0].value,
 				N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
@@ -1329,7 +1342,7 @@ function guardarEvaluacion(formulario){
 				GRABADO: 'S'
 			};
 			localStorage.setItem('form', '333');
-			evaluado = adicional;
+			evaluado = Object.assign( muestras, adicional);
 			break;
 		case '441':
 			evaluadoVehi = guardarEvaluadosVehiculos(formulario);
@@ -1366,7 +1379,7 @@ function setColumnas(tr, registro, contador, evaluado){
 	evaluado == 'E' ? tr.appendChild(createColumns(registro.NOCO)) : (registro.doc.PLACA === null ? registro.doc.PLACAREM : registro.doc.PLACA);
 	tr.appendChild(createColumns(registro.ACTA));
 	tr.appendChild(createColumns(registro.FECHA));
-	evaluado != 'D' ? tr.appendChild(createColumns(registro.P_CUMPL)) : console.log('');
+	evaluado != 'D' ? tr.appendChild(createColumns(registro.P_CUMPL)) : tr.appendChild(createColumns(registro.OBS_AS));
 	evaluado != 'D' ? tr.appendChild(createColumns(registro.CONCEPTO)) : console.log('');
 	return tr;		
 }
@@ -1425,7 +1438,8 @@ function mostrarEvaluados(formulario){
 			validarCambioTab(2);
 			break;
 		case '333':
-			traerEvaluados(db333, 'E');
+			traerEvaluados(db333, 'D');
+			validarCambioTab(0);
 			break;
 		case '441':
 			traerEvaluados(db441, 'V');
