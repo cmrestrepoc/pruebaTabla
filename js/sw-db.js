@@ -1024,7 +1024,7 @@ function guardarEvaluadosEstablecimientos(formulario){
 
 function persistirEvaluado(db, evaluado, formulario){
 	calcularNumActa(formulario).then( acta => {
-		var insertar = { _id: acta.substring(11, 14), ACTA: acta };
+		var insertar = { _id: acta.substring(11, 15), ACTA: acta };
 		evaluado = Object.assign( insertar, evaluado );
 		console.log(evaluado);
 
