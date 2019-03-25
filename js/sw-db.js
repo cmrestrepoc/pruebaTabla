@@ -580,7 +580,16 @@ function cargarTodosLosInscritos(){
 }
 
 function fetchEvaluados(doc, formulario){
-	let dataInicial = 'formulario='+formulario + '&' +
+	var credenciales = JSON.parse(localStorage.getItem('identity'));
+	let credentials = {
+		nombreUsuario: credenciales.usuario,
+		token: credenciales.token,
+		formulario: formulario
+	};
+	bigDoc = Object.assign(credentials, doc);
+	let data = JSON.stringify(bigDoc);
+	//console.log(JSON.stringify(doc));
+	/* let dataInicial = 'formulario='+formulario + '&' +
 						'ACTA=' + doc.ACTA + '&' +
 						'N_INSCRIP=' + doc.N_INSCRIP + '&' +
 						'DIRECC=' + doc.DIRECC + '&' +
@@ -617,22 +626,24 @@ function fetchEvaluados(doc, formulario){
 						'FIRMA_F2=' + doc.FIRMA_F2 + '&' +
 						'FIRMA_E1=' + doc.FIRMA_E1 + '&' +
 						'FIRMA_E2=' + doc.FIRMA_E2 + '&' +
-						'CONCEPTO=' + doc.CONCEPTO;
+						'CONCEPTO=' + doc.CONCEPTO;*/
 	if (verificarSesion()) {
-		var credenciales = JSON.parse(localStorage.getItem('identity'));
-		var data = 'nombreUsuario='+credenciales.usuario+'&'
-					+'token='+credenciales.token+'&' + dataInicial;
-		
 		return new Promise((resolve, reject) => {
 			fetch('https://sisbenpro.com/public/evaluacionesTabla', {
 					method: 'POST',
 					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded'
+						'Content-Type': 'application/json'
 					},
 					body: data
-			}).then( res => resolve(res) )
+			}).then( res => {
+				if(res.status == 500){
+					fetchEvaluados(doc, formulario);	
+				}else{
+					resolve([res.status, doc._id]);
+				} 
+			})
 			.catch( () => reject(doc._id) );
-		});		
+		});	 	
 	} else{
 		location.assign("./loginserver.html");
 	}
@@ -654,16 +665,17 @@ function cargarServidor(formulario){
 			return;
 	}
 
+	let long;
 	db.allDocs({include_docs: true, descending: true}).then ( doc => {
-		//console.log(doc.rows.length);
+		long = doc.rows.length;
 		console.log('Cantidad de registros en indexDB para este formulario: ', doc.rows.length);
 		let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario));
 		console.log(promesas);
 		Promise
 			.all(promesas)
-			.then( resJson => console.log('Respuesta del Servidor: ' + resJson.res) )
-			.catch( id => console.log('Problema en el envío del registro: ', id));
-	});	
+			.then( status => alert('Respuesta: ' + status) )
+			.catch( err => alert("Problemas con el envío de registros: ", err) );
+	}).finally( () => setTimeout( () => alert("Registros cargados en servidor"), 300 * long) );	
 }
 
 function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente, formulario){
