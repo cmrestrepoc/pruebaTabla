@@ -442,6 +442,8 @@ function guardarTraidos(formulario, dbBase, respObj){
 		dbBase = new PouchDB('inscritosCargados' + formulario);
 		console.log('Nueva base de datos creada');
 		
+		let count = 0;
+		let long = respObj.length;
 		respObj.forEach( registro => {
 			//console.log('Registro: ',registro);
 			let indice  = calcularIndice(registro.id);
@@ -456,7 +458,13 @@ function guardarTraidos(formulario, dbBase, respObj){
 			//console.log('Registro: ',registro);
 			dbBase.put(registro, function callback(err, result){
 				if (!err) {
-					console.log('inscrito guardado en base de datos');
+					if (count != long - 1) {
+						count++;
+						console.log('inscrito guardado en base de datos: ', count);	
+					}else{
+						alert("Inscritos formulario " + formulario + " cargados correctamente");
+						localStorage.removeItem('Accion');
+					}
 				}else {
 					console.log('problemas guardando inscrito en base de datos', err);
 				}
@@ -544,7 +552,6 @@ function cargarInscritos(formulario){
 			alert('Error: ' + respObj.err);
 		}else{
 			guardarTraidos(formulario, db, respObj);
-			alert("Inscritos cargados correctamente");
 				//cerrarSesionServidor();
 		}		
 	}).catch( err => console.log('Error: ', err) );
@@ -571,7 +578,6 @@ function cargarTodosLosInscritos(){
 			let promesa2 = fetchInscritos('444');
 			localStorage.removeItem('Accion');
 			promesa2.then ( respObj2 => guardarTraidos( '444', db444, respObj2 ) )
-					.then( () => alert('Inscritos descargados correctamente') )
 					.catch( err2 => console.log('Error', err2 ) );
 		}).catch( err1 => console.log('Error: ', err1) );
 
