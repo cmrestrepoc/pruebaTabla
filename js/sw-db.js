@@ -437,7 +437,6 @@ function mostrarInscritos444(formulario){
 }*/
 
 function guardarTraidos(formulario, dbBase, respObj){
-	var indice = 0;
 	dbBase.destroy().then( response => {
 		console.log('Base de datos anterior eliminada');
 		dbBase = new PouchDB('inscritosCargados' + formulario);
