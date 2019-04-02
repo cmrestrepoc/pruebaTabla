@@ -597,11 +597,7 @@ function fetchEvaluados(doc, formulario){
 	};
 	let bigDoc = Object.assign(credentials, doc);
 	let data = JSON.stringify(bigDoc);
-<<<<<<< HEAD
 	//console.log(data);
-=======
-	//console.log(JSON.stringify(doc));
->>>>>>> 3d42ebe89f454c8025815999635885710daf41b8
 	
 	if (verificarSesion()) {
 		return new Promise((resolve, reject) => {
