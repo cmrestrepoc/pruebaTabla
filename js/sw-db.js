@@ -136,6 +136,10 @@ function cargarInicio(formulario){
 
 	if(localStorage.getItem('evaluado') && (localStorage.getItem('firmaAut1') || localStorage.getItem('firmaAut2') || localStorage.getItem('firmaIns1') || localStorage.getItem('firmaIns2'))){
 		let eva = JSON.parse(localStorage.getItem('evaluado'));
+		eva.FIRMA_E1 = localStorage.getItem('firmaIns1');
+		eva.FIRMA_E2 = localStorage.getItem('firmaIns2');
+		eva.FIRMA_F1 = localStorage.getItem('firmaAut1');
+		eva.FIRMA_F2 = localStorage.getItem('firmaAut2');
 		persistirEvaluado(db, eva, formulario);
 		localStorage.removeItem('evaluado');
 		localStorage.removeItem('firmaAut1');
@@ -586,47 +590,10 @@ function fetchEvaluados(doc, formulario){
 		token: credenciales.token,
 		formulario: formulario
 	};
-	bigDoc = Object.assign(credentials, doc);
+	let bigDoc = Object.assign(credentials, doc);
 	let data = JSON.stringify(bigDoc);
-	//console.log(JSON.stringify(doc));
-	/* let dataInicial = 'formulario='+formulario + '&' +
-						'ACTA=' + doc.ACTA + '&' +
-						'N_INSCRIP=' + doc.N_INSCRIP + '&' +
-						'DIRECC=' + doc.DIRECC + '&' +
-						'FAX=' + doc.FAX + '&' +
-						'TELS=' + doc.TELS + '&' +
-						'CORREO=' + doc.CORREO + '&' +
-						'NOMBRE_P=' + doc.NOMBRE_P + '&' +
-						'TID_P=' + doc.TID_P + '&' +
-						'DOC_P=' + doc.DOC_P + '&' +
-						'NOMBRE_RL=' + doc.NOMBRE_RL + '&' +
-						'TID_RL=' + doc.TID_RL + '&' +
-						'DOC_RL=' + doc.DOC_RL + '&' +
-						'DIR_NOT=' + doc.DIR_NOT + '&' +
-						'DPTO_NOTI=' + doc.DPTO_NOTI + '&' +
-						'MPIO_NOTI=' + doc.MPIO_NOTI + '&' +
-						'HORARIOS=' + doc.HORARIOS + '&' +
-						'NUTRA=' + doc.NUTRA + '&' +
-						'F_UV=' + doc.F_UV + '&' +
-						'CCUV=' + doc.CCUV + '&' +
-						'CUV=' + doc.CUV + '&' +
-						'UV_P=' + doc.UV_P + '&' +
-						'NMOTIVO=' + doc.NMOTIVO + '&' +
-						'MOTIVO=' + doc.MOTIVO + '&' +
-						'AUTORIZA=' + doc.AUTORIZA + '&' +
-						'P_CUMPL=' + doc.P_CUMPL + '&' +
-						'N_MUESTRAS=' + doc.N_MUESTRAS + '&' +
-						'N_ACTAS=' + doc.N_ACTAS + '&' +
-						'AMS=' + doc.AMS + '&' +
-						'DETA_MS=' + doc.DETA_MS + '&' +
-						'NOCO=' + doc.NOCO + '&' +
-						'FECHA=' + doc.FECHA + '&' +
-						'P_CUMPL=' + doc.P_CUMPL + '&' +
-						'FIRMA_F1=' + doc.FIRMA_F1 + '&' +
-						'FIRMA_F2=' + doc.FIRMA_F2 + '&' +
-						'FIRMA_E1=' + doc.FIRMA_E1 + '&' +
-						'FIRMA_E2=' + doc.FIRMA_E2 + '&' +
-						'CONCEPTO=' + doc.CONCEPTO;*/
+	//console.log(data);
+	
 	if (verificarSesion()) {
 		return new Promise((resolve, reject) => {
 			fetch('https://sisbenpro.com/public/evaluacionesTabla', {
@@ -934,10 +901,10 @@ function guardarComunesEvaluados(formulario){
 		NOMBRE_E2: document.getElementsByName('funcionario' + formulario + '-2')[0].value,
 		ID_E2: document.getElementsByName('idFuncionario' + formulario + '-2')[0].value,
 		CARGO_E2: document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value,
-		FIRMA_F1: localStorage.getItem('firmaAut1'),
-		FIRMA_F2: localStorage.getItem('firmaAut2'),
-		FIRMA_E1: localStorage.getItem('firmaIns1'),
-		FIRMA_E2: localStorage.getItem('firmaIns2'),
+		FIRMA_F1: '',
+		FIRMA_F2: '',
+		FIRMA_E1: '',
+		FIRMA_E2: '',
 		GRABADO: 'S'
 	};
 	return evaluado;
