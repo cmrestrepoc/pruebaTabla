@@ -142,7 +142,7 @@ function crearMuestra(){
 }
 
 function loginServer(){
-	let user = document.getElementsByName('nomUsuario')[0].value;
+	let user = JSON.parse(localStorage.getItem('usuario'));
 	let clave = document.getElementsByName('password')[0].value;
 
 	let data = 'nombreUsuario='+user+'&clave='+clave;
