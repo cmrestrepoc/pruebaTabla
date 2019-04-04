@@ -624,18 +624,7 @@ function fetchEvaluados(doc, formulario){
 function cargarServidor(formulario){
 	let db;
 	//console.log(formulario);
-	switch(formulario){
-		case '440':
-			db = db440;
-			break;
-		case '479':
-			console.log('Estamos dentro del 479');
-			db = db479;
-			break;
-		default:
-			console.log('Problemas con el formulario');
-			return;
-	}
+	db = dbActasForm(formulario);
 
 	let long;
 	db.allDocs({include_docs: true, descending: true}).then ( doc => {
@@ -880,8 +869,8 @@ function guardarComunesEvaluados(formulario){
 		CCUV: document.getElementsByName('concepto' + formulario)[0].value,
 		CUV: document.getElementsByName('textoConcepto' + formulario)[0].value,
 		UV_P: document.getElementsByName('porcentaje' + formulario)[0].value,
-		NMOTIVO: document.getElementsByName('motivo' + formulario)[0].value,
-		MOTIVO: document.getElementsByName('textoMotivo' + formulario)[0].value,
+		/* NMOTIVO: document.getElementsByName('motivo' + formulario)[0].value,
+		MOTIVO: document.getElementsByName('textoMotivo' + formulario)[0].value, */
 		AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,
 		CONCEPTO: document.getElementsByName('conceptoEval' + formulario)[0].value,
 		P_CUMPL: document.getElementsByName('cumplimiento' + formulario)[0].value,
