@@ -598,45 +598,44 @@ function fetchEvaluados(doc, formulario){
 	let bigDoc = Object.assign(credentials, doc);
 	let data = JSON.stringify(bigDoc);
 	//console.log(data);
-	
-	if (verificarSesion()) {
-		return new Promise((resolve, reject) => {
-			fetch('https://sisbenpro.com/public/evaluacionesTabla', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: data
-			}).then( res => {
-				if(res.status == 500){
-					fetchEvaluados(doc, formulario);	
-				}else{
-					resolve([res.status, doc._id]);
-				} 
-			})
-			.catch( () => reject(doc._id) );
-		});	 	
-	} else{
-		location.assign("./loginserver.html");
-	}
+	return new Promise((resolve, reject) => {
+		fetch('https://sisbenpro.com/public/evaluacionesTabla', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: data
+		}).then( res => {
+			if(res.status == 500){
+				fetchEvaluados(doc, formulario);	
+			}else{
+				resolve([res.status, doc._id]);
+			} 
+		})
+		.catch( () => reject(doc._id) );
+	});
 }
 
 function cargarServidor(formulario){
-	let db;
-	//console.log(formulario);
-	db = dbActasForm(formulario);
-
-	let long;
-	db.allDocs({include_docs: true, descending: true}).then ( doc => {
-		long = doc.rows.length;
-		console.log('Cantidad de registros en indexDB para este formulario: ', doc.rows.length);
-		let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario));
-		console.log(promesas);
-		Promise
-			.all(promesas)
-			.then( status => alert('Respuesta: ' + status) )
-			.catch( err => alert("Problemas con el envío de registros: ", err) );
-	}).finally( () => setTimeout( () => alert("Registros cargados en servidor"), 300 * long) );	
+	if (verificarSesion()) {
+		let db;
+		//console.log(formulario);
+		db = dbActasForm(formulario);
+	
+		let long;
+		db.allDocs({include_docs: true, descending: true}).then( doc => {
+			long = doc.rows.length;
+			console.log('Cantidad de registros en indexDB para este formulario: ', doc.rows.length);
+			let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario));
+			console.log(promesas);
+			Promise
+				.all(promesas)
+				.then( status => alert('Respuesta: ' + status) )
+				.catch( err => alert("Problemas con el envío de registros: ", err) );
+		}).then( () => setTimeout( () => alert("Registros cargados en servidor"), 300 * long) );	
+	} else{
+		location.assign("./loginserver.html");
+	}
 }
 
 function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente, formulario){
