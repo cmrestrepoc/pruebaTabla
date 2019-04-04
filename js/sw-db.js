@@ -613,12 +613,13 @@ function fetchEvaluados(doc, formulario){
 				body: data
 		}).then( res => {
 			if(res.status == 500){
-				fetchEvaluados(doc, formulario);	
+				alert("Problemas enviando acta con consecutivo: ", doc._id);
+				return fetchEvaluados(doc, formulario);	
 			}else{
 				resolve([res.status, doc._id]);
 			} 
 		})
-		.catch( () => reject(doc._id) );
+		.catch( () => reject([res.status, doc._id]) );
 	});
 }
 
