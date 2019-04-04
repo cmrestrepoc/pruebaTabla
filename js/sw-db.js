@@ -168,8 +168,7 @@ function verificarAccion(){
 			case 'cargarTodosLosInscritos':
 			cargarTodosLosInscritos();
 			break;
-			case 'cargarServidor':
-			cargarServidor();
+			default:
 			break;
 		}
 	}else{
