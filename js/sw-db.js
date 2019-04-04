@@ -149,6 +149,10 @@ function cargarInicio(formulario){
 	}
 }
 
+function verificarAccionForm(formulario){
+	localStorage.getItem('Accion') == 'cargarServidor' ? cargarServidor(formulario) : console.log('No hay Acción');
+}
+
 function verificarAccion(){
 	if (localStorage.getItem('Accion')) {
 		switch(localStorage.getItem('Accion')){
@@ -163,6 +167,9 @@ function verificarAccion(){
 			break;
 			case 'cargarTodosLosInscritos':
 			cargarTodosLosInscritos();
+			break;
+			case 'cargarServidor':
+			cargarServidor();
 			break;
 		}
 	}else{
@@ -617,10 +624,12 @@ function fetchEvaluados(doc, formulario){
 }
 
 function cargarServidor(formulario){
+	localStorage.getItem('Accion') == 'cargarServidor' ?
+			localStorage.removeItem('Accion') :
+			localStorage.setItem('Accion', 'cargarServidor');
+
 	if (verificarSesion()) {
-		let db;
-		//console.log(formulario);
-		db = dbActasForm(formulario);
+		let db = dbActasForm(formulario);
 	
 		let long;
 		db.allDocs({include_docs: true, descending: true}).then( doc => {
@@ -638,7 +647,7 @@ function cargarServidor(formulario){
 	}
 }
 
-function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente, formulario){
+function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 	//var id = 0;
 	if(idExistente == 0){
 		dbBase.info().then( result => {
@@ -793,7 +802,7 @@ function guardarInscrito493(){
 
 	inscrito = Object.assign( inscrito, inscritoEsta, adicional );
 	
-	persistirInscrito(db493, dbNuevos493, inscrito, idExistente, '493');
+	persistirInscrito(db493, dbNuevos493, inscrito, idExistente);
 }
 
 function guardarInscrito444(){
@@ -817,7 +826,7 @@ function guardarInscrito444(){
 	
 	inscrito = Object.assign( inscrito, adicional );
 	
-	persistirInscrito(db444, dbNuevos444, inscrito, idExistente, '444');
+	persistirInscrito(db444, dbNuevos444, inscrito, idExistente);
 }
 
 function guardarInscrito569(){
@@ -841,7 +850,7 @@ function guardarInscrito569(){
 	
 	inscrito = Object.assign( inscrito, inscritoEsta, adicional );
 	
-	persistirInscrito(db569, dbNuevos569, inscrito, idExistente, '569');
+	persistirInscrito(db569, dbNuevos569, inscrito, idExistente);
 }
 
 function guardarComunesEvaluados(formulario){
