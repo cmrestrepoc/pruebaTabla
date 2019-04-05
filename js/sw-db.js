@@ -613,12 +613,13 @@ function fetchEvaluados(doc, formulario){
 				body: data
 		}).then( res => {
 			if(res.status == 500){
-				return fetchEvaluados(doc, formulario);	
+				return fetchEvaluados(doc, formulario)
+				.then( () => setTimeout( () => alert("Registros cargados en servidor"), 1500) );	
 			}else{
 				resolve([res.status, doc._id]);
 			} 
 		})
-		.catch( () => reject([res.status, doc._id]) );
+		.catch( err => reject(err) );
 	});
 }
 
@@ -630,17 +631,15 @@ function cargarServidor(formulario){
 	if (verificarSesion()) {
 		let db = dbActasForm(formulario);
 	
-		let long;
 		db.allDocs({include_docs: true, descending: true}).then( doc => {
-			long = doc.rows.length;
 			console.log('Cantidad de registros en indexDB para este formulario: ', doc.rows.length);
 			let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario));
 			console.log(promesas);
 			Promise
 				.all(promesas)
-				.then( status => alert('Respuesta: ' + status) )
-				.catch( err => alert("Problemas con el envío de registros: ", err) );
-		}).then( () => setTimeout( () => alert("Registros cargados en servidor"), 300 * long) );	
+				.then( () => alert("Registros cargados en servidor") )
+				.catch( (err) => alert("Problemas con el envío de registros: ", err ) );
+		})	
 	} else{
 		location.assign("./loginserver.html");
 	}
