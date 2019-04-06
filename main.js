@@ -126,7 +126,7 @@ function crearColumna(name){
 function crearMuestra(){
 	let tbody = document.getElementById('muestras');
 	let tr = document.createElement('tr');
-	let listado = document.getElementById('listadoMuestras');
+	//let listado = document.getElementById('listadoMuestras');
 	//let br = document.createElement('br');
 	
 	tr.appendChild(crearColumna('Orden'));

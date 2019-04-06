@@ -140,7 +140,9 @@ function cargarInicio(formulario){
 		eva.FIRMA_E2 = localStorage.getItem('firmaIns2');
 		eva.FIRMA_F1 = localStorage.getItem('firmaAut1');
 		eva.FIRMA_F2 = localStorage.getItem('firmaAut2');
+		
 		persistirEvaluado(db, eva, formulario);
+		
 		localStorage.removeItem('evaluado');
 		localStorage.removeItem('firmaAut1');
 		localStorage.removeItem('firmaAut2');
@@ -198,13 +200,15 @@ function calcularIndice(ultimo){
 
 function calcularNumActa(formulario){
 	let db = dbActasForm(formulario);
+	let codUsuario = localStorage.getItem('codigoUsuario');
 	return db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
 		let indice = calcularIndice(ultimo);
 		let fecha = calcularFecha();
-		let cadenaFecha = fecha.dia + fecha.mes + fecha.anio;
+		let year = fecha.anio.toString()
+		let cadenaFecha = fecha.dia + fecha.mes + year.substring(2, 4);
 		//console.log(indice);
-		let acta = formulario + cadenaFecha + indice;
+		let acta = formulario + codUsuario + cadenaFecha + indice;
 		console.log(acta);
 		return acta;
 	});
