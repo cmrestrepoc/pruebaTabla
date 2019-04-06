@@ -634,7 +634,7 @@ function cargarServidor(formulario){
 
 	if (verificarSesion()) {
 		let db = dbActasForm(formulario);
-	
+		localStorage.removeItem('Accion');	
 		db.allDocs({include_docs: true, descending: true}).then( doc => {
 			console.log('Cantidad de registros en indexDB para este formulario: ', doc.rows.length);
 			let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario));
