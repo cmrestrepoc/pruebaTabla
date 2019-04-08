@@ -282,7 +282,6 @@ function escogerInscrito(registro, formulario){
 		console.log('Debería estar en ' + formulario);
 		document.getElementsByName('id' + formulario)[0].value = registro._id;
 		document.getElementsByName('fecha' + formulario)[0].value = registro.FECHA;
-		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
 		document.getElementsByName('obAutoridad' + formulario)[0].value = registro.OBSERVA_AU;
 		document.getElementsByName('obPersona' + formulario)[0].value = registro.OBSERVA_F1;
 		document.getElementsByName('inscribe' + formulario)[0].value = registro.NOMBRE_E1;
