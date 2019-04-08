@@ -1278,7 +1278,6 @@ function guardarEvaluacion(formulario){
 			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 			evaluado = {
 				FECHA: fecha,
-				//ACTA: document.getElementsByName('acta' + formulario)[0].value,
 				N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
 				DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
 				FAX: document.getElementsByName('fax' + formulario)[0].value,
