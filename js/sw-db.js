@@ -878,8 +878,8 @@ function guardarComunesEvaluados(formulario){
 		CCUV: document.getElementsByName('concepto' + formulario)[0].value,
 		CUV: document.getElementsByName('textoConcepto' + formulario)[0].value,
 		UV_P: document.getElementsByName('porcentaje' + formulario)[0].value,
-		/* NMOTIVO: document.getElementsByName('motivo' + formulario)[0].value,
-		MOTIVO: document.getElementsByName('textoMotivo' + formulario)[0].value, */
+		NMOTIVO: document.getElementsByName('motivo' + formulario)[0].value,
+		MOTIVO: document.getElementsByName('textoMotivo' + formulario)[0].value,
 		AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,
 		CONCEPTO: document.getElementsByName('conceptoEval' + formulario)[0].value,
 		P_CUMPL: document.getElementsByName('cumplimiento' + formulario)[0].value,
@@ -888,7 +888,8 @@ function guardarComunesEvaluados(formulario){
 		AMS: document.getElementsByName('medidaSeguridad' + formulario)[0].value,
 		DETA_MS: document.getElementsByName('medida' + formulario)[0].value,
 
-		//ACTA, UV_P, HORARIOS, NUTRA, son los únicos campos que son exclusivos de las evaluaciones, los otros son comunes con los inscritos
+		/* ACTA, UV_P, HORARIOS, NUTRA, son los únicos campos que son exclusivos de las evaluaciones, 
+		los otros son comunes con los inscritos */
 		
 		OBS_AS: document.getElementsByName('obAutoridad' + formulario)[0].value,
 		OBS_ES: document.getElementsByName('obPersona' + formulario)[0].value,
@@ -908,7 +909,7 @@ function guardarComunesEvaluados(formulario){
 		FIRMA_F2: '',
 		FIRMA_E1: '',
 		FIRMA_E2: '',
-		GRABADO: 'S'
+		GRABADO: ''
 	};
 	return evaluado;
 }
@@ -1024,7 +1025,7 @@ function persistirEvaluado(db, evaluado, formulario){
 
 function guardarEvaluacion(formulario){
 	let evaluado;
-	formulario != '333' ? evaluado = guardarComunesEvaluados(formulario) : null;
+	formulario != '333' || formulario != '442' ? evaluado = guardarComunesEvaluados(formulario) : null;
 	let preguntasComunes;
 	let evaluadoEsta;
 	let evaluadoVehi;
@@ -1275,6 +1276,43 @@ function guardarEvaluacion(formulario){
 			break;
 		case '442':
 			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+			evaluado = {
+				FECHA: fecha,
+				//ACTA: document.getElementsByName('acta' + formulario)[0].value,
+				N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
+				DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
+				FAX: document.getElementsByName('fax' + formulario)[0].value,
+				TELS: document.getElementsByName('tel' + formulario)[0].value + ' ' + document.getElementsByName('cel' + formulario)[0].value,
+				CORREO: document.getElementsByName('correoProp' + formulario)[0].value,
+				NOMBRE_P: document.getElementsByName('propietario' + formulario)[0].value,
+				TID_P: document.getElementsByName('tipoIdProp' + formulario)[0].value,
+				DOC_P: document.getElementsByName('idPropietario' + formulario)[0].value,
+				DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
+				DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
+				MPIO_NOTI: document.getElementsByName('mpioNotif' + formulario)[0].value,
+				HORARIOS: document.getElementsByName('horarios' + formulario)[0].value,
+				NUTRA: document.getElementsByName('noTrabajadores' + formulario)[0].value,
+				AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,
+				OBS_AS: document.getElementsByName('obAutoridad' + formulario)[0].value,
+				OBS_ES: document.getElementsByName('obPersona' + formulario)[0].value,
+				NOMBRE_F1: document.getElementsByName('funcionario' + formulario + '-1')[0].value,
+				ID_F1: document.getElementsByName('idFuncionario' + formulario + '-1')[0].value,
+				CARGO_F1: document.getElementsByName('cargoFuncionario' + formulario + '-1')[0].value,
+				NOMBRE_F2: document.getElementsByName('funcionario' + formulario + '-2')[0].value,
+				ID_F2: document.getElementsByName('idFuncionario' + formulario + '-2')[0].value,
+				CARGO_F2: document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value,
+				NOMBRE_E1: document.getElementsByName('persona' + formulario + '-1')[0].value,
+				ID_E1: document.getElementsByName('idPersona' + formulario + '-1')[0].value,
+				CARGO_E1: document.getElementsByName('cargoPersona' + formulario + '-1')[0].value,
+				NOMBRE_E2: document.getElementsByName('funcionario' + formulario + '-2')[0].value,
+				ID_E2: document.getElementsByName('idFuncionario' + formulario + '-2')[0].value,
+				CARGO_E2: document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value,
+				FIRMA_F1: '',
+				FIRMA_F2: '',
+				FIRMA_E1: '',
+				FIRMA_E2: '',
+				GRABADO: 'S'
+			}
 			adicional = {
 				PREGUNTAS: Array.from(document.getElementsByName('pregunta'))
 			};
