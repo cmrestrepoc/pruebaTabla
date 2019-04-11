@@ -136,7 +136,7 @@ self.addEventListener('fetch', e => {
 	// Codigo como está en el curso del Tico: Network with cache fallback
 	const respuesta = fetch( e.request ).then( res => {
 		//console.log(e.request.method);
-		if(e.request.method !== 'POST'){
+		//if(e.request.method !== 'POST'){
 			if(!res) return caches.match(e.request);
 			
 			caches.open( CACHE_NAME )
@@ -144,7 +144,7 @@ self.addEventListener('fetch', e => {
 					cache.put(e.request, res);
 					//limpiarCache( CACHE_NAME, 20 );
 				});
-		}
+		//}
 
 		return res.clone();
 
