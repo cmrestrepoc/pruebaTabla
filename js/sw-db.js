@@ -617,7 +617,8 @@ function fetchEvaluados(doc, formulario){
 		}).then( res => {
 			if(res.status == 500){
 				return fetchEvaluados(doc, formulario)
-				.then( () => setTimeout( () => alert("Registros cargados en servidor"), 1500) );	
+				.then( body => resolve(body) );
+				//.then( () => setTimeout( () => alert("Registros cargados en servidor"), 1500) );	
 			}else{
 				res.json().then( body => resolve(body)	)
 			} 
@@ -643,19 +644,19 @@ function cargarServidor(formulario){
 				.then( respuesta => {
 					//let mensaje = [];
 					let cuerpo = document.getElementById('cuerpoRespuesta');
+					cuerpo.innerHTML = '';
 					respuesta.forEach(element => {
 						let texto = document.createElement('p');
 						texto.innerHTML = element.res;
 						cuerpo.appendChild(texto);
 					});
 				})
-				.catch( err => {
+				.catch( () => {
 					let cuerpo = document.getElementById('cuerpoRespuesta');
-					err.forEach(element => {
-						let texto = document.createElement('p');
-						texto.innerHTML = element;
-						cuerpo.appendChild(texto);
-					});
+					cuerpo.innerHTML = '';
+					let texto = document.createElement('p');
+					texto.innerHTML = "Es posible que haya habido problemas enviando alguno de los registros. Inténtelo de nuevo hasta confirmar que todas las actas hayan sido enviadas";
+					cuerpo.appendChild(texto);
 				});
 				//.catch( (err) => alert("Problemas con el envío de registros: ", err ) );
 		})	
