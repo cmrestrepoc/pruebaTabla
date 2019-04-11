@@ -26,10 +26,10 @@ function obtenerCodigo(usuario){
 			indice = '08';
 			break;
 		case 'MARIOR':
-			indice = '99';
+			indice = '10';
 			break;
 		case 'CRESTREPO':
-			indice = '100'
+			indice = '11'
 			break;
 		default:
 			alert('El usuario no está registrado para obtener código');
