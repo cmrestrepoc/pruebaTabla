@@ -619,7 +619,7 @@ function fetchEvaluados(doc, formulario){
 				return fetchEvaluados(doc, formulario)
 				.then( () => setTimeout( () => alert("Registros cargados en servidor"), 1500) );	
 			}else{
-				res.json().then( body => resolve([res.status, body])	)
+				res.json().then( body => resolve(body)	)
 			} 
 		})
 		.catch( err => reject(err) );
@@ -645,7 +645,7 @@ function cargarServidor(formulario){
 					let cuerpo = document.getElementById('cuerpoRespuesta');
 					respuesta.forEach(element => {
 						let texto = document.createElement('p');
-						texto.innerHTML = element[1].res;
+						texto.innerHTML = element.res;
 						cuerpo.appendChild(texto);
 					});
 				})
