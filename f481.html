@@ -33,7 +33,6 @@
 
 		<script src="./js/jquery-3.3.1.slim.min.js"></script>
 		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
-		<script src="./js/bootstrap.js"></script>
 		<script src="./js/bootstrap.min.js"></script>
 		<script src="./js/pouchdb.min.js"></script>
 		<script src="./js/validate.min.js"></script>
@@ -199,22 +198,6 @@
 										    <input type="text" class="form-control" name="barrio" value="Barrio">
 										</div>
 									</div>
-									<!--div class="col-md-2">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio481" value="comuna" id="comuna">
-										    </span>
-										    <input type="text" class="form-control" name="comuna" value="Comuna">
-										</div>
-									</div>									
-									<div class="col-md-2">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio481" value="localidad" id="localidad">
-										    </span>
-										    <input type="text" class="form-control" name="localidad" value="Localidad">
-										</div>
-									</div-->																	
 									<div class="col-md-2" style="padding:0">
 										<div class="input-group">
 											<span class="input-group-addon">
@@ -223,38 +206,6 @@
 										    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
 										</div>
 									</div>
-									<!--div class="col-md-2" style="margin-left:50px">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio481" value="caserio" id="caserio">
-										    </span>
-										    <input type="text" class="form-control" name="caserio" value="Caserío">
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio481" value="sector" id="sector">
-										    </span>
-										    <input type="text" class="form-control" name="sector" value="Sector">
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio481" value="upz" id="upz">
-										    </span>
-										    <input type="text" class="form-control" name="upz" value="Upz">
-										</div>
-									</div>
-									<div class="col-md-2">
-										<div class="input-group">
-											<span class="input-group-addon">
-										    	<input type="radio" name="territorio481" value="otro" id="otro">
-										    </span>
-										    <input type="text" class="form-control" name="otro" value="Otro">
-										</div>
-									</div-->
 									<div class="col-md-2">
 										<div class="input-group">
 											<span class="input-group-addon">
@@ -1009,9 +960,23 @@
 			                            </button>			                            
 			                        </div>
 			                        <div class="col-md-3">
-			                        	<a type="submit" onclick="cargarServidor('481')" class="btn btn-primary">
+			                        	<button class="btn btn-primary" data-toggle="modal" data-target="#resp"  onclick="cargarServidor('481')">
 			                                Subir información a servidor
-			                            </a>
+										</button>
+										<!-- Modal -->
+										<div class="modal fade" id="resp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+														<h4 class="modal-title" id="myModalLabel">Respuesta: </h4>
+													</div>
+													<div class="modal-body">
+														<label id="cuerpoRespuesta"></label>
+													</div>
+												</div>
+											</div>
+										</div>
 			                        </div>
 			                        <div class="col-md-3">
 			                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
