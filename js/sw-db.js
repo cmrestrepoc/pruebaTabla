@@ -649,7 +649,15 @@ function cargarServidor(formulario){
 						cuerpo.appendChild(texto);
 					});
 				})
-				.catch( (err) => alert("Problemas con el envío de registros: ", err ) );
+				.catch( err => {
+					let cuerpo = document.getElementById('cuerpoRespuesta');
+					err.forEach(element => {
+						let texto = document.createElement('p');
+						texto.innerHTML = element;
+						cuerpo.appendChild(texto);
+					});
+				});
+				//.catch( (err) => alert("Problemas con el envío de registros: ", err ) );
 		})	
 	} else{
 		location.assign("./loginserver.html");
