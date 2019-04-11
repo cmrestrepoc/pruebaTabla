@@ -25,6 +25,12 @@ function obtenerCodigo(usuario){
 		case 'JCARDENAS':
 			indice = '08';
 			break;
+		case 'MARIOR':
+			indice = '99';
+			break;
+		case 'CRESTREPO':
+			indice = '100'
+			break;
 		default:
 			alert('El usuario no está registrado para obtener código');
 			break;
