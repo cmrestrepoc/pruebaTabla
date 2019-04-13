@@ -623,7 +623,7 @@ function fetchEvaluados(doc, formulario){
 				res.json().then( body => resolve(body)	)
 			} 
 		})
-		.catch( err => reject(err) );
+		.catch( err => reject([err, doc.ACTA]) );
 	});
 }
 
@@ -651,11 +651,11 @@ function cargarServidor(formulario){
 						cuerpo.appendChild(texto);
 					});
 				})
-				.catch( () => {
+				.catch( (err) => {
 					let cuerpo = document.getElementById('cuerpoRespuesta');
 					cuerpo.innerHTML = '';
 					let texto = document.createElement('p');
-					texto.innerHTML = "Es posible que haya habido problemas enviando alguno de los registros. Inténtelo de nuevo hasta confirmar que todas las actas hayan sido enviadas";
+					texto.innerHTML = "El acta " + err[1] + " no pudo ser almacenada. Inténtelo de nuevo hasta confirmar que todas las actas hayan sido enviadas";
 					cuerpo.appendChild(texto);
 				});
 				//.catch( (err) => alert("Problemas con el envío de registros: ", err ) );
