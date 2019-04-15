@@ -182,10 +182,10 @@ function cargarInicioInscripciones(formulario){
 			case '569':
 			case '444':
 		}
-		ins.ACTA = calcularActaInscripcion(formulario, dbNuevos);
-	
+		/* calcularActaInscripcion(formulario, dbNuevos).then( acta => {
+			ins.ACTA = acta;
+		}); */
 		persistirInscrito(db, dbNuevos, ins, 0);
-
 		localStorage.removeItem('inscrito');
 		localStorage.removeItem('firmaAutoridad');
 		localStorage.removeItem('firmaInscribe');
@@ -265,8 +265,8 @@ function escogerInscrito(registro, formulario){
 	document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
 	document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
 	document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
-	document.getElementsByName('deptoNotif' + formulario)[0].value = registro.DPTO_NOT;
-	document.getElementsByName('mpioNotif' + formulario)[0].value = registro.MPIO_NOT;
+	document.getElementsByName('deptoNotif' + formulario)[0].value = registro.DPTO_NOTI;
+	document.getElementsByName('mpioNotif' + formulario)[0].value = registro.MPIO_NOTI;
 	document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
 	
 	if(formulario == '444' || formulario == '472' || formulario == '441'){
@@ -330,7 +330,7 @@ function escogerInscrito(registro, formulario){
 		document.getElementsByName('recibe' + formulario)[0].value = registro.NOMBRE_F1;
 		document.getElementsByName('idRecibe' + formulario)[0].value = registro.ID_F1;
 
-		if(!formulario == '444'){
+		if(formulario != '444'){
 			document.getElementsByName('funcUltVisita' + formulario)[0].value = registro.DIR_NOT_E;
 			document.getElementsByName('visitado' + formulario)[0].value = registro.VISITADO;
 		}else{
