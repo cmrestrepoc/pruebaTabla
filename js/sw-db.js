@@ -151,6 +151,47 @@ function cargarInicio(formulario){
 	}
 }
 
+function calcularActaInscripcion(formulario, db){
+	let codUsuario = localStorage.getItem('codigoUsuario');
+	return db.info().then( result => {
+		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
+		let indice = calcularIndice(ultimo);
+		let fecha = calcularFecha();
+		let year = fecha.anio.toString()
+		let cadenaFecha = fecha.dia + fecha.mes + year.substring(2, 4);
+		//console.log(indice);
+		let acta = formulario + codUsuario + cadenaFecha + indice;
+		console.log(acta);
+		return acta;
+	});
+}
+
+function cargarInicioInscripciones(formulario){
+	if(localStorage.getItem('inscrito') && localStorage.getItem('firmaAutoridad') && localStorage.getItem('firmaInscribe') )
+	{
+		let ins = JSON.parse(localStorage.getItem('inscrito'));
+		ins.FIRMA_F1 = localStorage.getItem('firmaAutoridad');
+		ins.FIRMA_E1 = localStorage.getItem('firmaInscribe');
+		let db;
+		let dbNuevos;
+
+		switch(formulario){
+			case '493':
+				db = db493;
+				dbNuevos = dbNuevos493;
+			case '569':
+			case '444':
+		}
+		ins.ACTA = calcularActaInscripcion(formulario, dbNuevos);
+	
+		persistirInscrito(db, dbNuevos, ins, 0);
+
+		localStorage.removeItem('inscrito');
+		localStorage.removeItem('firmaAutoridad');
+		localStorage.removeItem('firmaInscribe');
+	}
+}
+
 function verificarAccionForm(formulario){
 	localStorage.getItem('Accion') == 'cargarServidor' ? cargarServidor(formulario) : console.log('No hay Acción');
 }
@@ -671,10 +712,10 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 		dbBase.info().then( result => {
 			var ultimo = result.doc_count + 1;
 			let indice  = calcularIndice(ultimo);
-			//console.log(indice);
+			console.log(indice);
 			var insertar = { _id: indice };
 			inscrito = Object.assign( insertar, inscrito );
-			//console.log(inscrito);
+			console.log(inscrito);
 
 			dbBase.put(inscrito, function callback(err, result){
 				if (!err) {
@@ -730,13 +771,8 @@ function guardarComunesInscritos(formulario){
 	var inscrito = {
 		//Campos comunes a todos los formularios en general
 		
-		/*DPPTO: document.getElementsByName('depto' + formulario)[0].value,
-		CODEPTO: 76,
-		CIUDAD: document.getElementsByName('mpio' + formulario)[0].value,
-		COMUN: 130,*/
 		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
 		N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
-		//ENTIDAD: 'SECRETARÍA DE SALUD MUNICIPAL',
 		NOMBRE_P: document.getElementsByName('propietario' + formulario)[0].value,
 		TID_P: document.getElementsByName('tipoIdProp' + formulario)[0].value,
 		DOC_P: document.getElementsByName('idPropietario' + formulario)[0].value,
@@ -747,8 +783,8 @@ function guardarComunesInscritos(formulario){
 		DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
 		DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
 		MPIO_NOTI: document.getElementsByName('mpioNotif' + formulario)[0].value,
-		FIRMA_F1: localStorage.getItem('firmaAutoridad'),
-		FIRMA_E1: localStorage.getItem('firmaInscribe'),
+		FIRMA_F1: '',
+		FIRMA_E1: '',
 		AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,
 		
 		//Campos comunes a los formularios de inscripción 493, 444, 569
@@ -805,7 +841,7 @@ function guardarInscrito493(){
 	for (var i = 0; i < document.getElementsByName('actividad493').length; i++) {
 		document.getElementsByName('actividad493')[i].checked ? actividad.push(document.getElementsByName('actividad493')[i].value) : console.log(i); 
 		//console.log(actividad[i].checked ? actividad[i].value : 'No aplica');
-	};
+	}
 
 	console.log(document.getElementsByName('territorio493'));
 
@@ -819,8 +855,9 @@ function guardarInscrito493(){
 	};
 
 	inscrito = Object.assign( inscrito, inscritoEsta, adicional );
+	localStorage.setItem('inscrito', JSON.stringify(inscrito));
 	
-	persistirInscrito(db493, dbNuevos493, inscrito, idExistente);
+	idExistente == 0 ? firmaInscripcion() : persistirInscrito(db493, dbNuevos493, inscrito, idExistente);
 }
 
 function guardarInscrito444(){
@@ -1373,10 +1410,10 @@ function guardarEvaluacion(formulario){
 				NOMBRE_E2: document.getElementsByName('persona' + formulario + '-2')[0].value,
 				ID_E2: document.getElementsByName('idPersona' + formulario + '-2')[0].value,
 				CARGO_E2: document.getElementsByName('cargoPersona' + formulario + '-2')[0].value,
-				FIRMA_F1: localStorage.getItem('firmaAut1'),
-				FIRMA_F2: localStorage.getItem('firmaAut2'),
-				FIRMA_E1: localStorage.getItem('firmaIns1'),
-				FIRMA_E2: localStorage.getItem('firmaIns2'),
+				FIRMA_F1: '',
+				FIRMA_F2: '',
+				FIRMA_E1: '',
+				FIRMA_E2: '',
 				GRABADO: 'S'
 			};
 			localStorage.setItem('form', '333');
