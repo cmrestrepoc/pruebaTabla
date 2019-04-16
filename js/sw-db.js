@@ -167,21 +167,31 @@ function calcularActaInscripcion(formulario, db){
 }
 
 function cargarInicioInscripciones(formulario){
+	let db;
+	let dbNuevos;
+	switch(formulario){
+		case '493':
+			db = db493;
+			dbNuevos = dbNuevos493;
+			break;
+		case '569':
+			db = db569;
+			dbNuevos = dbNuevos569;
+			break;
+		case '444':
+			db = db444;
+			dbNuevos = dbNuevos444;
+			break;
+	}
+	calcularActaInscripcion(formulario, dbNuevos).then( acta => { 
+		document.getElementsByName('acta' + formulario)[0].value = acta;
+	});
 	if(localStorage.getItem('inscrito') && localStorage.getItem('firmaAutoridad') && localStorage.getItem('firmaInscribe') )
 	{
 		let ins = JSON.parse(localStorage.getItem('inscrito'));
 		ins.FIRMA_F1 = localStorage.getItem('firmaAutoridad');
 		ins.FIRMA_E1 = localStorage.getItem('firmaInscribe');
-		let db;
-		let dbNuevos;
 
-		switch(formulario){
-			case '493':
-				db = db493;
-				dbNuevos = dbNuevos493;
-			case '569':
-			case '444':
-		}
 		/* calcularActaInscripcion(formulario, dbNuevos).then( acta => {
 			ins.ACTA = acta;
 		}); */
@@ -321,6 +331,7 @@ function escogerInscrito(registro, formulario){
 
 	if(formulario == '493' || formulario == '569'|| formulario == '444'){
 		console.log('Debería estar en ' + formulario);
+		document.getElementsByName('acta' + formulario)[0].value = registro.ACTA;
 		document.getElementsByName('id' + formulario)[0].value = registro._id;
 		document.getElementsByName('fecha' + formulario)[0].value = registro.FECHA;
 		document.getElementsByName('obAutoridad' + formulario)[0].value = registro.OBSERVA_AU;
@@ -501,14 +512,16 @@ function guardarTraidos(formulario, dbBase, respObj){
 		respObj.forEach( registro => {
 			//console.log('Registro: ',registro);
 			let indice  = calcularIndice(registro.id);
-					
+			let id = { _id: indice };
+						
 			if (registro.ACTIVIDAD) {
 				registro.ACTIVIDAD = JSON.parse(registro.ACTIVIDAD);	
 			}
 			
-			var id = { _id: indice };
+			// Los inscritos que vienen desde el servidor vienen sin numero de acta
+			registro.ACTA = " ";
 			// Con la siguiente línea se añade la variable _id al objeto			
-			registro = Object.assign(id,registro);   
+			registro = Object.assign(id, registro);   
 			//console.log('Registro: ',registro);
 			dbBase.put(registro, function callback(err, result){
 				if (!err) {
@@ -678,6 +691,7 @@ function cargarServidor(formulario){
 		localStorage.removeItem('Accion');	
 		db.allDocs({include_docs: true, descending: true}).then( doc => {
 			console.log('Cantidad de registros en indexDB para este formulario: ', doc.rows.length);
+			//console.log(JSON.stringify(doc.rows));
 			let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario));
 			console.log(promesas);
 			Promise
@@ -698,9 +712,9 @@ function cargarServidor(formulario){
 					let texto = document.createElement('p');
 					texto.innerHTML = "El acta " + err[1] + " no pudo ser almacenada. Inténtelo de nuevo hasta confirmar que todas las actas hayan sido enviadas";
 					cuerpo.appendChild(texto);
-				});
+				}); 
 				//.catch( (err) => alert("Problemas con el envío de registros: ", err ) );
-		})	
+		});	
 	} else{
 		location.assign("./loginserver.html");
 	}
@@ -719,16 +733,16 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 
 			dbBase.put(inscrito, function callback(err, result){
 				if (!err) {
-					alert('inscrito guardado en base de datos');
+					console.log('inscrito guardado en base de datos');
 				}else {
-					alert('problemas guardando inscrito en base de datos',err);
+					console.log('problemas guardando inscrito en base de datos',err);
 				}
 			});
 			dbNuevos.put(inscrito, function callback(err, result){
 				if (!err) {
-					console.log('inscrito guardado en base de datos');
+					alert('inscrito guardado en base de datos');
 				}else {
-					console.log('problemas guardando inscrito en base de datos');
+					alert('problemas guardando inscrito en base de datos');
 				}
 			});					
 		});					
@@ -743,25 +757,37 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 			inscrito = Object.assign(insertar, inscrito);
 			dbBase.put(inscrito, function callback(err, result){
 				if (!err) {
-					alert('inscrito modificado en base de datos');
+					console.log('inscrito modificado en base de datos de traidos del server');
 				}else {
-					alert('problemas modificando inscrito en base de datos: '+err);
+					console.log('problemas modificando inscrito en base de datos de traidos del server: '+err);
 					console.log(err);
 				}
 			});
-			/*delete inscrito._rev;
-			delete inscrito._id;
-			id = new Date().toISOString();
-			insertar = { _id: id };
-			inscrito = Object.assign( insertar, inscrito );
-			console.log(inscrito);
-			dbNuevos.put(inscrito, function callback(err, result){
-				if (!err) {
-					console.log('inscrito modificado en base de datos');
-				}else {
-					console.log('problemas modificando inscrito en base de datos: ',err);
-				}
-			});  Dejar esto comentado por si las...*/
+			dbNuevos.get(idExistente).then( docum => {
+				insertar = { 
+					_id: docum._id,
+					_rev: docum._rev
+				};
+				inscrito = Object.assign(insertar, inscrito);
+				dbNuevos.put(inscrito, function callback(err, result){
+					if (!err) {
+						alert('inscrito modificado en base de datos');
+					}else {
+						alert('problemas modificando inscrito en base de datos: '+err);
+						console.log(err);
+					}
+				});
+			})
+			.catch( () => {
+				dbNuevos.put(inscrito, function callback(err, result){
+					if (!err) {
+						alert('inscrito almacenado en base de datos');
+					}else {
+						alert('problemas almacenando inscrito en base de datos: '+err);
+						console.log(err);
+					}
+				});
+			});
 		});
 	}
 }
@@ -770,7 +796,7 @@ function guardarComunesInscritos(formulario){
 
 	var inscrito = {
 		//Campos comunes a todos los formularios en general
-		
+		ACTA: '',
 		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
 		N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
 		NOMBRE_P: document.getElementsByName('propietario' + formulario)[0].value,
@@ -880,8 +906,9 @@ function guardarInscrito444(){
 	};
 	
 	inscrito = Object.assign( inscrito, adicional );
+	localStorage.setItem('inscrito', JSON.stringify(inscrito));
 	
-	persistirInscrito(db444, dbNuevos444, inscrito, idExistente);
+	idExistente == 0 ? firmaInscripcion() : persistirInscrito(db444, dbNuevos444, inscrito, idExistente);
 }
 
 function guardarInscrito569(){
@@ -904,8 +931,9 @@ function guardarInscrito569(){
 	};
 	
 	inscrito = Object.assign( inscrito, inscritoEsta, adicional );
+	localStorage.setItem('inscrito', JSON.stringify(inscrito));
 	
-	persistirInscrito(db569, dbNuevos569, inscrito, idExistente);
+	idExistente == 0 ? firmaInscripcion() : persistirInscrito(db569, dbNuevos569, inscrito, idExistente);
 }
 
 function guardarComunesEvaluados(formulario){
