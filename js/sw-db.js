@@ -691,8 +691,8 @@ function cargarServidor(formulario){
 		localStorage.removeItem('Accion');	
 		db.allDocs({include_docs: true, descending: true}).then( doc => {
 			console.log('Cantidad de registros en indexDB para este formulario: ', doc.rows.length);
-			console.log(JSON.stringify(doc.rows));
-			/* let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario));
+			//console.log(JSON.stringify(doc.rows));
+			let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario));
 			console.log(promesas);
 			Promise
 				.all(promesas)
@@ -713,7 +713,7 @@ function cargarServidor(formulario){
 					texto.innerHTML = "El acta " + err[1] + " no pudo ser almacenada. Inténtelo de nuevo hasta confirmar que todas las actas hayan sido enviadas";
 					cuerpo.appendChild(texto);
 				}); 
-				//.catch( (err) => alert("Problemas con el envío de registros: ", err ) ); */
+				//.catch( (err) => alert("Problemas con el envío de registros: ", err ) );
 		});	
 	} else{
 		location.assign("./loginserver.html");
