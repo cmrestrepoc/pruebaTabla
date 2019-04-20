@@ -774,6 +774,8 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 				_id: doc._id,
 				_rev: doc._rev
 			};
+			console.log("Id usado para la busqueda", idExistente);
+			console.log("rev del inscrito en la bd de traidos del server", doc._rev);
 			inscrito = Object.assign(insertar, inscrito);
 			dbBase.put(inscrito, function callback(err, result){
 				if (!err) {
@@ -788,7 +790,11 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 					_id: docum._id,
 					_rev: docum._rev
 				};
+				console.log("Rev a adicionar al inscrito para la tabla de nuevos");
+				delete inscrito._id;
+				delete inscrito._rev;
 				inscrito = Object.assign(insertar, inscrito);
+				console.log("Inscrito ya existente a guardar en tabla de nuevos: ", inscrito);
 				dbNuevos.put(inscrito, function callback(err, result){
 					if (!err) {
 						alert('inscrito modificado en base de datos');
