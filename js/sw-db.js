@@ -386,7 +386,7 @@ function escogerInscrito(registro, formulario){
 				// El siguiente for busca si la key está en el array, busca por el key. Con forEach 
 				//hay que cambiar el orden
 				for (let valor in registro.ACTIVIDAD){
-					mapActividad.set(registro.ACTIVIDAD[valor],valor);
+					mapActividad.set(registro.ACTIVIDAD[valor].toUpperCase(),valor);
 					j++;
 				}
 				//var mapActividad = new Map(registro.ACTIVIDAD);
@@ -651,7 +651,7 @@ function cargarTodosLosInscritos(){
 	}).catch( err => console.log('Error: ', err) );	
 }
 
-function fetchEvaluados(doc, formulario){
+function fetchEvaluados(doc, formulario, url){
 	var credenciales = JSON.parse(localStorage.getItem('identity'));
 	let credentials = {
 		nombreUsuario: credenciales.usuario,
@@ -662,7 +662,7 @@ function fetchEvaluados(doc, formulario){
 	let data = JSON.stringify(bigDoc);
 	//console.log(data);
 	return new Promise((resolve, reject) => {
-		fetch('https://sisbenpro.com/public/evaluacionesTabla', {
+		fetch(url, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -685,14 +685,34 @@ function cargarServidor(formulario){
 	localStorage.getItem('Accion') == 'cargarServidor' ?
 			localStorage.removeItem('Accion') :
 			localStorage.setItem('Accion', 'cargarServidor');
+			
+	let db;
+	let urltofetch;
+	switch (formulario) {
+		case '493':
+		db = dbNuevos493;
+		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
+		break;
+		case '569':
+		db = dbNuevos569;
+		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
+		break;
+		case '444':
+		db = dbNuevos444;
+		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
+		break;
+		default:
+		db = dbActasForm(formulario);
+		urltofetch = 'https://sisbenpro.com/public/evaluacionesTabla';
+		break;
+	}
 
 	if (verificarSesion()) {
-		let db = dbActasForm(formulario);
 		localStorage.removeItem('Accion');	
 		db.allDocs({include_docs: true, descending: true}).then( doc => {
 			console.log('Cantidad de registros en indexDB para este formulario: ', doc.rows.length);
-			//console.log(JSON.stringify(doc.rows));
-			let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario));
+			console.log(JSON.stringify(doc.rows));
+			let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario, urltofetch));
 			console.log(promesas);
 			Promise
 				.all(promesas)
@@ -779,6 +799,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 				});
 			})
 			.catch( () => {
+				console.log("Inscrito que no esta en tabla de nuevos: ", inscrito);
 				dbNuevos.put(inscrito, function callback(err, result){
 					if (!err) {
 						alert('inscrito almacenado en base de datos');
@@ -796,7 +817,7 @@ function guardarComunesInscritos(formulario){
 
 	var inscrito = {
 		//Campos comunes a todos los formularios en general
-		ACTA: '',
+		ACTA: document.getElementsByName('acta' + formulario)[0].value,
 		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
 		N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
 		NOMBRE_P: document.getElementsByName('propietario' + formulario)[0].value,
@@ -836,6 +857,7 @@ function guardarComunesEstablecimientos(formulario){
 		NOCO: document.getElementsByName('nombreComercial' + formulario)[0].value,
 		RSO: document.getElementsByName('razonSocial' + formulario)[0].value,
 		NIT: document.getElementsByName('nit' + formulario)[0].value,
+		CCUV: document.getElementsByName('concepto' + formulario)[0].value,
 		CUV: document.getElementsByName('textoConcepto' + formulario)[0].value,
 		F_UV: document.getElementsByName('fechaUltVisita' + formulario)[0].value,
 		DIR_NOT_E: document.getElementsByName('funcUltVisita' + formulario)[0].value,
