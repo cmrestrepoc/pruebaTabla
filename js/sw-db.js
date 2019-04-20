@@ -800,6 +800,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 			})
 			.catch( () => {
 				console.log("Inscrito que no esta en tabla de nuevos: ", inscrito);
+				delete inscrito._rev;
 				dbNuevos.put(inscrito, function callback(err, result){
 					if (!err) {
 						alert('inscrito almacenado en base de datos');
