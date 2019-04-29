@@ -130,7 +130,7 @@ header img{
 }
 
 #llave3 img{
-	height: 200px;
+	height: 220px;
 }
 
 #derivadosActas{
@@ -139,7 +139,7 @@ header img{
 }
 
 #derivadosActas h4{
-	margin-top: 120px;
+	margin-top: 130px;
 	margin-bottom: 70px;
 }
 
@@ -149,7 +149,7 @@ header img{
 }
 
 #llave4 img{
-	height: 250px;
+	height: 270px;
 }
 
 #deriActaEstablecimientos h4{
@@ -159,7 +159,7 @@ header img{
 
 #llave5{
 	margin-top: 50px;
-	margin-left: -30px;
+	margin-left: -60px;
 	float: left;
 }
 
@@ -169,6 +169,7 @@ header img{
 
 #deriActaVehiculos{
 	margin-top: 45px;
+	margin-left: -30px;
 	float:left;
 }
 

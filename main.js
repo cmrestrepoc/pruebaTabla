@@ -202,3 +202,127 @@ function auxiliarInscVehi(valor){
 		document.getElementsByName('inscripcion444')[0].value += valor;
 	}
 }
+
+function setSujeto(value, destino) {
+	switch(value){
+		case "479-1":
+			document.getElementsByName(destino)[0].value = "RESTAURANTES, PANADERIAS,Y/O PASTELERIAS, CAFETERIAS, FRUTERIAS, COMIDAS RAPIDAS, SERVICIO DE BANQUETES, OFERTA DE ALIMENTACION POR REDES S.";
+			break;
+		case "479-2":
+			document.getElementsByName(destino)[0].value = "COMEDORES ESCOLARES (INCLUYE PAE Y PRIVADOS) INFANTILES (ICBF, INPEC), COLEGIOS Y UNIVERSIDADES";
+			break;
+		case "479-3":
+			document.getElementsByName(destino)[0].value = "COMEDORES CARCELARIOS (USPEC), FUERZAS MILITARES Y POLICIVAS";
+			break;
+		case "479-4":
+			document.getElementsByName(destino)[0].value = "COMEDORES HOGARES GERIATRICOS, ASILOS, HOSPITALES, CASINOS DE EMPRESAS O FABRICAS, CLUBES SOCIALES";
+			break;
+		case "479-5":
+			document.getElementsByName(destino)[0].value = "HOTELES, MOTELES, HOSTALES, RESIDENCIAS Y CASAS DE LENOCINIO CON PREPARACION DE ALIMENTOS";
+			break;
+		case "479-6":
+			document.getElementsByName(destino)[0].value = "ESTABLECIMIENTOS DE PREPARACION DE ALIMENTOS AL INTERIOR DE PLAZAS DE MERCADO, CENTRALES DE ABASTO, PLAZOLETAS DE COMIDA, ZONAS FRANCAS";
+			break;
+		case "481-1":
+			document.getElementsByName(destino)[0].value = "BODEGAS PARA ALMACENAMIENTO DE ALIMENTOS Y/O BEBIDAS INCLUIDAS ZONAS FRANCAS";
+			break;
+		case "481-2":
+			document.getElementsByName(destino)[0].value = "ALMACENAN Y DISTRIBUYEN";
+			break;
+		case "481-3":
+			document.getElementsByName(destino)[0].value = "DADORES DE FRIO";
+			break;
+		case "495-1":
+			document.getElementsByName(destino)[0].value = "TIENDAS DE BARRIO I CIGARRERIAS INCLUIDAS ZONAS FRANCAS";
+			break;
+		case "495-2":
+			document.getElementsByName(destino)[0].value = "MINI MERCADO";
+			break;
+		case "495-3":
+			document.getElementsByName(destino)[0].value = "EXPENDIO CON OPERACIONES DE PORCIONADO, TROCEADO O ACONDICIONAMIENTO";
+			break;
+		case "495-4":
+			document.getElementsByName(destino)[0].value = "EXPENDIO DE PRODUCTOS DE LA PESCA";
+			break;
+		case "495-5":
+			document.getElementsByName(destino)[0].value = "CHARCUTERIAS Y SALSAMENTARIAS";
+			break;
+		case "495-6":
+			document.getElementsByName(destino)[0].value = "VENTA DE LECHE CRUDA";
+			break;
+		case "440-1":
+			document.getElementsByName(destino)[0].value = "CARNICERIAS Y FAMAS";
+			break;
+		case "440-2":
+			document.getElementsByName(destino)[0].value = "CARNICERIA DE GRANDES SUPERFICIES, DE PLAZAS DE MERCADO";
+			break;
+		case "474-1":
+			document.getElementsByName(destino)[0].value = "BARES";
+			break;
+		case "474-2":
+			document.getElementsByName(destino)[0].value = "DISCOTECAS";
+			break;
+		case "474-3":
+			document.getElementsByName(destino)[0].value = "CANTINAS";
+			break;
+		case "474-4":
+			document.getElementsByName(destino)[0].value = "TABERNAS";
+			break;
+		case "474-5":
+			document.getElementsByName(destino)[0].value = "CIGARRERIAS";
+			break;
+		case "474-6":
+			document.getElementsByName(destino)[0].value = "LICORERAS";
+			break;
+		case "474-7":
+			document.getElementsByName(destino)[0].value = "WHISKERIAS";
+			break;
+		case "474-8":
+			document.getElementsByName(destino)[0].value = "PROSTIBULOS";
+			break;
+		case "474-9":
+			document.getElementsByName(destino)[0].value = "CLUBES SOCIALES";
+			break;
+		case "478-1":
+			document.getElementsByName(destino)[0].value = "GRAN SUPERFICIE";
+			break;
+		case "478-2":
+			document.getElementsByName(destino)[0].value = "HIPERMERCADO";
+			break;
+		case "478-3":
+			document.getElementsByName(destino)[0].value = "SUPERMERCADO";
+			break;
+		case "478-4":
+			document.getElementsByName(destino)[0].value = "FRUVER";
+			break;
+		case "475-1":
+			document.getElementsByName(destino)[0].value = "CENTRO DE ABASTO";
+			break;
+		case "475-2":
+			document.getElementsByName(destino)[0].value = "PLAZA DE MERCADO";
+			break;
+		case "472-1":
+			document.getElementsByName(destino)[0].value = "VEHICULO";
+			break;
+		case "480-1":
+			document.getElementsByName(destino)[0].value = "PUESTO FIJO ESTACIONARIO";
+			break;
+		case "480-2":
+			document.getElementsByName(destino)[0].value = "PUESTO MOVIL";
+			break;
+		case "480-3":
+			document.getElementsByName(destino)[0].value = "PLAZA DE MERCADO MOVIL";
+			break;
+		case "480-4":
+			document.getElementsByName(destino)[0].value = "MERCADO CAMPESINO";
+			break;
+		case "480-5":
+			document.getElementsByName(destino)[0].value = "FOOD TRUCK";
+			break;
+		case "480-6":
+			document.getElementsByName(destino)[0].value = "COMERCIALIZACION AMBULANTE DE LECHE CRUDA PARA CONSUMO HUMANO DIRECTO";
+			break;
+		default:
+			document.getElementsByName(destino)[0].value = '';
+	}
+}
