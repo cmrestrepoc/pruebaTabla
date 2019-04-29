@@ -834,7 +834,6 @@ function guardarComunesInscritos(formulario){
 		TELS: document.getElementsByName('tel' + formulario)[0].value,
 		CORREO: document.getElementsByName('correoProp' + formulario)[0].value,
 		DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
-		DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
 		DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
 		MPIO_NOTI: document.getElementsByName('mpioNotif' + formulario)[0].value,
 		FIRMA_F1: '',
@@ -858,7 +857,7 @@ function guardarComunesEstablecimientos(formulario){
 	for (var i = 0; i < document.getElementsByName('territorio' + formulario).length; i++){
 		document.getElementsByName('territorio' + formulario)[i].checked ? territorio.push(document.getElementsByName('territorio' + formulario)[i].value) : console.log(i);
 	}
-
+	
 	var inscrito = {
 		//Campos comunes a todos los formularios menos a 444
 		NOCO: document.getElementsByName('nombreComercial' + formulario)[0].value,
@@ -871,6 +870,7 @@ function guardarComunesEstablecimientos(formulario){
 		MAMER: document.getElementsByName('matriculaMercantil' + formulario)[0].value,
 		NOLOCA: document.getElementsByName('nomTerr' + formulario)[0].value,
 		VISITADO: document.getElementsByName('visitado' + formulario)[0].value,
+		DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
 		
 		TERRITORIO: territorio
 	}
