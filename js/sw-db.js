@@ -1135,8 +1135,8 @@ function persistirEvaluado(db, evaluado, formulario){
 }
 
 function guardarEvaluacion(formulario){
-	let evaluado;
-	formulario != '333' || formulario != '442' ? evaluado = guardarComunesEvaluados(formulario) : null;
+	console.log('Estamos en el formulario', formulario)
+	let evaluado = formulario != '333' && formulario != '442' ? guardarComunesEvaluados(formulario) : null;
 	let preguntasComunes;
 	let evaluadoEsta;
 	let evaluadoVehi;
@@ -1387,8 +1387,12 @@ function guardarEvaluacion(formulario){
 			break;
 		case '442':
 			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+			let iterable = document.getElementsByName('pregunta');
+			let arregloPreguntas = [];
+			let k = 0;
+			iterable.forEach( item => arregloPreguntas.push(item.value) );
 			evaluado = {
-				FECHA: fecha,
+				FECHA: document.getElementsByName('fecha' + formulario)[0].value,
 				N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
 				DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
 				FAX: document.getElementsByName('fax' + formulario)[0].value,
@@ -1424,7 +1428,7 @@ function guardarEvaluacion(formulario){
 				GRABADO: 'S'
 			}
 			adicional = {
-				PREGUNTAS: Array.from(document.getElementsByName('pregunta'))
+				PREGUNTAS: arregloPreguntas
 			};
 			evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
 			break;
