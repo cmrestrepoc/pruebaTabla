@@ -272,7 +272,7 @@
                                 <label class="col-md-6 control-label" style="text-align: right">Usuario autoriza Notifiación y/o firma electrónica</label>
                                 <div class="col-md-3">
                                     <label class="col-md-12 control-label">Notific.</label>
-                                    <select class="form-control" name="autorizaNoti479">
+                                    <select class="form-control" name="autorizaNoti26">
                                         <option></option>
                                         <option value="S">Si</option>
                                         <option value="N">No</option>
@@ -280,7 +280,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="col-md-12 control-label">Firma</label>
-                                    <select class="form-control" name="autorizaFirma479">
+                                    <select class="form-control" name="autorizaFirma26">
                                         <option></option>
                                         <option value="S">Si</option>
                                         <option value="N">No</option>
@@ -298,10 +298,116 @@
                         </div><!-- Fin del form-group -->
                         <br><br><br><hr>
 
-                    </div>
-                </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" style="text-align:right">OBSERVACIONES REALIZADAS EN LA VISITA:</label>		
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="obAutoridad26"></textarea>
+                            </div>
+                            <br><br><br>
+                            <label class="col-md-3 control-label" style="text-align:right">REQUERIMIENTOS DE LA VISITA:</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="obPersona26"></textarea>
+                            </div>
+                        </div><!-- Fin del form-group -->
+                        <br><br><hr>
+
+                        <div class="form-group">
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="col-md-4">
+                                    <label class="col-md-12 control-label">__</label>
+                                    <label class="col-md-12 control-label" style="text-align: right; line-height: 30px">Realiza la encuesta:</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <label class="col-md-12 control-label">Nombre:</label>
+                                    <input type="text" class="form-control" name="funcionario479-1">
+                                </div>
+                                <div class="col-md-3">								
+                                    <label class="col-md-12 control-label">Identificación:</label>
+                                    <input type="text" class="form-control" name="idFuncionario479-1">
+                                </div><br><br> <br> <br>
+                                <div class="col-md-4">
+                                    <label class="col-md-12 control-label" style="text-align: right; line-height: 30px">Propietario o Rep. legal:</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" name="funcionario479-2">
+                                </div>
+                                <div class="col-md-3">								
+                                    <input type="text" class="form-control" name="idFuncionario479-2">
+                                </div><br><br> <br>
+                                <div class="col-md-4">
+                                    <label class="col-md-12 control-label" style="text-align: right; line-height: 30px">Testigo de la encuesta:</label>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" name="funcionario479-2">
+                                </div>
+                                <div class="col-md-3">								
+                                    <input type="text" class="form-control" name="idFuncionario479-2">
+                                </div>						        
+                            </div>
+                        </div><!-- Fin del form-group -->
+
+                        <br><br><br><br><br><br><br><br><br><hr>
+
+						<input type="hidden" name="id479" value="0">
+								
+						<br><br>
+						<div class="form-group">
+			                <div class="col-md-4 col-md-offset-2">
+			                    <button type="submit" onclick="guardarEvaluacion('479')" class="btn btn-primary">
+			                        Guardar
+			                    </button>			                            
+			                </div>
+			                <div class="col-md-3">
+			                    <button class="btn btn-primary" data-toggle="modal" data-target="#resp"  onclick="cargarServidor('479')">
+			                        Subir información a servidor
+								</button>
+								<!-- Modal -->
+								<div class="modal fade" id="resp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												<h4 class="modal-title" id="myModalLabel">Respuesta: </h4>
+											</div>
+											<div class="modal-body">
+												<label id="cuerpoRespuesta"></label>
+											</div>
+										</div>
+									</div>
+								</div>
+			                </div>
+			                <div class="col-md-3">
+			                    <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+			                        Cerrar Sesión con Servidor
+			                    </a>
+			                </div>		                       
+			            </div>
+
+			            <br><br><br><br>
+			            <div class="form-group">
+			                <div class="panel panel-default">
+			                    <div class="panel-heading">ACTAS ALMACENADAS EN DISPOSITIVO</div>
+			                    <div class="panel-body">	                    			
+			                    	<table class="table table-bordered" id="tablaEvaluados">
+										<thead>
+											<tr>
+												<th></th>
+												<th>Sujeto</th>
+												<th>Tipo de Sujeto</th>
+												<th>Acta Número</th>
+												<th>Fecha</th>
+											</tr>									
+										</thead>
+										<tbody id="evaluados"></tbody>
+									</table>													
+			                    </div>
+			                </div>	
+                        </div><!-- Fin del form-group -->
+                        
+                    </div><!-- Fin del panel body -->
+                </div><!-- Fin del panel default -->
             
-            </div>
-        </div>
+            </div><!-- Fin del row -->
+        </div><!-- Fin del container -->
     </body>
 </html>  
