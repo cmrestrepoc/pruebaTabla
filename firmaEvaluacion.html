@@ -68,9 +68,10 @@
         $("#firmaIns1").jqScribble();
         $("#firmaIns2").jqScribble();
 
-        if(localStorage.getItem('form') == '333'|| localStorage.getItem('form') == '243') {
+        if(localStorage.getItem('form') == '333'|| localStorage.getItem('form') == '243' || localStorage.getItem('form') == '26') {
             let elemento = document.getElementsByName('firma');
             elemento[0].innerHTML = "POR PARTE DE LA EMPRESA";
+            document.getElementsByClassName('panel')[1].style.display = localStorage.getItem('form') == '26' ? 'none': 'block';
             localStorage.getItem('form') == '333' ? elemento[1].innerHTML = "POR PARTE DEL LABORATORIO" : elemento[1].innerHTML = "TESTIGO DE LA ENCUESTA";
         } 
     });
@@ -141,7 +142,7 @@
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
-                FIRMA 1
+                FIRMA
             </div>                                              
             <div class="panel-body">
                 <div id="contenedor">
@@ -160,7 +161,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                FIRMA 2
+                FIRMA
             </div>                                              
             <div class="panel-body">
                 <div id="contenedor">
@@ -179,7 +180,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                FIRMA 3
+                FIRMA
             </div>                                              
             <div class="panel-body">
                 <div id="contenedor">
@@ -198,7 +199,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                FIRMA 4
+                FIRMA
             </div>                                              
             <div class="panel-body">
                 <div id="contenedor">

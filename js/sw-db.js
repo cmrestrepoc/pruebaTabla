@@ -15,7 +15,7 @@ var db475 = new PouchDB('evaluaciones475');
 var db481 = new PouchDB('evaluaciones481');
 var db442 = new PouchDB('evaluaciones442');
 var db333 = new PouchDB('evaluaciones333');
-
+var db26 = new PouchDB('evaluaciones26');
 var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
 
@@ -102,6 +102,9 @@ function dbActasForm(formulario){
 		case '333':
 			db = db333;
 			break;
+		case '26':
+			db = db26;
+			break
 		case '441':
 			db = db441;
 			break;
@@ -267,159 +270,173 @@ function calcularNumActa(formulario){
 
 function escogerInscrito(registro, formulario){
 
-	document.getElementsByName('fax' + formulario)[0].value = registro.FAX;
-	document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
-	document.getElementsByName('cel' + formulario)[0].value = registro.CELULAR;
-	document.getElementsByName('correoProp' + formulario)[0].value = registro.CORREO;
-	document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
-	document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
-	document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
-	document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
-	document.getElementsByName('deptoNotif' + formulario)[0].value = registro.DPTO_NOTI;
-	document.getElementsByName('mpioNotif' + formulario)[0].value = registro.MPIO_NOTI;
-	document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
-	
-	if(formulario == '444' || formulario == '472' || formulario == '441'){
-		console.log('Inscritos 444');
-		document.getElementsByName('marca' + formulario)[0].value = registro.MARCAV;
-		document.getElementsByName('modelo' + formulario)[0].value = registro.MODELOV;
-		document.getElementsByName('placa' + formulario)[0].value = registro.PLACA;
-		document.getElementsByName('isotermo' + formulario)[0].value = registro.ISOTERMO;
-		document.getElementsByName('ufrio' + formulario)[0].value = registro.U_UFRIO;
-		document.getElementsByName('producto' + formulario)[0].value = registro.PRODUCTO;
-		if (formulario == '444' || formulario == '441') {
-			document.getElementsByName('furgon' + formulario)[0].value = registro.FURGON;
-			document.getElementsByName('rmque' + formulario)[0].value = registro.REMOLQUE;
-			document.getElementsByName('placaRemolque' + formulario)[0].value = registro.PLACAREM;
-			document.getElementsByName('srmque' + formulario)[0].value = registro.SEMIREM;
-			document.getElementsByName('placaSrmque' + formulario)[0].value = registro.PLACASEMI;	
-		}
-	}else{ 
-		document.getElementsByName('dirNotif' + formulario)[0].value = registro.DIR_NOT;
-		document.getElementsByName('nombreComercial' + formulario)[0].value = registro.NOCO;
+	if(formulario == '333'){
+		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
+		document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
+		document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
+		document.getElementsByName('correoProp' + formulario)[0].value = registro.CORREO;
+		document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
+		document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
+		document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
+		document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
 		document.getElementsByName('razonSocial' + formulario)[0].value = registro.RSO;
 		document.getElementsByName('nit' + formulario)[0].value = registro.NIT;
-		document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
-		document.getElementsByName('matriculaMercantil' + formulario)[0].value = registro.MAMER;
-
-		if (registro.TERRITORIO != undefined) {
-			console.log('Territorio: ', registro.TERRITORIO);
-			switch(registro.TERRITORIO){
-				case 'barrio':
-					$('#barrio').prop('checked', true);
-					break;
-				case 'corregimiento':
-					$('#corregimiento').prop('checked', true);
-					break;
-				case 'vereda':
-					$('#vereda').prop('checked', true);
-					break;
-				default:
-				break;
-			}
-		}else{
-			console.log('Territorio Null');
-			$('input:radio[name=territorio'+formulario+']').prop('checked', false);
-		}
-
-		if (formulario != '442'){
-			document.getElementsByName('concepto' + formulario)[0].value = registro.CCUV;
-			document.getElementsByName('textoConcepto' + formulario)[0].value = registro.CUV;
-			document.getElementsByName('fechaUltVisita' + formulario)[0].value = registro.F_UV;
-		}	
-	}
-
-	if(formulario == '493' || formulario == '569'|| formulario == '444'){
-		console.log('Debería estar en ' + formulario);
-		document.getElementsByName('acta' + formulario)[0].value = registro.ACTA;
-		document.getElementsByName('id' + formulario)[0].value = registro._id;
-		document.getElementsByName('fecha' + formulario)[0].value = registro.FECHA;
-		document.getElementsByName('obAutoridad' + formulario)[0].value = registro.OBSERVA_AU;
-		document.getElementsByName('obPersona' + formulario)[0].value = registro.OBSERVA_F1;
-		document.getElementsByName('inscribe' + formulario)[0].value = registro.NOMBRE_E1;
-		document.getElementsByName('idInscribe' + formulario)[0].value = registro.ID_E1;
-		document.getElementsByName('recibe' + formulario)[0].value = registro.NOMBRE_F1;
-		document.getElementsByName('idRecibe' + formulario)[0].value = registro.ID_F1;
-
-		if(formulario != '444'){
-			document.getElementsByName('funcUltVisita' + formulario)[0].value = registro.DIR_NOT_E;
-			document.getElementsByName('visitado' + formulario)[0].value = registro.VISITADO;
-		}else{
-			document.getElementsByName('inscripcionRep444')[0].value = registro.N_INSCRIP;
-			document.getElementsByName('fecha444_2')[0].value = registro.FECHA;
-			document.getElementsByName('funcionario444')[0].value = registro.NOMBRE_F1;
-		
-		}
-
-	}else{
-		// Aquí se puede introducir un método para calcular automáticamente un número de acta
 		calcularNumActa(formulario).then( acta => {
 			console.log("Valor de acta recibido ", acta);
 			document.getElementsByName('acta' + formulario)[0].value = acta;
 		});
+	}else{
+		document.getElementsByName('fax' + formulario)[0].value = registro.FAX;
+		document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
+		document.getElementsByName('cel' + formulario)[0].value = registro.CELULAR;
+		document.getElementsByName('correoProp' + formulario)[0].value = registro.CORREO;
+		document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
+		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
+		document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
+		document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
+		document.getElementsByName('deptoNotif' + formulario)[0].value = registro.DPTO_NOTI;
+		document.getElementsByName('mpioNotif' + formulario)[0].value = registro.MPIO_NOTI;
+		document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
 		
-		let alerta = document.getElementsByName('alertaInscrito');
-		let arreglo = Array.from(alerta); //en este caso alerta es un iterable pero no un arreglo, hay que convertirlo primero
-		let arr = arreglo.map( item => {
-			item.style.display = "none";
-			return item;
-		});
-		document.getElementsByName('entidad' + formulario).value = registro.ENTIDAD;
-	}
-
-	if (formulario == '493') {
-		console.log('Estamos en ' + formulario);
-		console.log("registro.actividad", registro.ACTIVIDAD);
-		
-		document.getElementsByName('cargoRecibe' + formulario)[0].value = registro.CARGO_F1;
-		document.getElementsByName('cargoInscribe' + formulario)[0].value = registro.CARGO_E1;
-
-		if (registro.ACTIVIDAD != null){
-			if (registro.ACTIVIDAD.length != 0) {
-				var actividad = [];
-				for (var i = 0; i < document.getElementsByName('actividad' + formulario).length; i++) {
-					actividad.push(document.getElementsByName('actividad' + formulario)[i].value);
+		if(formulario == '444' || formulario == '472' || formulario == '441'){
+			console.log('Inscritos 444');
+			document.getElementsByName('marca' + formulario)[0].value = registro.MARCAV;
+			document.getElementsByName('modelo' + formulario)[0].value = registro.MODELOV;
+			document.getElementsByName('placa' + formulario)[0].value = registro.PLACA;
+			document.getElementsByName('isotermo' + formulario)[0].value = registro.ISOTERMO;
+			document.getElementsByName('ufrio' + formulario)[0].value = registro.U_UFRIO;
+			document.getElementsByName('producto' + formulario)[0].value = registro.PRODUCTO;
+			if (formulario == '444' || formulario == '441') {
+				document.getElementsByName('furgon' + formulario)[0].value = registro.FURGON;
+				document.getElementsByName('rmque' + formulario)[0].value = registro.REMOLQUE;
+				document.getElementsByName('placaRemolque' + formulario)[0].value = registro.PLACAREM;
+				document.getElementsByName('srmque' + formulario)[0].value = registro.SEMIREM;
+				document.getElementsByName('placaSrmque' + formulario)[0].value = registro.PLACASEMI;	
+			}
+		}else{ 
+			document.getElementsByName('dirNotif' + formulario)[0].value = registro.DIR_NOT;
+			document.getElementsByName('nombreComercial' + formulario)[0].value = registro.NOCO;
+			document.getElementsByName('razonSocial' + formulario)[0].value = registro.RSO;
+			document.getElementsByName('nit' + formulario)[0].value = registro.NIT;
+			document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
+			document.getElementsByName('matriculaMercantil' + formulario)[0].value = registro.MAMER;
+	
+			if (registro.TERRITORIO != undefined) {
+				console.log('Territorio: ', registro.TERRITORIO);
+				switch(registro.TERRITORIO){
+					case 'barrio':
+						$('#barrio').prop('checked', true);
+						break;
+					case 'corregimiento':
+						$('#corregimiento').prop('checked', true);
+						break;
+					case 'vereda':
+						$('#vereda').prop('checked', true);
+						break;
+					default:
+					break;
 				}
-
-				var mapActividad = new Map();
-				var j = 0;
-				// El siguiente for busca si la key está en el array, busca por el key. Con forEach 
-				//hay que cambiar el orden
-				for (let valor in registro.ACTIVIDAD){
-					mapActividad.set(registro.ACTIVIDAD[valor].toUpperCase(),valor);
-					j++;
-				}
-				//var mapActividad = new Map(registro.ACTIVIDAD);
-				console.log(mapActividad);
-				console.log(JSON.stringify(registro.ACTIVIDAD));
-
-				$('input:checkbox[name=actividad'+formulario+']').prop('checked', false);
-
-				for (var i = 0; i < actividad.length; i++) {
-					//console.log(actividad[i]);
-					//console.log(mapActividad.has(actividad[i]));
-					mapActividad.has(actividad[i]) ? $('input:checkbox[value='+actividad[i]+']').prop('checked', true) : $('input:checkbox[value='+actividad[i]+']').prop('checked', false);			
-				};
+			}else{
+				console.log('Territorio Null');
+				$('input:radio[name=territorio'+formulario+']').prop('checked', false);
+			}
+	
+			if (formulario != '442'){
+				document.getElementsByName('concepto' + formulario)[0].value = registro.CCUV;
+				document.getElementsByName('textoConcepto' + formulario)[0].value = registro.CUV;
+				document.getElementsByName('fechaUltVisita' + formulario)[0].value = registro.F_UV;
+			}	
+		}
+	
+		if(formulario == '493' || formulario == '569'|| formulario == '444'){
+			console.log('Debería estar en ' + formulario);
+			document.getElementsByName('acta' + formulario)[0].value = registro.ACTA;
+			document.getElementsByName('id' + formulario)[0].value = registro._id;
+			document.getElementsByName('fecha' + formulario)[0].value = registro.FECHA;
+			document.getElementsByName('obAutoridad' + formulario)[0].value = registro.OBSERVA_AU;
+			document.getElementsByName('obPersona' + formulario)[0].value = registro.OBSERVA_F1;
+			document.getElementsByName('inscribe' + formulario)[0].value = registro.NOMBRE_E1;
+			document.getElementsByName('idInscribe' + formulario)[0].value = registro.ID_E1;
+			document.getElementsByName('recibe' + formulario)[0].value = registro.NOMBRE_F1;
+			document.getElementsByName('idRecibe' + formulario)[0].value = registro.ID_F1;
+			if(formulario != '444'){
+				document.getElementsByName('funcUltVisita' + formulario)[0].value = registro.DIR_NOT_E;
+				document.getElementsByName('visitado' + formulario)[0].value = registro.VISITADO;
+			}else{
+				document.getElementsByName('inscripcionRep444')[0].value = registro.N_INSCRIP;
+				document.getElementsByName('fecha444_2')[0].value = registro.FECHA;
+				document.getElementsByName('funcionario444')[0].value = registro.NOMBRE_F1;
+			}
+		}else{
+			// Aquí se puede introducir un método para calcular automáticamente un número de acta
+			calcularNumActa(formulario).then( acta => {
+				console.log("Valor de acta recibido ", acta);
+				document.getElementsByName('acta' + formulario)[0].value = acta;
+			});
+			
+			let alerta = document.getElementsByName('alertaInscrito');
+			let arreglo = Array.from(alerta); //en este caso alerta es un iterable pero no un arreglo, hay que convertirlo primero
+			let arr = arreglo.map( item => {
+				item.style.display = "none";
+				return item;
+			});
+			document.getElementsByName('entidad' + formulario).value = registro.ENTIDAD;
+		}
+	
+		if (formulario == '493') {
+			console.log('Estamos en ' + formulario);
+			console.log("registro.actividad", registro.ACTIVIDAD);
+			
+			document.getElementsByName('cargoRecibe' + formulario)[0].value = registro.CARGO_F1;
+			document.getElementsByName('cargoInscribe' + formulario)[0].value = registro.CARGO_E1;
+	
+			if (registro.ACTIVIDAD != null){
+				if (registro.ACTIVIDAD.length != 0) {
+					var actividad = [];
+					for (var i = 0; i < document.getElementsByName('actividad' + formulario).length; i++) {
+						actividad.push(document.getElementsByName('actividad' + formulario)[i].value);
+					}
+	
+					var mapActividad = new Map();
+					var j = 0;
+					// El siguiente for busca si la key está en el array, busca por el key. Con forEach 
+					//hay que cambiar el orden
+					for (let valor in registro.ACTIVIDAD){
+						mapActividad.set(registro.ACTIVIDAD[valor].toUpperCase(),valor);
+						j++;
+					}
+					//var mapActividad = new Map(registro.ACTIVIDAD);
+					console.log(mapActividad);
+					console.log(JSON.stringify(registro.ACTIVIDAD));
+	
+					$('input:checkbox[name=actividad'+formulario+']').prop('checked', false);
+	
+					for (var i = 0; i < actividad.length; i++) {
+						//console.log(actividad[i]);
+						//console.log(mapActividad.has(actividad[i]));
+						mapActividad.has(actividad[i]) ? $('input:checkbox[value='+actividad[i]+']').prop('checked', true) : $('input:checkbox[value='+actividad[i]+']').prop('checked', false);			
+					};
+				}else{
+					$('input:checkbox[name=actividad'+formulario+']').prop('checked', false);
+				}	
 			}else{
 				$('input:checkbox[name=actividad'+formulario+']').prop('checked', false);
-			}	
-		}else{
-			$('input:checkbox[name=actividad'+formulario+']').prop('checked', false);
+			}
 		}
-	}
-
-	if (formulario == '569' || formulario == '440') {
-		document.getElementsByName('repLegal' + formulario)[0].value = registro.NOMBRE_RL;
-		document.getElementsByName('tipoIdRl' + formulario)[0].value = registro.TID_RL;
-		document.getElementsByName('idRepLegal' + formulario)[0].value = registro.DOC_RL;
-	}
-
-	if(formulario == '569'){
-		document.getElementsByName('dependencia' + formulario)[0].value = registro.DEPENDEN;
-		document.getElementsByName('expendio' + formulario)[0].value = registro.EXPENDIO;
-		document.getElementsByName('almacena' + formulario)[0].value = registro.ALMACENA;
-		document.getElementsByName('deposito' + formulario)[0].value = registro.DEPOSITO;
-		document.getElementsByName('despresa' + formulario)[0].value = registro.DESPRESA;
+	
+		if (formulario == '569' || formulario == '440') {
+			document.getElementsByName('repLegal' + formulario)[0].value = registro.NOMBRE_RL;
+			document.getElementsByName('tipoIdRl' + formulario)[0].value = registro.TID_RL;
+			document.getElementsByName('idRepLegal' + formulario)[0].value = registro.DOC_RL;
+		}
+	
+		if(formulario == '569'){
+			document.getElementsByName('dependencia' + formulario)[0].value = registro.DEPENDEN;
+			document.getElementsByName('expendio' + formulario)[0].value = registro.EXPENDIO;
+			document.getElementsByName('almacena' + formulario)[0].value = registro.ALMACENA;
+			document.getElementsByName('deposito' + formulario)[0].value = registro.DEPOSITO;
+			document.getElementsByName('despresa' + formulario)[0].value = registro.DESPRESA;
+		}
 	}
 } 
 
@@ -966,11 +983,9 @@ function guardarInscrito569(){
 }
 
 function guardarComunesEvaluados(formulario){
-	var fecha = document.getElementsByName('fecha' + formulario)[0].value;
-
 	var evaluado = {
 		//Campos comunes a todos los formularios en general
-		FECHA: fecha,
+		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
 		//ACTA: document.getElementsByName('acta' + formulario)[0].value,
 		N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
 		DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
@@ -1101,15 +1116,50 @@ function guardarEvaluadosEstablecimientos(formulario){
 		NOMBRE_RL: document.getElementsByName('repLegal' + formulario)[0].value,
 		TID_RL: document.getElementsByName('tipoIdRl' + formulario)[0].value,
 		DOC_RL: document.getElementsByName('idRepLegal' + formulario)[0].value,
-		NOCO: document.getElementsByName('nombreComercial' + formulario)[0].value,
+		NOCO: formulario != "333" ? document.getElementsByName('nombreComercial' + formulario)[0].value : "",
 		RSO: document.getElementsByName('razonSocial' + formulario)[0].value,
 		NIT: document.getElementsByName('nit' + formulario)[0].value,
-		MAMER: document.getElementsByName('matriculaMercantil' + formulario)[0].value,
+		MAMER: formulario != "26" && formulario != '333' ? 
+			document.getElementsByName('matriculaMercantil' + formulario)[0].value : "",
 		NOLOCA: document.getElementsByName('nomTerr' + formulario)[0].value,
-		TERRITORIO: territorio
+		TERRITORIO: formulario != "333" ? territorio : "",
 	};
 	
 	return evaluado;	
+}
+
+function guardarEvaluadoReducido(formulario){
+	let evaluado = {
+		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
+		N_INSCRIP: formulario != '26' ? document.getElementsByName('inscripcion' + formulario)[0].value : "",
+		DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
+		TELS: document.getElementsByName('tel' + formulario)[0].value + ' ' + document.getElementsByName('cel' + formulario)[0].value,
+		CORREO: document.getElementsByName('correoProp' + formulario)[0].value,
+		NOMBRE_P: formulario != '26' ? document.getElementsByName('propietario' + formulario)[0].value : "",
+		TID_P: formulario != '26' ? document.getElementsByName('tipoIdProp' + formulario)[0].value : "",
+		DOC_P: formulario != '26' ? document.getElementsByName('idPropietario' + formulario)[0].value : "",
+		AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,			
+		OBS_AS: document.getElementsByName('obAutoridad' + formulario)[0].value,
+		NOMBRE_F1: document.getElementsByName('funcionario' + formulario + '-1')[0].value,
+		ID_F1: document.getElementsByName('idFuncionario' + formulario + '-1')[0].value,
+		CARGO_F1: formulario != '26' ? document.getElementsByName('cargoFuncionario' + formulario + '-1')[0].value: "",
+		NOMBRE_F2: formulario != '26' ? document.getElementsByName('funcionario' + formulario + '-2')[0].value : "",
+		ID_F2: formulario != '26' ? document.getElementsByName('idFuncionario' + formulario + '-2')[0].value : "",
+		CARGO_F2: formulario != '26' ? document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value : "",
+		NOMBRE_E1: document.getElementsByName('persona' + formulario + '-1')[0].value,
+		ID_E1: document.getElementsByName('idPersona' + formulario + '-1')[0].value,
+		CARGO_E1: formulario != '26' ? document.getElementsByName('cargoPersona' + formulario + '-1')[0].value : "",
+		NOMBRE_E2: formulario != '26' ? document.getElementsByName('persona' + formulario + '-2')[0].value : "",
+		ID_E2: formulario != '26' ? document.getElementsByName('idPersona' + formulario + '-2')[0].value : "",
+		CARGO_E2: formulario != '26' ? document.getElementsByName('cargoPersona' + formulario + '-2')[0].value : "",
+		FIRMA_F1: '',
+		FIRMA_F2: '',
+		FIRMA_E1: '',
+		FIRMA_E2: '',
+		GRABADO: 'S'
+	};
+
+	return evaluado;
 }
 
 /*function validarEvaluado(evaluado){
@@ -1136,10 +1186,12 @@ function persistirEvaluado(db, evaluado, formulario){
 
 function guardarEvaluacion(formulario){
 	console.log('Estamos en el formulario', formulario)
-	let evaluado = formulario != '333' && formulario != '442' ? guardarComunesEvaluados(formulario) : null;
+	let evaluado = formulario != '333' && formulario != '442' && formulario != '26' ? 
+					guardarComunesEvaluados(formulario) : null;
 	let preguntasComunes;
 	let evaluadoEsta;
 	let evaluadoVehi;
+	let reducido;
 	
 	switch(formulario){
 		case '440':
@@ -1387,97 +1439,88 @@ function guardarEvaluacion(formulario){
 			break;
 		case '442':
 			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+			reducido = guardarEvaluadoReducido(formulario);
 			let iterable = document.getElementsByName('pregunta');
 			let arregloPreguntas = [];
-			let k = 0;
 			iterable.forEach( item => arregloPreguntas.push(item.value) );
-			evaluado = {
-				FECHA: document.getElementsByName('fecha' + formulario)[0].value,
-				N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
-				DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
+			adicional = {
 				FAX: document.getElementsByName('fax' + formulario)[0].value,
-				TELS: document.getElementsByName('tel' + formulario)[0].value + ' ' + document.getElementsByName('cel' + formulario)[0].value,
-				CORREO: document.getElementsByName('correoProp' + formulario)[0].value,
-				NOMBRE_P: document.getElementsByName('propietario' + formulario)[0].value,
-				TID_P: document.getElementsByName('tipoIdProp' + formulario)[0].value,
-				DOC_P: document.getElementsByName('idPropietario' + formulario)[0].value,
 				DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
 				DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
 				MPIO_NOTI: document.getElementsByName('mpioNotif' + formulario)[0].value,
 				HORARIOS: document.getElementsByName('horarios' + formulario)[0].value,
 				NUTRA: document.getElementsByName('noTrabajadores' + formulario)[0].value,
-				AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,
-				OBS_AS: document.getElementsByName('obAutoridad' + formulario)[0].value,
 				OBS_ES: document.getElementsByName('obPersona' + formulario)[0].value,
-				NOMBRE_F1: document.getElementsByName('funcionario' + formulario + '-1')[0].value,
-				ID_F1: document.getElementsByName('idFuncionario' + formulario + '-1')[0].value,
-				CARGO_F1: document.getElementsByName('cargoFuncionario' + formulario + '-1')[0].value,
-				NOMBRE_F2: document.getElementsByName('funcionario' + formulario + '-2')[0].value,
-				ID_F2: document.getElementsByName('idFuncionario' + formulario + '-2')[0].value,
-				CARGO_F2: document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value,
-				NOMBRE_E1: document.getElementsByName('persona' + formulario + '-1')[0].value,
-				ID_E1: document.getElementsByName('idPersona' + formulario + '-1')[0].value,
-				CARGO_E1: document.getElementsByName('cargoPersona' + formulario + '-1')[0].value,
-				NOMBRE_E2: document.getElementsByName('funcionario' + formulario + '-2')[0].value,
-				ID_E2: document.getElementsByName('idFuncionario' + formulario + '-2')[0].value,
-				CARGO_E2: document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value,
-				FIRMA_F1: '',
-				FIRMA_F2: '',
-				FIRMA_E1: '',
-				FIRMA_E2: '',
-				GRABADO: 'S'
-			}
-			adicional = {
 				PREGUNTAS: arregloPreguntas
 			};
-			evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
+			evaluado = Object.assign( evaluadoEsta, reducido, adicional );
 			break;
 		case '333':
-			let longitud = document.getElementsByName('orden');
+			reducido = guardarEvaluadoReducido(formulario);
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+			delete evaluadoEsta.MAMER;
+			delete evaluadoEsta.NOCO;
+			delete evaluadoEsta.TERRITORIO;
+			let longitud = document.getElementsByName('Orden');
 			let muestras = [];
-			for(let i=0; i<longitud; i++){
-				muestras[i] = {
-					acta: document.getElementsByName('acta' + formulario)[0].value,
-					Orden: document.getElementsByName('Orden')[i].value,
-					Um: document.getElementsByName('Um')[i].value,
-					Contenido: document.getElementsByName('Contenido')[i].value,
-					Temperatura: document.getElementsByName('Temperatura')[i].value,
-					TipoEnvase: document.getElementsByName('TipoEnvase')[i].value,
-					LoteFechaV: document.getElementsByName('LoteFechaV')[i].value,
-					RegSanit: document.getElementsByName('RegSanit')[i].value
-				};
+			console.log("Longitud del arrglo de muestras", longitud.length);
+			for(let i=0; i<longitud.length; i++){
+				muestras.push(
+					{
+						acta: document.getElementsByName('acta' + formulario)[0].value,
+						Orden: document.getElementsByName('Orden')[i].value,
+						Um: document.getElementsByName('Um')[i].value,
+						Contenido: document.getElementsByName('Contenido')[i].value,
+						Temperatura: document.getElementsByName('Temperatura')[i].value,
+						TipoEnvase: document.getElementsByName('TipoEnvase')[i].value,
+						LoteFechaV: document.getElementsByName('LoteFechaV')[i].value,
+						RegSanit: document.getElementsByName('RegSanit')[i].value
+					}
+				);
 			}
-			evaluado = {
-				MUESTRAS: muestras,
-				FECHA: document.getElementsByName('fecha' + formulario)[0].value,
-				N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
-				DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
-				TELS: document.getElementsByName('tel' + formulario)[0].value + ' ' + document.getElementsByName('cel' + formulario)[0].value,
-				CORREO: document.getElementsByName('correoProp' + formulario)[0].value,
-				NOMBRE_P: document.getElementsByName('propietario' + formulario)[0].value,
-				TID_P: document.getElementsByName('tipoIdProp' + formulario)[0].value,
-				DOC_P: document.getElementsByName('idPropietario' + formulario)[0].value,
-				AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,			
-				OBS_AS: document.getElementsByName('obAutoridad' + formulario)[0].value,
-				NOMBRE_F1: document.getElementsByName('funcionario' + formulario + '-1')[0].value,
-				ID_F1: document.getElementsByName('idFuncionario' + formulario + '-1')[0].value,
-				CARGO_F1: document.getElementsByName('cargoFuncionario' + formulario + '-1')[0].value,
-				NOMBRE_F2: document.getElementsByName('funcionario' + formulario + '-2')[0].value,
-				ID_F2: document.getElementsByName('idFuncionario' + formulario + '-2')[0].value,
-				CARGO_F2: document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value,
-				NOMBRE_E1: document.getElementsByName('persona' + formulario + '-1')[0].value,
-				ID_E1: document.getElementsByName('idPersona' + formulario + '-1')[0].value,
-				CARGO_E1: document.getElementsByName('cargoPersona' + formulario + '-1')[0].value,
-				NOMBRE_E2: document.getElementsByName('persona' + formulario + '-2')[0].value,
-				ID_E2: document.getElementsByName('idPersona' + formulario + '-2')[0].value,
-				CARGO_E2: document.getElementsByName('cargoPersona' + formulario + '-2')[0].value,
-				FIRMA_F1: '',
-				FIRMA_F2: '',
-				FIRMA_E1: '',
-				FIRMA_E2: '',
-				GRABADO: 'S'
+			adicional = {
+				OBJETO: document.getElementsByName('objeto' + formulario)[0].value,
+				MUESTRAS: muestras
 			};
+			evaluado = Object.assign( reducido, adicional );
 			localStorage.setItem('form', '333');
+			break;
+		case '26':
+			reducido = guardarEvaluadoReducido(formulario);
+			console.log("Reducido: ", reducido);
+			delete reducido.NOMBRE_P; 
+			delete reducido.TID_P; 
+			delete reducido.DOC_P; 
+			delete reducido.N_INSCRIP; 
+			delete reducido.CARGO_F1; 
+			delete reducido.NOMBRE_F2; 
+			delete reducido.ID_F2;
+			delete reducido.CARGO_F2;
+			delete reducido.CARGO_E1;
+			delete reducido.NOMBRE_E2;
+			delete reducido.ID_E2;
+			delete reducido.CARGO_E2;
+			delete reducido.FIRMA_F2;
+			delete reducido.FIRMA_E2;
+			console.log("Reducido Depurado: ", reducido);			
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+			delete evaluadoEsta.MAMER;
+			adicional = {
+				HORA: document.getElementsByName('hora26')[0].value,
+				ZONA: document.getElementsByName('zona26')[0].value,
+				TIPO_SU: document.getElementsByName('tipoSujeto26')[0].value,
+				SUJETO: document.getElementsByName('sujeto26')[0].value,
+				FAX: document.getElementsByName('fax' + formulario)[0].value,
+				TIPOVIS: document.getElementsByName('tipoVisita26')[0].value,
+				NTIPOVIS: document.getElementsByName('tipoVisita26')[0].value == '1' ? "IVC" : 
+						document.getElementsByName('tipoVisita26')[0].value == '2' ? "QUEJA SANITARIA" : "",
+				REQUERI_AU: document.getElementsByName('obPersona' + formulario)[0].value,
+				NOMBRE_T1: document.getElementsByName('testigo26')[0].value,
+				ID_T1: document.getElementsByName('idTestigo26')[0].value,
+				FIRMA_T1: ''
+			};
+			evaluado = Object.assign( evaluadoEsta, reducido, adicional );
+			localStorage.setItem('form', '26');
 			break;
 		case '441':
 			evaluadoVehi = guardarEvaluadosVehiculos(formulario);
@@ -1501,9 +1544,11 @@ function guardarEvaluacion(formulario){
 			evaluado = Object.assign( evaluado, evaluadoVehi, adicional);
 			break;
 	}
+
+	//console.log("Estructura de evaluado en formulario " + formulario + " para revisión: " + JSON.stringify(evaluado));
 	
 	localStorage.setItem('evaluado', JSON.stringify(evaluado));
-	firmaEvaluacion();	
+	firmaEvaluacion();
 	
 	//persistirEvaluado(db, evaluado, formulario);
 	//location.reload();
@@ -1514,8 +1559,11 @@ function setColumnas(tr, registro, contador, evaluado){
 	evaluado == 'E' ? tr.appendChild(createColumns(registro.NOCO)) : (registro.PLACA === null ? tr.appendChild(createColumns(registro.PLACAREM)) : tr.appendChild(createColumns(registro.PLACA)));
 	tr.appendChild(createColumns(registro.ACTA));
 	tr.appendChild(createColumns(registro.FECHA));
-	evaluado != 'D' ? tr.appendChild(createColumns(registro.P_CUMPL)) : tr.appendChild(createColumns(registro.OBS_AS));
-	evaluado != 'D' ? tr.appendChild(createColumns(registro.CONCEPTO)) : console.log('');
+	evaluado == 'D' ? tr.appendChild(createColumns(registro.OBS_AS)) : 
+		evaluado == 'C' ? 
+			tr.appendChild(createColumns(registro.SUJETO)) : 
+			tr.appendChild(createColumns(registro.P_CUMPL));
+	evaluado == 'D' || evaluado == 'C' ? null : tr.appendChild(createColumns(registro.CONCEPTO));
 	return tr;		
 }
 
@@ -1556,10 +1604,6 @@ function mostrarEvaluados(formulario){
 			traerEvaluados(db495, 'E');
 			validarCambioTab(2);
 			break;
-		case '442':
-			traerEvaluados(db442, 'D');
-			validarCambioTab(3);
-			break;
 		case '478':
 			traerEvaluados(db478, 'E');
 			validarCambioTab(2);
@@ -1575,6 +1619,13 @@ function mostrarEvaluados(formulario){
 		case '333':
 			traerEvaluados(db333, 'D');
 			validarCambioTab(0);
+			break;
+		case '442':
+			traerEvaluados(db442, 'D');
+			validarCambioTab(3);
+			break;
+		case '26':
+			traerEvaluados(db26, 'C');
 			break;
 		case '441':
 			traerEvaluados(db441, 'V');

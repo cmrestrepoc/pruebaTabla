@@ -100,7 +100,7 @@ function BasicCanvasSave(imageData){window.open(imageData,'jqScribble Image');}
 		saveMimeType: 		"image/png",
 		saveFunction: 		BasicCanvasSave,
 		brush:				BasicBrush,
-		brushSize:			2,
+		brushSize:			6,
 		brushColor:			"rgb(0,0,0)"
 	};
 	
