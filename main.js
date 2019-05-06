@@ -206,22 +206,22 @@ function auxiliarInscVehi(valor){
 function setSujeto(value, destino) {
 	switch(value){
 		case "479-1":
-			document.getElementsByName(destino)[0].value = "RESTAURANTES, PANADERIAS,Y/O PASTELERIAS, CAFETERIAS, FRUTERIAS, COMIDAS RAPIDAS, SERVICIO DE BANQUETES, OFERTA DE ALIMENTACION POR REDES S.";
+			document.getElementsByName(destino)[0].value = "RESTAURANTES - PANADERIAS - Y/O PASTELERIAS - CAFETERIAS - FRUTERIAS - COMIDAS RAPIDAS - SERVICIO DE BANQUETES - OFERTA DE ALIMENTACION POR REDES S.";
 			break;
 		case "479-2":
-			document.getElementsByName(destino)[0].value = "COMEDORES ESCOLARES (INCLUYE PAE Y PRIVADOS) INFANTILES (ICBF, INPEC), COLEGIOS Y UNIVERSIDADES";
+			document.getElementsByName(destino)[0].value = "COMEDORES ESCOLARES (INCLUYE PAE Y PRIVADOS) INFANTILES (ICBF - INPEC) - COLEGIOS Y UNIVERSIDADES";
 			break;
 		case "479-3":
-			document.getElementsByName(destino)[0].value = "COMEDORES CARCELARIOS (USPEC), FUERZAS MILITARES Y POLICIVAS";
+			document.getElementsByName(destino)[0].value = "COMEDORES CARCELARIOS (USPEC) - FUERZAS MILITARES Y POLICIVAS";
 			break;
 		case "479-4":
-			document.getElementsByName(destino)[0].value = "COMEDORES HOGARES GERIATRICOS, ASILOS, HOSPITALES, CASINOS DE EMPRESAS O FABRICAS, CLUBES SOCIALES";
+			document.getElementsByName(destino)[0].value = "COMEDORES HOGARES GERIATRICOS - ASILOS - HOSPITALES - CASINOS DE EMPRESAS O FABRICAS - CLUBES SOCIALES";
 			break;
 		case "479-5":
-			document.getElementsByName(destino)[0].value = "HOTELES, MOTELES, HOSTALES, RESIDENCIAS Y CASAS DE LENOCINIO CON PREPARACION DE ALIMENTOS";
+			document.getElementsByName(destino)[0].value = "HOTELES - MOTELES - HOSTALES - RESIDENCIAS Y CASAS DE LENOCINIO CON PREPARACION DE ALIMENTOS";
 			break;
 		case "479-6":
-			document.getElementsByName(destino)[0].value = "ESTABLECIMIENTOS DE PREPARACION DE ALIMENTOS AL INTERIOR DE PLAZAS DE MERCADO, CENTRALES DE ABASTO, PLAZOLETAS DE COMIDA, ZONAS FRANCAS";
+			document.getElementsByName(destino)[0].value = "ESTABLECIMIENTOS DE PREPARACION DE ALIMENTOS AL INTERIOR DE PLAZAS DE MERCADO - CENTRALES DE ABASTO - PLAZOLETAS DE COMIDA - ZONAS FRANCAS";
 			break;
 		case "481-1":
 			document.getElementsByName(destino)[0].value = "BODEGAS PARA ALMACENAMIENTO DE ALIMENTOS Y/O BEBIDAS INCLUIDAS ZONAS FRANCAS";
@@ -239,7 +239,7 @@ function setSujeto(value, destino) {
 			document.getElementsByName(destino)[0].value = "MINI MERCADO";
 			break;
 		case "495-3":
-			document.getElementsByName(destino)[0].value = "EXPENDIO CON OPERACIONES DE PORCIONADO, TROCEADO O ACONDICIONAMIENTO";
+			document.getElementsByName(destino)[0].value = "EXPENDIO CON OPERACIONES DE PORCIONADO - TROCEADO O ACONDICIONAMIENTO";
 			break;
 		case "495-4":
 			document.getElementsByName(destino)[0].value = "EXPENDIO DE PRODUCTOS DE LA PESCA";
@@ -254,7 +254,7 @@ function setSujeto(value, destino) {
 			document.getElementsByName(destino)[0].value = "CARNICERIAS Y FAMAS";
 			break;
 		case "440-2":
-			document.getElementsByName(destino)[0].value = "CARNICERIA DE GRANDES SUPERFICIES, DE PLAZAS DE MERCADO";
+			document.getElementsByName(destino)[0].value = "CARNICERIA DE GRANDES SUPERFICIES - DE PLAZAS DE MERCADO";
 			break;
 		case "474-1":
 			document.getElementsByName(destino)[0].value = "BARES";
