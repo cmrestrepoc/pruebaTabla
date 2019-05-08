@@ -1451,6 +1451,8 @@ function guardarEvaluacion(formulario){
 				HORARIOS: document.getElementsByName('horarios' + formulario)[0].value,
 				NUTRA: document.getElementsByName('noTrabajadores' + formulario)[0].value,
 				OBS_ES: document.getElementsByName('obPersona' + formulario)[0].value,
+				OTRAS: document.getElementsByName('otrasEspecies' + formulario)[0].value,
+				OTIPOPRO: document.getElementsByName('otrosProductos' + formulario)[0].value,
 				PREGUNTAS: arregloPreguntas
 			};
 			evaluado = Object.assign( evaluadoEsta, reducido, adicional );
