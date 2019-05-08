@@ -1558,7 +1558,11 @@ function guardarEvaluacion(formulario){
 
 function setColumnas(tr, registro, contador, evaluado){
 	tr.appendChild(createColumns(contador));
-	evaluado == 'E' ? tr.appendChild(createColumns(registro.NOCO)) : (registro.PLACA === null ? tr.appendChild(createColumns(registro.PLACAREM)) : tr.appendChild(createColumns(registro.PLACA)));
+	evaluado == 'V' ? 
+		(registro.PLACA === null ? 
+			tr.appendChild(createColumns(registro.PLACAREM)) : 
+			tr.appendChild(createColumns(registro.PLACA))) : 
+		tr.appendChild(createColumns(registro.NOCO));
 	tr.appendChild(createColumns(registro.ACTA));
 	tr.appendChild(createColumns(registro.FECHA));
 	evaluado == 'D' ? tr.appendChild(createColumns(registro.OBS_AS)) : 
