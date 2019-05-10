@@ -1473,6 +1473,7 @@ function guardarEvaluacion(formulario){
 						Orden: document.getElementsByName('Orden')[i].value,
 						Um: document.getElementsByName('Um')[i].value,
 						Contenido: document.getElementsByName('Contenido')[i].value,
+						Producto: document.getElementsByName('Producto')[i].value,
 						Temperatura: document.getElementsByName('Temperatura')[i].value,
 						TipoEnvase: document.getElementsByName('TipoEnvase')[i].value,
 						LoteFechaV: document.getElementsByName('LoteFechaV')[i].value,

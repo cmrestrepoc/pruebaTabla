@@ -132,6 +132,7 @@ function crearMuestra(){
 	tr.appendChild(crearColumna('Orden'));
 	tr.appendChild(crearColumna('Um'));
 	tr.appendChild(crearColumna('Contenido'));
+	tr.appendChild(crearColumna('Producto'));
 	tr.appendChild(crearColumna('Temperatura'));
 	tr.appendChild(crearColumna('TipoEnvase'));
 	tr.appendChild(crearColumna('LoteFechaV'));
