@@ -1482,6 +1482,9 @@ function guardarEvaluacion(formulario){
 				);
 			}
 			adicional = {
+				FECHA2: document.getElementsByName('fecha' + formulario + '-2')[0].value,
+				HORA2: document.getElementsByName('hora' + formulario + '-2')[0].value,
+				T2: document.getElementsByName('temperatura' + formulario + '-2')[0].value,
 				OBJETO: document.getElementsByName('objeto' + formulario)[0].value,
 				MUESTRAS: muestras
 			};
@@ -1563,7 +1566,7 @@ function setColumnas(tr, registro, contador, evaluado){
 		(registro.PLACA === null ? 
 			tr.appendChild(createColumns(registro.PLACAREM)) : 
 			tr.appendChild(createColumns(registro.PLACA))) : 
-		tr.appendChild(createColumns(registro.NOCO));
+		tr.appendChild(createColumns(registro.RSO));
 	tr.appendChild(createColumns(registro.ACTA));
 	tr.appendChild(createColumns(registro.FECHA));
 	evaluado == 'D' ? tr.appendChild(createColumns(registro.OBS_AS)) : 
