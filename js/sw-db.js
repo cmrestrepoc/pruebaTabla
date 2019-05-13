@@ -15,6 +15,7 @@ var db475 = new PouchDB('evaluaciones475');
 var db481 = new PouchDB('evaluaciones481');
 var db442 = new PouchDB('evaluaciones442');
 var db333 = new PouchDB('evaluaciones333');
+var db243 = new PouchDB('evaluaciones243');
 var db26 = new PouchDB('evaluaciones26');
 var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
@@ -101,6 +102,9 @@ function dbActasForm(formulario){
 			break;
 		case '333':
 			db = db333;
+			break;
+		case '243':
+			db = db243;
 			break;
 		case '26':
 			db = db26;
@@ -270,7 +274,7 @@ function calcularNumActa(formulario){
 
 function escogerInscrito(registro, formulario){
 
-	if(formulario == '333'){
+	if(formulario == '333' || formulario == '243'){
 		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
 		document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
 		document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
@@ -651,7 +655,7 @@ function cargarTodosLosInscritos(){
 	promesa.then( respObj => {
 		if (respObj.err != undefined) {
 			respObj.err == "ERROR TOKEN" ? 
-			alert('Hubo problemas con el servidor. Es necesario cerrar Sesión con el servidor y volver a introducir credenciales') : 
+			alert('Hubo problemas!! Es necesario cerrar Sesión con el servidor y volver a introducir credenciales') : 
 			alert('Error: ' + respObj.err);
 			return;
 		}	
@@ -1116,13 +1120,14 @@ function guardarEvaluadosEstablecimientos(formulario){
 		NOMBRE_RL: document.getElementsByName('repLegal' + formulario)[0].value,
 		TID_RL: document.getElementsByName('tipoIdRl' + formulario)[0].value,
 		DOC_RL: document.getElementsByName('idRepLegal' + formulario)[0].value,
-		NOCO: formulario != "333" ? document.getElementsByName('nombreComercial' + formulario)[0].value : "",
+		NOCO: formulario != "333" && formulario != '243' ? 
+			document.getElementsByName('nombreComercial' + formulario)[0].value : "",
 		RSO: document.getElementsByName('razonSocial' + formulario)[0].value,
 		NIT: document.getElementsByName('nit' + formulario)[0].value,
-		MAMER: formulario != "26" && formulario != '333' ? 
+		MAMER: formulario != "26" && formulario != '333' && formulario != '243' ? 
 			document.getElementsByName('matriculaMercantil' + formulario)[0].value : "",
 		NOLOCA: document.getElementsByName('nomTerr' + formulario)[0].value,
-		TERRITORIO: formulario != "333" ? territorio : "",
+		TERRITORIO: formulario != "333" && formulario != '243' ? territorio : "",
 	};
 	
 	return evaluado;	
@@ -1186,7 +1191,7 @@ function persistirEvaluado(db, evaluado, formulario){
 
 function guardarEvaluacion(formulario){
 	console.log('Estamos en el formulario', formulario)
-	let evaluado = formulario != '333' && formulario != '442' && formulario != '26' ? 
+	let evaluado = formulario != '333' && formulario != '442' && formulario != '26' && formulario != '243' ? 
 					guardarComunesEvaluados(formulario) : null;
 	let preguntasComunes;
 	let evaluadoEsta;
@@ -1491,6 +1496,36 @@ function guardarEvaluacion(formulario){
 			evaluado = Object.assign( reducido, adicional );
 			localStorage.setItem('form', '333');
 			break;
+		case '243':
+			reducido = guardarEvaluadoReducido(formulario);
+			evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+			delete evaluadoEsta.MAMER;
+			delete evaluadoEsta.NOCO;
+			delete evaluadoEsta.TERRITORIO;
+			let longitudCong = document.getElementsByName('producto');
+			let muestrasCong = [];
+			console.log("Longitud del arrglo de muestras", longitudCong.length);
+			for(let i=0; i<longitudCong.length; i++){
+				muestrasCong.push(
+					{
+						acta: document.getElementsByName('acta' + formulario)[0].value,
+						producto: document.getElementsByName('producto')[i].value,
+						lote: document.getElementsByName('lote')[i].value,
+						presentaci: document.getElementsByName('presentaci')[i].value,
+						cantidad: document.getElementsByName('cantidad')[i].value,
+						fv: document.getElementsByName('fv')[i].value,
+						invima: document.getElementsByName('invima')[i].value
+					}
+				);
+			}
+			adicional = {
+				REQUES: document.getElementsByName('requerimientos243')[0].value,
+				OBJETO: document.getElementsByName('objeto' + formulario)[0].value,
+				MUESTRAS: muestrasCong
+			};
+			evaluado = Object.assign( reducido, adicional );
+			localStorage.setItem('form', '243');
+			break;
 		case '26':
 			reducido = guardarEvaluadoReducido(formulario);
 			console.log("Reducido: ", reducido);
@@ -1628,6 +1663,10 @@ function mostrarEvaluados(formulario){
 			break;
 		case '333':
 			traerEvaluados(db333, 'D');
+			validarCambioTab(0);
+			break;
+		case '243':
+			traerEvaluados(db243, 'D');
 			validarCambioTab(0);
 			break;
 		case '442':

@@ -108,18 +108,18 @@ function consolidarPuntaje(con, puntaje){
 	document.getElementsByName(puntaje)[0].value = puntajeTotal;
 }
 
-function crearInput(name){
+function crearInput(name, tipoInput){
 	let input = document.createElement('input');
-	input.type = 'text';
+	input.type = tipoInput;
 	input.className = 'form-control';
 	input.setAttribute('name', name);
 
 	return input; 
 }
 
-function crearColumna(name){
+function crearColumna(name, tipoInput){
 	let td = document.createElement('td');
-	td.appendChild(crearInput(name));
+	td.appendChild(crearInput(name, tipoInput));
 	return td;
 }
 
@@ -129,14 +129,29 @@ function crearMuestra(){
 	//let listado = document.getElementById('listadoMuestras');
 	//let br = document.createElement('br');
 	
-	tr.appendChild(crearColumna('Orden'));
-	tr.appendChild(crearColumna('Um'));
-	tr.appendChild(crearColumna('Contenido'));
-	tr.appendChild(crearColumna('Producto'));
-	tr.appendChild(crearColumna('Temperatura'));
-	tr.appendChild(crearColumna('TipoEnvase'));
-	tr.appendChild(crearColumna('LoteFechaV'));
-	tr.appendChild(crearColumna('RegSanit'));
+	tr.appendChild(crearColumna('Orden', 'text'));
+	tr.appendChild(crearColumna('Um', 'text'));
+	tr.appendChild(crearColumna('Contenido', 'text'));
+	tr.appendChild(crearColumna('Producto', 'text'));
+	tr.appendChild(crearColumna('Temperatura', 'text'));
+	tr.appendChild(crearColumna('TipoEnvase', 'text'));
+	tr.appendChild(crearColumna('LoteFechaV', 'text'));
+	tr.appendChild(crearColumna('RegSanit', 'text'));
+
+	tbody.appendChild(tr);
+	//listado.parentNode.insertBefore(br, listado.nextSibling);
+}
+
+function crearMuestraCongelado(){
+	let tbody = document.getElementById('muestrasCongelado');
+	let tr = document.createElement('tr');
+	
+	tr.appendChild(crearColumna('producto', 'text'));
+	tr.appendChild(crearColumna('lote', 'text'));
+	tr.appendChild(crearColumna('presentaci', 'text'));
+	tr.appendChild(crearColumna('cantidad', 'text'));
+	tr.appendChild(crearColumna('fv', 'date'));
+	tr.appendChild(crearColumna('invima', 'text'));
 
 	tbody.appendChild(tr);
 	//listado.parentNode.insertBefore(br, listado.nextSibling);
