@@ -1493,7 +1493,7 @@ function guardarEvaluacion(formulario){
 				OBJETO: document.getElementsByName('objeto' + formulario)[0].value,
 				MUESTRAS: muestras
 			};
-			evaluado = Object.assign( reducido, adicional );
+			evaluado = Object.assign( reducido, evaluadoEsta, adicional );
 			localStorage.setItem('form', '333');
 			break;
 		case '243':
@@ -1504,7 +1504,7 @@ function guardarEvaluacion(formulario){
 			delete evaluadoEsta.TERRITORIO;
 			let longitudCong = document.getElementsByName('producto');
 			let muestrasCong = [];
-			console.log("Longitud del arrglo de muestras", longitudCong.length);
+			console.log("Longitud del arreglo de muestras", longitudCong.length);
 			for(let i=0; i<longitudCong.length; i++){
 				muestrasCong.push(
 					{
@@ -1523,7 +1523,8 @@ function guardarEvaluacion(formulario){
 				OBJETO: document.getElementsByName('objeto' + formulario)[0].value,
 				MUESTRAS: muestrasCong
 			};
-			evaluado = Object.assign( reducido, adicional );
+			evaluado = Object.assign( reducido, evaluadoEsta, adicional );
+			console.log();
 			localStorage.setItem('form', '243');
 			break;
 		case '26':
@@ -1595,13 +1596,52 @@ function guardarEvaluacion(formulario){
 	//location.reload();
 }
 
+function escogerEvaluado(registro){
+	let cuerpo = document.getElementById('cuerpoRespuesta');
+	cuerpo.innerHTML = '';
+	let arrayKeys = Object.keys(registro);
+	let arrayToRemove = ['FIRMA_F1', 'FIRMA_F2', 'FIRMA_E1', 'FIRMA_E2', 'FIRMA_T1', '_id', '_rev'];
+	arrayToRemove.forEach(element => {
+		let indice = arrayKeys.indexOf(element);
+		if (indice !== -1){
+			arrayKeys.splice(indice, 1);
+		}
+	});
+	arrayKeys.forEach(element => {
+		let texto = document.createElement('p');
+		element == 'MUESTRAS' ? 
+			texto.innerHTML = element + ': ' + JSON.stringify(registro[element]) : 
+			texto.innerHTML = element + ': ' + registro[element];
+		cuerpo.appendChild(texto);
+	});
+}
+
+function createRadioEvaluado(registro){
+	var radio = document.createElement('input');
+	radio.type = 'radio';
+	radio.setAttribute('name',"seleEvaluado");
+	radio.value = registro._id;
+	radio.setAttribute( 'data-toggle', 'modal');
+	radio.setAttribute( 'data-target', '#resp');
+	radio.addEventListener('click', escogerEvaluado.bind(this, registro));
+
+	var span = document.createElement('span');
+	span.className = 'input-group-addon';
+	span.appendChild(radio);
+
+	var td = document.createElement('td');
+	td.appendChild(span);
+
+	return td;
+}
+
 function setColumnas(tr, registro, contador, evaluado){
 	tr.appendChild(createColumns(contador));
 	evaluado == 'V' ? 
 		(registro.PLACA === null ? 
 			tr.appendChild(createColumns(registro.PLACAREM)) : 
 			tr.appendChild(createColumns(registro.PLACA))) : 
-		tr.appendChild(createColumns(registro.RSO));
+		evaluado == 'E' ? tr.appendChild(createColumns(registro.NOCO)) : tr.appendChild(createColumns(registro.RSO));
 	tr.appendChild(createColumns(registro.ACTA));
 	tr.appendChild(createColumns(registro.FECHA));
 	evaluado == 'D' ? tr.appendChild(createColumns(registro.OBS_AS)) : 
@@ -1609,6 +1649,7 @@ function setColumnas(tr, registro, contador, evaluado){
 			tr.appendChild(createColumns(registro.SUJETO)) : 
 			tr.appendChild(createColumns(registro.P_CUMPL));
 	evaluado == 'D' || evaluado == 'C' ? null : tr.appendChild(createColumns(registro.CONCEPTO));
+	tr.appendChild(createRadioEvaluado(registro));
 	return tr;		
 }
 
@@ -1618,6 +1659,7 @@ function traerEvaluados(db, evaluado){
 		tbody.innerHTML = '';
 		var contador = 0;
 		doc.rows.forEach( registro => {
+			//console.log("Evaluado: ", registro);
 			contador++;
 			var tr = document.createElement('tr');
 			tr = setColumnas(tr, registro.doc, contador, evaluado);
