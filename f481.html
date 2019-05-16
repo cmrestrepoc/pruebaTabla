@@ -136,13 +136,23 @@
 								<br><br><br><hr>
 
 								<div class="form-group">
-									<label class="col-md-4 control-label" style="text-align:right">TIPO DE ESTABLECIMIENTO:</label>
-									<div class="col-md-5">
-										<div class="input-group">
-											<span class="input-group-addon">
-											    <input type="checkbox" name="tipoEstablecimiento" value="X">
-											   </span>
-											   <input type="text" class="form-control" name="almTempAmbiente" value="Almacenamiento a temperatura ambiente">
+									<label class="col-md-3 control-label" style="text-align:right">TIPO DE ESTABLECIMIENTO:</label>
+									<div class="col-md-9">
+										<div class="col-md-7">
+											<div class="input-group">
+												<span class="input-group-addon">
+													<input type="checkbox" name="tipoEstablecimiento" value="X">
+												</span>
+												<input type="text" class="form-control" name="almTempAmbiente" value="Almacenamiento a temperatura ambiente">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="input-group">
+												<span class="input-group-addon">
+													<input type="checkbox" name="tipoEstablecimiento" value="X">
+												</span>
+												<input type="text" class="form-control" name="dadorFrio" value="Dador de Frío">
+											</div>
 										</div>
 									</div>																															
 								</div><!-- Fin del form-group -->
@@ -955,12 +965,12 @@
 								<br><br>
 								<div class="form-group">
 			                        <div class="col-md-4 col-md-offset-2">
-			                            <button type="submit" onclick="guardarEvaluacion('481')" class="btn btn-primary">
+			                            <button type="submit" data-toggle="modal" data-target="#resp" onclick="guardarEvaluacion('481')" class="btn btn-primary">
 			                                Guardar
 			                            </button>			                            
 			                        </div>
 			                        <div class="col-md-3">
-			                        	<button class="btn btn-primary" data-toggle="modal" data-target="#resp"  onclick="cargarServidor('481')">
+			                        	<button class="btn btn-primary" data-toggle="modal" data-target="#resp" onclick="cargarServidor('481')">
 			                                Subir información a servidor
 										</button>
 										<!-- Modal -->
