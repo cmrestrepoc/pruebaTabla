@@ -501,9 +501,11 @@ function mostrarInscritos493(formulario){
 		crearTabla(doc, 'inscritos', '#tablaInscritos', '493', formulario);
 	});
 
-	/*dbNuevos493.allDocs({include_docs: true, descending: true}).then ( doc => {
-		crearTabla(doc, 'inscritosNuevos', '#tablaInscritosNuevos', '493');
-	});*/
+	if(formulario == '493'){
+		dbNuevos493.allDocs({include_docs: true, descending: true}).then ( doc => {
+			crearTabla(doc, 'inscritosNuevos', '#tablaInscritosNuevos', '493', formulario);
+		});
+	}
 }
 
 function mostrarInscritos569(formulario){
