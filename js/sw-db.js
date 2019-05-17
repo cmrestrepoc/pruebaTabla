@@ -465,7 +465,7 @@ function crearTabla(doc, idBody, idTabla, formulario, formularioActual){
 	var tbody = document.getElementById(idBody);
 		tbody.innerHTML = '';
 		var contador = 0;
-		var filas = doc.rows.map( registro => {
+		doc.rows.forEach( registro => {
 			//console.log(registro.doc._id);
 			var extra;
 			switch(formulario){
@@ -485,7 +485,7 @@ function crearTabla(doc, idBody, idTabla, formulario, formularioActual){
 			tr.appendChild(createColumns(contador));
 			tr.appendChild(createColumns(registro.doc._id));
 			tr.appendChild(createColumns(extra));
-			tr.appendChild(createColumns(registro.doc.N_INSCRIP));
+			tr.appendChild(createColumns(registro.doc.ACTA));
 			tr.appendChild(createColumns(registro.doc.FECHA));
 			tr.appendChild(createColumns(registro.doc.NOMBRE_P));
 			tr.appendChild(createColumns(registro.doc.DOC_P));
@@ -1198,7 +1198,7 @@ function guardarEvaluacion(formulario){
 	let evaluadoVehi;
 	let reducido;
 	
-	if (!validarCambioTab(10)){
+	if (!validarCambioTab(10) && formulario != '26'){
 		let cuerpo = document.getElementById('cuerpoRespuesta');
 		cuerpo.innerHTML = 'Lo sentimos mucho. Usted no escogió un inscrito antes de diligenciar la evaluación. '
 							+ 'Debe regresar a la pesataña de INSCRITOS y escoger uno o, en caso de que no esté inscrito '
