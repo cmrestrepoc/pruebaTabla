@@ -772,13 +772,6 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 			inscrito = Object.assign( insertar, inscrito );
 			console.log(inscrito);
 
-			/* dbBase.put(inscrito, function callback(err, result){
-				if (!err) {
-					console.log('inscrito guardado en base de datos');
-				}else {
-					console.log('problemas guardando inscrito en base de datos',err);
-				}
-			}); */
 			dbNuevos.put(inscrito, function callback(err, result){
 				if (!err) {
 					alert('inscrito guardado en base de datos');
@@ -790,54 +783,37 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 	}else{
 		//id = idExistente;
 		var insertar;
-		/* dbBase.get(idExistente).then( doc => {
+		dbNuevos.get(idExistente).then( docum => {
 			insertar = { 
-				_id: doc._id,
-				_rev: doc._rev
+				_id: docum._id,
+				_rev: docum._rev
 			};
-			console.log("Id usado para la busqueda", idExistente);
-			console.log("rev del inscrito en la bd de traidos del server", doc._rev);
+			console.log("Rev a adicionar al inscrito para la tabla de nuevos");
+			delete inscrito._id;
+			delete inscrito._rev;
 			inscrito = Object.assign(insertar, inscrito);
-			dbBase.put(inscrito, function callback(err, result){
+			console.log("Inscrito ya existente a guardar en tabla de nuevos: ", inscrito);
+			dbNuevos.put(inscrito, function callback(err, result){
 				if (!err) {
-					console.log('inscrito modificado en base de datos de traidos del server');
+					alert('inscrito modificado en base de datos');
 				}else {
-					console.log('problemas modificando inscrito en base de datos de traidos del server: '+err);
+					alert('problemas modificando inscrito en base de datos: '+err);
 					console.log(err);
 				}
-			}); */
-			dbNuevos.get(idExistente).then( docum => {
-				insertar = { 
-					_id: docum._id,
-					_rev: docum._rev
-				};
-				console.log("Rev a adicionar al inscrito para la tabla de nuevos");
-				delete inscrito._id;
-				delete inscrito._rev;
-				inscrito = Object.assign(insertar, inscrito);
-				console.log("Inscrito ya existente a guardar en tabla de nuevos: ", inscrito);
-				dbNuevos.put(inscrito, function callback(err, result){
-					if (!err) {
-						alert('inscrito modificado en base de datos');
-					}else {
-						alert('problemas modificando inscrito en base de datos: '+err);
-						console.log(err);
-					}
-				});
-			})
-			.catch( () => {
-				console.log("Inscrito que no esta en tabla de nuevos: ", inscrito);
-				delete inscrito._rev;
-				dbNuevos.put(inscrito, function callback(err, result){
-					if (!err) {
-						alert('inscrito almacenado en base de datos');
-					}else {
-						alert('problemas almacenando inscrito en base de datos: '+err);
-						console.log(err);
-					}
-				});
 			});
-		/* }); */
+		})
+		.catch( () => {
+			console.log("Inscrito que no esta en tabla de nuevos: ", inscrito);
+			delete inscrito._rev;
+			dbNuevos.put(inscrito, function callback(err, result){
+				if (!err) {
+					alert('inscrito almacenado en base de datos');
+				}else {
+					alert('problemas almacenando inscrito en base de datos: '+err);
+					console.log(err);
+				}
+			});
+		});
 	}
 }
 
