@@ -501,11 +501,9 @@ function mostrarInscritos493(formulario){
 		crearTabla(doc, 'inscritos', '#tablaInscritos', '493', formulario);
 	});
 
-	if(formulario == '493'){
-		dbNuevos493.allDocs({include_docs: true, descending: true}).then ( doc => {
-			crearTabla(doc, 'inscritosNuevos', '#tablaInscritosNuevos', '493', formulario);
-		});
-	}
+	dbNuevos493.allDocs({include_docs: true, descending: true}).then ( doc => {
+		crearTabla(doc, 'inscritosNuevos', '#tablaInscritosNuevos', '493', formulario);
+	});
 }
 
 function mostrarInscritos569(formulario){
@@ -542,7 +540,7 @@ function guardarTraidos(formulario, dbBase, respObj){
 			}
 			
 			// Los inscritos que vienen desde el servidor vienen sin numero de acta
-			registro.ACTA = " ";
+			//registro.ACTA = " ";
 			// Con la siguiente línea se añade la variable _id al objeto			
 			registro = Object.assign(id, registro);   
 			//console.log('Registro: ',registro);
@@ -774,13 +772,13 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 			inscrito = Object.assign( insertar, inscrito );
 			console.log(inscrito);
 
-			dbBase.put(inscrito, function callback(err, result){
+			/* dbBase.put(inscrito, function callback(err, result){
 				if (!err) {
 					console.log('inscrito guardado en base de datos');
 				}else {
 					console.log('problemas guardando inscrito en base de datos',err);
 				}
-			});
+			}); */
 			dbNuevos.put(inscrito, function callback(err, result){
 				if (!err) {
 					alert('inscrito guardado en base de datos');
@@ -792,7 +790,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 	}else{
 		//id = idExistente;
 		var insertar;
-		dbBase.get(idExistente).then( doc => {
+		/* dbBase.get(idExistente).then( doc => {
 			insertar = { 
 				_id: doc._id,
 				_rev: doc._rev
@@ -807,7 +805,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 					console.log('problemas modificando inscrito en base de datos de traidos del server: '+err);
 					console.log(err);
 				}
-			});
+			}); */
 			dbNuevos.get(idExistente).then( docum => {
 				insertar = { 
 					_id: docum._id,
@@ -839,7 +837,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 					}
 				});
 			});
-		});
+		/* }); */
 	}
 }
 

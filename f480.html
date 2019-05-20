@@ -79,7 +79,30 @@
 								<script type="text/javascript">mostrarInscritos493('480');</script>
 	                    		<div class="form-group">
 									<div class="panel panel-default">
-			                    		<div class="panel-heading">INSCRITOS EN BD</div>
+										<div class="panel-heading">INSCRITOS CREADOS O MODIFICADOS EN ESTE DISPOSITIVO</div>
+										<div class="panel-body">	                    			
+											<table class="table table-bordered" id="tablaInscritosNuevos">
+												<thead>
+													<tr>
+														<th></th>
+														<th>ID</th>
+														<th>Establecimiento</th>
+														<th>Acta No.</th>
+														<th>Fecha Inscrip.</th>
+														<th>Nom. Propietario</th>
+														<th>Ident. Propietario</th>									
+														<th></th>
+													</tr>									
+												</thead>
+												<tbody id="inscritosNuevos"></tbody>
+											</table>													
+										</div>
+									</div>							
+								</div><!-- Fin del form-group -->	
+								<br>
+								<div class="form-group">
+									<div class="panel panel-default">
+			                    		<div class="panel-heading">INSCRITOS CARGADOS DESDE SERVIDOR</div>
 			                    		<div class="panel-body">
 			                    			<table class="table table-bordered" id="tablaInscritos">
 												<thead>
@@ -87,7 +110,7 @@
 														<th></th>
 														<th>ID</th>
 														<th>Establecimiento</th>
-														<th>Inscripción No.</th>
+														<th>Acta No.</th>
 														<th>Fecha Inscrip.</th>
 														<th>Nom. Propietario</th>
 														<th>Ident. Propietario</th>									
