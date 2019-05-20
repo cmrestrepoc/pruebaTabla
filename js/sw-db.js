@@ -776,7 +776,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 				if (!err) {
 					alert('inscrito guardado en base de datos');
 				}else {
-					alert('problemas guardando inscrito en base de datos');
+					alert('problemas guardando inscrito en base de datos' + err);
 				}
 			});					
 		});					
@@ -797,7 +797,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 				if (!err) {
 					alert('inscrito modificado en base de datos');
 				}else {
-					alert('problemas modificando inscrito en base de datos: '+err);
+					alert('problemas modificando inscrito en base de datos: ' + err);
 					console.log(err);
 				}
 			});
@@ -809,7 +809,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 				if (!err) {
 					alert('inscrito almacenado en base de datos');
 				}else {
-					alert('problemas almacenando inscrito en base de datos: '+err);
+					alert('problemas almacenando inscrito en base de datos: ' + err);
 					console.log(err);
 				}
 			});
