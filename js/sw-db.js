@@ -45,17 +45,23 @@ db444.changes({
 dbNuevos493.changes({
 	since: 'now',
 	live: true
-}).on('change', mostrarInscritos493('493'));
+}).on('change', function(changes){
+	mostrarInscritos493('493');
+});
 
 dbNuevos569.changes({
 	since: 'now',
 	live: true
-}).on('change', mostrarInscritos569('569'));
+}).on('change', function(changes){
+	mostrarInscritos569('569');
+});
 
 dbNuevos444.changes({
 	since: 'now',
 	live: true
-}).on('change', mostrarInscritos444('444'));
+}).on('change', function(changes){
+	mostrarInscritos444('444');
+});
 
 
 function verificarSesionLocal(){
@@ -511,7 +517,7 @@ function mostrarInscritos569(formulario){
 		crearTabla(doc, 'inscritos569', '#tablaInscritos569', '569', formulario);
 	});
 
-	dbNuevos493.allDocs({include_docs: true, descending: true}).then ( doc => {
+	dbNuevos569.allDocs({include_docs: true, descending: true}).then ( doc => {
 		crearTabla(doc, 'inscritosNuevos569', '#tablaInscritosNuevos569', '569', formulario);
 	});
 }
@@ -521,7 +527,7 @@ function mostrarInscritos444(formulario){
 		crearTabla(doc, 'inscritos444', '#tablaInscritos444', '444', formulario);
 	});
 
-	dbNuevos493.allDocs({include_docs: true, descending: true}).then ( doc => {
+	dbNuevos444.allDocs({include_docs: true, descending: true}).then ( doc => {
 		crearTabla(doc, 'inscritosNuevos444', '#tablaInscritosNuevos444', '444', formulario);
 	});
 }
