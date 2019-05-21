@@ -21,7 +21,7 @@ var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
 
 
-db493.changes({
+/* db493.changes({
 	since: 'now',
 	live: true
 }).on('change', function(changes){
@@ -40,22 +40,22 @@ db444.changes({
 	live: true
 }).on('change', function(changes){
 	mostrarInscritos444('444');
-});
+}); */
 
-/*dbNuevos493.changes({
+dbNuevos493.changes({
 	since: 'now',
 	live: true
-}).on('change', mostrarInscritos493);
+}).on('change', mostrarInscritos493('493'));
 
 dbNuevos569.changes({
 	since: 'now',
 	live: true
-}).on('change', mostrarInscritos569);
+}).on('change', mostrarInscritos569('569'));
 
 dbNuevos444.changes({
 	since: 'now',
 	live: true
-}).on('change', mostrarInscritos444);*/
+}).on('change', mostrarInscritos444('444'));
 
 
 function verificarSesionLocal(){
@@ -510,11 +510,19 @@ function mostrarInscritos569(formulario){
 	db569.allDocs({include_docs: true, descending: true}).then ( doc => {
 		crearTabla(doc, 'inscritos569', '#tablaInscritos569', '569', formulario);
 	});
+
+	dbNuevos493.allDocs({include_docs: true, descending: true}).then ( doc => {
+		crearTabla(doc, 'inscritosNuevos569', '#tablaInscritosNuevos569', '569', formulario);
+	});
 }
 
 function mostrarInscritos444(formulario){
 	db444.allDocs({include_docs: true, descending: true}).then ( doc => {
 		crearTabla(doc, 'inscritos444', '#tablaInscritos444', '444', formulario);
+	});
+
+	dbNuevos493.allDocs({include_docs: true, descending: true}).then ( doc => {
+		crearTabla(doc, 'inscritosNuevos444', '#tablaInscritosNuevos444', '444', formulario);
 	});
 }
 
