@@ -764,7 +764,7 @@ function cargarServidor(formulario){
 function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 	//var id = 0;
 	if(idExistente == 0){
-		dbBase.info().then( result => {
+		dbNuevos.info().then( result => {
 			var ultimo = result.doc_count + 1;
 			let indice  = calcularIndice(ultimo);
 			console.log(indice);
@@ -805,14 +805,23 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 		.catch( () => {
 			console.log("Inscrito que no esta en tabla de nuevos: ", inscrito);
 			delete inscrito._rev;
-			dbNuevos.put(inscrito, function callback(err, result){
-				if (!err) {
-					alert('inscrito almacenado en base de datos');
-				}else {
-					alert('problemas almacenando inscrito en base de datos: ' + err);
-					console.log(err);
-				}
-			});
+			dbNuevos.info().then( result => {
+				var ultimo = result.doc_count + 1;
+				let indice  = calcularIndice(ultimo);
+				console.log(indice);
+				var insertar = { _id: indice };
+				inscrito = Object.assign( insertar, inscrito );
+				console.log(inscrito);
+				
+				dbNuevos.put(inscrito, function callback(err, result){
+					if (!err) {
+						alert('inscrito almacenado en base de datos');
+					}else {
+						alert('problemas almacenando inscrito en base de datos: ' + err);
+						console.log(err);
+					}
+				});
+			}).catch( error => console.log("Error contando registros",err) );
 		});
 	}
 }
