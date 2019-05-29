@@ -215,21 +215,7 @@ function cargarInicioInscripciones(formulario){
 	}
 }
 
-function validarLongitudInput(longitud, mensaje){
-
-}
-
-function agregarValidacionTextInputs(formulario){
-	//let container = document.querySelector("#datos");
-	/* let objeto = container.querySelectorAll(':scope input[type="text"]');
-	console.log(objeto[18].value); */
-	let stringInput = 'input[name="propietario479"]';
-	let nombres = document.querySelectorAll(stringInput);
-	console.log(nombres);
-}
-
 function verificarAccionForm(formulario){
-	agregarValidacionTextInputs();
 	localStorage.getItem('Accion') == 'cargarServidor' ? cargarServidor(formulario) : console.log('No hay Acción');
 }
 
