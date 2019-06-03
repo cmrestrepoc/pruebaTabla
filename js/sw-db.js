@@ -180,6 +180,7 @@ function calcularActaInscripcion(formulario, db){
 }
 
 function cargarInicioInscripciones(formulario){
+	agregarValidacionTextInputs(formulario);
 	let db;
 	let dbNuevos;
 	switch(formulario){
@@ -215,21 +216,129 @@ function cargarInicioInscripciones(formulario){
 	}
 }
 
-function validarLongitudInput(longitud, mensaje){
+/* Desde aqui arranca funcionalidad relacionada con validaciones */
 
+function ponerLabelError(element, mensaje){
+	element.style.borderColor = "red";
+	if(!document.getElementById(element.name)){
+		let etiqueta = document.createElement('Label');
+		let parent = element.parentNode;
+		etiqueta.style.color = 'red';
+		etiqueta.style.fontSize = '10px';
+		etiqueta.setAttribute('id', element.name);
+		etiqueta.innerHTML = mensaje;
+		console.log(etiqueta);
+		parent.insertBefore(etiqueta, element);
+	}
+}
+
+function ponerLabelOk(element){
+	let label = document.getElementById(element.name);
+	if(label){
+		label.parentNode.removeChild(label);
+	}
+	//element.style.removeProperty('borderColor');
+	element.style.borderColor = "green";
+}
+
+function validarHallazgos(element, key){
+	/* Se debe hacer parseInt sobre key, ya que no viene como entero... si no se hace, al sumar se concatena 
+	como una cadena de caracteres. */
+	let cadena = element[key].name.split('_');
+	let hallazgo = document.getElementsByName('hallazgos_' + cadena[1] + '_' + (parseInt(key, 10) + 1));
+	console.log("Contenido hallazgo: ", hallazgo[0].value);
+	if(!hallazgo[0].value && element[key].value != 1){
+		ponerLabelError(hallazgo[0], "Si el puntaje es diferente de 1, debe incluir al menos un hallazgo");
+	}else{
+		ponerLabelOk(hallazgo[0]);
+	}
+}
+
+function validarLongitudInput(elemento, longitud, mensaje){
+	console.log("Valor input: ", elemento.value);
+	console.log("Longitud input: ", elemento.value.length);
+	if(elemento.value.length > longitud){
+		ponerLabelError(elemento, mensaje);
+	}else{
+		ponerLabelOk(elemento);
+	}
 }
 
 function agregarValidacionTextInputs(formulario){
-	//let container = document.querySelector("#datos");
-	/* let objeto = container.querySelectorAll(':scope input[type="text"]');
-	console.log(objeto[18].value); */
-	let stringInput = 'input[name="propietario479"]';
-	let nombres = document.querySelectorAll(stringInput);
-	console.log(nombres);
+	/* El campo noloca tambien es de longitud maxima 50, pero no se incluye porque se escoge de un dropdown list */
+	let nombresInput = "input[name='propietario" + formulario + "'], input[name='repLegal" + formulario + "'], "
+						+ "input[name='persona" + formulario + "-1'], input[name='persona" + formulario + "-2'], "
+						+ "input[name='funcionario" + formulario + "-1'], input[name='funcionario" + formulario + "-2'], "
+						+ "input[name='dirNotif" + formulario + "'], input[name='direccion" + formulario + "'], "
+						+ "input[name='cual569'] ";
+	let nombres = document.querySelectorAll(nombresInput);
+	nombres.forEach(element => {
+		// El evento input captura los cambios de texto dentro de un elemento input
+		element.addEventListener('input', validarLongitudInput.bind(this, element, 50, 
+								"No puede escribir más de 50 caracteres en este campo"));
+	});
+
+	/* correo, horarios, objeto */
+	let medianosInput = "input[name='correoProp" + formulario + "'], input[name='horarios" + formulario + "'], "
+						+ "input[name='objeto" + formulario + "']";
+	let medianos = document.querySelectorAll(medianosInput);
+	medianos.forEach(element => {
+		element.addEventListener('input', validarLongitudInput.bind(this, element, 70,
+								"No puede escribir más de 70 caracteres en este campo"));
+	});
+
+	/* numeroActa para muestras, cargos, matriculaMercantil, otrasEspecies440, otro472 */
+	let cortosInput = "input[name='numeroActa" + formulario + "'], input[name='matriculaMercantil" + formulario + "'], "
+						+ "input[name='otrasEspecies" + formulario + "'], input[name='otro" + formulario + "'], "
+						+ "input[name='cargoFuncionario" + formulario + "-1'], input[name='cargoFuncionario" + formulario + "-2'], "
+						+ "input[name='cargoPersona" + formulario + "-1'], input[name='cargoPersona" + formulario + "-2'] ";
+	let cortos = document.querySelectorAll(cortosInput);
+	cortos.forEach(element => {
+		element.addEventListener('input', validarLongitudInput.bind(this, element, 30, 
+								"No puede escribir más de 30 caracteres en este campo"));
+	});
+
+	let nombresComercialesInput = "input[name='razonSocial" + formulario + "'], input[name='nombreComercial" + formulario + "'] ";
+	let nombresComerciales = document.querySelectorAll(nombresComercialesInput);
+	nombresComerciales.forEach(element => {
+		element.addEventListener('input', validarLongitudInput.bind(this, element, 100, 
+								"No puede escribir más de 100 caracteres en este campo"))
+	});
+
+	let stringHallazgos = '';
+	for(let i = 1; i<=6; i++){
+		for(let j = 1; j<=6; j++){
+			stringHallazgos += "textarea[name='hallazgos_" + i + "_" + j + "'], ";
+		}
+	}
+
+	let nombresTextAreas = "textarea[name='obAutoridad" + formulario + "'], textarea[name='obPersona" + formulario + "'], "
+					 + stringHallazgos + "textarea[name='medida" + formulario + "'] ";
+	let textAreas = document.querySelectorAll(nombresTextAreas);
+	textAreas.forEach(elemento => {
+		elemento.addEventListener('input', validarLongitudInput.bind(this, elemento, 254, 
+								"No puede escribir más de 254 caracteres en este campo"));
+	});
+
+	let stringEvaluaciones = '';
+	let evaluaciones = [];
+	for(let i = 1; i<=6; i++){
+		stringEvaluaciones = "select[name='evaluacion_" + i + "'] ";
+		evaluaciones.push(document.querySelectorAll(stringEvaluaciones));
+	}
+	/* Debido a que en la key vienen indices no numericos como length y otros, se verifica con isNaA */ 
+	evaluaciones.forEach( element => {
+		for (let key in element){
+			if (!isNaN(key)){
+				element[key].addEventListener('change', validarHallazgos.bind(this, element, key));
+			}
+		}
+	});
 }
 
+/* La funcionalidad de validaciones termina con el llamado al metodo desde una funcion de arranque en todas las vistas */
 function verificarAccionForm(formulario){
-	agregarValidacionTextInputs();
+	agregarValidacionTextInputs(formulario);
 	localStorage.getItem('Accion') == 'cargarServidor' ? cargarServidor(formulario) : console.log('No hay Acción');
 }
 
@@ -991,6 +1100,7 @@ function guardarInscrito569(){
 		ALMACENA: document.getElementsByName('almacena569')[0].value,
 		DEPOSITO: document.getElementsByName('deposito569')[0].value,
 		DESPRESA: document.getElementsByName('despresa569')[0].value,
+		OTROTIPO: document.getElementsByName('cual569')[0].value
 	};
 	
 	inscrito = Object.assign( inscrito, inscritoEsta, adicional );
