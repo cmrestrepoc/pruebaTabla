@@ -402,15 +402,16 @@ function calcularNumActa(formulario){
 }
 
 function escogerInscrito(registro, formulario){
+	document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
+	document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
+	document.getElementsByName('correoProp' + formulario)[0].value = registro.CORREO;
+	document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
+	document.getElementsByName('cel' + formulario)[0].value = registro.CELULAR;
+	document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
+	document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
+	document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
 
 	if(formulario == '333' || formulario == '243'){
-		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
-		document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
-		document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
-		document.getElementsByName('correoProp' + formulario)[0].value = registro.CORREO;
-		document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
-		document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
-		document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
 		document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
 		document.getElementsByName('razonSocial' + formulario)[0].value = registro.RSO;
 		document.getElementsByName('nit' + formulario)[0].value = registro.NIT;
@@ -420,20 +421,19 @@ function escogerInscrito(registro, formulario){
 		});
 	}else{
 		document.getElementsByName('fax' + formulario)[0].value = registro.FAX;
-		document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
-		document.getElementsByName('cel' + formulario)[0].value = registro.CELULAR;
+		/* document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
 		document.getElementsByName('correoProp' + formulario)[0].value = registro.CORREO;
 		document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
 		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
 		document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
-		document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
+		document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
+		document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P; */
 		document.getElementsByName('deptoNotif' + formulario)[0].value = registro.DPTO_NOTI ? 
 			registro.DPTO_NOTI : 
 			document.getElementsByName('deptoNotif' + formulario)[0].value;
 		document.getElementsByName('mpioNotif' + formulario)[0].value = registro.MPIO_NOTI ? 
 			registro.MPIO_NOTI : 
 			document.getElementsByName('mpioNotif' + formulario)[0].value;
-		document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
 		
 		if(formulario == '444' || formulario == '472' || formulario == '441'){
 			console.log('Inscritos 444');
