@@ -427,8 +427,12 @@ function escogerInscrito(registro, formulario){
 		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
 		document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
 		document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
-		document.getElementsByName('deptoNotif' + formulario)[0].value = registro.DPTO_NOTI;
-		document.getElementsByName('mpioNotif' + formulario)[0].value = registro.MPIO_NOTI;
+		document.getElementsByName('deptoNotif' + formulario)[0].value = registro.DPTO_NOTI ? 
+			registro.DPTO_NOTI : 
+			document.getElementsByName('deptoNotif' + formulario)[0].value;
+		document.getElementsByName('mpioNotif' + formulario)[0].value = registro.MPIO_NOTI ? 
+			registro.MPIO_NOTI : 
+			document.getElementsByName('mpioNotif' + formulario)[0].value;
 		document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
 		
 		if(formulario == '444' || formulario == '472' || formulario == '441'){
