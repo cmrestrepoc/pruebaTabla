@@ -410,6 +410,7 @@ function escogerInscrito(registro, formulario){
 	document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
 	document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
 	document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
+	document.getElementsByName('autorizaNoti' + formulario)[0].value = registro.AUTORIZA;
 
 	if(formulario == '333' || formulario == '243'){
 		document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
