@@ -191,7 +191,7 @@ function loginServer(){
 				}
 				location.reload();
 			}else if (jsonRes.token == 'Usuario ya está loggeado') {
-				alert('Este usuario ya está loggeado');
+				alert('Este usuario está bloqueado. Posiblemente por decisión del administrador del sistema o porque otro dispositivo lo está usando');
 				history.back();
 			}else{
 				identity.token = jsonRes.token;
