@@ -17,30 +17,9 @@ var db442 = new PouchDB('evaluaciones442');
 var db333 = new PouchDB('evaluaciones333');
 var db243 = new PouchDB('evaluaciones243');
 var db26 = new PouchDB('evaluaciones26');
+var db443 = new PouchDB('evaluaciones443');
 var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
-
-
-/* db493.changes({
-	since: 'now',
-	live: true
-}).on('change', function(changes){
-	mostrarInscritos493('493');
-});
-
-db569.changes({
-	since: 'now',
-	live: true
-}).on('change', function(changes){
-	mostrarInscritos569('569');
-});
-
-db444.changes({
-	since: 'now',
-	live: true
-}).on('change', function(changes){
-	mostrarInscritos444('444');
-}); */
 
 dbNuevos493.changes({
 	since: 'now',
@@ -62,7 +41,6 @@ dbNuevos444.changes({
 }).on('change', function(changes){
 	mostrarInscritos444('444');
 });
-
 
 function verificarSesionLocal(){
 	let estado = localStorage.getItem('estado');
@@ -115,6 +93,9 @@ function dbActasForm(formulario){
 		case '26':
 			db = db26;
 			break
+		case '443':
+			db = db443;
+			break;
 		case '441':
 			db = db441;
 			break;
@@ -130,7 +111,7 @@ function calcularFecha(){
 	console.log(fecha.getFullYear());
 	let mes = fecha.getMonth() + 1;
 	let cadenaMes = mes < 10 ? '0' + mes : mes;
-	let cadenaDia = fecha.getUTCDate() < 10 ? '0' + fecha.getUTCDate() : fecha.getUTCDate();
+	let cadenaDia = fecha.getDate() < 10 ? '0' + fecha.getDate() : fecha.getDate();
 	
 	return {
 		dia: cadenaDia,
@@ -161,6 +142,177 @@ function cargarInicio(formulario){
 		localStorage.removeItem('firmaAut2');
 		localStorage.removeItem('firmaIns1');
 		localStorage.removeItem('firmaIns2');
+	}
+}
+
+function setInicio(formulario){
+	//alert("Se ejecuta setInicio");
+	document.getElementById('municipio').innerHTML = "CANDELARIA";
+	let form = "";
+	switch(formulario){
+		case '440':
+			form = 'FT440';
+			break;
+		case '474':
+			form = 'FT474';
+			break;
+		case '479':
+			form = 'FT479';
+			break;
+		case '480':
+			form = 'FT480';
+			break;
+		case '495':
+			form = 'FT495';
+			break;
+		case '478':
+			form = 'FT478';
+			break;
+		case '475':
+			form = 'FT475';
+			break;
+		case '481':
+			form = 'FT481'; 
+			break;
+		case '442':
+			form = 'FT442';
+			break;
+		case '333':
+			form = 'FT333';
+			break;
+		case '243':
+			form = 'FT243';
+			break;
+		case '26':
+			form = 'FT26'
+			break
+		case '443':
+			form = 'FT443';
+			break;
+		case '441':
+			form = 'FT441';
+			break;
+		case '472':
+			form = 'FT472';
+			break;
+		case '493':
+			form = 'FT493'
+			break
+		case '569':
+			form = 'FT569';
+			break;
+		case '444':
+			form = 'FT444';
+			break;
+		default:
+	}
+	document.getElementById('nomForm').innerHTML = form;
+	document.getElementById('formato').innerHTML = form;
+	localStorage.setItem('form', form.substr(2));
+	document.getElementsByName('mpio' + formulario)[0] ? 
+		document.getElementsByName('mpio' + formulario)[0].value = "CANDELARIA": null;
+	document.getElementsByName('ciudad' + formulario)[0] ? 
+		document.getElementsByName('ciudad' + formulario)[0].value = "CANDELARIA": null;
+	document.getElementsByName('mpioNotif' + formulario)[0] ?
+		document.getElementsByName('mpioNotif' + formulario)[0].value = "CANDELARIA": null;
+	document.getElementsByName('dpto' + formulario)[0] ? 
+		document.getElementsByName('dpto' + formulario)[0].value = "VALLE DEL CAUCA": null;
+	document.getElementsByName('depto' + formulario)[0] ? 
+		document.getElementsByName('depto' + formulario)[0].value = "VALLE DEL CAUCA": null;
+	document.getElementsByName('deptoNotif' + formulario)[0] ?
+		document.getElementsByName('deptoNotif' + formulario)[0].value = "VALLE DEL CAUCA": null;
+	document.getElementsByName('entidad' + formulario)[0] ? 
+		document.getElementsByName('entidad' + formulario)[0].value = "SECRETARÍA DE SALUD MUNICIPAL - CANDELARIA": null;
+	document.getElementsByName('inscripcion' + formulario)[0] ?
+		document.getElementsByName('inscripcion' + formulario)[0].value = "76130": null;
+
+	if(document.getElementsByName('nomTerr' + formulario)){
+		/* console.log("El campo nomTerr está definido"); */
+		let arregloBarrios = [
+			'SAMANES',
+			'OBRERO',
+			'PANAMERICANO',
+			'SAN CRISTOBAL',
+			'MUNICIPAL',
+			'LA CRUZ',
+			'LA VICTORIA',
+			'JORGE ELIECER GAITAN',
+			'MARIA AUXILIADORA',
+			'SANTA ANA',
+			'ARMANDO VASQUEZ',
+			'COOTRAIM',
+			'BRISAS DEL RIO',
+			'BUCHITOLO',
+			'EL ARENA',
+			'EL CABUYAL',
+			'EL CARMELO',
+			'EL LAURO',
+			'EL TIPLE',
+			'JUANCHITO',
+			'VILLAGORGONA',
+			'LA REGINA',
+			'MADRE VIEJA',
+			'SAN JOAQUIN',
+			'POBLADO CAMPESTRE',
+		]
+		let madre = document.getElementsByName('nomTerr' + formulario)[0];
+		arregloBarrios.forEach( elemento => {
+			let option = document.createElement('option');
+			option.value = elemento;
+			option.innerHTML = elemento;
+			madre.appendChild(option);
+		});
+	}
+
+	if(formulario == '26'){
+		let arregloSujetos = [
+			'479-1',
+			'479-2',
+			'479-3',
+			'479-4',
+			'479-5',
+			'479-6',
+			'481-1',
+			'481-2',
+			'481-3',
+			'495-1',
+			'495-2',
+			'495-3',
+			'495-4',
+			'495-5',
+			'495-6',
+			'440-1',
+			'440-2',
+			'474-1',
+			'474-2',
+			'474-3',
+			'474-4',
+			'474-5',
+			'474-6',
+			'474-7',
+			'474-8',
+			'474-9',
+			'478-1',
+			'478-2',
+			'478-3',
+			'478-4',
+			'475-1',
+			'475-2',
+			'472-1',
+			'480-1',
+			'480-2',
+			'480-3',
+			'480-4',
+			'480-5',
+			'480-6'
+		];
+		let madre = document.getElementsByName('tipoSujeto26')[0];
+		arregloSujetos.forEach( elemento => {
+			let option = document.createElement('option');
+			option.value = elemento;
+			option.innerHTML = elemento;
+			madre.appendChild(option);
+		});
 	}
 }
 
@@ -197,7 +349,9 @@ function cargarInicioInscripciones(formulario){
 			dbNuevos = dbNuevos444;
 			break;
 	}
-	calcularActaInscripcion(formulario, dbNuevos).then( acta => { 
+	let formu = localStorage.getItem('form');
+	console.log("Valor de form!!!", formu);
+	calcularActaInscripcion(formu, dbNuevos).then( acta => {
 		document.getElementsByName('acta' + formulario)[0].value = acta;
 	});
 	if(localStorage.getItem('inscrito') && localStorage.getItem('firmaAutoridad') && localStorage.getItem('firmaInscribe') )
@@ -385,7 +539,7 @@ function calcularIndice(ultimo){
 	return indice;		
 }
 
-function calcularNumActa(formulario){
+function calcularNumActa(formulario, form){
 	let db = dbActasForm(formulario);
 	let codUsuario = localStorage.getItem('codigoUsuario');
 	return db.info().then( result => {
@@ -395,7 +549,7 @@ function calcularNumActa(formulario){
 		let year = fecha.anio.toString()
 		let cadenaFecha = fecha.dia + fecha.mes + year.substring(2, 4);
 		//console.log(indice);
-		let acta = formulario + codUsuario + cadenaFecha + indice;
+		let acta = form + codUsuario + cadenaFecha + indice;
 		console.log(acta);
 		return acta;
 	});
@@ -416,19 +570,14 @@ function escogerInscrito(registro, formulario){
 		document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
 		document.getElementsByName('razonSocial' + formulario)[0].value = registro.RSO;
 		document.getElementsByName('nit' + formulario)[0].value = registro.NIT;
-		calcularNumActa(formulario).then( acta => {
+		let formu = localStorage.getItem('form');
+		console.log("lo que se recoge de localstorage", formu);
+		calcularNumActa(formulario, formu).then( acta => {
 			console.log("Valor de acta recibido ", acta);
 			document.getElementsByName('acta' + formulario)[0].value = acta;
 		});
 	}else{
 		document.getElementsByName('fax' + formulario)[0].value = registro.FAX;
-		/* document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
-		document.getElementsByName('correoProp' + formulario)[0].value = registro.CORREO;
-		document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
-		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
-		document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
-		document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
-		document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P; */
 		document.getElementsByName('deptoNotif' + formulario)[0].value = registro.DPTO_NOTI ? 
 			registro.DPTO_NOTI : 
 			document.getElementsByName('deptoNotif' + formulario)[0].value;
@@ -507,7 +656,8 @@ function escogerInscrito(registro, formulario){
 			}
 		}else{
 			// Aquí se puede introducir un método para calcular automáticamente un número de acta
-			calcularNumActa(formulario).then( acta => {
+			let formu = localStorage.getItem('form');
+			calcularNumActa(formulario, formu).then( acta => {
 				console.log("Valor de acta recibido ", acta);
 				document.getElementsByName('acta' + formulario)[0].value = acta;
 			});
@@ -660,10 +810,6 @@ function mostrarInscritos444(formulario){
 	});
 }
 
-/*function eliminarInscritos(){
-	db493.destroy().then(resp => console.log);
-}*/
-
 function guardarTraidos(formulario, dbBase, respObj){
 	dbBase.destroy().then( response => {
 		console.log('Base de datos anterior eliminada');
@@ -713,8 +859,7 @@ function cerrarSesionServidor(){
 		localStorage.removeItem('identity');
 	}else{
 		alert('No hay una sesión abierta con el servidor en este momento');
-	}
-	
+	}	
 }
 
 function verificarSesion(){
@@ -833,7 +978,7 @@ function fetchEvaluados(doc, formulario, url){
 				body: data
 		}).then( res => {
 			if(res.status == 500){
-				return fetchEvaluados(doc, formulario)
+				return fetchEvaluados(doc, formulario, url)
 				.then( body => resolve(body) );
 				//.then( () => setTimeout( () => alert("Registros cargados en servidor"), 1500) );	
 			}else{
@@ -969,7 +1114,6 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 }
 
 function guardarComunesInscritos(formulario){
-
 	var inscrito = {
 		//Campos comunes a todos los formularios en general
 		ACTA: document.getElementsByName('acta' + formulario)[0].value,
@@ -1294,10 +1438,6 @@ function guardarEvaluadoReducido(formulario){
 
 	return evaluado;
 }
-
-/*function validarEvaluado(evaluado){
-	
-}*/
 
 function persistirEvaluado(db, evaluado, formulario){
 	calcularNumActa(formulario).then( acta => {

@@ -342,3 +342,29 @@ function setSujeto(value, destino) {
 			document.getElementsByName(destino)[0].value = '';
 	}
 }
+
+function setInicioMenu(){
+	document.getElementById('municipio').innerHTML = "CANDELARIA";
+	document.getElementsByName("nombreFormularios")[0].innerHTML = "FT-442";
+	document.getElementsByName("nombreFormularios")[1].innerHTML = "FT-443";
+	document.getElementsByName("nombreFormularios")[2].innerHTML = "FT-569";
+	document.getElementsByName("nombreFormularios")[3].innerHTML = "FT-493";
+	document.getElementsByName("nombreFormularios")[4].innerHTML = "FT-444";
+	document.getElementsByName("nombreFormularios")[5].innerHTML = "FT-26";
+	document.getElementsByName("nombreFormularios")[6].innerHTML = "FT-243";
+	document.getElementsByName("nombreFormularios")[7].innerHTML = "FT-333";
+	document.getElementsByName("nombreFormularios")[8].innerHTML = "FT-440";
+	document.getElementsByName("nombreFormularios")[9].innerHTML = "FT-474";
+	document.getElementsByName("nombreFormularios")[10].innerHTML = "FT-475";
+	document.getElementsByName("nombreFormularios")[11].innerHTML = "FT-478";
+	document.getElementsByName("nombreFormularios")[12].innerHTML = "FT-479";
+	document.getElementsByName("nombreFormularios")[13].innerHTML = "FT-480";
+	document.getElementsByName("nombreFormularios")[14].innerHTML = "FT-481";
+	document.getElementsByName("nombreFormularios")[15].innerHTML = "FT-495";
+	document.getElementsByName("nombreFormularios")[16].innerHTML = "FT-441";
+	document.getElementsByName("nombreFormularios")[17].innerHTML = "FT-472";
+}
+
+function setInicioIndex(){
+	document.getElementById('municipio').innerHTML = "CANDELARIA";
+}
