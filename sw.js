@@ -4,7 +4,7 @@
 //importScripts('./js/sw-db.js');
 
 // Asignar un nombre y versión de la cache
-const CACHE_NAME = 'v2_cache_visalud_pwa';
+const CACHE_NAME = 'v3_cache_visalud_pwa';
 
 // ficheros a cachear en la aplicación
 var urlsToCache = [
