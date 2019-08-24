@@ -11,12 +11,14 @@ if('serviceWorker' in navigator){
 	console.log('NO PUEDES usar los serviceWorker en tu navegador');
 }
 
-caches.open('v3_cache_visalud_pwa')
-	.then(cache => {
-		cache.keys()
-			.then(keys => alert('Longitud del caché instalado: ' + keys.length))
-			.catch(err => console.log('Problemas abriendo el cache', err));
-	})
+function contarElementosCache(){
+	caches.open('v3_cache_visalud_pwa')
+		.then(cache => {
+			cache.keys()
+				.then(keys => alert('Longitud del caché instalado: ' + keys.length))
+				.catch(err => console.log('Problemas abriendo el cache', err));
+		})
+}
 
 function setConcepto(objeto, destino) {
 	var concepto = objeto.value;
