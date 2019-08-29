@@ -279,11 +279,13 @@ function agregarValidacionTextInputs(formulario){
 	});
 
 	/* validación de campo inscripción */
+	/* Ejemplo de uso de var vs let... en este caso, si se pone let, longitud no es reconocida dentro del forEach*/
+	var longitud = formulario != '444' ? 15 : 11; 
 	let inputInscripcion = "input[name='inscripcion" + formulario  + "']";
 	let objetosInscripcion = document.querySelectorAll(inputInscripcion);
 	objetosInscripcion.forEach( elemento => {
-		elemento.addEventListener('input', validarLongitudInput.bind(this, elemento, 15,
-			"No puede escribir más de 15 caracteres en este campo"));
+		elemento.addEventListener('input', validarLongitudInput.bind(this, elemento, longitud,
+			"No puede escribir más de " + longitud + " caracteres en este campo"));
 	});
 
 	/* correo, horarios, objeto */
