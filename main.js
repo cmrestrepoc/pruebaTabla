@@ -215,7 +215,10 @@ function loginServer(){
 }
 
 function estabNumInscripcion(valor, formulario){
-	document.getElementsByName('inscripcion' + formulario)[0].value += valor;
+	let event = new Event('input');
+	let elementoInscripcion = document.getElementsByName('inscripcion' + formulario)[0];
+	elementoInscripcion.value += valor;
+	elementoInscripcion.dispatchEvent(event);
 }
 
 function vehiNumInscripcion(valor){

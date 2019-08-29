@@ -278,6 +278,14 @@ function agregarValidacionTextInputs(formulario){
 								"No puede escribir más de 50 caracteres en este campo"));
 	});
 
+	/* validación de campo inscripción */
+	let inputInscripcion = "input[name='inscripcion" + formulario  + "']";
+	let objetosInscripcion = document.querySelectorAll(inputInscripcion);
+	objetosInscripcion.forEach( elemento => {
+		elemento.addEventListener('input', validarLongitudInput.bind(this, elemento, 15,
+			"No puede escribir más de 15 caracteres en este campo"));
+	});
+
 	/* correo, horarios, objeto */
 	let medianosInput = "input[name='correoProp" + formulario + "'], input[name='horarios" + formulario + "'], "
 						+ "input[name='objeto" + formulario + "']";
