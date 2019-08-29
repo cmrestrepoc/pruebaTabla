@@ -222,12 +222,20 @@ function estabNumInscripcion(valor, formulario){
 }
 
 function vehiNumInscripcion(valor){
-	document.getElementsByName('inscripcion444')[0].value += valor;
+	if(document.getElementsByName('placa444')[0].value == ''){
+		let event = new Event('input');
+		let elementoInscripcion = document.getElementsByName('inscripcion444')[0];
+		elementoInscripcion.value += valor;
+		elementoInscripcion.dispatchEvent(event);
+	}
 }
 
 function auxiliarInscVehi(valor){
 	if(document.getElementsByName('placaSrmque444')[0].value == '' && document.getElementsByName('placaRemolque444')[0].value == ''){
-		document.getElementsByName('inscripcion444')[0].value += valor;
+		let event = new Event('input');
+		let elementoInscripcion = document.getElementsByName('inscripcion444')[0];
+		elementoInscripcion.value += valor;
+		elementoInscripcion.dispatchEvent(event);
 	}
 }
 
