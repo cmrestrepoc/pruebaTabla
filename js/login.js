@@ -31,6 +31,9 @@ function obtenerCodigo(usuario){
 		case 'CRESTREPO':
 			indice = '11'
 			break;
+		case 'JCRESTREPO':
+			indice = '12'
+			break;
 		default:
 			alert('El usuario no está registrado para obtener código');
 			break;
