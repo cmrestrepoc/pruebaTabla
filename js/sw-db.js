@@ -198,7 +198,11 @@ function cargarInicioInscripciones(formulario){
 			break;
 	}
 	calcularActaInscripcion(formulario, dbNuevos).then( acta => { 
-		document.getElementsByName('acta' + formulario)[0].value = acta;
+		console.log("Valor de acta recibido ", acta);
+		let event = new Event('input');
+		let objetoActa = document.getElementsByName('acta' + formulario)[0];
+		objetoActa.value = acta;
+		objetoActa.dispatchEvent(event);
 	});
 	if(localStorage.getItem('inscrito') && localStorage.getItem('firmaAutoridad') && localStorage.getItem('firmaInscribe') )
 	{
@@ -295,6 +299,15 @@ function agregarValidacionTextInputs(formulario){
 	medianos.forEach(element => {
 		element.addEventListener('input', validarLongitudInput.bind(this, element, 70,
 								"No puede escribir más de 70 caracteres en este campo"));
+	});
+
+	/* Validación campo Acta */
+	longitud = formulario === '26' ? 14 : 15;
+	let inputActa = "input[name='acta" + formulario  + "']";
+	let objetosActa = document.querySelectorAll(inputActa);
+	objetosActa.forEach( elemento => {
+		elemento.addEventListener('input', validarLongitudInput.bind(this, elemento, longitud, 
+								"No puede escribir más de " + longitud + " caracteres en este campo"));
 	});
 
 	/* numeroActa para muestras, cargos, matriculaMercantil, otrasEspecies440, otro472 */
@@ -428,7 +441,10 @@ function escogerInscrito(registro, formulario){
 		document.getElementsByName('nit' + formulario)[0].value = registro.NIT;
 		calcularNumActa(formulario).then( acta => {
 			console.log("Valor de acta recibido ", acta);
-			document.getElementsByName('acta' + formulario)[0].value = acta;
+			let event = new Event('input');
+			let objetoActa = document.getElementsByName('acta' + formulario)[0];
+			objetoActa.value = acta;
+			objetoActa.dispatchEvent(event);
 		});
 	}else{
 		document.getElementsByName('fax' + formulario)[0].value = registro.FAX;
@@ -519,7 +535,10 @@ function escogerInscrito(registro, formulario){
 			// Aquí se puede introducir un método para calcular automáticamente un número de acta
 			calcularNumActa(formulario).then( acta => {
 				console.log("Valor de acta recibido ", acta);
-				document.getElementsByName('acta' + formulario)[0].value = acta;
+				let event = new Event('input');
+				let objetoActa = document.getElementsByName('acta' + formulario)[0];
+				objetoActa.value = acta;
+				objetoActa.dispatchEvent(event);
 			});
 			
 			let alerta = document.getElementsByName('alertaInscrito');

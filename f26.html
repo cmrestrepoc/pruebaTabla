@@ -141,7 +141,11 @@
                                 </div>
                                 <script>
                                     calcularNumActa('26').then( numActa => {
-                                        document.getElementsByName('acta26')[0].value = numActa;
+                                        console.log("Valor de acta recibido ", numActa);
+                                        let event = new Event('input');
+                                        let objetoActa = document.getElementsByName('acta26')[0];
+                                        objetoActa.value = numActa;
+                                        objetoActa.dispatchEvent(event);
                                     });
                                 </script>
                                 <div class="col-md-5">
