@@ -29,12 +29,13 @@ function obtenerCodigo(usuario){
 			indice = '10';
 			break;
 		case 'CRESTREPO':
-			indice = '11'
+			indice = '11';
 			break;
 		case 'JCRESTREPO':
 			indice = '12'
 			break;
 		default:
+			indice = 'error';
 			alert('El usuario no está registrado para obtener código');
 			break;
 	}
@@ -45,16 +46,18 @@ function login(){
 	let estado;
 	let usuario = document.getElementsByName('nomUsuario')[0].value;
 	let clave = document.getElementsByName('password')[0].value;
-	let codigoUsuario = obtenerCodigo(usuario);
-	clave == 'GC130' ? estado = true : estado = false;
-	if (estado) {
-		localStorage.setItem('estado', JSON.stringify(estado));
-		localStorage.setItem('usuario', JSON.stringify(usuario));
-		localStorage.setItem('codigoUsuario', codigoUsuario);
-		alert('Login exitoso');
-		window.location.replace("menu0.html");
-	}else{
-		alert('Clave incorrecta');
+	let codigoUsuario = obtenerCodigo(usuario) !== 'error' ? obtenerCodigo(usuario) : null;
+	if(codigoUsuario){
+		clave == 'GC130' ? estado = true : estado = false;
+		if (estado) {
+			localStorage.setItem('estado', JSON.stringify(estado));
+			localStorage.setItem('usuario', JSON.stringify(usuario));
+			localStorage.setItem('codigoUsuario', codigoUsuario);
+			alert('Login exitoso');
+			window.location.replace("menu0.html");
+		}else{
+			alert('Clave incorrecta');
+		}
 	}
 }
 
