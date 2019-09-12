@@ -1096,7 +1096,7 @@ function guardarInscrito493(){
 	
 		var adicional = {		
 			ZONA: document.getElementsByName('zona493')[0].value,
-			ACTIVIDAD: actividad,
+			ACTIVIDAD: JSON.stringify(actividad),
 			CARGO_F1: document.getElementsByName('cargoRecibe493')[0].value,
 			CARGO_E1: document.getElementsByName('cargoInscribe493')[0].value,
 			ACTIVO: '',					//campos no funcionales que es mejor remover
