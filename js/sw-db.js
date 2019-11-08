@@ -321,6 +321,7 @@ function agregarValidacionTextInputs(formulario){
 								"No puede escribir más de 30 caracteres en este campo"));
 	});
 
+	/* validaciones en razón social y nombre comercial */
 	let nombresComercialesInput = "input[name='razonSocial" + formulario + "'], input[name='nombreComercial" + formulario + "'] ";
 	let nombresComerciales = document.querySelectorAll(nombresComercialesInput);
 	nombresComerciales.forEach(element => {
@@ -328,13 +329,23 @@ function agregarValidacionTextInputs(formulario){
 								"No puede escribir más de 100 caracteres en este campo"))
 	});
 
+	/* validaciones para numeros de identificación (cedulas) */
+	let cedulasInput = "input[name='idPropietario" + formulario + "'], input[name='idRepLegal" + formulario + "'], "
+						+ "input[name='idFuncionario" + formulario + "-1']," + "input[name='idFuncionario" + formulario + "-2'],"
+						+ "input[name='idPersona" + formulario + "-1']," + "input[name='idPersona" + formulario + "-2']";
+	let cedulas = document.querySelectorAll(cedulasInput);
+	cedulas.forEach(element => {
+		element.addEventListener('input', validarLongitudInput.bind(this, element, 12,
+								"No puede escribir más de 12 caracteres en este campo"));
+	});
+
+	/* validaciones en textAreas */
 	let stringHallazgos = '';
 	for(let i = 1; i<=6; i++){
 		for(let j = 1; j<=6; j++){
 			stringHallazgos += "textarea[name='hallazgos_" + i + "_" + j + "'], ";
 		}
 	}
-
 	let nombresTextAreas = "textarea[name='obAutoridad" + formulario + "'], textarea[name='obPersona" + formulario + "'], "
 					 + stringHallazgos + "textarea[name='medida" + formulario + "'] ";
 	let textAreas = document.querySelectorAll(nombresTextAreas);
@@ -343,14 +354,15 @@ function agregarValidacionTextInputs(formulario){
 								"No puede escribir más de 254 caracteres en este campo"));
 	});
 
+	/* validaciones en hallazgos cuando hay evaluación negativa */
 	let stringEvaluaciones = '';
 	let evaluaciones = [];
 	for(let i = 1; i<=6; i++){
 		stringEvaluaciones = "select[name='evaluacion_" + i + "'] ";
 		evaluaciones.push(document.querySelectorAll(stringEvaluaciones));
 	}
-	/* Debido a que en la key vienen indices no numericos como length y otros, se verifica con isNaA */ 
 	evaluaciones.forEach( element => {
+		/* Debido a que en la key vienen indices no numericos como length y otros, se verifica con isNaA */ 
 		for (let key in element){
 			if (!isNaN(key)){
 				element[key].addEventListener('change', validarHallazgos.bind(this, element, key));
