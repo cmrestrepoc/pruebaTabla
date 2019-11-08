@@ -1414,8 +1414,8 @@ function guardarEvaluacion(formulario){
 				}
 				adicional = {
 					TIPOCARNE: tipocarne,
-					OTRAS: document.getElementsByName('otrasEspecies')[0].value,
-					OTIPOPRO: document.getElementsByName('otrosProductos')[0].value,
+					OTRAS: document.getElementsByName('otrasEspecies' + formulario)[0].value,
+					OTIPOPRO: document.getElementsByName('otrosProductos' + formulario)[0].value,
 					E14: document.getElementsByName('evaluacion_1')[3].value,
 					H14: document.getElementsByName('hallazgos_1_4')[0].value,
 					E22: document.getElementsByName('evaluacion_2')[1].value,
