@@ -423,15 +423,25 @@ function calcularIndice(ultimo){
 function calcularNumActa(formulario){
 	let db = dbActasForm(formulario);
 	let codUsuario = localStorage.getItem('codigoUsuario');
+	// let objetoActa = {}
 	return db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
 		let indice = calcularIndice(ultimo);
 		let fecha = calcularFecha();
 		let year = fecha.anio.toString()
-		let cadenaFecha = fecha.dia + fecha.mes + year.substring(2, 4);
+		let cadenaFecha = fecha.dia.toString() + fecha.mes.toString() + year.substring(2, 4);
 		//console.log(indice);
+		/* objetoActa = {
+			indice,
+			fecha,
+			year,
+			cadenaFecha,
+			formulario,
+			codUsuario
+		} */
 		let acta = formulario + codUsuario + cadenaFecha + indice;
 		console.log(acta);
+		// console.log('objetoActa', objetoActa)
 		return acta;
 	});
 }
@@ -1177,7 +1187,7 @@ function guardarInscrito569(){
 }
 
 function guardarComunesEvaluados(formulario){
-	var evaluado = {
+	let evaluado = {
 		//Campos comunes a todos los formularios en general
 		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
 		//ACTA: document.getElementsByName('acta' + formulario)[0].value,
@@ -1229,6 +1239,8 @@ function guardarComunesEvaluados(formulario){
 		FIRMA_F2: '',
 		FIRMA_E1: '',
 		FIRMA_E2: '',
+		LONGITUD: '',
+		LATITUD: '',
 		GRABADO: ''
 	};
 	return evaluado;
@@ -1382,7 +1394,8 @@ function persistirEvaluado(db, evaluado, formulario){
 function guardarEvaluacion(formulario){
 	console.log('Estamos en el formulario', formulario)
 	let evaluado = formulario != '333' && formulario != '442' && formulario != '26' && formulario != '243' ? 
-					guardarComunesEvaluados(formulario) : null;
+					guardarComunesEvaluados(formulario) : {};
+	var coordinates = {}					
 	let preguntasComunes;
 	let evaluadoEsta;
 	let evaluadoVehi;
@@ -1792,9 +1805,16 @@ function guardarEvaluacion(formulario){
 		}
 	
 		//console.log("Estructura de evaluado en formulario " + formulario + " para revisión: " + JSON.stringify(evaluado));
-		
-		localStorage.setItem('evaluado', JSON.stringify(evaluado));
-		firmaEvaluacion();
+		navigator.geolocation.getCurrentPosition(position => {
+			coordinates = {
+				LONGITUD: position.coords.longitude,
+				LATITUD: position.coords.latitude
+			}
+			console.log('Coordenadas calculadas')
+			evaluado = Object.assign(evaluado, coordinates)
+			localStorage.setItem('evaluado', JSON.stringify(evaluado));
+			firmaEvaluacion();
+		})
 		
 		//persistirEvaluado(db, evaluado, formulario);
 		//location.reload();
