@@ -715,7 +715,9 @@ function mostrarInscritos444(formulario){
 	db493.destroy().then(resp => console.log);
 }*/
 
-function guardarTraidos(formulario, dbBase, respObj){
+function guardarTraidos(formulario, dbBase, respObj, bandera, banderaAlerta){
+	let alerta = document.getElementsByName('mensajesServicios')[banderaAlerta];
+	alerta.style.display = 'block';
 	dbBase.destroy().then( response => {
 		console.log('Base de datos anterior eliminada');
 		dbBase = new PouchDB('inscritosCargados' + formulario);
@@ -723,35 +725,39 @@ function guardarTraidos(formulario, dbBase, respObj){
 		
 		let count = 0;
 		let long = respObj.length;
-		respObj.forEach( registro => {
-			//console.log('Registro: ',registro);
-			let indice  = calcularIndice(registro.id);
-			let id = { _id: indice };
-						
-			if (registro.ACTIVIDAD) {
-				registro.ACTIVIDAD = JSON.parse(registro.ACTIVIDAD);	
-			}
-			
-			// Los inscritos que vienen desde el servidor vienen sin numero de acta
-			//registro.ACTA = " ";
-			// Con la siguiente línea se añade la variable _id al objeto			
-			registro = Object.assign(id, registro);   
-			//console.log('Registro: ',registro);
-			dbBase.put(registro, function callback(err, result){
-				if (!err) {
-					if (count != long - 1) {
-						count++;
-						console.log('inscrito guardado en base de datos: ', count);	
-					}else{
-						alert("Inscritos formulario " + formulario + " cargados correctamente");
-						localStorage.removeItem('Accion');
-					}
-				}else {
-					console.log('problemas guardando inscrito en base de datos', err);
+		
+		if(respObj.length > 0){
+			respObj.forEach( registro => {
+				//console.log('Registro: ',registro);
+				let indice  = calcularIndice(registro.id);
+				let id = { _id: indice };
+							
+				if (registro.ACTIVIDAD) {
+					registro.ACTIVIDAD = JSON.parse(registro.ACTIVIDAD);	
 				}
+				
+				// Con la siguiente línea se añade la variable _id al objeto			
+				registro = Object.assign(id, registro);   
+				//console.log('Registro: ',registro);
+				dbBase.put(registro, function callback(err, result){
+					if (!err) {
+						if (count != long - 1) {
+							count++;
+							alerta.innerHTML = 'Inscritos guardados en base de datos: ' + count;	
+						}else{
+							alerta.innerHTML = "Registros de " + bandera + " cargados correctamente";
+							localStorage.removeItem('Accion');
+						}
+					}else {
+						alerta.innerHTML = 'Problemas guardando inscrito en base de datos' + err;
+					}
+				});
 			});
-		});
-	});	
+		}else{
+			alerta.innerHTML = 'No hay inscritos de ' + bandera + ' para cargar'
+		}
+	})
+	.catch( () => alerta.innerHTML = 'Esta acción ya fue ejecutada, por favor continue' );	
 }
 
 function cerrarSesionServidor(){
@@ -820,45 +826,77 @@ function dbInscritosFromForm(formulario){
 //Aquí se usa la función json(), que funciona similar a JSON.parse()
 function cargarInscritos(formulario){
 	let db = dbInscritosFromForm(formulario);
+	let banderaAlerta;
+	let alerta = document.getElementsByName('mensajesServicios')[banderaAlerta];
+	if(localStorage.getItem('Accion')){
+		localStorage.getItem('Accion') == 'cargarInscritos' + formulario ?
+				localStorage.removeItem('Accion') :
+				!localStorage.getItem('identity') ? 
+					localStorage.setItem('Accion', 'cargarInscritos' + formulario) :
+					null;
+		banderaAlerta = 1;
+	}else{
+		!localStorage.getItem('identity') && localStorage.setItem('Accion', 'cargarInscritos' + formulario);
+		banderaAlerta = 0;
+	}
 	//if(!localStorage.getItem('identity')){
-		localStorage.getItem('Accion') == 'cargarInscritos' + formulario ? 
+		/* localStorage.getItem('Accion') == 'cargarInscritos' + formulario ? 
 			localStorage.removeItem('Accion') :
-			localStorage.setItem('Accion', 'cargarInscritos' + formulario);
+			localStorage.setItem('Accion', 'cargarInscritos' + formulario); */
 	//}
 	var promesa = fetchInscritos(formulario);
 	promesa.then( respObj => {
 		if (respObj.err != undefined) {
+			alerta.style.display = 'block';
 			respObj.err == "ERROR TOKEN" ? 
-			alert('Hubo problemas con el servidor. Es necesario cerrar Sesión con el servidor y volver a introducir credenciales') : 
-			alert('Error: ' + respObj.err);
+			alerta.innerHTML = 'Hubo problemas!! Es necesario cerrar Sesión con el servidor y volver a introducir credenciales' :
+			// alert('Hubo problemas!! Es necesario cerrar Sesión con el servidor y volver a introducir credenciales') : 
+			alerta.innerHTML = 'Error: ' + respObj.err;
+			// alert('Error: ' + respObj.err);
 		}else{
-			guardarTraidos(formulario, db, respObj);
+			guardarTraidos(formulario, db, respObj, formulario, banderaAlerta);
 				//cerrarSesionServidor();
 		}		
 	}).catch( err => console.log('Error: ', err) );
 }
 
 function cargarTodosLosInscritos(){
-//	if(!localStorage.getItem('identity')){
+	let banderaAlerta;
+	let alerta = document.getElementsByName('mensajesServicios')[banderaAlerta];
+	if(localStorage.getItem('Accion')){
 		localStorage.getItem('Accion') == 'cargarTodosLosInscritos' ?
+				localStorage.removeItem('Accion') :
+				!localStorage.getItem('identity') ? 
+					localStorage.setItem('Accion', 'cargarTodosLosInscritos' + formulario) :
+					null;
+		banderaAlerta = 1;
+	}else{
+		!localStorage.getItem('identity') && localStorage.setItem('Accion', 'cargarTodosLosInscritos');
+		banderaAlerta = 0;
+	}
+//	if(!localStorage.getItem('identity')){
+		/* localStorage.getItem('Accion') == 'cargarTodosLosInscritos' ?
 			localStorage.removeItem('Accion') :
-			localStorage.setItem('Accion', 'cargarTodosLosInscritos');
+			localStorage.setItem('Accion', 'cargarTodosLosInscritos'); */
 //	}	
 	let promesa = fetchInscritos('493');
 	promesa.then( respObj => {
 		if (respObj.err != undefined) {
+			alerta.style.display = 'block';
 			respObj.err == "ERROR TOKEN" ? 
-			alert('Hubo problemas!! Es necesario cerrar Sesión con el servidor y volver a introducir credenciales') : 
-			alert('Error: ' + respObj.err);
+			alerta.innerHTML = 'Hubo problemas!! Es necesario cerrar Sesión con el servidor y volver a introducir credenciales' :
+			// alert('Hubo problemas!! Es necesario cerrar Sesión con el servidor y volver a introducir credenciales') : 
+			alerta.innerHTML = 'Error: ' + respObj.err;
+			// alert('Error: ' + respObj.err);
 			return;
 		}	
-		guardarTraidos('493', db493, respObj);
+		guardarTraidos('493', db493, respObj, 'Establecimientos de alimentos', banderaAlerta);
 		let promesa1 = fetchInscritos('569');
 		promesa1.then( respObj1 => {
-			guardarTraidos( '569', db569, respObj1 );
+			guardarTraidos( '569', db569, respObj1, 'Establecimientos Prod Cárnicos', banderaAlerta );
 			let promesa2 = fetchInscritos('444');
 			localStorage.removeItem('Accion');
-			promesa2.then ( respObj2 => guardarTraidos( '444', db444, respObj2 ) )
+			promesa2.then ( respObj2 => guardarTraidos( '444', db444, respObj2, 'Vehículos', banderaAlerta ) )
 					.catch( err2 => console.log('Error', err2 ) );
 		}).catch( err1 => console.log('Error: ', err1) );
 

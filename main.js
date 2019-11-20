@@ -15,7 +15,7 @@ function contarElementosCache(){
 	caches.open('v3_cache_visalud_pwa')
 		.then(cache => {
 			cache.keys()
-				.then(keys => alert('Longitud del caché instalado: ' + keys.length))
+				.then(keys => document.getElementsByName('versionContent')[0].innerHTML += ' - Caché: ' + keys.length)
 				.catch(err => console.log('Problemas abriendo el cache', err));
 		})
 }
