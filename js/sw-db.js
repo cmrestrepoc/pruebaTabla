@@ -912,6 +912,8 @@ function fetchEvaluados(doc, formulario, url){
 	};
 	let bigDoc = Object.assign(credentials, doc);
 	let data = JSON.stringify(bigDoc);
+	let cuerpo = document.getElementById('cuerpoRespuesta');
+	cuerpo.innerHTML = ''
 	//console.log(data);
 	return new Promise((resolve, reject) => {
 		fetch(url, {
@@ -922,11 +924,14 @@ function fetchEvaluados(doc, formulario, url){
 				body: data
 		}).then( res => {
 			if(res.status == 500){
-				return fetchEvaluados(doc, formulario)
+				return fetchEvaluados(doc, formulario, url)
 				.then( body => resolve(body) );
 				//.then( () => setTimeout( () => alert("Registros cargados en servidor"), 1500) );	
 			}else{
 				res.json().then( body => resolve(body)	)
+				let texto = document.createElement('p');
+				texto.innerHTML = "Se almacenó el acta: " + doc.ACTA;
+				cuerpo.appendChild(texto);
 			} 
 		})
 		.catch( err => reject([err, doc.ACTA]) );
@@ -971,7 +976,6 @@ function cargarServidor(formulario){
 				.then( respuesta => {
 					//let mensaje = [];
 					let cuerpo = document.getElementById('cuerpoRespuesta');
-					cuerpo.innerHTML = '';
 					respuesta.forEach(element => {
 						let texto = document.createElement('p');
 						texto.innerHTML = element.res;
@@ -980,7 +984,6 @@ function cargarServidor(formulario){
 				})
 				.catch( (err) => {
 					let cuerpo = document.getElementById('cuerpoRespuesta');
-					cuerpo.innerHTML = '';
 					let texto = document.createElement('p');
 					texto.innerHTML = "El acta " + err[1] + " no pudo ser almacenada. Inténtelo de nuevo hasta confirmar que todas las actas hayan sido enviadas";
 					cuerpo.appendChild(texto);
