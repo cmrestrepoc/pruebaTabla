@@ -32,7 +32,22 @@ function obtenerCodigo(usuario){
 			indice = '11';
 			break;
 		case 'JCRESTREPO':
-			indice = '12'
+			indice = '09'
+			break;
+		case 'GCAICEDO':
+			indice = '14'
+			break;
+		case 'GCARVAJAL':
+			indice = '15'
+			break;
+		case 'MRAMOS':
+			indice = '16'
+			break;
+		case 'JOPANCE':
+			indice = '17'
+			break;
+		case 'VCORTES':
+			indice = '18'
 			break;
 		default:
 			indice = 'error';

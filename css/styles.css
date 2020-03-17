@@ -63,7 +63,7 @@ header img{
 #menu2{
 	width: 48%;
 	float: left;
-	margin-top: 30px;
+	margin-top: -30px;
 }
 
 #inscripciones{
@@ -149,17 +149,22 @@ header img{
 }
 
 #llave4 img{
-	height: 270px;
+	margin-top: -10px;
+	height: 290px;
+}
+
+#deriActaEstablecimientos {
+	margin-top: -10px;
 }
 
 #deriActaEstablecimientos h4{
-	margin-top: 15px;
+	margin-top: 14px;
 	margin-bottom: -10px;
 }
 
 #llave5{
-	margin-top: 50px;
-	margin-left: -60px;
+	margin-top: 45px;
+	margin-left: -140px;
 	float: left;
 }
 
@@ -168,8 +173,8 @@ header img{
 }
 
 #deriActaVehiculos{
-	margin-top: 45px;
-	margin-left: -30px;
+	margin-top: 40px;
+	margin-left: -110px;
 	float:left;
 }
 

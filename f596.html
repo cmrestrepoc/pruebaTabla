@@ -1,0 +1,714 @@
+<!DOCTYPE HTML>
+<html lang="es">
+	<head>
+		<meta charset="utf-8"/>
+		<title>F596</title>
+
+		<!-- favicon -->
+		<link rel="shortcut icon" type="img/png" href="./img/escudo130.ico" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<!-- Color de la aplicación -->
+		<meta name="theme-color" content="#65c0ba" />
+
+		<!-- Optomización para móvil -->
+		<meta name="MobileOptimized" content="width" />
+		<meta name="HandleFriendly" content="true" />
+
+		<!-- Configuración General PWA -->
+		<link rel="manifest" href="manifest.json" />
+
+		<style>
+			body {
+				/* Disables pull-to-refresh but allows overscroll glow effects. */
+				overscroll-behavior-y: contain;
+			}
+		</style>
+
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="./css/styles.css">
+		<link rel="stylesheet" type="text/css" href="./css/jquery.dataTables.min.css">
+
+		<script src="./js/jquery-3.3.1.slim.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<script src="./js/pouchdb.min.js"></script>
+		<script type="text/javascript" src="main.js"></script>
+		<script type="text/javascript" src="./js/sw-db.js"></script>
+
+	</head>
+
+	<body onload="verificarAccionForm('596')">
+		<header>
+			<a href="menu0.html">
+				<img alt src="./img/escudo.jpg" />
+			</a>
+			<div class="titulos">
+				<h1>MUNICIPIO DE CANDELARIA (V)</h1>
+				<h2>Vigilancia en Salud Pública</h2>
+				<h2>Acta FT596</h2>
+			</div>
+
+		</header>
+
+		<br><br>
+
+		<div class="container">
+			<div class="row">
+				
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						FT596: Formulario para Verificación de Rotulado. Res 5109 de 2005
+					</div>
+						
+					<div class="panel-body">
+
+						<!-- Nav tabs -->
+						<ul id="misTabs" class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#inscritos493" aria-controls="inscritos493" role="tab" data-toggle="tab">Inscritos</a></li>
+							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab(0)">Datos del Establecimiento</a></li>
+							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab" onclick="mostrarEvaluados('596')">Evaluación</a></li>
+						</ul>
+
+						<!-- Tab panes -->
+						<div class="tab-content" id="miTabContent">
+							<div role="tabpanel" class="tab-pane fade active in" id="inscritos493" aria-labelledby="inscritos493-tab">
+								<br>
+								<script type="text/javascript">mostrarInscritos493('596');</script>
+								<div class="form-group">
+									<div class="panel panel-default">
+										<div class="panel-heading">INSCRITOS CREADOS O MODIFICADOS EN ESTE DISPOSITIVO</div>
+										<div class="panel-body">	                    			
+											<table class="table table-bordered" id="tablaInscritosNuevos">
+												<thead>
+													<tr>
+														<th></th>
+														<th>ID</th>
+														<th>Establecimiento</th>
+														<th>Acta No.</th>
+														<th>Fecha Inscrip.</th>
+														<th>Nom. Propietario</th>
+														<th>Ident. Propietario</th>									
+														<th></th>
+													</tr>									
+												</thead>
+												<tbody id="inscritosNuevos"></tbody>
+											</table>													
+										</div>
+									</div>							
+								</div><!-- Fin del form-group -->	
+								<br>
+								<div class="form-group">
+									<div class="panel panel-default">
+			                    		<div class="panel-heading">INSCRITOS CARGADOS DESDE SERVIDOR</div>
+			                    		<div class="panel-body">
+			                    			<table class="table table-bordered" id="tablaInscritos">
+												<thead>
+													<tr>
+														<th></th>
+														<th>ID</th>
+														<th>Establecimiento</th>
+														<th>Acta No.</th>
+														<th>Fecha Inscrip.</th>
+														<th>Nom. Propietario</th>
+														<th>Ident. Propietario</th>									
+														<th></th>
+													</tr>	
+												</thead>
+												<tbody id="inscritos"></tbody>
+											</table>
+										</div>
+	                    			</div>
+								</div><!-- Fin del form-group -->
+							</div><!-- Fin del tab-pane -->
+
+							<div role="tabpanel" class="tab-pane fade" id="datos" aria-labelledby="datos-tab">								
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
+								<div class="form-group">
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Ciudad:</label>
+										<input type="text" class="form-control" name="ciudad596" value="CANDELARIA">
+									</div>
+									<div class="col-md-10">
+										<div class="col-md-3">
+											<label class="col-md-12 control-label">Fecha:</label>
+											<input type="date" class="form-control" name="fecha596">
+										</div>
+										<script type="text/javascript">
+											cargarInicio('596');
+										</script>										
+										<div class="col-md-3">
+											<label class="col-md-12 control-label">Acta No:</label>
+											<input type="text" class="form-control" name="acta596">
+										</div>
+
+										<div class="col-md-6" style="padding:0">
+											<label class="col-md-12 control-label">Entidad:</label>
+											<input type="text" class="form-control" name="entidad596" value="SECRETARÍA DE SALUD MUNICIPAL - CANDELARIA">
+										</div>
+									</div>
+															
+								</div>
+
+								<br><br><br><hr>
+
+								<div class="form-group">
+									<div class="col-md-4">
+										<label class="col-md-6 control-label">Razón Social:</label>
+										<input type="text" class="form-control" name="razonSocial596">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-6 control-label">Nit/CC:</label>
+										<input type="number" class="form-control" name="nit596" required="required">
+									</div>
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Nombre Comercial:</label>
+										<input type="text" class="form-control" name="nombreComercial596">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Inscripción No:</label>
+										<input type="text" class="form-control" name="inscripcion596">
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><br><hr>
+
+								<div class="form-group">
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Matrícula Mercantil:</label>
+										<input type="number" class="form-control" name="matriculaMercantil596">
+									</div>
+									<div class="col-md-4">
+										<label class="col-md-12 control-label">Dirección:</label>
+										<input type="text" class="form-control" name="direccion596">
+									</div>
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Departamento:</label>
+										<input type="text" class="form-control" name="dpto596" value="VALLE DEL CAUCA">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Municipio:</label>
+										<input type="text" class="form-control" name="mpio596" value="CANDELARIA">
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><br><hr>
+
+								<div class="form-group">
+									<label class="col-md-2 control-label" style="text-align:right; padding-right:0">Tipo de territorio:</label>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+										    	<input type="radio" name="territorio596" value="barrio" id="barrio">
+										    </span>
+										    <input type="text" class="form-control" name="barrio" value="Barrio">
+										</div>
+									</div>
+									<div class="col-md-2" style="padding:0">
+										<div class="input-group">
+											<span class="input-group-addon">
+										    	<input type="radio" name="territorio596" value="corregimiento" id="corregimiento">
+										    </span>
+										    <input type="text" class="form-control" name="corregimiento" value="Corregimiento">
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="input-group">
+											<span class="input-group-addon">
+										    	<input type="radio" name="territorio596" value="vereda" id="vereda">
+										    </span>
+										    <input type="text" class="form-control" name="vereda" value="Vereda">
+										</div>
+									</div>
+									<label class="col-md-1 control-label" style="text-align:right;padding:0">Nombre:</label>
+									<div class="col-md-3">
+										<select class="form-control" name="nomTerr596">
+											<option></option>
+											<option value="SAMANES">SAMANES</option>
+											<option value="OBRERO">OBRERO</option>
+											<option value="PANAMERICANO">PANAMERICANO</option>
+											<option value="SAN CRISTOBAL">SAN CRISTOBAL</option>
+											<option value="MUNICIPAL">MUNICIPAL</option>
+											<option value="LA CRUZ">LA CRUZ</option>
+											<option value="LA VICTORIA">LA VICTORIA</option>
+											<option value="JORGE ELIECER GAITAN">JORGE ELIECER GAITAN</option>
+											<option value="MARIA AUXILIADORA">MARIA AUXILIADORA</option>
+											<option value="SANTA ANA">SANTA ANA</option>
+											<option value="ARMANDO VASQUEZ">ARMANDO VASQUEZ</option>
+											<option value="COOTRAIM">COOTRAIM</option>
+											<option value="BRISAS DEL RIO">BRISAS DEL RIO</option>
+											<option value="BUCHITOLO">BUCHITOLO</option>
+											<option value="EL ARENAL">EL ARENAL</option>
+											<option value="EL CABUYAL">EL CABUYAL</option>
+											<option value="EL CARMELO">EL CARMELO</option>
+											<option value="EL LAURO">EL LAURO</option>
+											<option value="EL TIPLE">EL TIPLE</option>
+											<option value="JUANCHITO">JUANCHITO</option>
+											<option value="VILLAGORGONA">VILLAGORGONA</option>
+											<option value="LA REGINA">LA REGINA</option>
+											<option value="MADRE VIEJA">MADRE VIEJA</option>
+											<option value="SAN JOAQUIN">SAN JOAQUIN</option>
+											<option value="POBLADO CAMPESTRE">POBLADO CAMPESTRE</option>
+										</select>
+									</div>														
+								</div><!-- Fin del form-group -->
+
+			                    <br><br><hr>
+
+			                    <div class="form-group">
+									<div class="col-md-5">
+										<label class="col-md-12 control-label">Correo</label>
+										<input type="email" class="form-control" name="correoProp596">
+									</div>													
+									<div class="col-md-3">
+										<label class="col-md-12 control-label">Celular:</label>
+										<input type="number" class="form-control" name="cel596">	
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Fax:</label>
+										<input type="number" class="form-control" name="fax596">		
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Teléfono:</label>
+										<input type="number" class="form-control" name="tel596">		
+									</div>							
+								</div><!-- Fin del form-group -->
+
+								<br><br><br><hr>
+
+			                    <div class="form-group">
+									<div class="col-md-6">
+										<div class="col-md-6" style="padding:0">
+											<label class="col-md-12 control-label">Propietario:</label>
+											<input type="text" class="form-control" name="propietario596">
+										</div>
+										<div class="col-md-6" style="padding:0">
+											<label class="col-md-12 control-label">Identificación:</label>
+											<div class="col-md-5">
+												<select class="form-control" name="tipoIdProp596" id="tipoIdProp596">
+													<option></option>
+													<option value="CC">CC</option>
+													<option value="CE">CE</option>
+													<option value="NIT">NIT</option>
+												</select>
+											</div>
+											<div class="col-md-7" style="padding:0">
+												<input type="number" class="form-control" name="idPropietario596" placeholder="# identificación">
+											</div>							
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="col-md-6" style="padding:0">
+											<label class="col-md-12 control-label">Rep. Legal:</label>
+											<input type="text" class="form-control" name="repLegal596">
+										</div>										
+										<div class="col-md-6" style="padding:0">					
+											<label class="col-md-12 control-label">Identificación:</label>
+											<div class="col-md-5">
+												<select class="form-control" name="tipoIdRl596">
+													<option></option>
+													<option value="CC">CC</option>
+													<option value="CE">CE</option>
+													<option value="NIT">NIT</option>
+												</select>
+											</div>
+											<div class="col-md-7" style="padding:0">
+												<input type="number" class="form-control" name="idRepLegal596" placeholder="# identificación">
+											</div>											
+										</div>										
+									</div>
+								</div><!-- Fin del form-group -->
+								<br><br><br><hr>
+
+								<div class="form-group">
+									
+									<div class="col-md-6" style="padding:0">
+										<div class="col-md-5" style="padding:0">
+											<label class="col-md-12 control-label">Dir Notif:</label>
+										<input type="text" class="form-control" name="dirNotif596">
+										</div>										
+										<div class="col-md-4">
+											<label class="control-label col-md-12">Depto N.:</label>
+											<input type="text" class="form-control" value="VALLE DEL CAUCA" name="deptoNotif596">
+										</div>
+										<div class="col-md-3" style="padding:0">
+											<label class="control-label col-md-12">Mpio N.:</label>
+											<input type="text" class="form-control" value="CANDELARIA" name="mpioNotif596">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label class="col-md-6 control-label">Usuario autoriza Notifiación y/o firma electrónica</label>
+										<div class="col-md-3">
+											<label class="col-md-12 control-label">Notific.</label>
+											<select class="form-control" name="autorizaNoti596">
+												<option></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
+										</div>
+										<div class="col-md-3">
+											<label class="col-md-12 control-label">Firma</label>
+											<select class="form-control" name="autorizaFirma596">
+												<option></option>
+												<option value="S">Si</option>
+												<option value="N">No</option>
+											</select>
+										</div>
+									</div>								
+                                </div><!-- Fin del form-group -->
+
+                                <br><br><br><br><br>
+
+                                <div class="form-group">
+									<label class="col-md-1 control-label" style="text-align:right">Producto:</label>		
+									<div class="col-md-11">
+										<textarea class="form-control" name="producto596"></textarea>
+									</div>
+                                </div><!-- Fin del form-group -->
+
+                            </div><!-- Fin del tab-pane -->
+                            
+                            <div role="tabpanel" aria-labelledby="evaluacion-tab" class="tab-pane fade" id="evaluacion">
+								<br><div class="alert alert-danger alert-dismissible fade in col-md-12" role="alert" name="alertaInscrito" style="display: none">
+									<strong>Cuidado!</strong> Debe elegir un inscrito antes de continuar.
+								</div><br>
+								
+								<div class="form-group">
+									<table class="table" style="font-size:12px">
+										<thead>
+											<th scope="col"></th>
+											<th class="col-md-6" scope="col">ASPECTOS A VERIFICAR</th>
+											<th class="col-md-1" style="text-align: center" scope="col">CUMPLE</th>
+											<th class="col-md-5" scope="col">OBSERVACIONES</th>
+										</thead>
+										<tbody>
+											<tr>
+												<td>1.</td>
+												<td>El rótulo no describe o presenta el producto alimenticio envasado, en forma falsa, equivoca o engañosa o susceptible de crear una impresión errónea respecto de su naturaleza o inocuidad.</td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>2.</td>
+												<td>No contiene ilustraciones o representaciones gráficas que hagan alusiones a propiedades medicinales, preventivas o curativas que den lugar a apreciaciones falsas sobre la verdadera naturaleza, origen, composición o calidad del alimento.</td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>3.</td>
+												<td>Si el alimento declara que su contenido es 100% natural, no contiene aditivos declarados en la lista de ingredientes.</td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>4.</td>
+												<td>No emplea palabras, ilustraciones o representaciones gráficas, que sugieran directa o indirectamente cualquier otro producto con el cual pueda confundirse o inducir a suponer que el alimento se relaciona en forma alguna con otro producto.</td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>5.</td>
+												<td>El nombre indica la verdadera naturaleza del alimento. Si usa un nombre genérico, este se encuentra avalado por la normatividad sanitaria vigente.</td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>6.</td>
+												<td>Contiene la lista de ingredientes</td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>7.</td>
+												<td>El nombre del producto y el contenido neto aparecen en la cara principal de exhibición. </td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>8.</td>
+												<td>Indica el nombre o Razón Social y dirección del fabricante, envasador o reempacador, precedido por la expresión "fabricado o envasado por".  Si se trata de un producto importado indica el nombre o razón social y dirección del importador. En estos casos contiene las leyendas según la normatividad sanitaria vigente.</td>
+												<td>
+													<select class="for  m-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>9.</td>
+												<td>Contiene la información del lote de forma visible, legible e indeleble acompañada de la palabra "lote", o la letra "L". </td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>10.</td>
+												<td>Especifica de forma visible, legible e indeleble, la fecha de vencimiento y/o duración mínima, en orden estricto y secuencial, así: Día, mes y año: Día escrito con números - mes con las tres primeras letras o en forma numérica - año con los últimos dos dígitos. Día y mes para productos que tengan una fecha de vencimiento no superior a tres meses. Mes y año para productos que tengan un vencimiento de más de tres meses. No usa sticker para la presentación de esta información. </td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>11.</td>
+												<td>Contiene las instrucciones necesarias para modo de empleo.</td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>12.</td>
+												<td>Declara el número de registro sanitario según la normatividad sanitaria vigente.</td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>13.</td>
+												<td>En caso que el producto contenga la información en idioma extranjero, presenta el rótulo o etiqueta complementaria que contenga la información en idioma español, según la normatividad sanitaria vigente.</td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>14.</td>
+												<td>En caso de declarar en la lista de ingredientes que contiene aspartame, se especifica la leyenda según la normatividad sanitaria vigente.</td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>
+											<tr>
+												<td>15.</td>
+												<td>Incluye las leyendas obligatorias según lo especifica la normativa sanitaria vigente.</td>
+												<td>
+													<select class="form-control" name="pregunta">
+														<option></option>
+														<option value="S">Si</option>
+														<option value="N">No</option>
+														<option value="NA">No Aplica</option>
+													</select>
+												</td>
+												<td>
+													<textarea class="form-control" name="observaciones"></textarea>
+												</td>
+											</tr>												
+										</tbody>
+									</table>
+								</div><!-- Fin del form-group -->
+								<hr>
+								<div class="form-group">
+									<label class="control-label col-md-12">VII. NOTIFICACIÓN DEL ACTA: POR PARTE DE LOS FUNCIONARIOS QUE REALIZAN LA VISITA</label>																
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">__</label>
+										<label class="col-md-12 control-label">Funcionario 1:</label>
+									</div>
+									<div class="col-md-5">
+										<label class="col-md-12 control-label">___</label>
+										<input type="text" class="form-control" name="funcionario596-1">
+									</div>
+									<div class="col-md-2">								
+										<label class="col-md-12 control-label">Identificación:</label>
+										<input type="number" class="form-control" name="idFuncionario596-1">
+									</div>
+									<div class="col-md-3">								
+										<label class="col-md-12 control-label">Cargo:</label>
+										<input type="text" class="form-control" name="cargoFuncionario596-1">
+									</div>
+									<div class="col-md-2">
+										<label class="col-md-12 control-label">Funcionario 2:</label>
+									</div>
+									<div class="col-md-5">
+										<input type="text" class="form-control" name="funcionario596-2">
+									</div>
+									<div class="col-md-2">								
+										<input type="number" class="form-control" name="idFuncionario596-2">
+									</div>
+									<div class="col-md-3">								
+										<input type="text" class="form-control" name="cargoFuncionario596-2">
+									</div>							
+								</div><!-- Fin del form-group -->
+
+                                <input type="hidden" name="id596" value="0">								
+								<br><br><br><br><br><br><br><br><br>
+								<div class="form-group">
+			                        <div class="col-md-4 col-md-offset-2">
+			                            <button type="submit" data-toggle="modal" data-target="#resp" onclick="guardarEvaluacion('596')" class="btn btn-primary">
+			                                Guardar
+			                            </button>			                            
+			                        </div>
+			                        <div class="col-md-3">
+			                        	<button class="btn btn-primary" data-toggle="modal" data-target="#resp"  onclick="/* cargarServidor('596') */">
+			                                Subir información a servidor
+										</button>
+										<!-- Modal -->
+										<div class="modal fade" id="resp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+														<h4 class="modal-title" id="myModalLabel">Respuesta: </h4>
+													</div>
+													<div class="modal-body">
+														<label id="cuerpoRespuesta"></label>
+													</div>
+												</div>
+											</div>
+										</div>
+			                        </div>
+			                        <div class="col-md-3">
+			                            <a type="submit" onclick="cerrarSesionServidor()" class="btn btn-primary">
+			                                Cerrar Sesión con Servidor
+			                            </a>
+			                        </div>		                       
+			                    </div><!-- Fin del form-group -->
+
+			                    <br><br>
+
+			                    <div class="form-group">
+			                    	<div class="panel panel-default">
+			                    		<div class="panel-heading">EVALUADOS EN BD</div>
+			                    		<div class="panel-body">	                    			
+			                    			<table class="table table-bordered" id="tablaEvaluados">
+												<thead>
+													<tr>
+														<th></th>
+														<th>Establecimiento</th>
+														<th>Acta Número</th>
+														<th>Fecha Evaluación</th>
+														<th>Producto</th>
+														<th></th>
+													</tr>									
+												</thead>
+												<tbody id="evaluados"></tbody>
+											</table>													
+			                    		</div>
+			                    	</div>									
+                                </div><!-- Fin del form-group -->
+                            </div><!-- Fin del tab-pane -->
+						</div><!-- Fin del tab-content -->						
+
+					</div><!-- Fin del Panel-body -->
+				</div><!-- Fin del panel default -->
+			</div><!-- Fin del Row -->
+		</div><!-- Fin del container -->
+
+	</body>
+
+</html>

@@ -14,6 +14,7 @@ var db478 = new PouchDB('evaluaciones478');
 var db475 = new PouchDB('evaluaciones475');
 var db481 = new PouchDB('evaluaciones481');
 var db442 = new PouchDB('evaluaciones442');
+var db596 = new PouchDB('evaluaciones596');
 var db333 = new PouchDB('evaluaciones333');
 var db243 = new PouchDB('evaluaciones243');
 var db26 = new PouchDB('evaluaciones26');
@@ -105,6 +106,9 @@ function dbActasForm(formulario){
 			break;
 		case '442':
 			db = db442;
+			break;
+		case '596':
+			db = db596;
 			break;
 		case '333':
 			db = db333;
@@ -479,13 +483,6 @@ function escogerInscrito(registro, formulario){
 		});
 	}else{
 		document.getElementsByName('fax' + formulario)[0].value = registro.FAX;
-		/* document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
-		document.getElementsByName('correoProp' + formulario)[0].value = registro.CORREO;
-		document.getElementsByName('direccion' + formulario)[0].value = registro.DIRECC;
-		document.getElementsByName('inscripcion' + formulario)[0].value = registro.N_INSCRIP;
-		document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
-		document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
-		document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P; */
 		document.getElementsByName('deptoNotif' + formulario)[0].value = registro.DPTO_NOTI ? 
 			registro.DPTO_NOTI : 
 			document.getElementsByName('deptoNotif' + formulario)[0].value;
@@ -536,11 +533,11 @@ function escogerInscrito(registro, formulario){
 				$('input:radio[name=territorio'+formulario+']').prop('checked', false);
 			}
 	
-			if (formulario != '442'){
+			if (formulario != '442' && formulario != '596'){
 				document.getElementsByName('concepto' + formulario)[0].value = registro.CCUV;
 				document.getElementsByName('textoConcepto' + formulario)[0].value = registro.CUV;
 				document.getElementsByName('fechaUltVisita' + formulario)[0].value = registro.F_UV;
-			}	
+			}
 		}
 	
 		if(formulario == '493' || formulario == '569'|| formulario == '444'){
@@ -1396,19 +1393,19 @@ function guardarEvaluadoReducido(formulario){
 		TID_P: formulario != '26' ? document.getElementsByName('tipoIdProp' + formulario)[0].value : "",
 		DOC_P: formulario != '26' ? document.getElementsByName('idPropietario' + formulario)[0].value : "",
 		AUTORIZA: document.getElementsByName('autorizaNoti' + formulario)[0].value,			
-		OBS_AS: document.getElementsByName('obAutoridad' + formulario)[0].value,
+		OBS_AS: formulario != '596' && document.getElementsByName('obAutoridad' + formulario)[0].value,
 		NOMBRE_F1: document.getElementsByName('funcionario' + formulario + '-1')[0].value,
 		ID_F1: document.getElementsByName('idFuncionario' + formulario + '-1')[0].value,
 		CARGO_F1: formulario != '26' ? document.getElementsByName('cargoFuncionario' + formulario + '-1')[0].value: "",
 		NOMBRE_F2: formulario != '26' ? document.getElementsByName('funcionario' + formulario + '-2')[0].value : "",
 		ID_F2: formulario != '26' ? document.getElementsByName('idFuncionario' + formulario + '-2')[0].value : "",
 		CARGO_F2: formulario != '26' ? document.getElementsByName('cargoFuncionario' + formulario + '-2')[0].value : "",
-		NOMBRE_E1: document.getElementsByName('persona' + formulario + '-1')[0].value,
-		ID_E1: document.getElementsByName('idPersona' + formulario + '-1')[0].value,
-		CARGO_E1: formulario != '26' ? document.getElementsByName('cargoPersona' + formulario + '-1')[0].value : "",
-		NOMBRE_E2: formulario != '26' ? document.getElementsByName('persona' + formulario + '-2')[0].value : "",
-		ID_E2: formulario != '26' ? document.getElementsByName('idPersona' + formulario + '-2')[0].value : "",
-		CARGO_E2: formulario != '26' ? document.getElementsByName('cargoPersona' + formulario + '-2')[0].value : "",
+		NOMBRE_E1: formulario != '596' && document.getElementsByName('persona' + formulario + '-1')[0].value,
+		ID_E1: formulario != '596' && document.getElementsByName('idPersona' + formulario + '-1')[0].value,
+		CARGO_E1: formulario != '596' && formulario != '26' ? document.getElementsByName('cargoPersona' + formulario + '-1')[0].value : "",
+		NOMBRE_E2: formulario != '596' && formulario != '26' ? document.getElementsByName('persona' + formulario + '-2')[0].value : "",
+		ID_E2: formulario != '596' && formulario != '26' ? document.getElementsByName('idPersona' + formulario + '-2')[0].value : "",
+		CARGO_E2: formulario != '596' && formulario != '26' ? document.getElementsByName('cargoPersona' + formulario + '-2')[0].value : "",
 		FIRMA_F1: '',
 		FIRMA_F2: '',
 		FIRMA_E1: '',
@@ -1443,7 +1440,8 @@ function persistirEvaluado(db, evaluado, formulario){
 
 function guardarEvaluacion(formulario){
 	console.log('Estamos en el formulario', formulario)
-	let evaluado = formulario != '333' && formulario != '442' && formulario != '26' && formulario != '243' ? 
+	let evaluado = formulario != '333' && formulario != '442' && formulario != '596' && 
+					formulario != '26' && formulario != '243' ? 
 					guardarComunesEvaluados(formulario) : {};
 	var coordinates = {}					
 	let preguntasComunes;
@@ -1729,6 +1727,27 @@ function guardarEvaluacion(formulario){
 				};
 				evaluado = Object.assign( evaluadoEsta, reducido, adicional );
 				break;
+			case '596':
+				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+				reducido = guardarEvaluadoReducido(formulario);
+				let iterableNuevo = document.getElementsByName('pregunta');
+				let iterableObservaciones = document.getElementsByName('observaciones');
+				let arregloPreguntasNuevo = [];
+				let arregloObservaciones = []
+				iterableNuevo.forEach( item => arregloPreguntasNuevo.push(item.value) );
+				iterableObservaciones.forEach( item => arregloObservaciones.push(item.value) );
+				adicional = {
+					FAX: document.getElementsByName('fax' + formulario)[0].value,
+					DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
+					DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
+					MPIO_NOTI: document.getElementsByName('mpioNotif' + formulario)[0].value,
+					PRODUCTO: document.getElementsByName('producto' + formulario)[0].value,
+					PREGUNTAS: arregloPreguntasNuevo,
+					OBSERVACIONES: arregloObservaciones
+				};
+				evaluado = Object.assign( evaluadoEsta, reducido, adicional );
+				localStorage.setItem('form', '596');
+				break;
 			case '333':
 				reducido = guardarEvaluadoReducido(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
@@ -1927,8 +1946,10 @@ function setColumnas(tr, registro, contador, evaluado){
 	evaluado == 'D' ? tr.appendChild(createColumns(registro.OBS_AS)) : 
 		evaluado == 'C' ? 
 			tr.appendChild(createColumns(registro.SUJETO)) : 
-			tr.appendChild(createColumns(registro.P_CUMPL));
-	evaluado == 'D' || evaluado == 'C' ? null : tr.appendChild(createColumns(registro.CONCEPTO));
+			evaluado == 'B' ?
+				tr.appendChild(createColumns(registro.PRODUCTO)) :
+				tr.appendChild(createColumns(registro.P_CUMPL));
+	evaluado == 'D' || evaluado == 'C' || evaluado == 'B' ? null : tr.appendChild(createColumns(registro.CONCEPTO));
 	tr.appendChild(createRadioEvaluado(registro));
 	return tr;		
 }
@@ -1994,6 +2015,10 @@ function mostrarEvaluados(formulario){
 		case '442':
 			traerEvaluados(db442, 'D');
 			validarCambioTab(3);
+			break;
+		case '596':
+			traerEvaluados(db596, 'B');
+			validarCambioTab(1);
 			break;
 		case '26':
 			traerEvaluados(db26, 'C');
