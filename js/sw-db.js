@@ -1452,8 +1452,7 @@ function guardarEvaluacion(formulario){
 		'243',
 		'245'
 	]
-	let evaluado = !excluded.includes(formulario) ? 
-					guardarComunesEvaluados(formulario) : {};
+	let evaluado = !excluded.includes(formulario) ? guardarComunesEvaluados(formulario) : {};
 	var coordinates = {}					
 	let preguntasComunes;
 	let evaluadoEsta;
@@ -1742,6 +1741,8 @@ function guardarEvaluacion(formulario){
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 				reducido = guardarEvaluadoReducido(formulario);
 				adicional = {
+					TIPO_SU: document.getElementsByName('tipoSujeto' + formulario)[0].value,
+					SUJETO: document.getElementsByName('sujeto' + formulario)[0].value,
 					FAX: document.getElementsByName('fax' + formulario)[0].value,
 					DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
 					DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
