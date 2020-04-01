@@ -17,6 +17,7 @@ var db442 = new PouchDB('evaluaciones442');
 var db596 = new PouchDB('evaluaciones596');
 var db333 = new PouchDB('evaluaciones333');
 var db243 = new PouchDB('evaluaciones243');
+var db245 = new PouchDB('evaluaciones245');
 var db26 = new PouchDB('evaluaciones26');
 var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
@@ -115,6 +116,9 @@ function dbActasForm(formulario){
 			break;
 		case '243':
 			db = db243;
+			break;
+		case '245':
+			db = db245;
 			break;
 		case '26':
 			db = db26;
@@ -606,10 +610,10 @@ function escogerInscrito(registro, formulario){
 	
 					$('input:checkbox[name=actividad'+formulario+']').prop('checked', false);
 	
-					for (var i = 0; i < actividad.length; i++) {
+					for (var k = 0; k < actividad.length; k++) {
 						//console.log(actividad[i]);
 						//console.log(mapActividad.has(actividad[i]));
-						mapActividad.has(actividad[i]) ? $('input:checkbox[value='+actividad[i]+']').prop('checked', true) : $('input:checkbox[value='+actividad[i]+']').prop('checked', false);			
+						mapActividad.has(actividad[k]) ? $('input:checkbox[value='+actividad[k]+']').prop('checked', true) : $('input:checkbox[value='+actividad[k]+']').prop('checked', false);			
 					};
 				}else{
 					$('input:checkbox[name=actividad'+formulario+']').prop('checked', false);
@@ -1440,8 +1444,15 @@ function persistirEvaluado(db, evaluado, formulario){
 
 function guardarEvaluacion(formulario){
 	console.log('Estamos en el formulario', formulario)
-	let evaluado = formulario != '333' && formulario != '442' && formulario != '596' && 
-					formulario != '26' && formulario != '243' ? 
+	let excluded = [
+		'333',
+		'442',
+		'596',
+		'26',
+		'243',
+		'245'
+	]
+	let evaluado = !excluded.includes(formulario) ? 
 					guardarComunesEvaluados(formulario) : {};
 	var coordinates = {}					
 	let preguntasComunes;
@@ -1454,7 +1465,7 @@ function guardarEvaluacion(formulario){
 	if (!objetoActa.value){
 		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el número de acta. '
 							+ 'Por favor devuélvase y verifique que el número de acta esté incluido antes de guardar el acta.';
-	}else if (!validarCambioTab(10) && formulario != '26'){
+	}else if (!validarCambioTab(10) && formulario != '26' && formulario != '245'){
 		cuerpo.innerHTML = 'Lo sentimos mucho. Usted no escogió un inscrito antes de diligenciar la evaluación. '
 							+ 'Debe regresar a la pesataña de INSCRITOS y escoger uno o, en caso de que no esté inscrito '
 							+ 'el establecimiento o vehículo, debe dirigirse al formulario de inscripción correspondiente. '
@@ -1724,6 +1735,69 @@ function guardarEvaluacion(formulario){
 					OTRAS: document.getElementsByName('otrasEspecies' + formulario)[0].value,
 					OTIPOPRO: document.getElementsByName('otrosProductos' + formulario)[0].value,
 					PREGUNTAS: arregloPreguntas
+				};
+				evaluado = Object.assign( evaluadoEsta, reducido, adicional );
+				break;
+			case '245':
+				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
+				reducido = guardarEvaluadoReducido(formulario);
+				adicional = {
+					FAX: document.getElementsByName('fax' + formulario)[0].value,
+					DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
+					DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
+					MPIO_NOTI: document.getElementsByName('mpioNotif' + formulario)[0].value,
+					HORARIOS: document.getElementsByName('horarios' + formulario)[0].value,
+					NUTRA: document.getElementsByName('noTrabajadores' + formulario)[0].value,
+					OBS_ES: document.getElementsByName('obPersona' + formulario)[0].value,
+					CONCEPTO: document.getElementsByName('conceptoEval' + formulario)[0].value,
+					P_CUMPL: document.getElementsByName('cumplimiento' + formulario)[0].value,
+					E11: document.getElementsByName('evaluacion_1')[0].value,
+					H11: document.getElementsByName('hallazgos_1_1')[0].value,
+					E12: document.getElementsByName('evaluacion_1')[1].value,
+					H12: document.getElementsByName('hallazgos_1_2')[0].value,
+					E13: document.getElementsByName('evaluacion_1')[2].value,
+					H13: document.getElementsByName('hallazgos_1_3')[0].value,
+					E14: document.getElementsByName('evaluacion_1')[3].value,
+					H14: document.getElementsByName('hallazgos_1_4')[0].value,
+					E15: document.getElementsByName('evaluacion_1')[4].value,
+					H15: document.getElementsByName('hallazgos_1_5')[0].value,
+					E16: document.getElementsByName('evaluacion_1')[5].value,
+					H16: document.getElementsByName('hallazgos_1_6')[0].value,
+					E17: document.getElementsByName('evaluacion_1')[6].value,
+					H17: document.getElementsByName('hallazgos_1_7')[0].value,
+					E18: document.getElementsByName('evaluacion_1')[7].value,
+					H18: document.getElementsByName('hallazgos_1_8')[0].value,
+					EB1: document.getElementsByName('evalBloque1')[0].value,
+					E21: document.getElementsByName('evaluacion_2')[0].value,
+					H21: document.getElementsByName('hallazgos_2_1')[0].value,
+					E22: document.getElementsByName('evaluacion_2')[1].value,
+					H22: document.getElementsByName('hallazgos_2_2')[0].value,
+					E23: document.getElementsByName('evaluacion_2')[2].value,
+					H23: document.getElementsByName('hallazgos_2_3')[0].value,
+					E24: document.getElementsByName('evaluacion_2')[3].value,
+					H24: document.getElementsByName('hallazgos_2_4')[0].value,
+					E25: document.getElementsByName('evaluacion_2')[4].value,
+					H25: document.getElementsByName('hallazgos_2_5')[0].value,
+					E26: document.getElementsByName('evaluacion_2')[5].value,
+					H26: document.getElementsByName('hallazgos_2_6')[0].value,
+					E27: document.getElementsByName('evaluacion_2')[6].value,
+					H27: document.getElementsByName('hallazgos_2_7')[0].value,
+					EB2: document.getElementsByName('evalBloque2')[0].value,	
+					E31: document.getElementsByName('evaluacion_3')[0].value,
+					H31: document.getElementsByName('hallazgos_3_1')[0].value,
+					E32: document.getElementsByName('evaluacion_3')[1].value,
+					H32: document.getElementsByName('hallazgos_3_2')[0].value,
+					E33: document.getElementsByName('evaluacion_3')[2].value,
+					H33: document.getElementsByName('hallazgos_3_4')[0].value,
+					E34: document.getElementsByName('evaluacion_3')[3].value,
+					H34: document.getElementsByName('hallazgos_3_4')[0].value,
+					E35: document.getElementsByName('evaluacion_3')[4].value,
+					H35: document.getElementsByName('hallazgos_3_5')[0].value,
+					E36: document.getElementsByName('evaluacion_3')[5].value,
+					H36: document.getElementsByName('hallazgos_3_6')[0].value,
+					E37: document.getElementsByName('evaluacion_3')[6].value,
+					H37: document.getElementsByName('hallazgos_3_7')[0].value,
+					EB3: document.getElementsByName('evalBloque3')[0].value,
 				};
 				evaluado = Object.assign( evaluadoEsta, reducido, adicional );
 				break;
@@ -2020,6 +2094,9 @@ function mostrarEvaluados(formulario){
 			traerEvaluados(db596, 'B');
 			validarCambioTab(1);
 			break;
+		case '245':
+			traerEvaluados(db245, 'E')
+			break
 		case '26':
 			traerEvaluados(db26, 'C');
 			break;

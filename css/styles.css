@@ -149,12 +149,12 @@ header img{
 }
 
 #llave4 img{
-	margin-top: -10px;
-	height: 290px;
+	margin-top: -20px;
+	height: 310px;
 }
 
 #deriActaEstablecimientos {
-	margin-top: -10px;
+	margin-top: -20px;
 }
 
 #deriActaEstablecimientos h4{
@@ -163,8 +163,8 @@ header img{
 }
 
 #llave5{
-	margin-top: 45px;
-	margin-left: -140px;
+	margin-top: 30px;
+	margin-left: -160px;
 	float: left;
 }
 
@@ -173,8 +173,8 @@ header img{
 }
 
 #deriActaVehiculos{
-	margin-top: 40px;
-	margin-left: -110px;
+	margin-top: 25px;
+	margin-left: -135px;
 	float:left;
 }
 
