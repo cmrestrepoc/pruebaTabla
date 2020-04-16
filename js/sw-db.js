@@ -774,7 +774,7 @@ function cerrarSesionServidor(){
 	let identidad = JSON.parse(localStorage.getItem('identity'));
 	let alerta = document.getElementsByName('mensajesServicios')[0]
 	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario'))
-	fetch( BASEURL + URL_CERRAR_SESION + final)
+	fetch( 'https://sisbenpro.com/public/cerrarSesion/' + final)
 	.then( res => res.json() )
 	.then( jsonRes => {
 		console.log('respuesta del servicio', jsonRes)
