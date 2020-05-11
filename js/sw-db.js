@@ -1759,6 +1759,8 @@ function guardarEvaluacion(formulario){
 					HORA_F: document.getElementsByName('horaFinal' + formulario)[0].value,
 					CONCEPTO: document.getElementsByName('conceptoEval' + formulario)[0].value,
 					P_CUMPL: document.getElementsByName('cumplimiento' + formulario)[0].value,
+					NMOTIVO: document.getElementsByName('motivo' + formulario)[0].value,
+					MOTIVO: document.getElementsByName('textoMotivo' + formulario)[0].value,
 					E11: document.getElementsByName('evaluacion_1')[0].value,
 					H11: document.getElementsByName('hallazgos_1_1')[0].value,
 					E12: document.getElementsByName('evaluacion_1')[1].value,
