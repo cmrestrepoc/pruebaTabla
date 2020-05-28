@@ -1245,7 +1245,7 @@ function guardarComunesEvaluados(formulario){
 	let evaluado = {
 		//Campos comunes a todos los formularios en general
 		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
-		//ACTA: document.getElementsByName('acta' + formulario)[0].value,
+		ACTA: document.getElementsByName('acta' + formulario)[0].value,
 		N_INSCRIP: document.getElementsByName('inscripcion' + formulario)[0].value,
 		DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
 		FAX: document.getElementsByName('fax' + formulario)[0].value,
@@ -1392,6 +1392,7 @@ function guardarEvaluadosEstablecimientos(formulario){
 
 function guardarEvaluadoReducido(formulario){
 	let evaluado = {
+		ACTA: document.getElementsByName('acta' + formulario)[0].value,
 		FECHA: document.getElementsByName('fecha' + formulario)[0].value,
 		N_INSCRIP: formulario != '26' ? document.getElementsByName('inscripcion' + formulario)[0].value : "",
 		DIRECC: document.getElementsByName('direccion' + formulario)[0].value,
@@ -1430,7 +1431,7 @@ function guardarEvaluadoReducido(formulario){
 
 function persistirEvaluado(db, evaluado, formulario){
 	calcularNumActa(formulario).then( acta => {
-		var insertar = { _id: acta.substring(11, 15), ACTA: acta };
+		var insertar = { _id: acta.substring(11, 15) };
 		evaluado = Object.assign( insertar, evaluado );
 		console.log(evaluado);
 
