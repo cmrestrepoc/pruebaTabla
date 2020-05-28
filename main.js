@@ -288,7 +288,7 @@ function setSujeto(value, destino) {
 			{tipoSujeto: '2450102', sujeto: 'Unidades habitacionales'},
 			{tipoSujeto: '2450103', sujeto: 'Hogares geriátricos'},
 			{tipoSujeto: '2450104', sujeto: 'Orfanatos'},
-			{tipoSujeto: '2450104', sujeto: 'Hogar Gerontológico'},
+			{tipoSujeto: '2450105', sujeto: 'Hogar Gerontológico'},
 			{tipoSujeto: '24502', sujeto: 'VIVIENDA TRANSITORIA'},
 			{tipoSujeto: '2450201', sujeto: 'Campamentos'},
 			{tipoSujeto: '2450202', sujeto: 'Albergues para trabajadores'},
