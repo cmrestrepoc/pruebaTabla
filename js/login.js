@@ -49,6 +49,9 @@ function obtenerCodigo(usuario){
 		case 'VCORTES':
 			indice = '18'
 			break;
+		case 'MGARCES':
+			indice = '19'
+			break;
 		default:
 			indice = 'error';
 			alert('El usuario no está registrado para obtener código');
