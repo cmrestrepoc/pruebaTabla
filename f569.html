@@ -146,15 +146,15 @@
 								</div>
 								<script type="text/javascript">
 									function especificar(objeto){
-										if(objeto.value == 'O'){
-											document.getElementById('cual569').style.display = 'block';
-											//console.log(document.getElementById('cual569'));
+										console.log('cambia select dependencia', objeto)
+										if(objeto.value === 'O'){
+											document.getElementById('cualContainer569').style.display = 'block';
 										}else{
-											document.getElementById('cual569').style.display = 'none';
+											document.getElementById('cualContainer569').style.display = 'none';
 										}
 									}
 								</script>
-								<div class="col-md-6" id="cual569" style="display:none">
+								<div class="col-md-6" id="cualContainer569" style="display:none">
 									<label class="control-label col-md-12">Cuál?</label>
 									<input type="text" class="form-control" name="cual569">
 								</div>
