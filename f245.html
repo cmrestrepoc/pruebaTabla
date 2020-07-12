@@ -458,8 +458,7 @@
 								<br><br><br><hr>
 
 								<div class="form-group">
-									
-									<div class="col-md-6" style="padding:0">
+									<div class="col-md-10 col-md-offset-1" style="padding:0;">
 										<div class="col-md-5" style="padding:0">
 											<label class="col-md-12 control-label">Dir Notif:</label>
 										<input type="text" class="form-control" name="dirNotif245">
@@ -473,8 +472,13 @@
 											<input type="text" class="form-control" value="CANDELARIA" name="mpioNotif245">
 										</div>
 									</div>
-									<div class="col-md-6">
-										<div class="col-md-8">
+								</div><!-- Fin del form-group -->
+								
+								<br><br><br><hr>
+								
+								<div class="form-group">
+									<div class="col-md-8">
+										<div class="col-md-7 col-md-offset-1">
 											<label class="col-md-12 control-label">Horarios:</label>
 											<input type="text" class="form-control" name="horarios245">
 										</div>
@@ -484,48 +488,33 @@
 												<input type="number" class="form-control" name="noTrabajadores245">
 											</div>								
 										</div>
-									</div>								
-								</div><!-- Fin del form-group -->
-								
-								<br><br><br><hr>
-
-								<div class="form-group">
-									<div class="col-md-7" style="padding:0">
-										<label class="col-md-2 control-label" style="text-align: right;">Detalle:</label>
-										<div class="col-md-10">
-											<input type="text" class="form-control" name="detalle245">
-										</div>								
 									</div>
-
-									<div class="col-md-5">
+									<div class="col-md-4">
 										<div class="col-md-6" style="padding:0">
-											<label class="col-md-3 control-label">Hora inicial:</label>
-											<div class="col-md-9">
-												<div class="col-md-12">
-													<input type="text" class="form-control" name="horaInicial245">
-												</div>
+											<label class="col-md-12 control-label">Con ARL:</label>
+											<div class="col-md-8">
+												<input type="number" class="form-control" name="noTrabajadoresArl245">
 											</div>								
 										</div>
 										<div class="col-md-6" style="padding:0">
-											<label class="col-md-3 control-label">Hora final:</label>
-											<div class="col-md-9">
-												<div class="col-md-12">
-													<input type="text" class="form-control" name="horaFinal245">
-												</div>
+											<label class="col-md-12 control-label">Con EPS:</label>
+											<div class="col-md-8">
+												<input type="number" class="form-control" name="noTrabajadoresEps245">
 											</div>								
-										</div>														
-									</div>
+										</div>
+									</div>								
 								</div><!-- Fin del form-group -->
 								<br><br><br><hr>
 
 								<div class="form-group">
-									<label class="control-label col-md-2" style="text-align:right">ÚLTIMA INSPECCIÓN:</label>
-									<div class="col-md-7">
-										<div class="col-md-4" style="padding:0">
+									<label class="control-label col-md-12" style="text-align:left">ÚLTIMA INSPECCIÓN:</label>
+									<br><br>
+										<div class="col-md-7">
+										<div class="col-md-5" >
 											<label class="col-md-12 control-label">Fecha:</label>
 											<input type="date" class="form-control" name="fechaUltVisita245">
 										</div>
-										<div class="col-md-7 col-md-offset-1" style="padding:0">
+										<div class="col-md-7" style="padding:0">
 											<label class="col-md-12 control-label">Concepto última inspección:</label>
 											<div class="col-md-3">
 												<select class="form-control" name="concepto245" onchange="setConcepto(this,'textoConcepto245')">
@@ -540,11 +529,17 @@
 											</div>
 										</div>												
 									</div>
-									<div class="col-md-3">
-										<label class="control-label col-md-12">Porcentaje Cumplimiento</label>
-										<div class="col-md-6">
+									<div class="col-md-2">
+										<label class="control-label col-md-12">Cumplimiento</label>
+										<div class="col-md-8">
 											<input type="number" class="form-control" name="porcentaje245">
 										</div>%									
+									</div>
+									<div class="col-md-3" style="padding:0">
+										<label class="control-label col-md-12">Num. Acta</label>
+										<div class="col-md-10" style="padding:0">
+											<input type="number" class="form-control" name="actaUv245">
+										</div>								
 									</div>
 								</div><!-- Fin del form-group -->
 
@@ -589,9 +584,75 @@
 										</div>
 									</div>									
 								</div><!-- Fin del form-group -->
+								<br><br><br><hr><br>
+								<div class="col-md-10 col-md-offset-1">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											REVISIÓN DOCUMENTAL
+										</div>												
+										<div class="panel-body">
+											<div class="form-group" style="border-style:ridge; padding:3px">
+												<table class="table" style="font-size:12px">
+													<thead>
+														<tr>
+															<th scope="col" style="text-align: center;" class="col-md-5">DOCUMENTO</th>
+															<th scope="col" style="text-align: center;" class="col-md-1">CUMPLE(S/N)</th>
+															<th scope="col" style="text-align: center;">OBSERVACIONES</th>
+														</tr>
+													</thead>
+													<tbody>	
+														<tr>
+															<th scope="row">Documento del sistema de seguridad y salud en el trabajo (en caso de no contar notificar a dirección territorial Miinisterio de Trabajo</th>
+															<td>
+																<select class="form-control" name="rd">
+																	<option value="S">S</option>
+																	<option value="N">N</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="observaciones"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">Contrato con gestor de residuos (en caso de requerir notificar a autoridad ambiental)</th>
+															<td>
+																<select class="form-control" name="rd">
+																	<option value="S">S</option>
+																	<option value="N">N</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="observaciones"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">Permiso de vertimientos (en caso de requerir notificar a autoridad ambiental)</th>
+															<td>
+																<select class="form-control" name="rd">
+																	<option value="S">S</option>
+																	<option value="N">N</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="observaciones"></textarea></td>
+														</tr>
+														<tr>
+															<th scope="row">
+																En caso de requerir de medidas de control, la empresa contratada para ejecutar el programa de control de plagas cuenta con concepto favorable expedido por la AS de su jurisdicción 
+															</th>
+															<td>
+																<select class="form-control" name="rd">
+																	<option value="S">S</option>
+																	<option value="N">N</option>
+																</select>
+															</td>
+															<td><textarea class="form-control" name="observaciones"></textarea></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>											
+										</div>
+									</div>
+								</div>
 							</div><!-- Fin del tab-pane -->	
 
 							<div role="tabpanel" aria-labelledby="evaluacion-tab" class="tab-pane fade" id="evaluacion">
+								<br>
 								<div class="col-md-12">
 									<div class="panel panel-default">
 										<div class="panel-heading">
