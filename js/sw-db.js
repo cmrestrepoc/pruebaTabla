@@ -1454,8 +1454,7 @@ function guardarEvaluacion(formulario){
 		'442',
 		'596',
 		'26',
-		'243',
-		'245'
+		'243'
 	]
 	let evaluado = !excluded.includes(formulario) ? guardarComunesEvaluados(formulario) : {};
 	var coordinates = {}					
@@ -1744,24 +1743,24 @@ function guardarEvaluacion(formulario){
 				break;
 			case '245':
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				reducido = guardarEvaluadoReducido(formulario);
+				let iterableRd = document.getElementsByName('rd');
+				let iterableObs = document.getElementsByName('observaciones');
+				let arregloRd = [];
+				let arregloObs = [];
+				iterableRd.forEach( item => arregloRd.push(item.value) );
+				iterableObs.forEach( item => arregloObs.push(item.value) );
 				adicional = {
 					TIPO_SU: document.getElementsByName('tipoSujeto' + formulario)[0].value,
 					SUJETO: document.getElementsByName('sujeto' + formulario)[0].value,
-					FAX: document.getElementsByName('fax' + formulario)[0].value,
-					DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
-					DPTO_NOTI: document.getElementsByName('deptoNotif' + formulario)[0].value,
-					MPIO_NOTI: document.getElementsByName('mpioNotif' + formulario)[0].value,
-					HORARIOS: document.getElementsByName('horarios' + formulario)[0].value,
-					NUTRA: document.getElementsByName('noTrabajadores' + formulario)[0].value,
-					OBS_ES: document.getElementsByName('obPersona' + formulario)[0].value,
-					DENUTRA: document.getElementsByName('detalle' + formulario)[0].value,
-					HORA_I: document.getElementsByName('horaInicial' + formulario)[0].value,
-					HORA_F: document.getElementsByName('horaFinal' + formulario)[0].value,
-					CONCEPTO: document.getElementsByName('conceptoEval' + formulario)[0].value,
-					P_CUMPL: document.getElementsByName('cumplimiento' + formulario)[0].value,
-					NMOTIVO: document.getElementsByName('motivo' + formulario)[0].value,
-					MOTIVO: document.getElementsByName('textoMotivo' + formulario)[0].value,
+					NUTRA_ARL: document.getElementsByName('noTrabajadoresArl' + formulario)[0].value,
+					NUTRA_EPS: document.getElementsByName('noTrabajadoresEps' + formulario)[0].value,
+					AV_ACTA: document.getElementsByName('actaUv' + formulario)[0].value,
+					REQUES: document.getElementsByName('requerimientos' + formulario)[0].value,
+					DIAS_PLAZO: document.getElementsByName('diasHabiles' + formulario)[0].value,
+					FI_PLAZO: document.getElementsByName('fechaInicial' + formulario)[0].value,
+					FF_PLAZO: document.getElementsByName('fechaFinal' + formulario)[0].value,
+					RDS: arregloRd,
+					OBSERVACIONES: arregloObs,
 					E11: document.getElementsByName('evaluacion_1')[0].value,
 					H11: document.getElementsByName('hallazgos_1_1')[0].value,
 					E12: document.getElementsByName('evaluacion_1')[1].value,
@@ -1785,14 +1784,6 @@ function guardarEvaluacion(formulario){
 					H22: document.getElementsByName('hallazgos_2_2')[0].value,
 					E23: document.getElementsByName('evaluacion_2')[2].value,
 					H23: document.getElementsByName('hallazgos_2_3')[0].value,
-					E24: document.getElementsByName('evaluacion_2')[3].value,
-					H24: document.getElementsByName('hallazgos_2_4')[0].value,
-					E25: document.getElementsByName('evaluacion_2')[4].value,
-					H25: document.getElementsByName('hallazgos_2_5')[0].value,
-					E26: document.getElementsByName('evaluacion_2')[5].value,
-					H26: document.getElementsByName('hallazgos_2_6')[0].value,
-					E27: document.getElementsByName('evaluacion_2')[6].value,
-					H27: document.getElementsByName('hallazgos_2_7')[0].value,
 					EB2: document.getElementsByName('evalBloque2')[0].value,	
 					E31: document.getElementsByName('evaluacion_3')[0].value,
 					H31: document.getElementsByName('hallazgos_3_1')[0].value,
@@ -1808,9 +1799,32 @@ function guardarEvaluacion(formulario){
 					H36: document.getElementsByName('hallazgos_3_6')[0].value,
 					E37: document.getElementsByName('evaluacion_3')[6].value,
 					H37: document.getElementsByName('hallazgos_3_7')[0].value,
+					E38: document.getElementsByName('evaluacion_3')[7].value,
+					H38: document.getElementsByName('hallazgos_3_8')[0].value,
+					E39: document.getElementsByName('evaluacion_3')[8].value,
+					H39: document.getElementsByName('hallazgos_3_9')[0].value,
+					E310: document.getElementsByName('evaluacion_3')[9].value,
+					H310: document.getElementsByName('hallazgos_3_10')[0].value,
+					E311: document.getElementsByName('evaluacion_3')[10].value,
+					H311: document.getElementsByName('hallazgos_3_11')[0].value,
+					E312: document.getElementsByName('evaluacion_3')[11].value,
+					H312: document.getElementsByName('hallazgos_3_12')[0].value,
 					EB3: document.getElementsByName('evalBloque3')[0].value,
+					E41: document.getElementsByName('evaluacion_4')[0].value,
+					H41: document.getElementsByName('hallazgos_4_1')[0].value,
+					E42: document.getElementsByName('evaluacion_4')[1].value,
+					H42: document.getElementsByName('hallazgos_4_2')[0].value,
+					E43: document.getElementsByName('evaluacion_4')[2].value,
+					H43: document.getElementsByName('hallazgos_4_3')[0].value,
+					E44: document.getElementsByName('evaluacion_4')[3].value,
+					H44: document.getElementsByName('hallazgos_4_4')[0].value,
+					E45: document.getElementsByName('evaluacion_4')[4].value,
+					H45: document.getElementsByName('hallazgos_4_5')[0].value,
+					E46: document.getElementsByName('evaluacion_4')[5].value,
+					H46: document.getElementsByName('hallazgos_4_6')[0].value,
+					EB4: document.getElementsByName('evalBloque4')[0].value,
 				};
-				evaluado = Object.assign( evaluadoEsta, reducido, adicional );
+				evaluado = Object.assign( evaluado, evaluadoEsta, adicional );
 				break;
 			case '596':
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
