@@ -1143,7 +1143,7 @@ function guardarComunesEstablecimientos(formulario){
 		VISITADO: document.getElementsByName('visitado' + formulario)[0].value,
 		DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
 		
-		TERRITORIO: territorio
+		TERRITORIO: territorio[0]
 	}
 
 	return inscrito;
