@@ -67,7 +67,7 @@
 
 						<!-- Nav tabs -->
 						<ul id="misTabs" class="nav nav-tabs" role="tablist">
-							<li role="presentation" class="active"><a href="#inscritos682" aria-controls="inscritos682" role="tab" data-toggle="tab">Inscritos</a></li>
+							<li role="presentation" class="active"><a href="#tabInscritos682" aria-controls="tabInscritos682" role="tab" data-toggle="tab">Inscritos</a></li>
 							<li role="presentation"><a href="#datos" aria-controls="datos" role="tab" data-toggle="tab" onclick="validarCambioTab(0)">Datos del Establecimiento</a></li>
 							<li role="presentation"><a href="#evaluacion" aria-controls="evaluacion" role="tab" data-toggle="tab" onclick="validarCambioTab(1)">Evaluación</a></li>
 							<li role="presentation"><a href="#observaciones" aria-controls="observaciones" role="tab" data-toggle="tab" onclick="mostrarEvaluados('245')">Observaciones - Notificaciones</a></li>
@@ -75,14 +75,14 @@
 
 						<!-- Tab panes -->
 						<div class="tab-content" id="miTabContent">
-							<div role="tabpanel" class="tab-pane fade active in" id="inscritos682" aria-labelledby="inscritos682-tab">
+							<div role="tabpanel" class="tab-pane fade active in" id="tabInscritos682" aria-labelledby="tabInscritos682-tab">
 								<br>
 								<script type="text/javascript">mostrarInscritos682('245');</script>
 	                    		<div class="form-group">
 									<div class="panel panel-default">
 										<div class="panel-heading">INSCRITOS CREADOS O MODIFICADOS EN ESTE DISPOSITIVO</div>
 										<div class="panel-body">	                    			
-											<table class="table table-bordered" id="tablaInscritosNuevos">
+											<table class="table table-bordered" id="tablaInscritosNuevos682">
 												<thead>
 													<tr>
 														<th scope="column"></th>
@@ -95,7 +95,7 @@
 														<th scope="column"></th>
 													</tr>									
 												</thead>
-												<tbody id="inscritosNuevos"></tbody>
+												<tbody id="inscritosNuevos682"></tbody>
 											</table>													
 										</div>
 									</div>							
@@ -105,7 +105,7 @@
 									<div class="panel panel-default">
 			                    		<div class="panel-heading">INSCRITOS CARGADOS DESDE SERVIDOR</div>
 			                    		<div class="panel-body">
-			                    			<table class="table table-bordered" id="tablaInscritos">
+			                    			<table class="table table-bordered" id="tablaInscritos682">
 												<thead>
 													<tr>
 														<th scope="column"></th>
@@ -118,7 +118,7 @@
 														<th scope="column"></th>
 													</tr>	
 												</thead>
-												<tbody id="inscritos"></tbody>
+												<tbody id="inscritos682"></tbody>
 											</table>
 										</div>
 	                    			</div>
@@ -169,7 +169,7 @@
                                 <label class="col-md-12 control-label">Tipo de Sujeto:</label>
                                 <div class="col-md-2">
                                     <select class="form-control" name="tipoSujeto245"
-                                        onchange="setSujeto(this.value, 'sujeto245')" required>
+                                        onchange="setObjeto(this.value, 'sujeto245', 'sujetoComercial')" required>
                                         <option></option>
                                         <script>renderSelectCombo(objetoSujetoComercial, 'tipoSujeto245')</script>
                                     </select>

@@ -4,6 +4,8 @@ var db569 = new PouchDB('inscritosCargados569');
 var dbNuevos569 = new PouchDB('inscritosNuevos569');
 var db444 = new PouchDB('inscritosCargados444');
 var dbNuevos444 = new PouchDB('inscritosNuevos444');
+var db682 = new PouchDB('inscritosCargados682');
+var dbNuevos682 = new PouchDB('inscritosNuevos682');
 
 var db440 = new PouchDB('evaluaciones440');
 var db474 = new PouchDB('evaluaciones474');
@@ -21,28 +23,6 @@ var db245 = new PouchDB('evaluaciones245');
 var db26 = new PouchDB('evaluaciones26');
 var db441 = new PouchDB('evaluaciones441');
 var db472 = new PouchDB('evaluaciones472');
-
-
-/* db493.changes({
-	since: 'now',
-	live: true
-}).on('change', function(changes){
-	mostrarInscritos493('493');
-});
-
-db569.changes({
-	since: 'now',
-	live: true
-}).on('change', function(changes){
-	mostrarInscritos569('569');
-});
-
-db444.changes({
-	since: 'now',
-	live: true
-}).on('change', function(changes){
-	mostrarInscritos444('444');
-}); */
 
 dbNuevos493.changes({
 	since: 'now',
@@ -63,6 +43,13 @@ dbNuevos444.changes({
 	live: true
 }).on('change', function(changes){
 	mostrarInscritos444('444');
+});
+
+dbNuevos682.changes({
+	since: 'now',
+	live: true
+}).on('change', function(changes){
+	mostrarInscritos682('682');
 });
 
 
@@ -203,6 +190,10 @@ function cargarInicioInscripciones(formulario){
 		case '444':
 			db = db444;
 			dbNuevos = dbNuevos444;
+			break;
+		case '682':
+			db = db682;
+			dbNuevos = dbNuevos682;
 			break;
 	}
 	calcularActaInscripcion(formulario, dbNuevos).then( acta => { 
@@ -718,6 +709,16 @@ function mostrarInscritos444(formulario){
 
 	dbNuevos444.allDocs({include_docs: true, descending: true}).then ( doc => {
 		crearTabla(doc, 'inscritosNuevos444', '#tablaInscritosNuevos444', '444', formulario);
+	});
+}
+
+function mostrarInscritos682(formulario){
+	db682.allDocs({include_docs: true, descending: true}).then ( doc => {
+		crearTabla(doc, 'inscritos682', '#tablaInscritos682', '682', formulario);
+	});
+
+	dbNuevos682.allDocs({include_docs: true, descending: true}).then ( doc => {
+		crearTabla(doc, 'inscritosNuevos682', '#tablaInscritosNuevos682', '682', formulario);
 	});
 }
 

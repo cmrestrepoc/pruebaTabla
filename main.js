@@ -212,6 +212,19 @@ var objetoMedidasSanitarias = [
 	{value: '13', text: 'Otra'},
 ]
 
+var tiposInscripcion = [
+	{value: '01', text: 'INSCRIPCION POR PRIMERA VEZ'},
+	{value: '02', text: 'ACTUALIZACION DE DATOS'},
+	{value: '03', text: 'CIERRE DEL ESTABLECIMIENTO'},
+]
+
+var motivos = [
+	{objeto: objetoSujetoComercial, nombre: 'sujetoComercial'},
+	{objeto: objetoOtrosSujetos, nombre: 'otrosSujetos'},
+	{objeto: objetoMedidasSanitarias, nombre: 'medidasSanitarias'},
+	{objeto: tiposInscripcion, nombre: 'tiposInscripcion'},
+]
+
 function createOption({value, text}){
 	let option = document.createElement('option');
 	option.value = value;
@@ -285,6 +298,13 @@ function setMotivo(objeto, destino) {
 		default:
 			document.getElementsByName(destino)[0].value = '';
 	}
+}
+
+function setObjeto(valor, destino, motivo){
+	const { objeto } = motivos.filter( element => element.nombre === motivo)[0];
+	console.log('objeto destructurado', objeto)
+	const filtrado = objeto.filter(elemento => elemento.value === valor);
+	document.getElementsByName(destino)[0].value = filtrado[0].text;
 }
 
 function setMedidaSanitaria(valor, destino) {

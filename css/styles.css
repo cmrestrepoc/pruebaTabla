@@ -94,14 +94,21 @@ header img{
 	float: left;
 }
 
-#derivadosEstablecimientos h4{
+#derivadosEstablecimientos {
+	height: 140px;
 	margin-top: 50px;
-	margin-bottom: -30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+#derivadosEstablecimientos h4 {
+	margin: 0;
 }
 
 #llave2{
-	margin-top: 55px;
-	margin-left: -30px;
+	margin-top: 25px;
+	margin-left: -100px;
 	float: left;
 }
 
@@ -110,7 +117,8 @@ header img{
 }
 
 #derivadosVehiculos{
-	margin-top: 65px;
+	margin-top: 35px;
+	margin-left: -80px;
 	float: left;
 }
 
