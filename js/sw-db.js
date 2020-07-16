@@ -532,6 +532,7 @@ function escogerInscrito(registro, formulario){
 				document.getElementsByName('concepto' + formulario)[0].value = registro.CCUV;
 				document.getElementsByName('textoConcepto' + formulario)[0].value = registro.CUV;
 				document.getElementsByName('fechaUltVisita' + formulario)[0].value = registro.F_UV;
+				document.getElementsByName('zona' + formulario)[0].value = registro.ZONA;
 			}
 		}
 	
@@ -631,6 +632,14 @@ function escogerInscrito(registro, formulario){
 			document.getElementsByName('tipoSujeto' + formulario)[0].value = registro.TIPO_SU;
 			document.getElementsByName('sujeto' + formulario)[0].value = registro.SUJETO;
 		}
+		if(formulario === '682'){
+			document.getElementsByName('administrador682')[0].value = registro.NOMBRE_AD;
+			document.getElementsByName('tipoIdAdministrador682')[0].value = registro.TID_AD;
+			document.getElementsByName('idAdministrador682')[0].value = registro.DOC_AD;
+			document.getElementsByName('codigoInscripcion682')[0].value = registro.T_INSCRIP;
+			document.getElementsByName('tipoInscripcion682')[0].value = registro.TIPO_I;
+		}
+
 	}
 } 
 
