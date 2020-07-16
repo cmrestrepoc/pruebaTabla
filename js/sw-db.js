@@ -535,7 +535,7 @@ function escogerInscrito(registro, formulario){
 			}
 		}
 	
-		if(formulario == '493' || formulario == '569'|| formulario == '444'){
+		if(formulario == '493' || formulario == '569' || formulario == '444' || formulario == '682'){
 			console.log('Debería estar en ' + formulario);
 			document.getElementsByName('acta' + formulario)[0].value = registro.ACTA;
 			document.getElementsByName('id' + formulario)[0].value = registro._id;
@@ -627,6 +627,10 @@ function escogerInscrito(registro, formulario){
 			document.getElementsByName('deposito' + formulario)[0].value = registro.DEPOSITO;
 			document.getElementsByName('despresa' + formulario)[0].value = registro.DESPRESA;
 		}
+		if(formulario === '682' || formulario === '245'){
+			document.getElementsByName('tipoSujeto' + formulario)[0].value = registro.TIPO_SU;
+			document.getElementsByName('sujeto' + formulario)[0].value = registro.SUJETO;
+		}
 	}
 } 
 
@@ -663,6 +667,9 @@ function crearTabla(doc, idBody, idTabla, formulario, formularioActual){
 					break;
 				case '444':
 					extra = registro.doc.PLACA === null ? registro.doc.PLACAREM : registro.doc.PLACA;
+					break;
+				case '682':
+					extra = registro.doc.NOCO;
 					break;
 				default:
 			}
@@ -1177,8 +1184,6 @@ function guardarInscrito493(){
 			ACTIVIDAD: JSON.stringify(actividad),
 			CARGO_F1: document.getElementsByName('cargoRecibe493')[0].value,
 			CARGO_E1: document.getElementsByName('cargoInscribe493')[0].value,
-			ACTIVO: '',					//campos no funcionales que es mejor remover
-			GRABADO: ''					//campos no funcionales que es mejor remover
 		};
 	
 		inscrito = Object.assign( inscrito, inscritoEsta, adicional );
@@ -1239,6 +1244,35 @@ function guardarInscrito569(){
 		localStorage.setItem('inscrito', JSON.stringify(inscrito));
 		
 		idExistente == 0 ? firmaInscripcion() : persistirInscrito(db569, dbNuevos569, inscrito, idExistente);
+	}
+}
+
+function guardarInscrito682(){
+	if(validarOjetoActa('682')){
+		var idExistente = document.getElementsByName('id682')[0].value;
+	
+		var inscrito = guardarComunesInscritos('682');
+		var inscritoEsta = guardarComunesEstablecimientos('682');
+		
+		console.log(document.getElementsByName('territorio682'));
+	
+		var adicional = {		
+			ZONA: document.getElementsByName('zona682')[0].value,
+			TIPO_SU: document.getElementsByName('tipoSujeto682')[0].value,
+			SUJETO: document.getElementsByName('sujeto682')[0].value,
+			CARGO_F1: document.getElementsByName('cargoRecibe682')[0].value,
+			CARGO_E1: document.getElementsByName('cargoInscribe682')[0].value,
+			T_INSCRIP: document.getElementsByName('codigoInscripcion682')[0].value, 
+			TIPO_I: document.getElementsByName('tipoInscripcion682')[0].value,
+			NOMBRE_AD: document.getElementsByName('administrador682')[0].value,
+			TID_AD: document.getElementsByName('tipoIdAdministrador682')[0].value,
+			DOC_AD: document.getElementsByName('idAdministrador682')[0].value,
+		};
+		
+		inscrito = Object.assign( inscrito, inscritoEsta, adicional );
+		localStorage.setItem('inscrito', JSON.stringify(inscrito));
+		
+		idExistente == 0 ? firmaInscripcion() : persistirInscrito(db682, dbNuevos682, inscrito, idExistente);
 	}
 }
 
