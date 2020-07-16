@@ -11,7 +11,7 @@ if('serviceWorker' in navigator){
 	console.log('NO PUEDES usar los serviceWorker en tu navegador');
 }
 
-var objetoSujetoComercial = [
+var objetoSujetoComercialExtendido = [
     {value: '24501', text: 'VIVIENDA PERMANENTE'},
     {value: '2450101', text: 'Conjuntos residenciales'},
     {value: '2450102', text: 'Unidades habitacionales'},
@@ -151,6 +151,20 @@ var objetoSujetoComercial = [
     {value: '241102', text: 'Transporte acuático'},
     {value: '241103', text: 'Transporte aéreo'},
     {value: '241104', text: 'Almacenamiento y actividades complementarias al transporte'}
+]
+
+var objetoSujetoComercial = [
+    {value: '24501', text: 'VIVIENDA PERMANENTE'},
+    {value: '24502', text: 'VIVIENDA TRANSITORIA'},
+    {value: '24503', text: 'ESTABLECIMIENTOS EDUCATIVOS'},
+    {value: '24504', text: 'ESTABLECIMIENTOS CUARTELARIOS'},
+    {value: '24505', text: 'ESTABLECIMIENTOS CARCELARIOS'},
+    {value: '24506', text: 'ESTABLECIMIENTOS DE ESPECTACULOS PÚBLICOS'},
+    {value: '24507', text: 'ESTABLECIMIENTOS DE DIVERSION PUBLICA'},
+    {value: '24508', text: 'ESTABLECIMIENTOS INDUSTRIALES'},
+    {value: '24509', text: 'ESTABLECIMIENTOS COMERCIALES'},
+    {value: '24510', text: 'ESTABLECIMIENTOS HOSPITALARIOS Y SIMILARES'},
+    {value: '24511', text: 'PUNTOS DE ENTRADA- TERMINALES PORTUARIOS Y ACTIVIDADES CONEXAS'},
 ]
 
 var objetoOtrosSujetos = [
