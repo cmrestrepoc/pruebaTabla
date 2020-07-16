@@ -510,7 +510,7 @@ function escogerInscrito(registro, formulario){
 	
 			if (registro.TERRITORIO != undefined) {
 				console.log('Territorio: ', registro.TERRITORIO);
-				switch(registro.TERRITORIO){
+				switch(registro.TERRITORIO[0]){
 					case 'barrio':
 						$('#barrio').prop('checked', true);
 						break;
@@ -1143,7 +1143,7 @@ function guardarComunesEstablecimientos(formulario){
 		VISITADO: document.getElementsByName('visitado' + formulario)[0].value,
 		DIR_NOT: document.getElementsByName('dirNotif' + formulario)[0].value,
 		
-		TERRITORIO: territorio[0]
+		TERRITORIO: territorio,
 	}
 
 	return inscrito;
