@@ -397,6 +397,9 @@ function verificarAccion(){
 			case 'cargarInscritos569':
 			cargarInscritos('569');
 			break;
+			case 'cargarInscritos682':
+			cargarInscritos('682');
+			break;
 			case 'cargarTodosLosInscritos':
 			cargarTodosLosInscritos();
 			break;
@@ -789,7 +792,7 @@ function guardarTraidos(formulario, dbBase, respObj, bandera, banderaAlerta){
 
 function cerrarSesionServidor(){
 	let identidad = JSON.parse(localStorage.getItem('identity'));
-	let alerta = document.getElementsByName('mensajesServicios')[0]
+	let alerta = document.getElementsByName('mensajesServicios')[1]
 	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario'))
 	fetch( 'https://sisbenpro.com/public/cerrarSesion/' + final)
 	.then( res => res.json() )
@@ -850,6 +853,9 @@ function dbInscritosFromForm(formulario){
 		case '444':
 			db = db444;
 			break;
+		case '682':
+			db = db682;
+			break;
 	}
 	return db;
 }
@@ -858,18 +864,18 @@ function dbInscritosFromForm(formulario){
 function cargarInscritos(formulario){
 	let db = dbInscritosFromForm(formulario);
 	let banderaAlerta;
-	let alerta = document.getElementsByName('mensajesServicios')[banderaAlerta];
 	if(localStorage.getItem('Accion')){
 		localStorage.getItem('Accion') == 'cargarInscritos' + formulario ?
-				localStorage.removeItem('Accion') :
-				!localStorage.getItem('identity') ? 
-					localStorage.setItem('Accion', 'cargarInscritos' + formulario) :
-					null;
-		banderaAlerta = 1;
+		localStorage.removeItem('Accion') :
+		!localStorage.getItem('identity') ? 
+		localStorage.setItem('Accion', 'cargarInscritos' + formulario) :
+		null;
+		banderaAlerta = 0;
 	}else{
 		!localStorage.getItem('identity') && localStorage.setItem('Accion', 'cargarInscritos' + formulario);
-		banderaAlerta = 0;
+		banderaAlerta = 1;
 	}
+	let alerta = document.getElementsByName('mensajesServicios')[banderaAlerta];
 	//if(!localStorage.getItem('identity')){
 		/* localStorage.getItem('Accion') == 'cargarInscritos' + formulario ? 
 			localStorage.removeItem('Accion') :
@@ -900,10 +906,10 @@ function cargarTodosLosInscritos(){
 				!localStorage.getItem('identity') ? 
 					localStorage.setItem('Accion', 'cargarTodosLosInscritos' + formulario) :
 					null;
-		banderaAlerta = 1;
+		banderaAlerta = 0;
 	}else{
 		!localStorage.getItem('identity') && localStorage.setItem('Accion', 'cargarTodosLosInscritos');
-		banderaAlerta = 0;
+		banderaAlerta = 1;
 	}
 //	if(!localStorage.getItem('identity')){
 		/* localStorage.getItem('Accion') == 'cargarTodosLosInscritos' ?
