@@ -949,6 +949,7 @@ function fetchEvaluados(doc, formulario, url){
 	};
 	let bigDoc = Object.assign(credentials, doc);
 	let data = JSON.stringify(bigDoc);
+	console.log('Cuerpo request', data);
 	let cuerpo = document.getElementById('cuerpoRespuesta');
 	cuerpo.innerHTML = ''
 	//console.log(data);
@@ -995,6 +996,10 @@ function cargarServidor(formulario){
 		db = dbNuevos444;
 		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
 		break;
+		case '682':
+		db = dbNuevos682;
+		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
+		break;
 		default:
 		db = dbActasForm(formulario);
 		urltofetch = 'https://sisbenpro.com/public/evaluacionesTabla';
@@ -1005,7 +1010,7 @@ function cargarServidor(formulario){
 		localStorage.removeItem('Accion');	
 		db.allDocs({include_docs: true, descending: true}).then( doc => {
 			console.log('Cantidad de registros en indexDB para este formulario: ', doc.rows.length);
-			console.log(JSON.stringify(doc.rows));
+			// console.log(JSON.stringify(doc.rows));
 			let promesas = doc.rows.map( registro => fetchEvaluados(registro.doc, formulario, urltofetch));
 			console.log(promesas);
 			Promise
@@ -1805,7 +1810,7 @@ function guardarEvaluacion(formulario){
 					NUTRA_ARL: document.getElementsByName('noTrabajadoresArl' + formulario)[0].value,
 					NUTRA_EPS: document.getElementsByName('noTrabajadoresEps' + formulario)[0].value,
 					AV_ACTA: document.getElementsByName('actaUv' + formulario)[0].value,
-					REQUES: document.getElementsByName('requerimientos' + formulario)[0].value,
+					RQS: document.getElementsByName('requerimientos' + formulario)[0].value,
 					DIAS_PLAZO: document.getElementsByName('diasHabiles' + formulario)[0].value,
 					FI_PLAZO: document.getElementsByName('fechaInicial' + formulario)[0].value,
 					FF_PLAZO: document.getElementsByName('fechaFinal' + formulario)[0].value,
