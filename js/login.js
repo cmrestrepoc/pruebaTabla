@@ -35,18 +35,21 @@ function obtenerCodigo(usuario){
 			indice = '09'
 			break;
 		case 'GCAICEDO':
-			indice = '14'
+			indice = '13'
 			break;
 		case 'GCARVAJAL':
-			indice = '15'
+			indice = '14'
 			break;
 		case 'MRAMOS':
-			indice = '16'
+			indice = '15'
 			break;
 		case 'JOPANCE':
-			indice = '17'
+			indice = '16'
 			break;
 		case 'VCORTES':
+			indice = '17'
+			break;
+		case 'AYDAVILA':
 			indice = '18'
 			break;
 		case 'MGARCES':
