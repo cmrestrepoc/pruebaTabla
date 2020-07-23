@@ -25,14 +25,14 @@ function obtenerCodigo(usuario){
 		case 'JCARDENAS':
 			indice = '08';
 			break;
+		case 'JCRESTREPO':
+			indice = '09'
+			break;
 		case 'MARIOR':
 			indice = '10';
 			break;
 		case 'CRESTREPO':
 			indice = '11';
-			break;
-		case 'JCRESTREPO':
-			indice = '09'
 			break;
 		case 'GCAICEDO':
 			indice = '13'
