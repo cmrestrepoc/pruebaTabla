@@ -1278,10 +1278,10 @@ function guardarInscrito682(){
 	
 		var adicional = {		
 			ZONA: document.getElementsByName('zona682')[0].value,
-			TIPO_SU: document.getElementsByName('tipoSujeto682')[0].value,
-			SUJETO: document.getElementsByName('sujeto682')[0].value,
 			CARGO_F1: document.getElementsByName('cargoRecibe682')[0].value,
 			CARGO_E1: document.getElementsByName('cargoInscribe682')[0].value,
+			TIPO_SU: document.getElementsByName('tipoSujeto682')[0].value,
+			SUJETO: document.getElementsByName('sujeto682')[0].value,
 			T_INSCRIP: document.getElementsByName('codigoInscripcion682')[0].value, 
 			TIPO_I: document.getElementsByName('tipoInscripcion682')[0].value,
 			NOMBRE_AD: document.getElementsByName('administrador682')[0].value,
