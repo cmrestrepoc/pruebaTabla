@@ -138,7 +138,7 @@ function login(){
 			nombre: 'VIVIANA CORTES',
 			usuario: 'VCORTES',
 			indice: '18',
-			cedula: ''
+			cedula: '1113515576'
 		},
 	];
 	let estado;

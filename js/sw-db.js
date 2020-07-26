@@ -216,7 +216,7 @@ function cargarInicioInscripciones(formulario){
 		/* calcularActaInscripcion(formulario, dbNuevos).then( acta => {
 			ins.ACTA = acta;
 		}); */
-		persistirInscrito(db, dbNuevos, ins, 0);
+		persistirInscrito(dbNuevos, ins, 0);
 		localStorage.removeItem('inscrito');
 		localStorage.removeItem('firmaAutoridad');
 		localStorage.removeItem('firmaInscribe');
@@ -1045,7 +1045,7 @@ function cargarServidor(formulario){
 	}
 }
 
-function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
+function persistirInscrito(dbNuevos, inscrito, idExistente){
 	//var id = 0;
 	if(idExistente == 0){
 		dbNuevos.info().then( result => {
@@ -1070,9 +1070,9 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 		dbNuevos.get(idExistente).then( docum => {
 			insertar = { 
 				_id: docum._id,
-				_rev: docum._rev
+				_rev: docum._rev,
 			};
-			console.log("Rev a adicionar al inscrito para la tabla de nuevos");
+			console.log("Rev a adicionar al inscrito para la tabla de nuevos", insertar);
 			delete inscrito._id;
 			delete inscrito._rev;
 			inscrito = Object.assign(insertar, inscrito);
@@ -1080,6 +1080,7 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 			dbNuevos.put(inscrito, function callback(err, result){
 				if (!err) {
 					alert('inscrito modificado en base de datos');
+					location.reload();
 				}else {
 					alert('problemas modificando inscrito en base de datos: ' + err);
 					console.log(err);
@@ -1093,19 +1094,26 @@ function persistirInscrito(dbBase, dbNuevos, inscrito, idExistente){
 				var ultimo = result.doc_count + 1;
 				let indice  = calcularIndice(ultimo);
 				console.log(indice);
-				var insertar = { _id: indice };
+				console.log('inscrito', inscrito);
+				let insertar = { 
+					_id: indice, 
+					ACTA: inscrito.ACTA.substr(0, 11) + 'M' +  inscrito.ACTA.substr(12)
+				};
+				console.log('objeto a insertar con acta modificada', insertar);
+				delete inscrito.ACTA;
 				inscrito = Object.assign( insertar, inscrito );
 				console.log(inscrito);
 				
 				dbNuevos.put(inscrito, function callback(err, result){
 					if (!err) {
 						alert('inscrito almacenado en base de datos');
+						location.reload();
 					}else {
 						alert('problemas almacenando inscrito en base de datos: ' + err);
 						console.log(err);
 					}
 				});
-			}).catch( error => console.log("Error contando registros",err) );
+			}).catch( error => console.log("Error contando registros", error) );
 		});
 	}
 }
@@ -1217,7 +1225,7 @@ function guardarInscrito493(){
 		inscrito = Object.assign( inscrito, inscritoEsta, adicional );
 		localStorage.setItem('inscrito', JSON.stringify(inscrito));
 		
-		idExistente == 0 ? firmaInscripcion() : persistirInscrito(db493, dbNuevos493, inscrito, idExistente);
+		idExistente == 0 ? firmaInscripcion() : persistirInscrito(dbNuevos493, inscrito, idExistente);
 	}
 }
 
@@ -1243,7 +1251,7 @@ function guardarInscrito444(){
 		inscrito = Object.assign( inscrito, adicional );
 		localStorage.setItem('inscrito', JSON.stringify(inscrito));
 		
-		idExistente == 0 ? firmaInscripcion() : persistirInscrito(db444, dbNuevos444, inscrito, idExistente);
+		idExistente == 0 ? firmaInscripcion() : persistirInscrito(dbNuevos444, inscrito, idExistente);
 	}
 }
 
@@ -1271,7 +1279,7 @@ function guardarInscrito569(){
 		inscrito = Object.assign( inscrito, inscritoEsta, adicional );
 		localStorage.setItem('inscrito', JSON.stringify(inscrito));
 		
-		idExistente == 0 ? firmaInscripcion() : persistirInscrito(db569, dbNuevos569, inscrito, idExistente);
+		idExistente == 0 ? firmaInscripcion() : persistirInscrito(dbNuevos569, inscrito, idExistente);
 	}
 }
 
@@ -1300,7 +1308,7 @@ function guardarInscrito682(){
 		inscrito = Object.assign( inscrito, inscritoEsta, adicional );
 		localStorage.setItem('inscrito', JSON.stringify(inscrito));
 		
-		idExistente == 0 ? firmaInscripcion() : persistirInscrito(db682, dbNuevos682, inscrito, idExistente);
+		idExistente == 0 ? firmaInscripcion() : persistirInscrito(dbNuevos682, inscrito, idExistente);
 	}
 }
 
