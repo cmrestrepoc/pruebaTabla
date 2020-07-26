@@ -1808,6 +1808,7 @@ function guardarEvaluacion(formulario){
 					TIPO_SU: document.getElementsByName('tipoSujeto' + formulario)[0].value,
 					SUJETO: document.getElementsByName('sujeto' + formulario)[0].value,
 					MAIL_RL: document.getElementsByName('correoRepLegal' + formulario)[0].value,
+					MAIL_NOTI: document.getElementsByName('correoNotif' + formulario)[0].value,
 					NUTRA_ARL: document.getElementsByName('noTrabajadoresArl' + formulario)[0].value,
 					NUTRA_EPS: document.getElementsByName('noTrabajadoresEps' + formulario)[0].value,
 					AV_ACTA: document.getElementsByName('actaUv' + formulario)[0].value,
