@@ -67,20 +67,97 @@ function obtenerCodigo(usuario){
 }
 
 function login(){
+	let funcionarios = [
+		{
+			nombre: 'JEFFREY REYES BOLAÑOS',
+			usuario: 'JREYES',
+			indice: '03',
+			cedula: '1113520846'
+		},
+		{
+			nombre: 'EDISON PALMA',
+			usuario: 'EPALMA',
+			indice: '05',
+			cedula: '94041224'
+		},
+		{
+			nombre: 'DIEGO FERNANDO LLANOS',
+			usuario: 'DLLANOS',
+			indice: '06',
+			cedula: '14702330'
+		},
+		{
+			nombre: 'OLVER ANDRES BETANCOUR',
+			usuario: 'OBETANCOUR',
+			indice: '07',
+			cedula: '1113534977'
+		},
+		{
+			nombre: 'MARIO RESTREPO',
+			usuario: 'MARIOR',
+			indice: '10',
+			cedula: '6332086'
+		},
+		{
+			nombre: 'CARLOS MARIO RESTREPO',
+			usuario: 'CRESTREPO',
+			indice: '11',
+			cedula: '16845913'
+		},
+		{
+			nombre: 'GABRIEL CAICEDO SANCHEZ',
+			usuario: 'GCAICEDO',
+			indice: '13',
+			cedula: '14888544'
+		},
+		{
+			nombre: 'GISELL CARVAJAL SARRIA',
+			usuario: 'GCARVAJAL',
+			indice: '14',
+			cedula: '66969137'
+		},
+		{
+			nombre: 'CLAUDIA MERCEDES RAMOS QUINTERO',
+			usuario: 'CMRAMOS',
+			indice: '15',
+			cedula: '66975312'
+		},
+		{
+			nombre: 'JORGE ARMANDO OPANCE VACA',
+			usuario: 'JOPANCE',
+			indice: '16',
+			cedula: '1113643925'
+		},
+		{
+			nombre: 'ANA YULIETH DAVILA PAS',
+			usuario: 'AYDAVILA',
+			indice: '17',
+			cedula: '1113539368'
+		},
+		{
+			nombre: 'VIVIANA CORTES',
+			usuario: 'VCORTES',
+			indice: '18',
+			cedula: ''
+		},
+	];
 	let estado;
 	let usuario = document.getElementsByName('nomUsuario')[0].value;
+	let indice = funcionarios.findIndex(element => element.usuario == usuario);
+	console.log('indice usuario', usuario, indice);
 	let clave = document.getElementsByName('password')[0].value;
-	let codigoUsuario = obtenerCodigo(usuario) !== 'error' ? obtenerCodigo(usuario) : null;
-	if(codigoUsuario){
+	// let codigoUsuario = obtenerCodigo(usuario) !== 'error' ? obtenerCodigo(usuario) : null;
+	if(indice > 0){
 		clave == 'GC130' ? estado = true : estado = false;
 		if (estado) {
 			localStorage.setItem('estado', JSON.stringify(estado));
-			localStorage.setItem('usuario', JSON.stringify(usuario));
-			localStorage.setItem('codigoUsuario', codigoUsuario);
+			localStorage.setItem('usuario', JSON.stringify(funcionarios[indice]));			
 			window.location.replace("menu0.html");
 		}else{
 			alert('Clave incorrecta');
 		}
+	}else{
+		alert('El usuario no está registrado para obtener código');
 	}
 }
 

@@ -160,7 +160,11 @@ function cargarInicio(formulario){
 }
 
 function calcularActaInscripcion(formulario, db){
-	let codUsuario = localStorage.getItem('codigoUsuario');
+	let usuario = JSON.parse(localStorage.getItem('usuario'))
+	document.getElementsByName(`recibe${formulario}`)[0].value = usuario.nombre;
+	document.getElementsByName(`idRecibe${formulario}`)[0].value = usuario.cedula;
+	let codUsuario = JSON.parse(localStorage.getItem('codigoUsuario'));
+	console.log('usuario', codUsuario);
 	return db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
 		let indice = calcularIndice(ultimo);
@@ -433,7 +437,7 @@ function calcularIndice(ultimo){
 
 function calcularNumActa(formulario){
 	let db = dbActasForm(formulario);
-	let codUsuario = localStorage.getItem('codigoUsuario');
+	let codUsuario = JSON.parse(localStorage.getItem('usuario')).indice;
 	// let objetoActa = {}
 	return db.info().then( result => {
 		var ultimo = result.doc_count!=0 ? result.doc_count + 1: result.doc_count = 1;
@@ -535,7 +539,6 @@ function escogerInscrito(registro, formulario){
 				document.getElementsByName('concepto' + formulario)[0].value = registro.CCUV;
 				document.getElementsByName('textoConcepto' + formulario)[0].value = registro.CUV;
 				document.getElementsByName('fechaUltVisita' + formulario)[0].value = registro.F_UV;
-				document.getElementsByName('zona' + formulario)[0].value = registro.ZONA;
 			}
 		}
 	
@@ -557,6 +560,7 @@ function escogerInscrito(registro, formulario){
 				document.getElementsByName('inscripcionRep444')[0].value = registro.N_INSCRIP;
 				document.getElementsByName('fecha444_2')[0].value = registro.FECHA;
 				document.getElementsByName('funcionario444')[0].value = registro.NOMBRE_F1;
+				formulario != '569' ? document.getElementsByName('zona' + formulario)[0].value = registro.ZONA : null;
 			}
 		}else{
 			// Aquí se puede introducir un método para calcular automáticamente un número de acta
@@ -567,6 +571,10 @@ function escogerInscrito(registro, formulario){
 				objetoActa.value = acta;
 				objetoActa.dispatchEvent(event);
 			});
+
+			let usuario = JSON.parse(localStorage.getItem('usuario'))
+			document.getElementsByName(`funcionario${formulario}-1`)[0].value = usuario.nombre;
+			document.getElementsByName(`idFuncionario${formulario}-1`)[0].value = usuario.cedula;
 			
 			let alerta = document.getElementsByName('alertaInscrito');
 			let arreglo = Array.from(alerta); //en este caso alerta es un iterable pero no un arreglo, hay que convertirlo primero
