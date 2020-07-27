@@ -899,7 +899,15 @@ function cargarInscritos(formulario){
 			alerta.innerHTML = 'Error: ' + respObj.err;
 			// alert('Error: ' + respObj.err);
 		}else{
-			guardarTraidos(formulario, db, respObj, formulario, banderaAlerta);
+			let arregloForms = [
+				{form: '493', bandera: 'Establecimientos de alimentos'},
+				{form: '569', bandera: 'Establecimientos de prod. cárnicos'},
+				{form: '444', bandera: 'Vehículos'},
+				{form: '682', bandera: 'Establecimientos comerciales'},
+			];
+			let filtrado = arregloForms.filter(element => element.form == formulario)[0];
+			console.log('filtrado', filtrado);
+			guardarTraidos(formulario, db, respObj, filtrado.bandera, banderaAlerta);
 				//cerrarSesionServidor();
 		}		
 	}).catch( err => console.log('Error: ', err) );
@@ -940,8 +948,14 @@ function cargarTodosLosInscritos(){
 		promesa1.then( respObj1 => {
 			guardarTraidos( '569', db569, respObj1, 'Establecimientos Prod Cárnicos', banderaAlerta );
 			let promesa2 = fetchInscritos('444');
-			localStorage.removeItem('Accion');
-			promesa2.then ( respObj2 => guardarTraidos( '444', db444, respObj2, 'Vehículos', banderaAlerta ) )
+			promesa2.then ( respObj2 => {
+						guardarTraidos( '444', db444, respObj2, 'Vehículos', banderaAlerta );
+						let promesa3 = fetchInscritos('682');
+						localStorage.removeItem('Accion');
+						promesa3.then ( respObj3 => {
+							guardarTraidos( '682', db682, respObj3, 'Establecimientos comerciales', banderaAlerta);
+						})
+					})
 					.catch( err2 => console.log('Error', err2 ) );
 		}).catch( err1 => console.log('Error: ', err1) );
 
