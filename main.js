@@ -1120,7 +1120,7 @@ function loginServer(){
 	let data = 'nombreUsuario='+user.usuario+'&clave='+clave;
 
 	let identity = {
-		usuario: user,
+		usuario: user.usuario,
 		token: ''
 	};
 	//console.log(data);
