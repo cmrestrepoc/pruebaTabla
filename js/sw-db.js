@@ -843,7 +843,7 @@ function fetchInscritos(formulario){
 				.then( res => resolve(res) )
 				.catch( err => reject(err) );
 			}).then( resp => resp.json() )
-			.catch( error=>error.json() );
+			.catch( error=>console.log('error fetch inscritos', error) );
 	} else{
 		location.assign("./loginserver.html");
 	}
