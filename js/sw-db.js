@@ -801,7 +801,7 @@ function guardarTraidos(formulario, dbBase, respObj, bandera, banderaAlerta){
 function cerrarSesionServidor(){
 	let identidad = JSON.parse(localStorage.getItem('identity'));
 	let alerta = document.getElementsByName('mensajesServicios')[1]
-	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario').usuario)
+	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario')).usuario
 	fetch( 'https://sisbenpro.com/public/cerrarSesion/' + final)
 	.then( res => res.json() )
 	.then( jsonRes => {
