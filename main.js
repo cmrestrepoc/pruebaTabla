@@ -1117,7 +1117,7 @@ function loginServer(){
 	let user = JSON.parse(localStorage.getItem('usuario'));
 	let clave = document.getElementsByName('password')[0].value;
 
-	let data = 'nombreUsuario='+user+'&clave='+clave;
+	let data = 'nombreUsuario='+user.usuario+'&clave='+clave;
 
 	let identity = {
 		usuario: user,
