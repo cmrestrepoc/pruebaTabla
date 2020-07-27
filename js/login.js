@@ -140,6 +140,12 @@ function login(){
 			indice: '18',
 			cedula: '1113515576'
 		},
+		{
+			nombre: 'MAURICIO GARCES',
+			usuario: 'MGARCES',
+			indice: '19',
+			cedula: '1113518928'
+		},
 	];
 	let estado;
 	let usuario = document.getElementsByName('nomUsuario')[0].value;
