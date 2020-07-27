@@ -891,7 +891,7 @@ function cargarInscritos(formulario){
 	//}
 	var promesa = fetchInscritos(formulario);
 	promesa.then( respObj => {
-		if (respObj.err != undefined) {
+		if (respObj && respObj.err) {
 			alerta.style.display = 'block';
 			respObj.err == "ERROR TOKEN" ? 
 			alerta.innerHTML = 'Hubo problemas!! Es necesario cerrar Sesión con el servidor y volver a introducir credenciales' :
