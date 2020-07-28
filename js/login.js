@@ -172,6 +172,7 @@ function logout(){
 	let estado = false;
 	localStorage.setItem('estado', JSON.stringify(estado));
 	localStorage.removeItem('usuario');
+	localStorage.removeItem('codigoUsuario');
 	window.location.replace("index.html");
 }
 
