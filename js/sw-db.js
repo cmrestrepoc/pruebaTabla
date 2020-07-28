@@ -1200,6 +1200,8 @@ function firmaEvaluacion(){
 
 function validarOjetoActa(formulario){
 	let objetoActa = document.getElementsByName('acta' + formulario)[0];
+	let objetoNit = document.getElementsByName('nit' + formulario)[0];
+	let objetoPlaca = document.getElementsByName('placa' + formulario)[0];
 	let cuerpo = document.getElementById('cuerpoRespuesta');
 	console.log('objetoActa en plena validación', objetoActa.value);
 	if (!objetoActa.value){
@@ -1209,8 +1211,28 @@ function validarOjetoActa(formulario){
 							+ 'antes de guardar el acta.';
 		return false;
 	}else{
-		cuerpo.innerHTML = 'Guardando... ';
-		return true;
+		if(formulario != '444'){
+			if (!objetoNit.value){
+				cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el campo nit ' 
+								+ '(recuerde que ahí puede diligenciar la cédula del representante legal). '
+								+ 'Por favor devuélvase y verifique que el campo nit esté incluido ' 
+								+ 'antes de guardar el acta.';
+				return false;
+			}else{
+				cuerpo.innerHTML = 'Guardando... ';
+				return true;
+			}
+		}else{
+			if (objetoPlaca.value.length != 6){
+				cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar la placa y ésta debe tener '
+								+ '6 dígitos. Por favor devuélvase y verifique que la placa esté incluida y que tenga 6 dígitos ' 
+								+ 'antes de guardar el acta.';
+				return false;
+			}else{
+				cuerpo.innerHTML = 'Guardando... ';
+				return true;
+			}
+		}
 	}
 }
 

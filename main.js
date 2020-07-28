@@ -1164,7 +1164,7 @@ function loginServer(){
 function estabNumInscripcion(valor, formulario){
 	let event = new Event('input');
 	let elementoInscripcion = document.getElementsByName('inscripcion' + formulario)[0];
-	elementoInscripcion.value += valor;
+	elementoInscripcion.value = '76130' + valor;
 	elementoInscripcion.dispatchEvent(event);
 }
 
@@ -1179,7 +1179,7 @@ function auxiliarInscVehi(valor){
 	if(document.getElementsByName('placaSrmque444')[0].value == '' && document.getElementsByName('placaRemolque444')[0].value == ''){
 		let event = new Event('input');
 		let elementoInscripcion = document.getElementsByName('inscripcion444')[0];
-		elementoInscripcion.value += valor;
+		elementoInscripcion.value = '76130' + valor;
 		elementoInscripcion.dispatchEvent(event);
 	}
 }
