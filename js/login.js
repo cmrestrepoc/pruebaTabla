@@ -157,7 +157,8 @@ function login(){
 		clave == 'GC130' ? estado = true : estado = false;
 		if (estado) {
 			localStorage.setItem('estado', JSON.stringify(estado));
-			localStorage.setItem('usuario', JSON.stringify(funcionarios[indice]));			
+			localStorage.setItem('usuario', JSON.stringify(funcionarios[indice]));	
+			localStorage.setItem('codigoUsuario', JSON.stringify(funcionarios[indice].indice))		
 			window.location.replace("menu0.html");
 		}else{
 			alert('Clave incorrecta');
