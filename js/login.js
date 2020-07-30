@@ -129,16 +129,16 @@ function login(){
 			cedula: '1113643925'
 		},
 		{
-			nombre: 'ANA YULIETH DAVILA PAS',
-			usuario: 'AYDAVILA',
-			indice: '17',
-			cedula: '1113539368'
-		},
-		{
 			nombre: 'VIVIANA CORTES',
 			usuario: 'VCORTES',
-			indice: '18',
+			indice: '17',
 			cedula: '1113515576'
+		},
+		{
+			nombre: 'ANA YULIETH DAVILA PAS',
+			usuario: 'AYDAVILA',
+			indice: '18',
+			cedula: '1113539368'
 		},
 		{
 			nombre: 'MAURICIO GARCES',
