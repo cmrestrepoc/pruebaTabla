@@ -35,6 +35,8 @@
         let imageData;
         canvas = document.getElementById('firmaAutoridad');
         imageData = canvas.toDataURL("image/png");
+        let autoridad = localStorage.getItem('form') == '443' ? 'firmaAut1' : 'firmaAutoridad';
+        let inscribe = localStorage.getItem('form') == '443' ? 'firmaIns1' : 'firmaInscribe';
         localStorage.setItem('firmaAutoridad', imageData);
         canvas = document.getElementById('firmaInscribe');
         imageData = canvas.toDataURL("image/png");
