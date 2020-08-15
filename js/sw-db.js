@@ -1585,10 +1585,14 @@ function guardarEvaluacion(formulario){
 	let reducido;
 	
 	let objetoActa = document.getElementsByName('acta' + formulario)[0];
+	let objetoNit = document.getElementsByName('nit' + formulario)[0];
 	let cuerpo = document.getElementById('cuerpoRespuesta');
 	if (!objetoActa.value){
 		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el número de acta. '
 							+ 'Por favor devuélvase y verifique que el número de acta esté incluido antes de guardar el acta.';
+	}else if(!objetoNit.value) {
+		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el campo nit/cédula. '
+							+ 'Por favor devuélvase y verifique que este campo esté diligenciado antes de guardar el acta.';
 	}else if (!validarCambioTab(10) && formulario != '26' && formulario != '441' && formulario != '472'){
 		cuerpo.innerHTML = 'Lo sentimos mucho. Usted no escogió un inscrito antes de diligenciar la evaluación. '
 							+ 'Debe regresar a la pesataña de INSCRITOS y escoger uno o, en caso de que no esté inscrito '
