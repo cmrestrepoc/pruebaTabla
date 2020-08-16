@@ -149,9 +149,9 @@ function cargarInicio(formulario){
 	if(localStorage.getItem('evaluado') && (localStorage.getItem('firmaAut1') || localStorage.getItem('firmaAut2') || localStorage.getItem('firmaIns1') || localStorage.getItem('firmaIns2'))){
 		let eva = JSON.parse(localStorage.getItem('evaluado'));
 		eva.FIRMA_E1 = localStorage.getItem('firmaIns1');
-		eva.FIRMA_E2 = localStorage.getItem('firmaIns2');
+		eva.FIRMA_E2 = formulario != '443' ? localStorage.getItem('firmaIns2'): null;
 		eva.FIRMA_F1 = localStorage.getItem('firmaAut1');
-		eva.FIRMA_F2 = localStorage.getItem('firmaAut2');
+		eva.FIRMA_F2 = formulario != '443' ? localStorage.getItem('firmaAut2'): null;
 		
 		persistirEvaluado(db, eva, formulario);
 		
@@ -879,10 +879,9 @@ function cargarInscritos(formulario){
 	let banderaAlerta;
 	if(localStorage.getItem('Accion')){
 		localStorage.getItem('Accion') == 'cargarInscritos' + formulario ?
-		localStorage.removeItem('Accion') :
-		!localStorage.getItem('identity') ? 
-		localStorage.setItem('Accion', 'cargarInscritos' + formulario) :
-		null;
+			localStorage.removeItem('Accion') :
+			!localStorage.getItem('identity') ? 
+				localStorage.setItem('Accion', 'cargarInscritos' + formulario) : null;
 		banderaAlerta = 0;
 	}else{
 		!localStorage.getItem('identity') && localStorage.setItem('Accion', 'cargarInscritos' + formulario);
@@ -1603,16 +1602,16 @@ function guardarEvaluacion(formulario){
 		cuerpo.innerHTML = 'Guardando... ';
 		switch(formulario){
 			case '440':
-				var tipocarne;
+				var tipocarne = [];
 				var adicional;
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
 		
 				for (let i = 0; i < document.getElementsByName('tipoCarneExpende').length; i++){
-					tipocarne = document.getElementsByName('tipoCarneExpende')[i].checked ? document.getElementsByName('tipoCarneExpende')[i].value : console.log(i);
+					document.getElementsByName('tipoCarneExpende')[i].checked ? tipocarne.push(document.getElementsByName('tipoCarneExpende')[i].value) : console.log(i);
 				}
 				adicional = {
-					TIPOCARNE: tipocarne,
+					TIPOCARNE: JSON.stringify(tipocarne),
 					OTRAS: document.getElementsByName('otrasEspecies' + formulario)[0].value,
 					OTIPOPRO: document.getElementsByName('otrosProductos' + formulario)[0].value,
 					E14: document.getElementsByName('evaluacion_1')[3].value,
@@ -1986,11 +1985,12 @@ function guardarEvaluacion(formulario){
 				delete reducido.CARGO_E2;
 				delete reducido.FIRMA_F2;
 				delete reducido.FIRMA_E2;
+				tipocarne = [];
 				for (let i = 0; i < document.getElementsByName('tipoCarneExpende').length; i++){
-					tipocarne = document.getElementsByName('tipoCarneExpende')[i].checked ? document.getElementsByName('tipoCarneExpende')[i].value : console.log(i);
+					document.getElementsByName('tipoCarneExpende')[i].checked ? tipocarne.push(document.getElementsByName('tipoCarneExpende')[i].value) : console.log(i);
 				}
 				adicional = {
-					TIPOCARNE: tipocarne,
+					TIPOCARNE: JSON.stringify(tipocarne),
 					OTRAS: document.getElementsByName('otrasEspecies' + formulario)[0].value,
 					OTIPOPRO: document.getElementsByName('otrosProductos' + formulario)[0].value,
 					SOPROVIS: document.getElementsByName('provisional' + formulario)[0].value,
