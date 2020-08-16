@@ -37,10 +37,10 @@
         imageData = canvas.toDataURL("image/png");
         let autoridad = localStorage.getItem('form') == '443' ? 'firmaAut1' : 'firmaAutoridad';
         let inscribe = localStorage.getItem('form') == '443' ? 'firmaIns1' : 'firmaInscribe';
-        localStorage.setItem('firmaAutoridad', imageData);
+        localStorage.setItem(autoridad, imageData);
         canvas = document.getElementById('firmaInscribe');
         imageData = canvas.toDataURL("image/png");
-        localStorage.setItem('firmaInscribe', imageData);
+        localStorage.setItem(inscribe, imageData);
         /* switch(firmante){
             case 'firmaAutoridad':
                 localStorage.setItem('firmaAutoridad', imageData);
