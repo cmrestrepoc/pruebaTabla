@@ -1589,7 +1589,7 @@ function guardarEvaluacion(formulario){
 	if (!objetoActa.value){
 		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el número de acta. '
 							+ 'Por favor devuélvase y verifique que el número de acta esté incluido antes de guardar el acta.';
-	}else if(!objetoNit.value) {
+	}else if(formulario != '441' && formulario != '472' && !objetoNit.value) {
 		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el campo nit/cédula. '
 							+ 'Por favor devuélvase y verifique que este campo esté diligenciado antes de guardar el acta.';
 	}else if (!validarCambioTab(10) && formulario != '26' && formulario != '441' && formulario != '472'){
