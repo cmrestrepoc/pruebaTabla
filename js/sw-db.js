@@ -153,7 +153,7 @@ function cargarInicio(formulario){
 		eva.FIRMA_F1 = localStorage.getItem('firmaAut1');
 		eva.FIRMA_F2 = formulario != '443' ? localStorage.getItem('firmaAut2'): null;
 		
-		persistirEvaluado(db, eva, formulario);
+		persistirEvaluado(db, eva);
 		
 		localStorage.removeItem('evaluado');
 		localStorage.removeItem('firmaAut1');
@@ -1406,8 +1406,6 @@ function guardarComunesEvaluados(formulario){
 		FIRMA_F2: '',
 		FIRMA_E1: '',
 		FIRMA_E2: '',
-		LONGITUD: '',
-		LATITUD: '',
 		GRABADO: ''
 	};
 	return evaluado;
@@ -1544,25 +1542,43 @@ function guardarEvaluadoReducido(formulario){
 	return evaluado;
 }
 
-/*function validarEvaluado(evaluado){
-	
-}*/
+function persistirCoordenadas(db, eva, result){
+	navigator.geolocation.getCurrentPosition(position => {
+		let coordinates = {
+			LONGITUD: position.coords.longitude,
+			LATITUD: position.coords.latitude
+		}
+		console.log('evaluado antes de coordenadas', eva)
+		return db.put({
+			_id: result.id,
+			_rev: result.rev,
+			...eva,
+			LONGITUD: coordinates.LONGITUD,
+			LATITUD: coordinates.LATITUD,
+		})
+		.then(res => console.log('Registro actualizado con coordenadas', res))
+		.catch(err => console.log('Problemas actualizando registro', err))
+	}, (err) => {
+		console.log('Error obteniendo coordenadas', err)
+	})
+}
 
-function persistirEvaluado(db, evaluado, formulario){
-	calcularNumActa(formulario).then( acta => {
-		var insertar = { _id: acta.substring(11, 15) };
-		evaluado = Object.assign( insertar, evaluado );
-		console.log(evaluado);
+function persistirEvaluado(db, evaluado){
+	var insertar = { _id: evaluado.ACTA.substring(11, 15) };
+	evaluado = Object.assign( insertar, evaluado );
+	console.log(evaluado);
 
-		db.put(evaluado, function callback(err, result){
-			if (!err) {
-				alert('evaluado guardado en base de datos');
-				location.reload();
-			}else {
-				alert('problemas guardando evaluado en base de datos: ', err);
-			}
-		});
+	db.put(evaluado, async function callback(err, result){
+		if (!err) {
+			console.log('resultado', result)
+			await persistirCoordenadas(db, evaluado, result)
+			alert('evaluado guardado en base de datos');
+			location.reload();
+		}else {
+			alert('problemas guardando evaluado en base de datos: ', err);
+		}
 	});
+	
 	
 }
 
@@ -1579,6 +1595,7 @@ function guardarEvaluacion(formulario){
 	let evaluado = !excluded.includes(formulario) ? guardarComunesEvaluados(formulario) : {};
 	var coordinates = {}					
 	let preguntasComunes;
+	let tipoEsta = [];
 	let evaluadoEsta;
 	let evaluadoVehi;
 	let reducido;
@@ -1655,7 +1672,6 @@ function guardarEvaluacion(formulario){
 			case '479':
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -1689,7 +1705,6 @@ function guardarEvaluacion(formulario){
 			case '480':
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -1712,7 +1727,6 @@ function guardarEvaluacion(formulario){
 			case '495':
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -1746,7 +1760,6 @@ function guardarEvaluacion(formulario){
 			case '478':
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -1791,7 +1804,6 @@ function guardarEvaluacion(formulario){
 				break;
 			case '475':
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -1819,7 +1831,6 @@ function guardarEvaluacion(formulario){
 			case '481':
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -2133,22 +2144,10 @@ function guardarEvaluacion(formulario){
 		}
 	
 		//console.log("Estructura de evaluado en formulario " + formulario + " para revisión: " + JSON.stringify(evaluado));
-		navigator.geolocation.getCurrentPosition(position => {
-			coordinates = {
-				LONGITUD: position.coords.longitude,
-				LATITUD: position.coords.latitude
-			}
-			console.log('Coordenadas calculadas')
-			evaluado = Object.assign(evaluado, coordinates)
-			localStorage.setItem('evaluado', JSON.stringify(evaluado));
-			firmaEvaluacion(formulario);
-		}, (err) => {
-			console.log('Error obteniendo coordenadas', err)
-			localStorage.setItem('evaluado', JSON.stringify(evaluado));
-			firmaEvaluacion(formulario);
-		})
 		
-		//persistirEvaluado(db, evaluado, formulario);
+		localStorage.setItem('evaluado', JSON.stringify(evaluado));
+		firmaEvaluacion(formulario);
+		//persistirEvaluado(db, evaluado);
 		//location.reload();
 	}
 
