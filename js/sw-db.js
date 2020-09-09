@@ -472,14 +472,14 @@ function escogerInscrito(registro, formulario){
 	document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
 	document.getElementsByName('cel' + formulario)[0].value = registro.CELULAR;
 	document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
-	document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
+	document.getElementsByName('idPropietario' + formulario)[0].value = parseInt(registro.DOC_P);
 	document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
 	document.getElementsByName('autorizaNoti' + formulario)[0].value = registro.AUTORIZA;
 
 	if(formulario == '333' || formulario == '243'){
 		document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
 		document.getElementsByName('razonSocial' + formulario)[0].value = registro.RSO;
-		document.getElementsByName('nit' + formulario)[0].value = registro.NIT;
+		document.getElementsByName('nit' + formulario)[0].value = parseInt(registro.NIT);
 		calcularNumActa(formulario).then( acta => {
 			console.log("Valor de acta recibido ", acta);
 			let event = new Event('input');
@@ -515,7 +515,7 @@ function escogerInscrito(registro, formulario){
 			document.getElementsByName('dirNotif' + formulario)[0].value = registro.DIR_NOT;
 			document.getElementsByName('nombreComercial' + formulario)[0].value = registro.NOCO;
 			document.getElementsByName('razonSocial' + formulario)[0].value = registro.RSO;
-			document.getElementsByName('nit' + formulario)[0].value = registro.NIT;
+			document.getElementsByName('nit' + formulario)[0].value = parseInt(registro.NIT);
 			document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
 			document.getElementsByName('matriculaMercantil' + formulario)[0].value = registro.MAMER;
 	
@@ -634,7 +634,7 @@ function escogerInscrito(registro, formulario){
 		if (formulario == '569' || formulario == '440') {
 			document.getElementsByName('repLegal' + formulario)[0].value = registro.NOMBRE_RL;
 			document.getElementsByName('tipoIdRl' + formulario)[0].value = registro.TID_RL;
-			document.getElementsByName('idRepLegal' + formulario)[0].value = registro.DOC_RL;
+			document.getElementsByName('idRepLegal' + formulario)[0].value = parseInt(registro.DOC_RL);
 		}
 	
 		if(formulario == '569'){
@@ -651,7 +651,7 @@ function escogerInscrito(registro, formulario){
 		if(formulario === '682'){
 			document.getElementsByName('administrador682')[0].value = registro.NOMBRE_AD;
 			document.getElementsByName('tipoIdAdministrador682')[0].value = registro.TID_AD;
-			document.getElementsByName('idAdministrador682')[0].value = registro.DOC_AD;
+			document.getElementsByName('idAdministrador682')[0].value = parseInt(registro.DOC_AD);
 			document.getElementsByName('codigoInscripcion682')[0].value = registro.T_INSCRIP;
 			document.getElementsByName('tipoInscripcion682')[0].value = registro.TIPO_I;
 		}
