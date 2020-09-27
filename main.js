@@ -931,6 +931,8 @@ var motivos = [
 	{objeto: tiposInscripcion, nombre: 'tiposInscripcion'},
 ]
 
+const BASE_URL_SERVICIOS = 'https://sisbenpro.com/public/';
+
 function createOption({value, text}){
 	let option = document.createElement('option');
 	option.value = value;
@@ -1124,7 +1126,7 @@ function loginServer(){
 		token: ''
 	};
 	//console.log(data);
-	fetch('https://sisbenpro.com/public/loginVisalud', {
+	fetch(BASE_URL_SERVICIOS + 'loginVisalud', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
@@ -1138,7 +1140,7 @@ function loginServer(){
 				var identidad = JSON.parse(localStorage.getItem('identity'));
 				if (identidad != undefined) {
 					//identidad = JSON.parse(localStorage.getItem('identity'));
-					fetch('https://sisbenpro.com/public/cerrarSesion/'+identidad.usuario)
+					fetch(BASE_URL_SERVICIOS + 'cerrarSesion/'+identidad.usuario)
 					.then( res => res.json() )
 					.then( jsonRes => alert('Sesión cerrada por precaución. ' + jsonRes.res) );
 					localStorage.removeItem('identity');				

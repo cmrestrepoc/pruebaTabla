@@ -53,6 +53,7 @@ dbNuevos682.changes({
 	mostrarInscritos682('682');
 });
 
+const BASE_URL = 'https://sisbenpro.com/public/';
 
 function verificarSesionLocal(){
 	let estado = localStorage.getItem('estado');
@@ -807,7 +808,7 @@ function cerrarSesionServidor(){
 	let identidad = JSON.parse(localStorage.getItem('identity'));
 	let alerta = document.getElementsByName('mensajesServicios')[1]
 	let final = identidad ? identidad.usuario : JSON.parse(localStorage.getItem('usuario')).usuario
-	fetch( 'https://sisbenpro.com/public/cerrarSesion/' + final)
+	fetch( BASE_URL + 'cerrarSesion/' + final)
 	.then( res => res.json() )
 	.then( jsonRes => {
 		console.log('respuesta del servicio', jsonRes)
@@ -837,7 +838,7 @@ function fetchInscritos(formulario){
 		console.log('Estamos en el formulario: ', formulario);
 		
 		return new Promise((resolve, reject) => {
-			fetch('https://sisbenpro.com/public/inscritosVisual', {
+			fetch(BASE_URL + 'inscritosVisual', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded'
@@ -1012,23 +1013,23 @@ function cargarServidor(formulario){
 	switch (formulario) {
 		case '493':
 		db = dbNuevos493;
-		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
+		urltofetch = BASE_URL + 'inscritosTabla'
 		break;
 		case '569':
 		db = dbNuevos569;
-		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
+		urltofetch = BASE_URL + 'inscritosTabla'
 		break;
 		case '444':
 		db = dbNuevos444;
-		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
+		urltofetch = BASE_URL + 'inscritosTabla'
 		break;
 		case '682':
 		db = dbNuevos682;
-		urltofetch = 'https://sisbenpro.com/public/inscritosTabla'
+		urltofetch = BASE_URL + 'inscritosTabla'
 		break;
 		default:
 		db = dbActasForm(formulario);
-		urltofetch = 'https://sisbenpro.com/public/evaluacionesTabla';
+		urltofetch = BASE_URL + 'evaluacionesTabla';
 		break;
 	}
 
