@@ -154,7 +154,7 @@ function cargarInicio(formulario){
 		eva.FIRMA_F1 = localStorage.getItem('firmaAut1');
 		eva.FIRMA_F2 = formulario != '443' ? localStorage.getItem('firmaAut2'): null;
 		
-		persistirEvaluado(db, eva, formulario);
+		persistirEvaluado(db, eva);
 		
 		localStorage.removeItem('evaluado');
 		localStorage.removeItem('firmaAut1');
@@ -473,14 +473,14 @@ function escogerInscrito(registro, formulario){
 	document.getElementsByName('tel' + formulario)[0].value = registro.TELS;
 	document.getElementsByName('cel' + formulario)[0].value = registro.CELULAR;
 	document.getElementsByName('propietario' + formulario)[0].value = registro.NOMBRE_P;
-	document.getElementsByName('idPropietario' + formulario)[0].value = registro.DOC_P;
+	document.getElementsByName('idPropietario' + formulario)[0].value = parseInt(registro.DOC_P);
 	document.getElementsByName('tipoIdProp' + formulario)[0].value = registro.TID_P;
 	document.getElementsByName('autorizaNoti' + formulario)[0].value = registro.AUTORIZA;
 
 	if(formulario == '333' || formulario == '243'){
 		document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
 		document.getElementsByName('razonSocial' + formulario)[0].value = registro.RSO;
-		document.getElementsByName('nit' + formulario)[0].value = registro.NIT;
+		document.getElementsByName('nit' + formulario)[0].value = parseInt(registro.NIT);
 		calcularNumActa(formulario).then( acta => {
 			console.log("Valor de acta recibido ", acta);
 			let event = new Event('input');
@@ -516,7 +516,7 @@ function escogerInscrito(registro, formulario){
 			document.getElementsByName('dirNotif' + formulario)[0].value = registro.DIR_NOT;
 			document.getElementsByName('nombreComercial' + formulario)[0].value = registro.NOCO;
 			document.getElementsByName('razonSocial' + formulario)[0].value = registro.RSO;
-			document.getElementsByName('nit' + formulario)[0].value = registro.NIT;
+			document.getElementsByName('nit' + formulario)[0].value = parseInt(registro.NIT);
 			document.getElementsByName('nomTerr' + formulario)[0].value = registro.NOLOCA;
 			document.getElementsByName('matriculaMercantil' + formulario)[0].value = registro.MAMER;
 	
@@ -635,7 +635,7 @@ function escogerInscrito(registro, formulario){
 		if (formulario == '569' || formulario == '440') {
 			document.getElementsByName('repLegal' + formulario)[0].value = registro.NOMBRE_RL;
 			document.getElementsByName('tipoIdRl' + formulario)[0].value = registro.TID_RL;
-			document.getElementsByName('idRepLegal' + formulario)[0].value = registro.DOC_RL;
+			document.getElementsByName('idRepLegal' + formulario)[0].value = parseInt(registro.DOC_RL);
 		}
 	
 		if(formulario == '569'){
@@ -652,7 +652,7 @@ function escogerInscrito(registro, formulario){
 		if(formulario === '682'){
 			document.getElementsByName('administrador682')[0].value = registro.NOMBRE_AD;
 			document.getElementsByName('tipoIdAdministrador682')[0].value = registro.TID_AD;
-			document.getElementsByName('idAdministrador682')[0].value = registro.DOC_AD;
+			document.getElementsByName('idAdministrador682')[0].value = parseInt(registro.DOC_AD);
 			document.getElementsByName('codigoInscripcion682')[0].value = registro.T_INSCRIP;
 			document.getElementsByName('tipoInscripcion682')[0].value = registro.TIPO_I;
 		}
@@ -1407,8 +1407,6 @@ function guardarComunesEvaluados(formulario){
 		FIRMA_F2: '',
 		FIRMA_E1: '',
 		FIRMA_E2: '',
-		LONGITUD: '',
-		LATITUD: '',
 		GRABADO: ''
 	};
 	return evaluado;
@@ -1545,25 +1543,43 @@ function guardarEvaluadoReducido(formulario){
 	return evaluado;
 }
 
-/*function validarEvaluado(evaluado){
-	
-}*/
+function persistirCoordenadas(db, eva, result){
+	navigator.geolocation.getCurrentPosition(position => {
+		let coordinates = {
+			LONGITUD: position.coords.longitude,
+			LATITUD: position.coords.latitude
+		}
+		console.log('evaluado antes de coordenadas', eva)
+		return db.put({
+			_id: result.id,
+			_rev: result.rev,
+			...eva,
+			LONGITUD: coordinates.LONGITUD,
+			LATITUD: coordinates.LATITUD,
+		})
+		.then(res => console.log('Registro actualizado con coordenadas', res))
+		.catch(err => console.log('Problemas actualizando registro', err))
+	}, (err) => {
+		console.log('Error obteniendo coordenadas', err)
+	})
+}
 
-function persistirEvaluado(db, evaluado, formulario){
-	calcularNumActa(formulario).then( acta => {
-		var insertar = { _id: acta.substring(11, 15) };
-		evaluado = Object.assign( insertar, evaluado );
-		console.log(evaluado);
+function persistirEvaluado(db, evaluado){
+	var insertar = { _id: evaluado.ACTA.substring(11, 15) };
+	evaluado = Object.assign( insertar, evaluado );
+	console.log(evaluado);
 
-		db.put(evaluado, function callback(err, result){
-			if (!err) {
-				alert('evaluado guardado en base de datos');
-				location.reload();
-			}else {
-				alert('problemas guardando evaluado en base de datos: ', err);
-			}
-		});
+	db.put(evaluado, async function callback(err, result){
+		if (!err) {
+			console.log('resultado', result)
+			await persistirCoordenadas(db, evaluado, result)
+			alert('evaluado guardado en base de datos');
+			location.reload();
+		}else {
+			alert('problemas guardando evaluado en base de datos: ', err);
+		}
 	});
+	
 	
 }
 
@@ -1580,6 +1596,7 @@ function guardarEvaluacion(formulario){
 	let evaluado = !excluded.includes(formulario) ? guardarComunesEvaluados(formulario) : {};
 	var coordinates = {}					
 	let preguntasComunes;
+	let tipoEsta = [];
 	let evaluadoEsta;
 	let evaluadoVehi;
 	let reducido;
@@ -1590,7 +1607,7 @@ function guardarEvaluacion(formulario){
 	if (!objetoActa.value){
 		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el número de acta. '
 							+ 'Por favor devuélvase y verifique que el número de acta esté incluido antes de guardar el acta.';
-	}else if(!objetoNit.value) {
+	}else if(formulario != '441' && formulario != '472' && !objetoNit.value) {
 		cuerpo.innerHTML = 'Lo sentimos mucho. Es absolutamente obligatorio diligenciar el campo nit/cédula. '
 							+ 'Por favor devuélvase y verifique que este campo esté diligenciado antes de guardar el acta.';
 	}else if (!validarCambioTab(10) && formulario != '26' && formulario != '441' && formulario != '472'){
@@ -1656,7 +1673,6 @@ function guardarEvaluacion(formulario){
 			case '479':
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -1690,7 +1706,6 @@ function guardarEvaluacion(formulario){
 			case '480':
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -1713,7 +1728,6 @@ function guardarEvaluacion(formulario){
 			case '495':
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -1747,7 +1761,6 @@ function guardarEvaluacion(formulario){
 			case '478':
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -1792,7 +1805,6 @@ function guardarEvaluacion(formulario){
 				break;
 			case '475':
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -1820,7 +1832,6 @@ function guardarEvaluacion(formulario){
 			case '481':
 				preguntasComunes = comunesEvaluadosEstabPreguntas(formulario);
 				evaluadoEsta = guardarEvaluadosEstablecimientos(formulario);
-				tipoEsta = [];
 				for (let i = 0; i < document.getElementsByName('tipoEstablecimiento').length; i++) {
 					document.getElementsByName('tipoEstablecimiento')[i].checked ? tipoEsta.push(document.getElementsByName('tipoEstablecimiento')[i].value) : console.log(i);
 				}
@@ -2134,22 +2145,10 @@ function guardarEvaluacion(formulario){
 		}
 	
 		//console.log("Estructura de evaluado en formulario " + formulario + " para revisión: " + JSON.stringify(evaluado));
-		navigator.geolocation.getCurrentPosition(position => {
-			coordinates = {
-				LONGITUD: position.coords.longitude,
-				LATITUD: position.coords.latitude
-			}
-			console.log('Coordenadas calculadas')
-			evaluado = Object.assign(evaluado, coordinates)
-			localStorage.setItem('evaluado', JSON.stringify(evaluado));
-			firmaEvaluacion(formulario);
-		}, (err) => {
-			console.log('Error obteniendo coordenadas', err)
-			localStorage.setItem('evaluado', JSON.stringify(evaluado));
-			firmaEvaluacion(formulario);
-		})
 		
-		//persistirEvaluado(db, evaluado, formulario);
+		localStorage.setItem('evaluado', JSON.stringify(evaluado));
+		firmaEvaluacion(formulario);
+		//persistirEvaluado(db, evaluado);
 		//location.reload();
 	}
 
