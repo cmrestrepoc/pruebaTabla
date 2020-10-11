@@ -584,10 +584,10 @@ function escogerInscrito(registro, formulario){
 			
 			let alerta = document.getElementsByName('alertaInscrito');
 			let arreglo = Array.from(alerta); //en este caso alerta es un iterable pero no un arreglo, hay que convertirlo primero
-			let arr = arreglo.map( item => {
+			for ( const item of arreglo) {
 				item.style.display = "none";
 				return item;
-			});
+			};
 			document.getElementsByName('entidad' + formulario).value = registro.ENTIDAD;
 		}
 	
