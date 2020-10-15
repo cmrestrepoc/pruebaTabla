@@ -36,6 +36,7 @@ var urlsToCache = [
 	'./f493.html',
 	'./f495.html',
 	'./f569.html',
+	'./f682.html',
 	'./firmaEvaluacion.html',
 	'./firmaInscripcion.html',
 	'./css/bootstrap.css',
