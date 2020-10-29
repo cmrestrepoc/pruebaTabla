@@ -2126,6 +2126,10 @@ function guardarEvaluacion(formulario){
 					NOMBRE_CO: document.getElementsByName('conductor441')[0].value,
 					TID_CO: document.getElementsByName('tipoIdCond441')[0].value,
 					DOC_CO: document.getElementsByName('idConductor441')[0].value,
+					REMOLQUE: document.getElementsByName('rmque441')[0].value,
+					PLACAREM: document.getElementsByName('placaRemolque441')[0].value,
+					SEMIREM: document.getElementsByName('srmque441')[0].value,
+					PLACASEMI: document.getElementsByName('placaSrmque441')[0].value,
 					E53: document.getElementsByName('evaluacion_5')[2].value,
 					H53: document.getElementsByName('hallazgos_5_3')[0].value
 				};
