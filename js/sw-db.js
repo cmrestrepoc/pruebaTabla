@@ -565,7 +565,6 @@ function escogerInscrito(registro, formulario){
 				document.getElementsByName('inscripcionRep444')[0].value = registro.N_INSCRIP;
 				document.getElementsByName('fecha444_2')[0].value = registro.FECHA;
 				document.getElementsByName('funcionario444')[0].value = registro.NOMBRE_F1;
-				formulario != '569' ? document.getElementsByName('zona' + formulario)[0].value = registro.ZONA : null;
 			}
 		}else{
 			// Aquí se puede introducir un método para calcular automáticamente un número de acta
@@ -594,6 +593,7 @@ function escogerInscrito(registro, formulario){
 			console.log('Estamos en ' + formulario);
 			console.log("registro.actividad", registro.ACTIVIDAD);
 			
+			formulario != '569' ? document.getElementsByName('zona' + formulario)[0].value = registro.ZONA : null;
 			document.getElementsByName('cargoRecibe' + formulario)[0].value = registro.CARGO_F1;
 			document.getElementsByName('cargoInscribe' + formulario)[0].value = registro.CARGO_E1;
 	
@@ -994,7 +994,7 @@ function fetchEvaluados(doc, formulario, url){
 			}else{
 				res.json().then( body => resolve(body)	)
 				let texto = document.createElement('p');
-				texto.innerHTML = "Se almacenó el acta: " + doc.ACTA;
+				texto.innerHTML = "Se envió el acta: " + doc.ACTA;
 				cuerpo.appendChild(texto);
 			} 
 		})
@@ -2126,6 +2126,10 @@ function guardarEvaluacion(formulario){
 					NOMBRE_CO: document.getElementsByName('conductor441')[0].value,
 					TID_CO: document.getElementsByName('tipoIdCond441')[0].value,
 					DOC_CO: document.getElementsByName('idConductor441')[0].value,
+					REMOLQUE: document.getElementsByName('rmque441')[0].value,
+					PLACAREM: document.getElementsByName('placaRemolque441')[0].value,
+					SEMIREM: document.getElementsByName('srmque441')[0].value,
+					PLACASEMI: document.getElementsByName('placaSrmque441')[0].value,
 					E53: document.getElementsByName('evaluacion_5')[2].value,
 					H53: document.getElementsByName('hallazgos_5_3')[0].value
 				};

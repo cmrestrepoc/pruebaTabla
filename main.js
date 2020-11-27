@@ -1172,9 +1172,14 @@ function estabNumInscripcion(valor, formulario){
 
 function vehiNumInscripcion(valor){
 	let event = new Event('input');
+	let eventRep = new Event('input');
 	let elementoInscripcion = document.getElementsByName('inscripcion444')[0];
+	let elementoInscripcionRep = document.getElementsByName('inscripcionRep444')[0];
 	elementoInscripcion.value = '76130' + valor;
-	elementoInscripcion.dispatchEvent(event);
+	elementoInscripcionRep.value = '76130' + valor;
+	let isValidEvent = elementoInscripcion.dispatchEvent(event);
+	let isValidEventRep = elementoInscripcionRep.dispatchEvent(eventRep);
+	console.log('dispatch de eventos', isValidEvent, isValidEventRep)
 }
 
 function auxiliarInscVehi(valor){
