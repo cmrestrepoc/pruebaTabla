@@ -46,7 +46,6 @@
         canvas = document.getElementById('firmaIns2');
         imageData = canvas.toDataURL("image/png");
         imageData !== vacia ? localStorage.setItem('firmaIns2', imageData) : localStorage.removeItem('firmaIns2');
-        alert('Firmas Almacenadas correctamente');
     }
     $(document).ready(function()
     {
@@ -77,6 +76,20 @@
 
     function regresar(){
         save();
+        if(
+            localStorage.getItem('firmaAut1') ||
+            localStorage.getItem('firmaAut2') ||
+            localStorage.getItem('firmaAut3') ||
+            localStorage.getItem('firmaAut4')
+        ){
+            alert('Firmas almacenadas correctamente')
+            history.back();
+        } else {
+            document.getElementsByName('alertaFirmas')[0].style.display = 'block'
+            document.getElementsByName('espacios')[0].style.display = 'block'
+        }
+    }
+    function cancelar(){
         history.back();
     }
 </script>
@@ -123,7 +136,7 @@
 
 <body>
     <header>
-        <a href="menu0.html">
+        <a href="#">
             <img alt src="./img/escudo.jpg" />
         </a>
         <div class="titulos">
@@ -131,12 +144,18 @@
             <h2>Vigilancia en Salud Pública</h2>
         </div>
     </header><br><br>
-
     <div class="col-md-2 col-md-offset-2">
         <button class="btn btn-primary" onclick="regresar()">Regresar</button>
     </div>
+    <div class="col-md-2 col-md-offset-1">
+        <button class="btn btn-danger" onclick="cancelar()">Cancelar</button>
+    </div>
     <br><br><br>
-
+    <div class="alert alert-danger alert-dismissible fade in col-md-10 col-md-offset-1" role="alert" name="alertaFirmas" style="display: none;">
+        <strong>Cuidado!</strong> Al menos una persona debe firmar el acta.
+    </div>
+    <div name="espacios" style="display: none;"><br><br><br><br></div>
+    
     <div class="container">
         <div class="panel panel-default">
             <div class="panel-heading">
