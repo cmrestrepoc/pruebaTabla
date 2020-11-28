@@ -1098,6 +1098,7 @@ function persistirInscrito(dbNuevos, inscrito, idExistente){
 			dbNuevos.put(inscrito, function callback(err, result){
 				if (!err) {
 					alert('inscrito modificado en base de datos');
+					localStorage.removeItem('inscrito')
 					location.reload();
 				}else {
 					alert('problemas modificando inscrito en base de datos: ' + err);
