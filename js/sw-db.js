@@ -593,7 +593,7 @@ function escogerInscrito(registro, formulario){
 			console.log('Estamos en ' + formulario);
 			console.log("registro.actividad", registro.ACTIVIDAD);
 			
-			document.getElementsByName('zona' + formulario)[0].value = registro.ZONA;
+			formulario != '569' ? document.getElementsByName('zona' + formulario)[0].value = registro.ZONA : null;
 			document.getElementsByName('cargoRecibe' + formulario)[0].value = registro.CARGO_F1;
 			document.getElementsByName('cargoInscribe' + formulario)[0].value = registro.CARGO_E1;
 	
@@ -1098,6 +1098,7 @@ function persistirInscrito(dbNuevos, inscrito, idExistente){
 			dbNuevos.put(inscrito, function callback(err, result){
 				if (!err) {
 					alert('inscrito modificado en base de datos');
+					localStorage.removeItem('inscrito')
 					location.reload();
 				}else {
 					alert('problemas modificando inscrito en base de datos: ' + err);
