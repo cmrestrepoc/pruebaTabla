@@ -53,7 +53,7 @@ dbNuevos682.changes({
 	mostrarInscritos682('682');
 });
 
-const BASE_URL = 'https://sisbenpro.com/public/';
+const BASE_URL = 'https://simarpro.com/visaludservercandelaria/api';
 
 function verificarSesionLocal(){
 	let estado = localStorage.getItem('estado');
