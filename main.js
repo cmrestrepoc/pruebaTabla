@@ -931,7 +931,7 @@ var motivos = [
 	{objeto: tiposInscripcion, nombre: 'tiposInscripcion'},
 ]
 
-const BASE_URL_SERVICIOS = 'https://simarpro.com/visaludservercandelaria/api';
+const BASE_URL_SERVICIOS = 'https://simarpro.com/visaludservercandelaria/api/';
 
 function createOption({value, text}){
 	let option = document.createElement('option');
